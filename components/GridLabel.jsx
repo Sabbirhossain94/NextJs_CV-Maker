@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -15,19 +16,64 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function BasicGrid() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+      <Typography
+        sx={{
+          width: "33%",
+          paddingBottom: "20px",
+          fontWeight: "700",
+        }}
+      >
+        Personal Details
+      </Typography>
       <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <Grid item xs={4} md={6}>
+          <TextField
+            id="outlined-basic"
+            label="First Name"
+            variant="outlined"
+            sx={{ width: "100%" }}
+          />
         </Grid>
-        <Grid item xs={4}>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <Grid item xs={4} md={6}>
+          <TextField
+            id="outlined-basic"
+            label="Last Name"
+            variant="outlined"
+            sx={{ width: "100%" }}
+          />
         </Grid>
-        <Grid item xs={4}>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <Grid item xs={4} md={6}>
+          <TextField
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
+            sx={{ width: "100%" }}
+          />
         </Grid>
-        <Grid item xs={4}>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <Grid item xs={4} md={6}>
+          <TextField
+            id="outlined-basic"
+            label="Phone"
+            variant="outlined"
+            sx={{ width: "100%" }}
+          />
+        </Grid>
+        <Grid item xs={4} md={6}>
+          <TextField
+            id="outlined-basic"
+            label="Country"
+            variant="outlined"
+            sx={{ width: "100%" }}
+          />
+        </Grid>
+        <Grid item xs={4} md={6}>
+          <TextField
+            id="outlined-basic"
+            label="City"
+            variant="outlined"
+            sx={{ width: "100%" }}
+          />
         </Grid>
       </Grid>
     </Box>

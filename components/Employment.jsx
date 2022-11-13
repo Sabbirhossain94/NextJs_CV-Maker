@@ -7,14 +7,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import DatePicker from "./DatePicker";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import DatePicker from "../components/DatePicker"
 export default function ControlledAccordions() {
   const [expanded, setExpanded] = React.useState(false);
-  const [startDateValue, setStartDateValue] = React.useState(null);
-  const [endDateValue, setEndDateValue] = React.useState(null);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -31,7 +26,7 @@ export default function ControlledAccordions() {
             fontWeight: "700",
           }}
         >
-          Education
+          Employment History
         </Typography>
         <Accordion
           expanded={expanded === "panel1"}
@@ -60,7 +55,7 @@ export default function ControlledAccordions() {
               <Grid item sm={6} md={6}>
                 <TextField
                   id="outlined-basic"
-                  label="School"
+                  label="Job title"
                   variant="outlined"
                   sx={{ width: "100%" }}
                 />
@@ -68,13 +63,13 @@ export default function ControlledAccordions() {
               <Grid item xs={6} md={6}>
                 <TextField
                   id="outlined-basic"
-                  label="Degree"
+                  label="Employer"
                   variant="outlined"
                   sx={{ width: "100%" }}
                 />
               </Grid>
               <Grid item xs={6} md={6} sx={{ display: "flex" }}>
-                <DatePicker />
+               <DatePicker/>
               </Grid>
               <Grid item xs={6} md={6}>
                 <TextField

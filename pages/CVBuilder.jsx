@@ -4,6 +4,9 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useState } from "react";
 import GridLabel from "../components/GridLabel"
 import Education from "../components/Education"
+import SocialLinks from "../components/SocialLinks"
+import Employment from "../components/Employment"
+
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -22,17 +25,19 @@ export default function FlexLayoutGrid() {
           width: "50vw",
           height: "100vh",
           padding: "5%",
-          backgroundColor: "#e0e0e0",
+          backgroundColor: "white",
           
         }}
       >
         <Box sx={{ marginTop: "10px", width: "100%" }}>
           <LinearProgress variant="determinate" value={progress} />
 
-          <Box sx={{ marginTop: "8rem", width: "100%" }}>
+          <Box sx={{ marginTop: "4rem", width: "100%" }}>
             
             <GridLabel />
+            <Employment/>
             <Education/>
+            <SocialLinks />
           </Box>
         </Box>
       </Box>
