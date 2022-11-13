@@ -1,18 +1,20 @@
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useState } from "react";
-import GridLabel from "../components/GridLabel"
-import Education from "../components/Education"
-import SocialLinks from "../components/SocialLinks"
-import Employment from "../components/Employment"
-
+import GridLabel from "../components/GridLabel";
+import Education from "../components/Education";
+import SocialLinks from "../components/SocialLinks";
+import Employment from "../components/Employment";
+import AddIcon from "@mui/icons-material/Add";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { Typography } from "@mui/material";
+
 export default function FlexLayoutGrid() {
-     const [progress, setProgress] = useState(20);
+  const [progress, setProgress] = useState(20);
+ 
   return (
     <Box
       sx={{
@@ -26,18 +28,17 @@ export default function FlexLayoutGrid() {
           height: "100vh",
           padding: "5%",
           backgroundColor: "white",
-          
         }}
       >
         <Box sx={{ marginTop: "10px", width: "100%" }}>
           <LinearProgress variant="determinate" value={progress} />
 
           <Box sx={{ marginTop: "4rem", width: "100%" }}>
-            
             <GridLabel />
-            <Employment/>
-            <Education/>
+            <Employment />        
+            <Education />
             <SocialLinks />
+           
           </Box>
         </Box>
       </Box>
