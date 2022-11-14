@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useState } from "react";
-import GridLabel from "../components/GridLabel";
+import PersonalDetails from "../components/PersonalDetails";
 import Education from "../components/Education";
 import SocialLinks from "../components/SocialLinks";
 import Employment from "../components/Employment";
@@ -12,7 +12,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Typography } from "@mui/material";
 
-export default function FlexLayoutGrid() {
+export default function CVBuilder() {
   const [progress, setProgress] = useState(20);
  
   return (
@@ -34,11 +34,10 @@ export default function FlexLayoutGrid() {
           <LinearProgress variant="determinate" value={progress} />
 
           <Box sx={{ marginTop: "4rem", width: "100%" }}>
-            <GridLabel />
-            <Employment />        
+            <PersonalDetails />
+            <Employment />
             <Education />
             <SocialLinks />
-           
           </Box>
         </Box>
       </Box>

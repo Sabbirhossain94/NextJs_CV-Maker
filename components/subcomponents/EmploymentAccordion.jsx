@@ -7,9 +7,12 @@ import Grid from "@mui/material/Grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import DatePicker from "../../components/DatePicker"
-export default function EmploymentAccordion() {
-  const [expanded, setExpanded] = React.useState(false);
+import DeleteIcon from "@mui/icons-material/Delete";
 
+export default function EmploymentAccordion() {
+
+
+  const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -20,13 +23,26 @@ export default function EmploymentAccordion() {
       sx={{ backgroundColor: "white", marginTop: "20px" }}
     >
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
+        expandIcon={<ExpandMoreIcon color="primary"/>}
         aria-controls="panel1bh-content"
         id="panel1bh-header"
       >
-        <Typography sx={{ width: "33%", flexShrink: 0 }}>
+        <Typography sx={{ width: "90%", flexShrink: 0 }}>
           Not Specified
         </Typography>
+        <DeleteIcon
+          sx={{
+            fontSize: "20px",
+            marginLeft: "45px",
+            color: "white",
+            "&:hover": {
+              color: "#c62828",
+              fontSize: "22px",
+              cursor: "pointer",
+            },
+          }}
+          
+        />
       </AccordionSummary>
       <AccordionDetails>
         <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -69,7 +85,6 @@ export default function EmploymentAccordion() {
           </Grid>
         </Grid>
       </AccordionDetails>
-      
     </Accordion>
   );
 }

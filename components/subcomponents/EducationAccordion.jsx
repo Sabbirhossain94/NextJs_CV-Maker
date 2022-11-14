@@ -20,7 +20,7 @@ export default function EducationAccordion() {
     <Accordion
       expanded={expanded === "panel1"}
       onChange={handleChange("panel1")}
-      sx={{ backgroundColor: "white", marginTop: "20px" }}
+      sx={{ backgroundColor: "white", marginTop: "20px"  }}
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
@@ -32,10 +32,7 @@ export default function EducationAccordion() {
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        {/* <Typography>
-              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-              feugiat. Aliquam eget maximus est, id dignissim quam.
-            </Typography> */}
+      
         <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item sm={6} md={6}>
             <TextField

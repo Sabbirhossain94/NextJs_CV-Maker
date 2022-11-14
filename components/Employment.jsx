@@ -7,11 +7,11 @@ import EmploymentAccordion from "./subcomponents/EmploymentAccordion";
 import Grid from "@mui/material/Grid";
 export default function ControlledAccordions() {
 
-  const [accordionId, setAccordionId]= useState(1)
+  const [accordionId, setAccordionId]= useState(0)
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      name: <EmploymentAccordion />,
+      name: <EmploymentAccordion  />,
     },
   ]);
 
@@ -19,9 +19,9 @@ export default function ControlledAccordions() {
     setAccordionId(accordionId+1)
     setAccordionField([
       ...accordionField,
-      { 
-        id:accordionId,
-        name: <EmploymentAccordion />,
+      {
+        id: accordionId,
+        name: <EmploymentAccordion  />,
       },
     ]);
    
@@ -43,9 +43,11 @@ export default function ControlledAccordions() {
 
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2} columns={16}>
-              <Grid item md={16}>
-                {accordionField.map((item, key) => item.name)}
-              </Grid>
+            <Grid item md={16}>
+              {accordionField.map((item, key) => (
+                <>{item.name}</>
+              ))}
+            </Grid>
           </Grid>
         </Box>
 
