@@ -17,10 +17,10 @@ export default function SocialLinksAccordion() {
     <Accordion
       expanded={expanded === "panel1"}
       onChange={handleChange("panel1")}
-      sx={{ backgroundColor: "white",marginTop: "20px" }}
+      sx={{ backgroundColor: "white", marginTop: "10px" }}
     >
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
+        expandIcon={<ExpandMoreIcon color="primary" />}
         aria-controls="panel1bh-content"
         id="panel1bh-header"
       >

@@ -6,6 +6,7 @@ import Education from "../components/Education";
 import SocialLinks from "../components/SocialLinks";
 import Employment from "../components/Employment";
 import ProfessionalSummary from "../components/ProfessionalSummary";
+import Skills from "../components/Skills";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -29,7 +30,7 @@ export default function CVBuilder() {
           backgroundColor: "white",
         }}
       >
-        <Box sx={{ marginTop: "10px", width: "100%" }}>
+        <Box sx={{ marginTop: "10px", width: "100%" ,height: "100vh" }}>
           <LinearProgress variant="determinate" value={progress} />
 
           <Box sx={{ marginTop: "4rem", width: "100%" }}>
@@ -38,6 +39,7 @@ export default function CVBuilder() {
             <Employment />
             <Education />
             <SocialLinks />
+            <Skills />
           </Box>
         </Box>
       </Box>

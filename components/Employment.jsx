@@ -5,7 +5,8 @@ import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import EmploymentAccordion from "./subcomponents/EmploymentAccordion";
 import Grid from "@mui/material/Grid";
-export default function ControlledAccordions() {
+
+export default function Employment() {
 
   const [accordionId, setAccordionId]= useState(0)
   const [accordionField, setAccordionField] = useState([
@@ -36,6 +37,7 @@ export default function ControlledAccordions() {
             marginTop: "50px",
             paddingBottom: "20px",
             fontWeight: "700",
+            fontSize: "20px"
           }}
         >
           Employment History

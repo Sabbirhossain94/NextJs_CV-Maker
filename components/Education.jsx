@@ -5,10 +5,8 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import EducationAccordion from "./subcomponents/EducationAccordion";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-export default function ControlledAccordions() {
+
+export default function Education() {
  const [accordionId, setAccordionId] = useState(1);
  const [accordionField, setAccordionField] = useState([
    {
@@ -29,43 +27,42 @@ export default function ControlledAccordions() {
  
  };
   return (
-    <div>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Typography
-          sx={{
-            width: "33%",
-            marginTop: "30px",
-            paddingBottom: "20px",
-            fontWeight: "700",
-          }}
-        >
-          Education
-        </Typography>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={2} columns={16}>
-            <Grid item md={16}>
-              {accordionField.map((item, key) => item.name)}
-            </Grid>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Typography
+        sx={{
+          width: "33%",
+          marginTop: "30px",
+          paddingBottom: "20px",
+          fontWeight: "700",
+          fontSize: "20px",
+        }}
+      >
+        Education
+      </Typography>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2} columns={16}>
+          <Grid item md={16}>
+            {accordionField.map((item, key) => item.name)}
           </Grid>
-        </Box>
-        <Typography
-          sx={{
-            fontWeight: "700",
-            marginTop: "20px",
-            padding: "5px",
-            display: "flex",
-            borderRadius: "5px",
-            "&:hover": {
-              backgroundColor: "#e3f2fd",
-              cursor: "pointer",
-            },
-          }}
-          color="primary"
-          onClick={addAccordionSection}
-        >
-          <AddIcon sx={{ fontSize: "20px" }} /> Add one more education
-        </Typography>
+        </Grid>
       </Box>
-    </div>
+      <Typography
+        sx={{
+          fontWeight: "700",
+          marginTop: "20px",
+          padding: "5px",
+          display: "flex",
+          borderRadius: "5px",
+          "&:hover": {
+            backgroundColor: "#e3f2fd",
+            cursor: "pointer",
+          },
+        }}
+        color="primary"
+        onClick={addAccordionSection}
+      >
+        <AddIcon sx={{ fontSize: "20px" }} /> Add one more education
+      </Typography>
+    </Box>
   );
 }

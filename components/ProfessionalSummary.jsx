@@ -11,6 +11,7 @@ export default function ProfessionalSummary() {
           marginTop: "50px",
           paddingBottom: "20px",
           fontWeight: "700",
+          fontSize: "20px",
         }}
       >
         Professional History

@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import SocialLinksAccordion from "./subcomponents/SocialLinksAccordion";
 
-export default function ControlledAccordions() {
+export default function SocialLinks() {
  
 const [accordionId, setAccordionId] = useState(1);
 const [accordionField, setAccordionField] = useState([
@@ -36,6 +36,7 @@ const addAccordionSection = () => {
             marginTop: "30px",
             paddingBottom: "20px",
             fontWeight: "700",
+            fontSize: "20px",
           }}
         >
           Websites & Social Links

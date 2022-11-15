@@ -22,6 +22,7 @@ export default function PersonalDetails() {
           width: "33%",
           paddingBottom: "20px",
           fontWeight: "700",
+          fontSize: "20px",
         }}
       >
         Personal Details
@@ -74,7 +75,7 @@ export default function PersonalDetails() {
             variant="outlined"
             sx={{ width: "100%" }}
           />
-        </Grid>     
+        </Grid>
       </Grid>
       <PersonalDetailsAccordion />
     </Box>
