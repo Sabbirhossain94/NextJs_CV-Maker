@@ -5,12 +5,11 @@ import PersonalDetails from "../components/PersonalDetails";
 import Education from "../components/Education";
 import SocialLinks from "../components/SocialLinks";
 import Employment from "../components/Employment";
-import AddIcon from "@mui/icons-material/Add";
+import ProfessionalSummary from "../components/ProfessionalSummary";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { Typography } from "@mui/material";
 
 export default function CVBuilder() {
   const [progress, setProgress] = useState(20);
@@ -35,6 +34,7 @@ export default function CVBuilder() {
 
           <Box sx={{ marginTop: "4rem", width: "100%" }}>
             <PersonalDetails />
+            <ProfessionalSummary/>
             <Employment />
             <Education />
             <SocialLinks />
