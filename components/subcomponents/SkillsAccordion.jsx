@@ -11,12 +11,40 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-export default function SkillsAccordion() {
-    const [expanded, setExpanded] = React.useState(false);
+export default function SkillsAccordion({toggleSwitch}) {
+  console.log(toggleSwitch)
+  const [expanded, setExpanded] = React.useState(false);
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+    
+  };
 
-    const handleChange = (panel) => (event, isExpanded) => {
-      setExpanded(isExpanded ? panel : false);
-    };
+  const optionValue = [
+    {
+      value: 0,
+      name: "None",
+    },
+    {
+      value: 1,
+      name: "Novice",
+    },
+    {
+      value: 2,
+      name: "Beginner",
+    },
+    {
+      value: 3,
+      name: "Skillfull",
+    },
+    {
+      value: 4,
+      name: "Experienced",
+    },
+    {
+      value: 5,
+      name: "Expert",
+    },
+  ];
   return (
     <Accordion
       expanded={expanded === "panel1"}
@@ -34,7 +62,7 @@ export default function SkillsAccordion() {
       </AccordionSummary>
       <AccordionDetails>
         <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item sm={6} md={6}>
+          <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
               label="Skill"
@@ -43,26 +71,21 @@ export default function SkillsAccordion() {
             />
           </Grid>
           <Grid item xs={6} md={6}>
-            
-            <FormControl
-              sx={{ width: "80%", marginLeft: "50px"}}
-            >
+            <FormControl sx={{ width: "80%", marginLeft: "50px" }}>
               <InputLabel id="demo-simple-select-helper-label">
                 Level
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                label="Age"
+                label="level"  
+                defaultValue=""
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Novice</MenuItem>
-                <MenuItem value={20}>Beginner</MenuItem>
-                <MenuItem value={30}>Skillfull</MenuItem>
-                <MenuItem value={40}>Experienced</MenuItem>
-                <MenuItem value={50}>Expert</MenuItem>
+                {optionValue.map((item, key) => (
+                  <MenuItem value={item.value} key={key}>
+                    {item.name}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Grid>

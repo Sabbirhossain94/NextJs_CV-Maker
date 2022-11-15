@@ -5,27 +5,36 @@ import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import EmploymentAccordion from "./subcomponents/EmploymentAccordion";
 import Grid from "@mui/material/Grid";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Employment() {
+  const [accordionId, setAccordionId] = useState(0);
 
-  const [accordionId, setAccordionId]= useState(0)
+  const deleteAccordionSection = (id) => {
+    
+    const result = accordionField.filter((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+    });
+    setAccordionField(result)
+  };
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      name: <EmploymentAccordion  />,
+      name: <EmploymentAccordion />,
     },
   ]);
 
   const addAccordionSection = () => {
-    setAccordionId(accordionId+1)
+    setAccordionId(accordionId + 1);
     setAccordionField([
       ...accordionField,
       {
         id: accordionId,
-        name: <EmploymentAccordion  />,
+        name: <EmploymentAccordion />,
       },
     ]);
-   
   };
 
   return (
@@ -37,19 +46,32 @@ export default function Employment() {
             marginTop: "50px",
             paddingBottom: "20px",
             fontWeight: "700",
-            fontSize: "20px"
+            fontSize: "20px",
           }}
         >
           Employment History
         </Typography>
 
         <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={2} columns={16}>
-            <Grid item md={16}>
-              {accordionField.map((item, key) => (
-                <>{item.name}</>
-              ))}
-            </Grid>
+          <Grid>
+            {accordionField.map((item, key) => (
+              <Grid key={key} item md={16} sx={{ display: "flex" }}>
+                {item.name}
+                <DeleteIcon
+                  sx={{
+                    marginTop: "36px",
+                    marginLeft: "5px",
+                    fontSize: "20px",
+                    color: "white",
+                    "&:hover": {
+                      color: "#2196f3",
+                      cursor: "pointer",
+                    },
+                  }}
+                  onClick={() => deleteAccordionSection(item.id)}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Box>
 

@@ -5,9 +5,19 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import EducationAccordion from "./subcomponents/EducationAccordion";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Education() {
- const [accordionId, setAccordionId] = useState(1);
+ const [accordionId, setAccordionId] = useState(0);
+
+  const deleteAccordionSection = (id) => {
+    const result = accordionField.filter((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+    });
+    setAccordionField(result);
+  };
  const [accordionField, setAccordionField] = useState([
    {
      id: accordionId,
@@ -31,7 +41,7 @@ export default function Education() {
       <Typography
         sx={{
           width: "33%",
-          marginTop: "30px",
+          marginTop: "50px",
           paddingBottom: "20px",
           fontWeight: "700",
           fontSize: "20px",
@@ -40,10 +50,25 @@ export default function Education() {
         Education
       </Typography>
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2} columns={16}>
-          <Grid item md={16}>
-            {accordionField.map((item, key) => item.name)}
-          </Grid>
+        <Grid>
+          {accordionField.map((item, key) => (
+            <Grid key={key} item md={16} sx={{ display: "flex" }}>
+              {item.name}
+              <DeleteIcon
+                sx={{
+                  marginTop: "25px",
+                  marginLeft: "5px",
+                  fontSize: "20px",
+                  color: "white",
+                  "&:hover": {
+                    color: "#2196f3",
+                    cursor: "pointer",
+                  },
+                }}
+                onClick={() => deleteAccordionSection(item.id)}
+              />
+            </Grid>
+          ))}
         </Grid>
       </Box>
       <Typography

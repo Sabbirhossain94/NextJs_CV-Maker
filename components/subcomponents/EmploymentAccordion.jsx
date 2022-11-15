@@ -12,98 +12,82 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import MUIRichTextEditor from "mui-rte";
 
 export default function EmploymentAccordion() {
+ 
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
   return (
-    
-      <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-        sx={{ backgroundColor: "white", marginTop: "10px" }}
+    <Accordion
+      expanded={expanded === "panel1"}
+      onChange={handleChange("panel1")}
+      sx={{ backgroundColor: "white", marginTop: "25px",cursor: "none" }}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon color="primary" />}
+        aria-controls="panel1bh-content"
+        id="panel1bh-header"
       >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon color="primary" />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography sx={{ width: "90%", flexShrink: 0 }}>
-            Not Specified
-          </Typography>
-          <DeleteIcon
-            sx={{
-              fontSize: "20px",
-              marginLeft: "45px",
-              color: "white",
-              "&:hover": {
-                color: "#c62828",
-                fontSize: "22px",
-                cursor: "pointer",
-              },
-            }}
-          />
-        </AccordionSummary>
-        <AccordionDetails>
-          <Grid
-            container
-            rowSpacing={3}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          >
-            <Grid item sm={6} md={6}>
-              <TextField
-                id="outlined-basic"
-                label="Job title"
-                variant="outlined"
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6} md={6}>
-              <TextField
-                id="outlined-basic"
-                label="Employer"
-                variant="outlined"
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6} md={6} sx={{ display: "flex" }}>
-              <DatePicker />
-            </Grid>
-            <Grid item xs={6} md={6}>
-              <TextField
-                id="outlined-basic"
-                label="City"
-                variant="outlined"
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6} md={12}>
-              <Typography
-                sx={{
-                  paddingBottom: "5px",
-                  fontWeight: "400",
-                }}
-                color="#757575"
-              >
-                Description
-              </Typography>
-              <Box
-                sx={{
-                  height: "250px",
-                  padding: "10px",
-                  overflow: "auto",
-                  border: "1px solid",
-                  borderColor: "#acacac",
-                  borderRadius: "5px",
-                  marginTop: "10px",
-                }}
-              >
-                <MUIRichTextEditor label="Start typing..." />
-              </Box>
-            </Grid>
+        <Typography sx={{ width: "90%", flexShrink: 0 }}>
+          Not Specified
+        </Typography>
+        
+      </AccordionSummary>
+      <AccordionDetails>
+        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item sm={6} md={6}>
+            <TextField
+              id="outlined-basic"
+              label="Job title"
+              variant="outlined"
+              sx={{ width: "100%" }}
+            />
           </Grid>
-        </AccordionDetails>
-      </Accordion>
-   
+          <Grid item xs={6} md={6}>
+            <TextField
+              id="outlined-basic"
+              label="Employer"
+              variant="outlined"
+              sx={{ width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={6} md={6} sx={{ display: "flex" }}>
+            <DatePicker />
+          </Grid>
+          <Grid item xs={6} md={6}>
+            <TextField
+              id="outlined-basic"
+              label="City"
+              variant="outlined"
+              sx={{ width: "100%" }}
+            />
+          </Grid>
+          <Grid item xs={6} md={12}>
+            <Typography
+              sx={{
+                paddingBottom: "5px",
+                fontWeight: "400",
+              }}
+              color="#757575"
+            >
+              Description
+            </Typography>
+            <Box
+              sx={{
+                height: "250px",
+                padding: "10px",
+                overflow: "auto",
+                border: "1px solid",
+                borderColor: "#acacac",
+                borderRadius: "5px",
+                marginTop: "10px",
+              }}
+            >
+              <MUIRichTextEditor label="Start typing..." />
+            </Box>
+          </Grid>
+        </Grid>
+      </AccordionDetails>
+    </Accordion>
   );
 }

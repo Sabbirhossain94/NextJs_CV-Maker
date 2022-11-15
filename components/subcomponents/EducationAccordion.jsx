@@ -35,7 +35,7 @@ export default function EducationAccordion() {
       </AccordionSummary>
       <AccordionDetails>
         <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item sm={6} md={6}>
+          <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
               label="School"
