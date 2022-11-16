@@ -21,7 +21,7 @@ export default function EmploymentAccordion() {
     <Accordion
       expanded={expanded === "panel1"}
       onChange={handleChange("panel1")}
-      sx={{ backgroundColor: "white", marginTop: "25px",cursor: "none" }}
+      sx={{ backgroundColor: "white", marginTop: "10px", cursor: "none" }}
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon color="primary" />}
@@ -31,7 +31,6 @@ export default function EmploymentAccordion() {
         <Typography sx={{ width: "90%", flexShrink: 0 }}>
           Not Specified
         </Typography>
-        
       </AccordionSummary>
       <AccordionDetails>
         <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -39,16 +38,26 @@ export default function EmploymentAccordion() {
             <TextField
               id="outlined-basic"
               label="Job title"
-              variant="outlined"
-              sx={{ width: "100%" }}
+              variant="filled"
+              sx={{ width: "100%", background: "#eff2f9" }}
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
+              }}
             />
           </Grid>
           <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
               label="Employer"
-              variant="outlined"
-              sx={{ width: "100%" }}
+              variant="filled"
+              sx={{ width: "100%", background: "#eff2f9" }}
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
+              }}
             />
           </Grid>
           <Grid item xs={6} md={6} sx={{ display: "flex" }}>
@@ -58,8 +67,13 @@ export default function EmploymentAccordion() {
             <TextField
               id="outlined-basic"
               label="City"
-              variant="outlined"
-              sx={{ width: "100%" }}
+              variant="filled"
+              sx={{ width: "100%", background: "#eff2f9" }}
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
+              }}
             />
           </Grid>
           <Grid item xs={6} md={12}>
@@ -81,6 +95,7 @@ export default function EmploymentAccordion() {
                 borderColor: "#acacac",
                 borderRadius: "5px",
                 marginTop: "10px",
+                background: "#eff2f9",
               }}
             >
               <MUIRichTextEditor label="Start typing..." />

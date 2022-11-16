@@ -8,7 +8,7 @@ import EducationAccordion from "./subcomponents/EducationAccordion";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Education() {
- const [accordionId, setAccordionId] = useState(0);
+  const [accordionId, setAccordionId] = useState(0);
 
   const deleteAccordionSection = (id) => {
     const result = accordionField.filter((item) => {
@@ -18,24 +18,23 @@ export default function Education() {
     });
     setAccordionField(result);
   };
- const [accordionField, setAccordionField] = useState([
-   {
-     id: accordionId,
-     name: <EducationAccordion />,
-   },
- ]);
+  const [accordionField, setAccordionField] = useState([
+    {
+      id: accordionId,
+      name: <EducationAccordion />,
+    },
+  ]);
 
- const addAccordionSection = () => {
-   setAccordionId(accordionId + 1);
-   setAccordionField([
-     ...accordionField,
-     {
-       id: accordionId,
-       name: <EducationAccordion />,
-     },
-   ]);
- 
- };
+  const addAccordionSection = () => {
+    setAccordionId(accordionId + 1);
+    setAccordionField([
+      ...accordionField,
+      {
+        id: accordionId,
+        name: <EducationAccordion />,
+      },
+    ]);
+  };
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography
@@ -49,11 +48,14 @@ export default function Education() {
       >
         Education
       </Typography>
+
       <Box sx={{ flexGrow: 1 }}>
-        <Grid>
-          {accordionField.map((item, key) => (
-            <Grid key={key} item md={16} sx={{ display: "flex" }}>
+        {accordionField.map((item, key) => (
+          <Grid container columns={16}>
+            <Grid key={key} item md={15}>
               {item.name}
+            </Grid>
+            <Grid item md="auto">
               <DeleteIcon
                 sx={{
                   marginTop: "25px",
@@ -68,11 +70,12 @@ export default function Education() {
                 onClick={() => deleteAccordionSection(item.id)}
               />
             </Grid>
-          ))}
-        </Grid>
+          </Grid>
+        ))}
       </Box>
       <Typography
         sx={{
+          width: "94%",
           fontWeight: "700",
           marginTop: "20px",
           padding: "5px",

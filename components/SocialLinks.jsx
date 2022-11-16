@@ -8,34 +8,32 @@ import SocialLinksAccordion from "./subcomponents/SocialLinksAccordion";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function SocialLinks() {
- 
-const [accordionId, setAccordionId] = useState(0);
- const deleteAccordionSection = (id) => {
-   const result = accordionField.filter((item) => {
-     if (item.id !== id) {
-       return item;
-     }
-   });
-   setAccordionField(result);
- };
-const [accordionField, setAccordionField] = useState([
-  {
-    id: accordionId,
-    name: <SocialLinksAccordion />,
-  },
-]);
-
-const addAccordionSection = () => {
-  setAccordionId(accordionId + 1);
-  setAccordionField([
-    ...accordionField,
+  const [accordionId, setAccordionId] = useState(0);
+  const deleteAccordionSection = (id) => {
+    const result = accordionField.filter((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+    });
+    setAccordionField(result);
+  };
+  const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
       name: <SocialLinksAccordion />,
     },
   ]);
-  
-};
+
+  const addAccordionSection = () => {
+    setAccordionId(accordionId + 1);
+    setAccordionField([
+      ...accordionField,
+      {
+        id: accordionId,
+        name: <SocialLinksAccordion />,
+      },
+    ]);
+  };
   return (
     <div>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -50,16 +48,20 @@ const addAccordionSection = () => {
         >
           Websites & Social Links
         </Typography>
+
         <Box sx={{ flexGrow: 1 }}>
-          <Grid>
-            {accordionField.map((item, key) => (
-              <Grid key={key} item md={16} sx={{ display: "flex" }}>
+          {accordionField.map((item, key) => (
+            <Grid container columns={16}>
+              <Grid key={key} item md={15}>
                 {item.name}
+              </Grid>
+              <Grid item md="auto">
                 <DeleteIcon
                   sx={{
                     marginTop: "25px",
                     marginLeft: "5px",
                     fontSize: "20px",
+
                     color: "white",
                     "&:hover": {
                       color: "#2196f3",
@@ -69,11 +71,12 @@ const addAccordionSection = () => {
                   onClick={() => deleteAccordionSection(item.id)}
                 />
               </Grid>
-            ))}
-          </Grid>
+            </Grid>
+          ))}
         </Box>
         <Typography
           sx={{
+            width: "94%",
             fontWeight: "700",
             marginTop: "20px",
             padding: "5px",

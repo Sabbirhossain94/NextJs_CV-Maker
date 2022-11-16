@@ -16,21 +16,22 @@ export default function ProfessionalSummary() {
       >
         Professional History
       </Typography>
-
-      <Grid item xs={6} md={12} variant="contained">
-        <Box
-          sx={{
-            height: "250px",
-            padding: "10px",
-            overflow: "auto",
-            border: "1px solid",
-            borderColor: "#acacac",
-            borderRadius: "5px",
-            backgroundColor: "#eff2f9",
-          }}
-        >
-          <MUIRichTextEditor label="Start typing..." />
-        </Box>
+      <Grid container columns={16}>
+        <Grid item xs={6} md={15} variant="contained">
+          <Box
+            sx={{
+              height: "250px",
+              padding: "10px",
+              overflow: "auto",
+              border: "1px solid",
+              borderColor: "#acacac",
+              borderRadius: "5px",
+              backgroundColor: "#eff2f9",
+            }}
+          >
+            <MUIRichTextEditor label="Start typing..." />
+          </Box>
+        </Grid>
       </Grid>
     </Box>
   );

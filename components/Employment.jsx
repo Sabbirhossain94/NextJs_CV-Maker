@@ -38,7 +38,7 @@ export default function Employment() {
   };
 
   return (
-    <div>
+    
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Typography
           sx={{
@@ -53,15 +53,19 @@ export default function Employment() {
         </Typography>
 
         <Box sx={{ flexGrow: 1 }}>
-          <Grid>
+         
             {accordionField.map((item, key) => (
-              <Grid key={key} item md={16} sx={{ display: "flex" }}>
+               <Grid container columns={16}>
+              <Grid key={key} item md={15} >
                 {item.name}
+                </Grid>
+               <Grid item md="auto" > 
                 <DeleteIcon
                   sx={{
-                    marginTop: "36px",
+                    marginTop: "25px",
                     marginLeft: "5px",
                     fontSize: "20px",
+                   
                     color: "white",
                     "&:hover": {
                       color: "#2196f3",
@@ -70,13 +74,15 @@ export default function Employment() {
                   }}
                   onClick={() => deleteAccordionSection(item.id)}
                 />
+                </Grid>
               </Grid>
             ))}
-          </Grid>
+         
         </Box>
 
         <Typography
           sx={{
+            width: "94%",
             fontWeight: "700",
             marginTop: "20px",
             display: "flex",
@@ -90,9 +96,9 @@ export default function Employment() {
           color="primary"
           onClick={addAccordionSection}
         >
-          <AddIcon sx={{ fontSize: "20px" }} /> Add one more employment
+          <AddIcon sx={{ fontSize: "20px", }} /> Add one more employment
         </Typography>
       </Box>
-    </div>
+    
   );
 }

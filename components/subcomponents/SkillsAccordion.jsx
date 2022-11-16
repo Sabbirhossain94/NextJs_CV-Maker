@@ -10,6 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { inputLabelClasses } from "@mui/material/InputLabel";
 
 export default function SkillsAccordion({toggleSwitch}) {
   console.log(toggleSwitch)
@@ -66,8 +67,13 @@ export default function SkillsAccordion({toggleSwitch}) {
             <TextField
               id="outlined-basic"
               label="Skill"
-              variant="outlined"
-              sx={{ width: "100%" }}
+              variant="filled"
+              sx={{ width: "100%", background: "#EFF2F9" }}
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
+              }}
             />
           </Grid>
           <Grid item xs={6} md={6}>
@@ -78,8 +84,15 @@ export default function SkillsAccordion({toggleSwitch}) {
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                label="level"  
+                label="level"
                 defaultValue=""
+                variant="filled"
+                sx={{ background: "#eff2f9" }}
+                InputLabelProps={{
+                  sx: {
+                    color: "#828ba2",
+                  },
+                }}
               >
                 {optionValue.map((item, key) => (
                   <MenuItem value={item.value} key={key}>

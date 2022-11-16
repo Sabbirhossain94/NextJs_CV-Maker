@@ -34,16 +34,26 @@ export default function SocialLinksAccordion() {
             <TextField
               id="outlined-basic"
               label="Label"
-              variant="outlined"
-              sx={{ width: "100%" }}
+              variant="filled"
+              sx={{ width: "100%", background: "#eff2f9" }}
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
+              }}
             />
           </Grid>
           <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
               label="Link"
-              variant="outlined"
-              sx={{ width: "100%" }}
+              variant="filled"
+              sx={{ width: "100%", background: "#eff2f9" }}
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
+              }}
             />
           </Grid>
         </Grid>

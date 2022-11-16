@@ -39,16 +39,26 @@ export default function EducationAccordion() {
             <TextField
               id="outlined-basic"
               label="School"
-              variant="outlined"
-              sx={{ width: "100%" }}
+              variant="filled"
+              sx={{ width: "100%", background: "#eff2f9" }}
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
+              }}
             />
           </Grid>
           <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
               label="Degree"
-              variant="outlined"
-              sx={{ width: "100%" }}
+              variant="filled"
+              sx={{ width: "100%", background: "#eff2f9" }}
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
+              }}
             />
           </Grid>
           <Grid item xs={6} md={6} sx={{ display: "flex" }}>
@@ -58,8 +68,13 @@ export default function EducationAccordion() {
             <TextField
               id="outlined-basic"
               label="City"
-              variant="outlined"
-              sx={{ width: "100%" }}
+              variant="filled"
+              sx={{ width: "100%", background: "#eff2f9" }}
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
+              }}
             />
           </Grid>
           <Grid item xs={6} md={12}>
@@ -81,6 +96,7 @@ export default function EducationAccordion() {
                 borderColor: "#acacac",
                 borderRadius: "5px",
                 marginTop: "10px",
+                background: "#eff2f9",
               }}
             >
               <MUIRichTextEditor label="Start typing..." />

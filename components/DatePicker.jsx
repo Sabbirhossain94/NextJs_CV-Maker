@@ -17,7 +17,16 @@ export default function getDate() {
         onChange={(newValue) => setStartDateValue(newValue)}
         variant="outlined"
         renderInput={(params) => (
-          <TextField {...params} sx={{ width: "200px" }} />
+          <TextField
+            variant="filled"
+            {...params}
+            sx={{ width: "200px", background: "#eff2f9" }}
+            InputLabelProps={{
+              sx: {
+                color: "#828ba2",
+              },
+            }}
+          />
         )}
       />
       <DatePicker
@@ -29,7 +38,16 @@ export default function getDate() {
         variant="outlined"
         sx={{ width: "150px" }}
         renderInput={(params) => (
-          <TextField {...params} sx={{ marginLeft: "20px", width: "200px" }} />
+          <TextField
+            variant="filled"
+            {...params}
+            sx={{ marginLeft: "20px", width: "200px", background: "#eff2f9" }}
+            InputLabelProps={{
+              sx: {
+                color: "#828ba2",
+              },
+            }}
+          />
         )}
       />
     </LocalizationProvider>

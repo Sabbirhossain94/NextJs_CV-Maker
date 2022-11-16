@@ -112,29 +112,33 @@ export default function Skills() {
       </Stack>
 
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2} columns={16}>
-          {accordionField.map((item, key) => (
-              <Grid key={key} item md={16} sx={{display: "flex"}}>
-                {item.name}
-                <DeleteIcon
-                  sx={{
-                    marginTop: "25px",
-                    marginLeft: "5px",
-                    fontSize: "20px",
-                    color: "white",
-                    "&:hover": {
-                      color: "#2196f3",
-                      cursor: "pointer",
-                    },
-                  }}
-                  onClick={() => deleteAccordionSection(item.id)}
-                />
-              </Grid>
-          ))}
-        </Grid>
+        {accordionField.map((item, key) => (
+          <Grid container columns={16}>
+            <Grid key={key} item md={15}>
+              {item.name}
+            </Grid>
+            <Grid item md="auto">
+              <DeleteIcon
+                sx={{
+                  marginTop: "25px",
+                  marginLeft: "5px",
+                  fontSize: "20px",
+
+                  color: "white",
+                  "&:hover": {
+                    color: "#2196f3",
+                    cursor: "pointer",
+                  },
+                }}
+                onClick={() => deleteAccordionSection(item.id)}
+              />
+            </Grid>
+          </Grid>
+        ))}
       </Box>
       <Typography
         sx={{
+          width: "94%",
           fontWeight: "700",
           marginTop: "20px",
           padding: "5px",

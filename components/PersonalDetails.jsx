@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import PersonalDetailsAccordion from "../components/subcomponents/PersonalDetailsAccordion"
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -27,57 +26,30 @@ export default function PersonalDetails() {
       >
         Personal Details
       </Typography>
-      <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 5 }}>
-        <Grid item xs={4} md={6}>
-          <TextField
-            id="outlined-basic"
-            label="First Name"
-            variant="filled"
-            sx={{ width: "100%", background: "#eff2f9" }}
-          />
-        </Grid>
-        <Grid item xs={4} md={6}>
-          <TextField
-            id="outlined-basic"
-            label="Last Name"
-            variant="filled"
-            sx={{ width: "100%", background: "#eff2f9" }}
-          />
-        </Grid>
-        <Grid item xs={4} md={6}>
-          <TextField
-            id="outlined-basic"
-            label="Email"
-            variant="filled"
-            sx={{ width: "100%", background: "#eff2f9" }}
-          />
-        </Grid>
-        <Grid item xs={4} md={6}>
-          <TextField
-            id="outlined-basic"
-            label="Phone"
-            variant="filled"
-            sx={{ width: "100%", background: "#eff2f9" }}
-          />
-        </Grid>
-        <Grid item xs={4} md={6}>
-          <TextField
-            id="outlined-basic"
-            label="Country"
-            variant="filled"
-            sx={{ width: "100%", background: "#eff2f9" }}
-          />
-        </Grid>
-        <Grid item xs={4} md={6}>
-          <TextField
-            id="outlined-basic"
-            label="City"
-            variant="filled"
-            sx={{ width: "100%", background: "#eff2f9" }}
-          />
-        </Grid>
+      <Grid
+        container
+        rowSpacing={5}
+        columnSpacing={{ xs: 1, sm: 2, md: 4 }}
+        columns={15}
+      >
+        {["First Name", "Last Name", "Email", "Phone", "Country", "City"].map(
+          (item, key) => (
+            <Grid item xs={4} md={7} key={key}>
+              <TextField
+                id="outlined-basic"
+                label={item}
+                variant="filled"
+                sx={{ width: "100%", background: "#eff2f9" }}
+                InputLabelProps={{
+                  sx: {
+                    color: "#828ba2",
+                  },
+                }}
+              />
+            </Grid>
+          )
+        )}
       </Grid>
-      <PersonalDetailsAccordion />
     </Box>
   );
 }
