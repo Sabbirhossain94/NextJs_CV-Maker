@@ -22,10 +22,15 @@ export default function EducationAccordion() {
     <Accordion
       expanded={expanded === "panel1"}
       onChange={handleChange("panel1")}
-      sx={{ backgroundColor: "white", marginTop: "10px" }}
+      sx={{
+        backgroundColor: "white",
+        boxShadow: "none",
+        border: "1px solid",
+        borderColor: "#e7eaf4",
+      }}
     >
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon color="primary" />}
+        expandIcon={<ExpandMoreIcon color="#e7eaf4" />}
         aria-controls="panel1bh-content"
         id="panel1bh-header"
       >
@@ -40,11 +45,14 @@ export default function EducationAccordion() {
               id="outlined-basic"
               label="School"
               variant="filled"
-              sx={{ width: "100%", background: "#eff2f9" }}
+              sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",
                 },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
           </Grid>
@@ -53,11 +61,14 @@ export default function EducationAccordion() {
               id="outlined-basic"
               label="Degree"
               variant="filled"
-              sx={{ width: "100%", background: "#eff2f9" }}
+              sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",
                 },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
           </Grid>
@@ -69,11 +80,14 @@ export default function EducationAccordion() {
               id="outlined-basic"
               label="City"
               variant="filled"
-              sx={{ width: "100%", background: "#eff2f9" }}
+              sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",
                 },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
           </Grid>
@@ -93,10 +107,10 @@ export default function EducationAccordion() {
                 padding: "10px",
                 overflow: "auto",
                 border: "1px solid",
-                borderColor: "#acacac",
+                borderColor: "#e7eaf4",
                 borderRadius: "5px",
                 marginTop: "10px",
-                background: "#eff2f9",
+                background: "#e7eaf4",
               }}
             >
               <MUIRichTextEditor label="Start typing..." />

@@ -1,17 +1,10 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import AdditionalDetails from "./subcomponents/AdditionalDetails";
+
 
 export default function PersonalDetails() {
   return (
@@ -22,7 +15,9 @@ export default function PersonalDetails() {
           paddingBottom: "20px",
           fontWeight: "700",
           fontSize: "20px",
+          
         }}
+        
       >
         Personal Details
       </Typography>
@@ -39,17 +34,21 @@ export default function PersonalDetails() {
                 id="outlined-basic"
                 label={item}
                 variant="filled"
-                sx={{ width: "100%", background: "#eff2f9" }}
+                sx={{ width: "100%", background: "#e7eaf4" ,borderRadius: "5px"}}
                 InputLabelProps={{
                   sx: {
                     color: "#828ba2",
                   },
+                }}
+                InputProps={{
+                  disableUnderline: true,
                 }}
               />
             </Grid>
           )
         )}
       </Grid>
+      <AdditionalDetails />
     </Box>
   );
 }

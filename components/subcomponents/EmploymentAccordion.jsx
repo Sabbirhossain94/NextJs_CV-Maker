@@ -21,10 +21,17 @@ export default function EmploymentAccordion() {
     <Accordion
       expanded={expanded === "panel1"}
       onChange={handleChange("panel1")}
-      sx={{ backgroundColor: "white", marginTop: "10px", cursor: "none" }}
+      sx={{
+        backgroundColor: "white",
+
+        cursor: "none",
+        boxShadow: "none",
+        border: "1px solid",
+        borderColor: "#e7eaf4",
+      }}
     >
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon color="primary" />}
+        expandIcon={<ExpandMoreIcon color="#e7eaf4" />}
         aria-controls="panel1bh-content"
         id="panel1bh-header"
       >
@@ -39,11 +46,14 @@ export default function EmploymentAccordion() {
               id="outlined-basic"
               label="Job title"
               variant="filled"
-              sx={{ width: "100%", background: "#eff2f9" }}
+              sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",
                 },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
           </Grid>
@@ -52,11 +62,14 @@ export default function EmploymentAccordion() {
               id="outlined-basic"
               label="Employer"
               variant="filled"
-              sx={{ width: "100%", background: "#eff2f9" }}
+              sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",
                 },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
           </Grid>
@@ -68,11 +81,18 @@ export default function EmploymentAccordion() {
               id="outlined-basic"
               label="City"
               variant="filled"
-              sx={{ width: "100%", background: "#eff2f9" }}
+              sx={{
+                width: "100%",
+                background: "#e7eaf4",
+                borderRadius: "5px",
+              }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",
                 },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
           </Grid>
@@ -92,10 +112,10 @@ export default function EmploymentAccordion() {
                 padding: "10px",
                 overflow: "auto",
                 border: "1px solid",
-                borderColor: "#acacac",
+                borderColor: "#e7eaf4",
                 borderRadius: "5px",
                 marginTop: "10px",
-                background: "#eff2f9",
+                background: "#e7eaf4",
               }}
             >
               <MUIRichTextEditor label="Start typing..." />

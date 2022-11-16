@@ -20,7 +20,7 @@ export default function getDate() {
           <TextField
             variant="filled"
             {...params}
-            sx={{ width: "200px", background: "#eff2f9" }}
+            sx={{ width: "200px", background: "#e7eaf4", borderRadius: "5px" }}
             InputLabelProps={{
               sx: {
                 color: "#828ba2",
@@ -41,7 +41,12 @@ export default function getDate() {
           <TextField
             variant="filled"
             {...params}
-            sx={{ marginLeft: "20px", width: "200px", background: "#eff2f9" }}
+            sx={{
+              marginLeft: "20px",
+              width: "200px",
+              background: "#e7eaf4",
+              borderRadius: "5px",
+            }}
             InputLabelProps={{
               sx: {
                 color: "#828ba2",

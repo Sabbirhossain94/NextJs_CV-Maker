@@ -45,13 +45,11 @@ export default function AdditionalDetails() {
             sx={{
               flexShrink: 0,
               fontWeight: "700",
-
               borderRadius: "5px",
               width: "100%",
             }}
             color="primary"
           >
-            {" "}
             Edit additional details
           </Typography>
         </AccordionSummary>
@@ -75,11 +73,14 @@ export default function AdditionalDetails() {
                   id="outlined-basic"
                   label={item}
                   variant="filled"
-                  sx={{ width: "105%", background: "#eff2f9" }}
+                  sx={{ width: "105%", background: "#e7eaf4",borderRadius: "5px" }}
                   InputLabelProps={{
                     sx: {
                       color: "#828ba2",
                     },
+                  }}
+                  InputProps={{
+                    disableUnderline: true,
                   }}
                 />
               </Grid>

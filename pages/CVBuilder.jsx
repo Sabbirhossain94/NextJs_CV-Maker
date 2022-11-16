@@ -10,7 +10,7 @@ import SocialLinks from "../components/SocialLinks";
 import Employment from "../components/Employment";
 import ProfessionalSummary from "../components/ProfessionalSummary";
 import Skills from "../components/Skills";
-
+import AddSection from "../components/AddSection";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -18,7 +18,7 @@ import "@fontsource/roboto/700.css";
 
 export default function CVBuilder() {
   const [progress, setProgress] = useState(20);
-
+  const [test,setTest]= useState(null)
   const draggableSections = [
     {
       id: "1",
@@ -37,6 +37,11 @@ export default function CVBuilder() {
       name: <Skills />,
     },
   ];
+   const cvBuilderJson= {
+   personalDetails: null,
+   professionalHistory: null
+   }
+
   return (
     <Box
       sx={{
@@ -54,12 +59,12 @@ export default function CVBuilder() {
       >
         <Box sx={{ marginTop: "10px", width: "100%", height: "100vh" }}>
           <LinearProgress variant="determinate" value={progress} />
-
           <Box sx={{ marginTop: "4rem", width: "100%" }}>
             <PersonalDetails />
-            <AdditionalDetails/>
+            
             <ProfessionalSummary />
             <List>{draggableSections.map((item, index) => item.name)}</List>
+            <AddSection/>
           </Box>
         </Box>
       </Box>

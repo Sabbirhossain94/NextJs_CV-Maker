@@ -17,10 +17,15 @@ export default function SocialLinksAccordion() {
     <Accordion
       expanded={expanded === "panel1"}
       onChange={handleChange("panel1")}
-      sx={{ backgroundColor: "white", marginTop: "10px" }}
+      sx={{
+        backgroundColor: "white",
+        boxShadow: "none",
+        border: "1px solid",
+        borderColor: "#e7eaf4",
+      }}
     >
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon color="primary" />}
+        expandIcon={<ExpandMoreIcon color="#e7eaf4" />}
         aria-controls="panel1bh-content"
         id="panel1bh-header"
       >
@@ -35,11 +40,14 @@ export default function SocialLinksAccordion() {
               id="outlined-basic"
               label="Label"
               variant="filled"
-              sx={{ width: "100%", background: "#eff2f9" }}
+              sx={{ width: "100%", background: "#e7eaf4",borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",
                 },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
           </Grid>
@@ -48,11 +56,14 @@ export default function SocialLinksAccordion() {
               id="outlined-basic"
               label="Link"
               variant="filled"
-              sx={{ width: "100%", background: "#eff2f9" }}
+              sx={{ width: "100%", background: "#e7eaf4",borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",
                 },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
           </Grid>

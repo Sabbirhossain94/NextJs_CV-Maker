@@ -50,10 +50,16 @@ export default function SkillsAccordion({toggleSwitch}) {
     <Accordion
       expanded={expanded === "panel1"}
       onChange={handleChange("panel1")}
-      sx={{ backgroundColor: "white", marginTop: "10px" }}
+      sx={{
+        backgroundColor: "white",
+        marginTop: "10px",
+        boxShadow: "none",
+        border: "1px solid",
+        borderColor: "#e7eaf4",
+      }}
     >
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon color="primary" />}
+        expandIcon={<ExpandMoreIcon color="#e7eaf4" />}
         aria-controls="panel1bh-content"
         id="panel1bh-header"
       >
@@ -68,11 +74,14 @@ export default function SkillsAccordion({toggleSwitch}) {
               id="outlined-basic"
               label="Skill"
               variant="filled"
-              sx={{ width: "100%", background: "#EFF2F9" }}
+              sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",
                 },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
           </Grid>
@@ -87,11 +96,9 @@ export default function SkillsAccordion({toggleSwitch}) {
                 label="level"
                 defaultValue=""
                 variant="filled"
-                sx={{ background: "#eff2f9" }}
-                InputLabelProps={{
-                  sx: {
-                    color: "#828ba2",
-                  },
+                sx={{ background: "#e7eaf4", borderRadius: "5px" }}
+                InputProps={{
+                  disableUnderline: true,
                 }}
               >
                 {optionValue.map((item, key) => (
