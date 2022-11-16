@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function PersonalDetails() {
   return (
-    <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+    <Box>
       <Typography
         sx={{
           width: "33%",
@@ -27,53 +27,53 @@ export default function PersonalDetails() {
       >
         Personal Details
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 5 }}>
         <Grid item xs={4} md={6}>
           <TextField
             id="outlined-basic"
             label="First Name"
-            variant="outlined"
-            sx={{ width: "100%" }}
+            variant="filled"
+            sx={{ width: "100%", background: "#eff2f9" }}
           />
         </Grid>
         <Grid item xs={4} md={6}>
           <TextField
             id="outlined-basic"
             label="Last Name"
-            variant="outlined"
-            sx={{ width: "100%" }}
+            variant="filled"
+            sx={{ width: "100%", background: "#eff2f9" }}
           />
         </Grid>
         <Grid item xs={4} md={6}>
           <TextField
             id="outlined-basic"
             label="Email"
-            variant="outlined"
-            sx={{ width: "100%" }}
+            variant="filled"
+            sx={{ width: "100%", background: "#eff2f9" }}
           />
         </Grid>
         <Grid item xs={4} md={6}>
           <TextField
             id="outlined-basic"
             label="Phone"
-            variant="outlined"
-            sx={{ width: "100%" }}
+            variant="filled"
+            sx={{ width: "100%", background: "#eff2f9" }}
           />
         </Grid>
         <Grid item xs={4} md={6}>
           <TextField
             id="outlined-basic"
             label="Country"
-            variant="outlined"
-            sx={{ width: "100%" }}
+            variant="filled"
+            sx={{ width: "100%", background: "#eff2f9" }}
           />
         </Grid>
         <Grid item xs={4} md={6}>
           <TextField
             id="outlined-basic"
             label="City"
-            variant="outlined"
-            sx={{ width: "100%" }}
+            variant="filled"
+            sx={{ width: "100%", background: "#eff2f9" }}
           />
         </Grid>
       </Grid>

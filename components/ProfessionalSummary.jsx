@@ -26,6 +26,7 @@ export default function ProfessionalSummary() {
             border: "1px solid",
             borderColor: "#acacac",
             borderRadius: "5px",
+            backgroundColor: "#eff2f9",
           }}
         >
           <MUIRichTextEditor label="Start typing..." />

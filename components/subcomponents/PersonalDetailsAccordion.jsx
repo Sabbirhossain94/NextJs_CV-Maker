@@ -1,4 +1,5 @@
 import * as React from "react";
+import Box from "@mui/material/Box";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -13,85 +14,107 @@ export default function PersonalDetailsAccordion() {
         setExpanded(isExpanded ? panel : false);
       };
   return (
-    <Accordion
-      expanded={expanded === "panel1"}
-      onChange={handleChange("panel1")}
-      sx={{ backgroundColor: "white", boxShadow: "none" }}
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: "flex",
+        flexDirection: "column",
+        marginTop: "30px",
+      }}
     >
-      <AccordionSummary
-        sx={{flexDirection: "row-reverse"}}
-        expandIcon={<ExpandMoreIcon color="primary" sx={{marginTop: "5px"}}/>}
-        aria-controls="panel1bh-content"
-        id="panel1bh-header"
+      <Accordion
+        expanded={expanded === "panel1"}
+        onChange={handleChange("panel1")}
+        sx={{
+          backgroundColor: "white",
+          display: "flex",
+          flexDirection: "column-reverse",
+          boxShadow: "none"
+        }}
       >
-        <Typography
-          sx={{
-            flexShrink: 0,
-            fontWeight: "700",
-            marginTop: "10px",        
-            borderRadius: "5px",
-            display: "flex",
-            width: "100%"
-          }}
-          color="primary"
+        <AccordionSummary
+          sx={{ flexDirection: "row-reverse", width: "30%" }}
+          expandIcon={
+            <ExpandMoreIcon
+              color="primary"
+              sx={{ display: "flex"}}
+            />
+          }
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
         >
-          {" "}
-          Edit additional details
-        </Typography>
-      </AccordionSummary>
+          <Typography
+            sx={{
+              flexShrink: 0,
+              fontWeight: "700",
+              
+              borderRadius: "5px",
+              width: "100%",
+            }}
+            color="primary"
+          >
+            {" "}
+            Edit additional details
+          </Typography>
+        </AccordionSummary>
 
-      <AccordionDetails>
-        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={4} md={6}>
-            <TextField
-              id="outlined-basic"
-              label="Address"
-              variant="outlined"
-              sx={{ width: "100%" }}
-            />
+        <AccordionDetails>
+          <Grid
+            container
+            rowSpacing={5}
+            columnSpacing={{ xs: 1, sm: 2, md: 5 }}
+          >
+            <Grid item xs={4} md={6}>
+              <TextField
+                id="outlined-basic"
+                label="Address"
+                variant="filled"
+                sx={{ width: "100%", background: "#eff2f9" }}
+              />
+            </Grid>
+            <Grid item xs={4} md={6}>
+              <TextField
+                id="outlined-basic"
+                label="Postal Code"
+                variant="filled"
+                sx={{ width: "100%", background: "#eff2f9" }}
+              />
+            </Grid>
+            <Grid item xs={4} md={6}>
+              <TextField
+                id="outlined-basic"
+                label="Driving License"
+                variant="filled"
+                sx={{ width: "100%", background: "#eff2f9" }}
+              />
+            </Grid>
+            <Grid item xs={4} md={6}>
+              <TextField
+                id="outlined-basic"
+                label="Nationality"
+                variant="filled"
+                sx={{ width: "100%", background: "#eff2f9" }}
+              />
+            </Grid>
+            <Grid item xs={4} md={6}>
+              <TextField
+                id="outlined-basic"
+                label="Place Of Birth"
+                variant="filled"
+                sx={{ width: "100%", background: "#eff2f9" }}
+              />
+            </Grid>
+            <Grid item xs={4} md={6}>
+              <TextField
+                id="outlined-basic"
+                label="Date Of Birth"
+                variant="filled"
+                sx={{ width: "100%", background: "#eff2f9" }}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={4} md={6}>
-            <TextField
-              id="outlined-basic"
-              label="Postal Code"
-              variant="outlined"
-              sx={{ width: "100%" }}
-            />
-          </Grid>
-          <Grid item xs={4} md={6}>
-            <TextField
-              id="outlined-basic"
-              label="Driving License"
-              variant="outlined"
-              sx={{ width: "100%" }}
-            />
-          </Grid>
-          <Grid item xs={4} md={6}>
-            <TextField
-              id="outlined-basic"
-              label="Nationality"
-              variant="outlined"
-              sx={{ width: "100%" }}
-            />
-          </Grid>
-          <Grid item xs={4} md={6}>
-            <TextField
-              id="outlined-basic"
-              label="Place Of Birth"
-              variant="outlined"
-              sx={{ width: "100%" }}
-            />
-          </Grid>
-          <Grid item xs={4} md={6}>
-            <TextField
-              id="outlined-basic"
-              label="Date Of Birth"
-              variant="outlined"
-              sx={{ width: "100%" }}
-            />
-          </Grid>
-        </Grid>
-      </AccordionDetails>
-    </Accordion>
+        </AccordionDetails>
+      </Accordion>
+    </Box>
   );
 }
