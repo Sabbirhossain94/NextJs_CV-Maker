@@ -45,7 +45,7 @@ export default function Skills() {
       <Typography
         sx={{
           width: "33%",
-          marginTop: "50px",
+          marginTop: "20px",
           paddingBottom: "20px",
           fontWeight: "700",
           fontSize: "20px",

@@ -1,52 +1,75 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import GTranslateOutlinedIcon from "@mui/icons-material/GTranslateOutlined";
 import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import NordicWalkingOutlinedIcon from "@mui/icons-material/NordicWalkingOutlined";
-import Courses from "../components/Courses"
-import ExtraCurricular from "../components/ExtraCurricular"
+import Courses from "../components/Courses";
+import ExtraCurricular from "../components/ExtraCurricular";
 import Hobbies from "./Hobbies";
-import Language from "./Language"
+import Language from "./Language";
 
-export default function AddSection({allSections,setAllSections}) {
-  const [sectionIsActive, setSectionIsActive]= useState(false)
+export default function AddSection({ allSections, setAllSections }) {
+  const [activeSectionId, setActiveSectionId] = useState(null);
 
   const addSectionElements = [
     {
       id: 5,
-      icon: <SchoolOutlinedIcon color="primary" sx={{ fontSize: "35px" }} />,
+      icon: (
+        <SchoolOutlinedIcon
+          sx={{
+            fontSize: "35px",
+            ...{ color: activeSectionId == 5 ? "#bdbdbd" : "#1565c0" },
+          }}
+        />
+      ),
       name: "Courses",
-      component: <Courses />
+      component: <Courses />,
     },
     {
       id: 6,
       icon: (
-        <NordicWalkingOutlinedIcon color="primary" sx={{ fontSize: "35px" }} />
+        <NordicWalkingOutlinedIcon
+          color="primary"
+          sx={{
+            fontSize: "35px",
+            ...{ color: activeSectionId == 6 ? "#bdbdbd" : "#1565c0" },
+          }}
+        />
       ),
       name: "Extra-curricular Activities",
-      component: <ExtraCurricular/>
+      component: <ExtraCurricular />,
     },
     {
       id: 7,
       icon: (
-        <SportsEsportsOutlinedIcon color="primary" sx={{ fontSize: "35px" }} />
+        <SportsEsportsOutlinedIcon
+          color="primary"
+          sx={{
+            fontSize: "35px",
+            ...{ color: activeSectionId == 7 ? "#bdbdbd" : "#1565c0" },
+          }}
+        />
       ),
       name: "Hobbies",
-      component: <Hobbies/>
+      component: <Hobbies />,
     },
     {
       id: 8,
       icon: (
-        <GTranslateOutlinedIcon color="primary" sx={{ fontSize: "35px" }} />
+        <GTranslateOutlinedIcon
+          color="primary"
+          sx={{
+            fontSize: "35px",
+            ...{ color: activeSectionId == 8 ? "#bdbdbd" : "#1565c0" },
+          }}
+        />
       ),
       name: "Languages",
-      component: <Language/>
+      component: <Language />,
     },
-    
   ];
 
   const addToDraggableSections = (newSectionId, newSectionName) => {
@@ -54,7 +77,18 @@ export default function AddSection({allSections,setAllSections}) {
       ...allSections,
       { id: newSectionId, name: newSectionName },
     ]);
-    setSectionIsActive(true)
+  };
+
+  
+
+  const triggerActiveSection = (id) => {
+    const activeId = addSectionElements.filter((item) => {
+      if (item.id === id) {
+        return item.id;
+      }
+    });
+    setActiveSectionId(activeId[0].id);
+    console.log(activeSectionId);
   };
 
   return (
@@ -100,9 +134,17 @@ export default function AddSection({allSections,setAllSections}) {
                   color: "#2196f3",
                   cursor: "pointer",
                 },
+                ...{
+                  pointerEvents: item.id === activeSectionId ? "none" : "auto",
+                },
+                ...{
+                  color: item.id === activeSectionId ? "#bdbdbd" : "primary",
+                },
               }}
-              onClick={() => addToDraggableSections(item.id, item.component)}
-              
+              onClick={() => {
+                addToDraggableSections(item.id, item.component);
+                triggerActiveSection(item.id);
+              }}
             >
               {item.name}
             </Grid>

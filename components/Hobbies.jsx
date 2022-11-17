@@ -10,7 +10,7 @@ export default function Hobbies() {
       <Typography
         sx={{
           width: "33%",
-          marginTop: "50px",
+          marginTop: "20px",
           paddingBottom: "20px",
           fontWeight: "700",
           fontSize: "20px",
@@ -20,11 +20,9 @@ export default function Hobbies() {
       </Typography>
       <Grid
         container
-        rowSpacing={5}
-        columnSpacing={{ xs: 1, sm: 2, md: 4 }}
-        columns={15}
+        columns={14}
       >
-        <Grid item xs={4} md={15}>
+        <Grid item xs={4} md={13}>
           <TextField
             id="outlined-basic"
             label="What do you like?"
