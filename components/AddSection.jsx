@@ -11,18 +11,42 @@ import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import NordicWalkingOutlinedIcon from "@mui/icons-material/NordicWalkingOutlined";
 
 export default function AddSection() {
-    const Item = styled(Paper)(({ theme }) => ({
-      backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-      ...theme.typography.body2,
-      fontWeight: "400",
-      padding: theme.spacing(1),
-      textAlign: "start",
-      padding: "10px",
-      color: "black",
-      fontSize: "17px",
-      boxShadow: "none",
-      marginLeft: "-10px"
-    }));
+
+  const addSectionElements = [
+    {
+      id: 1,
+      icon: <SchoolOutlinedIcon color="primary" sx={{ fontSize: "35px" }} />,
+      name: "Courses",
+    },
+    {
+      id: 2,
+      icon: (
+        <NordicWalkingOutlinedIcon color="primary" sx={{ fontSize: "35px" }} />
+      ),
+      name: "Extra-curricular Activities",
+    },
+    {
+      id: 3,
+      icon: (
+        <SportsEsportsOutlinedIcon color="primary" sx={{ fontSize: "35px" }} />
+      ),
+      name: "Hobbies",
+    },
+    {
+      id: 4,
+      icon: (
+        <GTranslateOutlinedIcon color="primary" sx={{ fontSize: "35px" }} />
+      ),
+      name: "Languages",
+    },
+    {
+      id: 5,
+      icon: (
+        <WorkOutlineOutlinedIcon color="primary" sx={{ fontSize: "35px" }} />
+      ),
+      name: "Internships",
+    },
+  ];
   return (
     <Box>
       <Typography
@@ -36,37 +60,38 @@ export default function AddSection() {
       >
         Add Section
       </Typography>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 5 }}>
-        <Grid item xs={6}>
-          <Item>
-            <SchoolOutlinedIcon color="primary" sx={{marginTop: "2px"}} />
-            Courses
-          </Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>
-            <NordicWalkingOutlinedIcon color="primary" /> Extra-curricular
-            Activities
-          </Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>
-            <SportsEsportsOutlinedIcon color="primary" />
-            Hobbies
-          </Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>
-            <GTranslateOutlinedIcon color="primary" />
-            Languages
-          </Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>
-            <WorkOutlineOutlinedIcon color="primary" />
-            Internships
-          </Item>
-        </Grid>
+      <Grid
+        container
+        rowSpacing={2}
+        columns={16}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        sx={{ marginLeft: "5px", padding: "-7px" }}
+      >
+        {addSectionElements.map((item) => (
+          <Grid
+            key={item.id}
+            container
+            item
+            lg={5}
+            md={10}
+            sm={3}
+            sx={{ width: "30%", padding: "10px" }}
+          >
+            <Grid>{item.icon}</Grid>
+            <Grid
+              item
+              md="auto"
+              sx={{
+                marginLeft: "10px",
+                marginTop: "5px",
+                fontSize: "18px",
+                fontWeight: "400",
+              }}
+            >
+              {item.name}
+            </Grid>
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );

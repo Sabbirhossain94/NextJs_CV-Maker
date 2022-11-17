@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRef } from "react";
 import Box from "@mui/material/Box";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -9,6 +10,8 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
 export default function AdditionalDetails() {
+  
+  
     const [expanded, setExpanded] = React.useState(false);
       const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -73,8 +76,13 @@ export default function AdditionalDetails() {
                   id="outlined-basic"
                   label={item}
                   variant="filled"
-                  sx={{ width: "105%", background: "#e7eaf4",borderRadius: "5px" }}
-                  InputLabelProps={{
+                  sx={{
+                    width: "105%",
+                    background: "#e7eaf4",
+                    borderRadius: "5px",
+                    textDecoration: "none",
+                  }}
+                  inputLabelProps={{
                     sx: {
                       color: "#828ba2",
                     },

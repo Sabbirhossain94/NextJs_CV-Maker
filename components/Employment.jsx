@@ -51,9 +51,9 @@ export default function Employment() {
       </Typography>
 
       <Box sx={{ flexGrow: 1 }}>
-        {accordionField.map((item, key) => (
-          <Grid container columns={16}>
-            <Grid key={key} item md={15}>
+        {accordionField.map((item) => (
+          <Grid key={item.id} container columns={16}>
+            <Grid item md={15}>
               {item.name}
             </Grid>
             <Grid item md="auto">

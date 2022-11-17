@@ -21,19 +21,19 @@ export default function CVBuilder() {
   const [test,setTest]= useState(null)
   const draggableSections = [
     {
-      id: "1",
+      id: 1,
       name: <Employment />,
     },
     {
-      id: "2",
+      id: 2,
       name: <Education />,
     },
     {
-      id: "3",
+      id: 3,
       name: <SocialLinks />,
     },
     {
-      id: "4",
+      id: 4,
       name: <Skills />,
     },
   ];
@@ -61,10 +61,11 @@ export default function CVBuilder() {
           <LinearProgress variant="determinate" value={progress} />
           <Box sx={{ marginTop: "4rem", width: "100%" }}>
             <PersonalDetails />
-            
             <ProfessionalSummary />
-            <List>{draggableSections.map((item, index) => item.name)}</List>
-            <AddSection/>
+            {draggableSections.map((item) => (
+              <List key={item.id}> {item.name}</List>
+            ))}
+            <AddSection />
           </Box>
         </Box>
       </Box>
