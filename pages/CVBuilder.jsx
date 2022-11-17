@@ -1,10 +1,8 @@
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useState } from "react";
 import PersonalDetails from "../components/PersonalDetails";
-import AdditionalDetails from "../components/subcomponents/AdditionalDetails";
 import Education from "../components/Education";
 import SocialLinks from "../components/SocialLinks";
 import Employment from "../components/Employment";
@@ -17,9 +15,9 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 export default function CVBuilder() {
+
   const [progress, setProgress] = useState(20);
-  const [test,setTest]= useState(null)
-  const draggableSections = [
+  const [allSections, setAllSections] = useState([
     {
       id: 1,
       name: <Employment />,
@@ -36,11 +34,9 @@ export default function CVBuilder() {
       id: 4,
       name: <Skills />,
     },
-  ];
-   const cvBuilderJson= {
-   personalDetails: null,
-   professionalHistory: null
-   }
+  ]);
+
+ 
 
   return (
     <Box
@@ -62,10 +58,13 @@ export default function CVBuilder() {
           <Box sx={{ marginTop: "4rem", width: "100%" }}>
             <PersonalDetails />
             <ProfessionalSummary />
-            {draggableSections.map((item) => (
+            {allSections.map((item) => (
               <List key={item.id}> {item.name}</List>
             ))}
-            <AddSection />
+            <AddSection
+              allSections={allSections}
+              setAllSections={setAllSections}
+            />
           </Box>
         </Box>
       </Box>
