@@ -11,9 +11,27 @@ import ExtraCurricular from "../components/ExtraCurricular";
 import Hobbies from "./Hobbies";
 import Language from "./Language";
 
-export default function AddSection({ allSections, setAllSections }) {
+export default function AddSection({
+  allSections,
+  setAllSections,
+  deleteCustomSection,
+}) {
   const [activeSectionId, setActiveSectionId] = useState(null);
+  const addToDraggableSections = (newSectionId, newSectionName) => {
+    setAllSections([
+      ...allSections,
+      { id: newSectionId, name: newSectionName },
+    ]);
+  };
 
+  const triggerActiveSection = (id) => {
+    const activeId = addSectionElements.filter((item) => {
+      if (item.id === id) {
+        return item.id;
+      }
+    });
+    setActiveSectionId(activeId[0].id);
+  };
   const addSectionElements = [
     {
       id: 5,
@@ -26,7 +44,14 @@ export default function AddSection({ allSections, setAllSections }) {
         />
       ),
       name: "Courses",
-      component: <Courses />,
+      component: (
+        <Courses
+          deleteCustomSection={deleteCustomSection}
+          sectionId={5}
+          setActiveSectionId={setActiveSectionId}
+          activeSectionId={activeSectionId}
+        />
+      ),
     },
     {
       id: 6,
@@ -40,7 +65,13 @@ export default function AddSection({ allSections, setAllSections }) {
         />
       ),
       name: "Extra-curricular Activities",
-      component: <ExtraCurricular />,
+      component: (
+        <ExtraCurricular
+          deleteCustomSection={deleteCustomSection}
+          sectionId={6}
+          setActiveSectionId={setActiveSectionId}
+        />
+      ),
     },
     {
       id: 7,
@@ -54,7 +85,14 @@ export default function AddSection({ allSections, setAllSections }) {
         />
       ),
       name: "Hobbies",
-      component: <Hobbies />,
+      component: (
+        <Hobbies
+          deleteCustomSection={deleteCustomSection}
+          sectionId={7}
+          setActiveSectionId={setActiveSectionId}
+          activeSectionId={activeSectionId}
+        />
+      ),
     },
     {
       id: 8,
@@ -68,28 +106,16 @@ export default function AddSection({ allSections, setAllSections }) {
         />
       ),
       name: "Languages",
-      component: <Language />,
+      component: (
+        <Language
+          deleteCustomSection={deleteCustomSection}
+          sectionId={8}
+          setActiveSectionId={setActiveSectionId}
+          activeSectionId={activeSectionId}
+        />
+      ),
     },
   ];
-
-  const addToDraggableSections = (newSectionId, newSectionName) => {
-    setAllSections([
-      ...allSections,
-      { id: newSectionId, name: newSectionName },
-    ]);
-  };
-
-  
-
-  const triggerActiveSection = (id) => {
-    const activeId = addSectionElements.filter((item) => {
-      if (item.id === id) {
-        return item.id;
-      }
-    });
-    setActiveSectionId(activeId[0].id);
-    console.log(activeSectionId);
-  };
 
   return (
     <Box>

@@ -5,7 +5,8 @@ import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CourseAccordion from "../components/subcomponents/CourseAccordion"
-export default function Employment() {
+
+export default function Courses({ deleteCustomSection, sectionId, setActiveSectionId }) {
   const [accordionId, setAccordionId] = useState(0);
 
   const deleteAccordionSection = (id) => {
@@ -36,7 +37,7 @@ export default function Employment() {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Box sx={{display: "flex",flexDirection: "row"}}>
+      <Box sx={{ display: "flex", flexDirection: "row" }}>
         <Typography
           sx={{
             width: "33%",
@@ -46,9 +47,9 @@ export default function Employment() {
             fontSize: "20px",
           }}
         >
-          Courses{" "}
+          Courses
           <DeleteIcon
-            sx={{  
+            sx={{
               marginTop: "-20px",
               fontSize: "17px",
               color: "white",
@@ -57,6 +58,7 @@ export default function Employment() {
                 cursor: "pointer",
               },
             }}
+            onClick={() => {deleteCustomSection(sectionId); setActiveSectionId(null)}}
           />
         </Typography>
       </Box>

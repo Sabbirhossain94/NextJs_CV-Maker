@@ -6,7 +6,12 @@ import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ExtraCurricularAccordion from "../components/subcomponents/ExtraCurricularAccordion"
-export default function Education() {
+
+export default function ExtraCurricular({
+  deleteCustomSection,
+  sectionId,
+  setActiveSectionId,
+}) {
   const [accordionId, setAccordionId] = useState(0);
 
   const deleteAccordionSection = (id) => {
@@ -46,6 +51,21 @@ export default function Education() {
         }}
       >
         Extra-curricular Activites
+        <DeleteIcon
+          sx={{
+            marginTop: "-20px",
+            fontSize: "17px",
+            color: "white",
+            "&:hover": {
+              color: "#2196f3",
+              cursor: "pointer",
+            },
+          }}
+          onClick={() => {
+            deleteCustomSection(sectionId);
+            setActiveSectionId(null);
+          }}
+        />
       </Typography>
 
       <Box sx={{ flexGrow: 1 }}>

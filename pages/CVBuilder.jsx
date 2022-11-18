@@ -35,8 +35,16 @@ export default function CVBuilder() {
       name: <Skills />,
     },
   ]);
-
  
+ const deleteCustomSection = (id) => {
+  const result = allSections.filter((item)=> {
+    if(item.id !== id){
+      return item.id
+    }
+  })
+  setAllSections(result)
+  
+ }
 
   return (
     <Box
@@ -48,12 +56,18 @@ export default function CVBuilder() {
       <Box
         sx={{
           width: "50vw",
-          height: "100vh",
+          height: "100%",
           padding: "5%",
           backgroundColor: "white",
         }}
       >
-        <Box sx={{ marginTop: "10px", width: "100%", height: "100vh" }}>
+        <Box
+          sx={{
+            marginTop: "10px",
+            width: "100%",
+            height: "100vh",
+          }}
+        >
           <LinearProgress variant="determinate" value={progress} />
           <Box sx={{ marginTop: "4rem", width: "100%" }}>
             <PersonalDetails />
@@ -64,6 +78,7 @@ export default function CVBuilder() {
             <AddSection
               allSections={allSections}
               setAllSections={setAllSections}
+              deleteCustomSection={deleteCustomSection}
             />
           </Box>
         </Box>

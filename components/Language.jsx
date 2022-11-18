@@ -1,16 +1,13 @@
 import * as React from "react";
 import { useState } from "react";
-import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import SkillsAccordion from "./subcomponents/SkillsAccordion";
 import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LanguageAccordion from "../components/subcomponents/LanguageAccordion"
-export default function Skills() {
+
+export default function Language({ deleteCustomSection, sectionId, setActiveSectionId }) {
   const [accordionId, setAccordionId] = useState(0);
   const deleteAccordionSection = (id) => {
     const result = accordionField.filter((item) => {
@@ -38,7 +35,6 @@ export default function Skills() {
       },
     ]);
   };
- 
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -51,10 +47,20 @@ export default function Skills() {
           fontSize: "20px",
         }}
       >
-        Languages
+        Languages{" "}
+        <DeleteIcon
+          sx={{
+            marginTop: "-20px",
+            fontSize: "17px",
+            color: "white",
+            "&:hover": {
+              color: "#2196f3",
+              cursor: "pointer",
+            },
+          }}
+          onClick={() => {deleteCustomSection(sectionId);setActiveSectionId(null)}}
+        />
       </Typography>
-
-     
 
       <Box sx={{ flexGrow: 1 }}>
         {accordionField.map((item) => (

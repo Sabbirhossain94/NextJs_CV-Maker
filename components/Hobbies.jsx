@@ -3,8 +3,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function Hobbies() {
+export default function Hobbies({ deleteCustomSection, sectionId, setActiveSectionId }) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography
@@ -17,11 +18,20 @@ export default function Hobbies() {
         }}
       >
         Hobbies
+        <DeleteIcon
+          sx={{
+            marginTop: "-20px",
+            fontSize: "17px",
+            color: "white",
+            "&:hover": {
+              color: "#2196f3",
+              cursor: "pointer",
+            },
+          }}
+          onClick={() => {deleteCustomSection(sectionId);setActiveSectionId(null)}}
+        />
       </Typography>
-      <Grid
-        container
-        columns={14}
-      >
+      <Grid container columns={14}>
         <Grid item xs={4} md={13}>
           <TextField
             id="outlined-basic"
