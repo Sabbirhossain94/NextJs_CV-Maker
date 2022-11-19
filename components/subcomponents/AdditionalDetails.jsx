@@ -64,18 +64,39 @@ export default function AdditionalDetails() {
             columns={15}
           >
             {[
-              "Address",
-              "Postal Code",
-              "Driving License",
-              "Nationality",
-              "Place Of Birth",
-              "Date Of Birth",
+              {
+                label: "Address",
+                name: "address",
+                type: "text",
+              },
+              {
+                label: "Postal Code",
+                name: "postalcode",
+                type: "number",
+              },
+              {
+                label: "Nationality",
+                name: "nationality",
+                type: "text",
+              },
+              {
+                label: "Place Of Birth",
+                name: "placeofbirth",
+                type: "text",
+              },
+              {
+                label: "Date Of Birth",
+                name: "dateofbirth",
+                type: "text",
+              },
             ].map((item, key) => (
               <Grid item xs={4} md={7} key={key}>
                 <TextField
                   id="outlined-basic"
-                  label={item}
+                  label={item.label}
+                  name={item.name}
                   variant="filled"
+                  type={item.type}
                   sx={{
                     width: "105%",
                     background: "#e7eaf4",

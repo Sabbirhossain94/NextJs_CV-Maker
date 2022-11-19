@@ -4,9 +4,14 @@ import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CourseAccordion from "../components/subcomponents/CourseAccordion"
+import CourseAccordion from "../components/subcomponents/CourseAccordion";
 
-export default function Courses({ deleteCustomSection, sectionId, setActiveSectionId }) {
+
+export default function Courses({
+  deleteCustomSection,
+  sectionId,
+  setActiveSectionId,
+}) {
   const [accordionId, setAccordionId] = useState(0);
 
   const deleteAccordionSection = (id) => {
@@ -36,14 +41,14 @@ export default function Courses({ deleteCustomSection, sectionId, setActiveSecti
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" ,marginTop: "20px"}}>
-      <Grid container item md={6} >
-        <Grid container item md={4} >
+    <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
+      <Grid container item md={6}>
+        <Grid container item md={4}>
           <Typography
             sx={{
               fontWeight: "700",
               fontSize: "20px",
-              paddingBottom: "10px"
+              paddingBottom: "10px",
             }}
           >
             Courses
@@ -54,7 +59,7 @@ export default function Courses({ deleteCustomSection, sectionId, setActiveSecti
               marginLeft: "5px",
               fontSize: "18px",
               color: "white",
-              
+
               "&:hover": {
                 color: "#2196f3",
                 cursor: "pointer",
@@ -63,6 +68,7 @@ export default function Courses({ deleteCustomSection, sectionId, setActiveSecti
             onClick={() => {
               deleteCustomSection(sectionId);
               setActiveSectionId(null);
+             
             }}
           />
         </Grid>

@@ -1,18 +1,19 @@
-import React from 'react'
+import React from "react";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TextField from "@mui/material/TextField";
 
 export default function getDate() {
-    const [startDateValue, setStartDateValue] = React.useState(null);
-    const [endDateValue, setEndDateValue] = React.useState(null);
+  const [startDateValue, setStartDateValue] = React.useState(null);
+  const [endDateValue, setEndDateValue] = React.useState(null);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         id="outlined-basic"
         label="Start Date"
         inputFormat="MM/DD/YYYY"
+        name="startdate"
         value={startDateValue}
         onChange={(newValue) => setStartDateValue(newValue)}
         variant="outlined"
@@ -32,6 +33,7 @@ export default function getDate() {
       <DatePicker
         id="outlined-basic"
         label="End Date"
+        name="enddate"
         inputFormat="MM/DD/YYYY"
         value={endDateValue}
         onChange={(newValue) => setEndDateValue(newValue)}

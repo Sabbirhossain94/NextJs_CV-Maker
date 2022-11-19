@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PersonalDetails from "../components/PersonalDetails";
 import Education from "../components/Education";
 import SocialLinks from "../components/SocialLinks";
@@ -13,9 +13,10 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import Button from "@mui/material/Button";
 
 export default function CVBuilder() {
-
+  const formData = useRef();
   const [progress, setProgress] = useState(20);
   const [allSections, setAllSections] = useState([
     {
@@ -35,16 +36,41 @@ export default function CVBuilder() {
       name: <Skills />,
     },
   ]);
- 
- const deleteCustomSection = (id) => {
-  const result = allSections.filter((item)=> {
-    if(item.id !== id){
-      return item.id
-    }
-  })
-  setAllSections(result)
-  
- }
+
+  const deleteCustomSection = (id) => {
+    const result = allSections.filter((item) => {
+      if (item.id !== id) {
+        return item.id;
+      }
+    });
+    setAllSections(result);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const {
+      firstname,
+      lastname,
+      email,
+      phone,
+      country,
+      city,
+      address,
+      postalcode,
+      nationality,
+      placeofbirth,
+      dateofbirth,
+      jobtitle,
+      employer,
+      employmentcity,
+      startdate,
+      enddate
+    } = formData.current;
+    console.log(
+      `Job Title:${jobtitle.value} Employer:${employer.value} City:${employmentcity.value} Start Date:${startdate.value} End Date:${enddate.value} `
+    );
+    console.log(formData.current.value)
+  };
 
   return (
     <Box
@@ -70,16 +96,21 @@ export default function CVBuilder() {
         >
           <LinearProgress variant="determinate" value={progress} />
           <Box sx={{ marginTop: "4rem", width: "100%" }}>
-            <PersonalDetails />
-            <ProfessionalSummary />
-            {allSections.map((item) => (
-              <List key={item.id}> {item.name}</List>
-            ))}
-            <AddSection
-              allSections={allSections}
-              setAllSections={setAllSections}
-              deleteCustomSection={deleteCustomSection}
-            />
+            <form ref={formData} onSubmit={handleSubmit}>
+              <PersonalDetails />
+              <ProfessionalSummary />
+              {allSections.map((item) => (
+                <List key={item.id}> {item.name}</List>
+              ))}
+              <AddSection
+                allSections={allSections}
+                setAllSections={setAllSections}
+                deleteCustomSection={deleteCustomSection}
+              />
+              <Button type="submit" variant="contained">
+                Submit
+              </Button>
+            </form>
           </Box>
         </Box>
       </Box>
@@ -93,9 +124,7 @@ export default function CVBuilder() {
             opacity: [0.9, 0.8, 0.7],
           },
         }}
-      >
-        <Box sx={{ marginTop: "10px", width: "100%" }}></Box>
-      </Box>
+      ></Box>
     </Box>
   );
 }

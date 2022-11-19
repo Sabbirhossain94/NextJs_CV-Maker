@@ -45,6 +45,8 @@ export default function EmploymentAccordion() {
             <TextField
               id="outlined-basic"
               label="Job title"
+              type="text"
+              name="jobtitle"
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -61,6 +63,8 @@ export default function EmploymentAccordion() {
             <TextField
               id="outlined-basic"
               label="Employer"
+              type="text"
+              name="employer"
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -80,6 +84,8 @@ export default function EmploymentAccordion() {
             <TextField
               id="outlined-basic"
               label="City"
+              type="text"
+              name="employmentcity"
               variant="filled"
               sx={{
                 width: "100%",

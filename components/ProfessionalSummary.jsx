@@ -1,8 +1,12 @@
+import { useState} from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import MUIRichTextEditor from "mui-rte";
+
 export default function ProfessionalSummary() {
+
+  const [professionalhistory, setProfessionalHistory] = useState("");
   return (
     <Box>
       <Typography
@@ -29,7 +33,11 @@ export default function ProfessionalSummary() {
               backgroundColor: "#e7eaf4",
             }}
           >
-            <MUIRichTextEditor label="Start typing..." />
+            <MUIRichTextEditor
+              label="Start typing..."
+              value={professionalhistory}
+              
+            />
           </Box>
         </Grid>
       </Grid>
