@@ -36,32 +36,37 @@ export default function Courses({ deleteCustomSection, sectionId, setActiveSecti
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Typography
-          sx={{
-            width: "33%",
-            marginTop: "20px",
-            paddingBottom: "20px",
-            fontWeight: "700",
-            fontSize: "20px",
-          }}
-        >
-          Courses
+    <Box sx={{ display: "flex", flexDirection: "column" ,marginTop: "20px"}}>
+      <Grid container item md={6} >
+        <Grid container item md={4} >
+          <Typography
+            sx={{
+              fontWeight: "700",
+              fontSize: "20px",
+              paddingBottom: "10px"
+            }}
+          >
+            Courses
+          </Typography>
           <DeleteIcon
             sx={{
-              marginTop: "-20px",
-              fontSize: "17px",
+              marginTop: "7px",
+              marginLeft: "5px",
+              fontSize: "18px",
               color: "white",
+              
               "&:hover": {
                 color: "#2196f3",
                 cursor: "pointer",
               },
             }}
-            onClick={() => {deleteCustomSection(sectionId); setActiveSectionId(null)}}
+            onClick={() => {
+              deleteCustomSection(sectionId);
+              setActiveSectionId(null);
+            }}
           />
-        </Typography>
-      </Box>
+        </Grid>
+      </Grid>
 
       <Box sx={{ flexGrow: 1 }}>
         {accordionField.map((item) => (
@@ -91,7 +96,7 @@ export default function Courses({ deleteCustomSection, sectionId, setActiveSecti
         sx={{
           width: "94%",
           fontWeight: "700",
-          marginTop: "20px",
+          marginTop: "10px",
           display: "flex",
           padding: "5px",
           borderRadius: "5px",

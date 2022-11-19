@@ -17,6 +17,7 @@ export default function AddSection({
   deleteCustomSection,
 }) {
   const [activeSectionId, setActiveSectionId] = useState(null);
+ 
   const addToDraggableSections = (newSectionId, newSectionName) => {
     setAllSections([
       ...allSections,
@@ -24,23 +25,18 @@ export default function AddSection({
     ]);
   };
 
-  const triggerActiveSection = (id) => {
-    const activeId = addSectionElements.filter((item) => {
-      if (item.id === id) {
-        return item.id;
-      }
-    });
-    setActiveSectionId(activeId[0].id);
-  };
+ 
+
   const addSectionElements = [
     {
       id: 5,
       icon: (
         <SchoolOutlinedIcon
-          sx={{
+          style={{
             fontSize: "35px",
             ...{ color: activeSectionId == 5 ? "#bdbdbd" : "#1565c0" },
           }}
+          color="primary"
         />
       ),
       name: "Courses",
@@ -49,7 +45,6 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={5}
           setActiveSectionId={setActiveSectionId}
-          activeSectionId={activeSectionId}
         />
       ),
     },
@@ -90,7 +85,6 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={7}
           setActiveSectionId={setActiveSectionId}
-          activeSectionId={activeSectionId}
         />
       ),
     },
@@ -111,11 +105,19 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={8}
           setActiveSectionId={setActiveSectionId}
-          activeSectionId={activeSectionId}
         />
       ),
     },
   ];
+  const triggerActiveSection = (id) => {
+    const activeId = addSectionElements.filter((item) => {
+      if (item.id === id) {
+        return item.id;
+      }
+    });
+    setActiveSectionId(activeId[0].id);
+    console.log(activeSectionId);
+  };
 
   return (
     <Box>

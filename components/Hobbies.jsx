@@ -7,30 +7,38 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Hobbies({ deleteCustomSection, sectionId, setActiveSectionId }) {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Typography
-        sx={{
-          width: "33%",
-          marginTop: "20px",
-          paddingBottom: "20px",
-          fontWeight: "700",
-          fontSize: "20px",
-        }}
-      >
-        Hobbies
-        <DeleteIcon
-          sx={{
-            marginTop: "-20px",
-            fontSize: "17px",
-            color: "white",
-            "&:hover": {
-              color: "#2196f3",
-              cursor: "pointer",
-            },
-          }}
-          onClick={() => {deleteCustomSection(sectionId);setActiveSectionId(null)}}
-        />
-      </Typography>
+    <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
+      <Grid container item md={6}>
+        <Grid container item md={4}>
+          <Typography
+            sx={{
+              fontWeight: "700",
+              fontSize: "20px",
+              paddingBottom: "10px",
+            }}
+          >
+            Hobbies
+          </Typography>
+          <DeleteIcon
+            sx={{
+              marginTop: "7px",
+              marginLeft: "5px",
+              fontSize: "18px",
+              color: "white",
+
+              "&:hover": {
+                color: "#2196f3",
+                cursor: "pointer",
+              },
+            }}
+            onClick={() => {
+              deleteCustomSection(sectionId);
+              setActiveSectionId(null);
+            }}
+          />
+        </Grid>
+      </Grid>
+
       <Grid container columns={14}>
         <Grid item xs={4} md={13}>
           <TextField

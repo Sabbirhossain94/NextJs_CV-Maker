@@ -40,7 +40,7 @@ export default function SocialLinks() {
         <Typography
           sx={{
             width: "33%",
-            marginTop: "50px",
+            marginTop: "30px",
             paddingBottom: "20px",
             fontWeight: "700",
             fontSize: "20px",

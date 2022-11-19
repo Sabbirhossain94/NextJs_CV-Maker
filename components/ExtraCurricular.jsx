@@ -40,33 +40,37 @@ export default function ExtraCurricular({
     ]);
   };
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Typography
-        sx={{
-          width: "33%",
-          marginTop: "20px",
-          paddingBottom: "20px",
-          fontWeight: "700",
-          fontSize: "20px",
-        }}
-      >
-        Extra-curricular Activites
-        <DeleteIcon
-          sx={{
-            marginTop: "-20px",
-            fontSize: "17px",
-            color: "white",
-            "&:hover": {
-              color: "#2196f3",
-              cursor: "pointer",
-            },
-          }}
-          onClick={() => {
-            deleteCustomSection(sectionId);
-            setActiveSectionId(null);
-          }}
-        />
-      </Typography>
+    <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
+      <Grid container item md={8}>
+        <Grid container item md={8}>
+          <Typography
+            sx={{
+              fontWeight: "700",
+              fontSize: "20px",
+              paddingBottom: "10px",
+            }}
+          >
+            Extra-curricular Activities
+          </Typography>
+          <DeleteIcon
+            sx={{
+              marginTop: "7px",
+              marginLeft: "5px",
+              fontSize: "18px",
+              color: "white",
+
+              "&:hover": {
+                color: "#2196f3",
+                cursor: "pointer",
+              },
+            }}
+            onClick={() => {
+              deleteCustomSection(sectionId);
+              setActiveSectionId(null);
+            }}
+          />
+        </Grid>
+      </Grid>
 
       <Box sx={{ flexGrow: 1 }}>
         {accordionField.map((item) => (
@@ -96,7 +100,7 @@ export default function ExtraCurricular({
         sx={{
           width: "94%",
           fontWeight: "700",
-          marginTop: "20px",
+          marginTop: "10px",
           padding: "5px",
           display: "flex",
           borderRadius: "5px",

@@ -84,11 +84,11 @@ export default function Skills() {
   }));
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box sx={{ display: "flex", flexDirection: "column"}}>
       <Typography
         sx={{
           width: "33%",
-          marginTop: "50px",
+          marginTop: "30px",
           paddingBottom: "20px",
           fontWeight: "700",
           fontSize: "20px",
@@ -140,7 +140,7 @@ export default function Skills() {
         sx={{
           width: "94%",
           fontWeight: "700",
-          marginTop: "20px",
+          marginTop: "10px",
           padding: "5px",
           display: "flex",
           borderRadius: "5px",
