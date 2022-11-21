@@ -116,7 +116,7 @@ export default function AddSection({
       }
     });
     setActiveSectionId(activeId[0].id);
-    console.log(activeSectionId);
+    
   };
 
   return (

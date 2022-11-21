@@ -1,3 +1,4 @@
+import { useState } from "react";
 import * as React from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -8,11 +9,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import DatePicker from "../../components/DatePicker";
 
-
 export default function EducationAccordion() {
   const [expanded, setExpanded] = React.useState(false);
-  const [startDateValue, setStartDateValue] = React.useState(null);
-  const [endDateValue, setEndDateValue] = React.useState(null);
+  const [course, setCourse] = useState("");
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -34,7 +33,7 @@ export default function EducationAccordion() {
         id="panel1bh-header"
       >
         <Typography sx={{ width: "33%", flexShrink: 0 }}>
-          Not Specified
+          {course ? course : "(Not Specified)"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -53,6 +52,7 @@ export default function EducationAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={(e) => setCourse(e.target.value)}
             />
           </Grid>
           <Grid item xs={6} md={6}>
@@ -74,7 +74,6 @@ export default function EducationAccordion() {
           <Grid item xs={6} md={6} sx={{ display: "flex" }}>
             <DatePicker />
           </Grid>
-        
         </Grid>
       </AccordionDetails>
     </Accordion>

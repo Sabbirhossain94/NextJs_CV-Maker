@@ -17,7 +17,7 @@ import Button from "@mui/material/Button";
 
 export default function CVBuilder() {
   const formData = useRef();
-  const [progress, setProgress] = useState(20);
+  const [progress, setProgress] = useState(0);
   const [allSections, setAllSections] = useState([
     {
       id: 1,
@@ -39,7 +39,7 @@ export default function CVBuilder() {
 
   const deleteCustomSection = (id) => {
     const result = allSections.filter((item) => {
-      if (item.id !== id) {
+      if (item.id != id) {
         return item.id;
       }
     });
@@ -64,12 +64,31 @@ export default function CVBuilder() {
       employer,
       employmentcity,
       startdate,
-      enddate
+      enddate,
+      institution,
+      degree,
+      institutioncity,
+      label,
+      linkurl,
     } = formData.current;
-    console.log(
-      `Job Title:${jobtitle.value} Employer:${employer.value} City:${employmentcity.value} Start Date:${startdate.value} End Date:${enddate.value} `
-    );
-    console.log(formData.current.value)
+
+    const personalDetails = {
+      FirstName: firstname.value,
+      LastName: lastname.value,
+      Email: email.value,
+      Phone: phone.value,
+      Country: country.value,
+      City: city.value,
+      Address: address.value,
+      PostalCode: postalcode.value,
+      Nationality: nationality.value,
+      PlaceOfBirth: placeofbirth.value,
+      DateOfBirth: dateofbirth.value,
+      
+    };
+
+     console.log(personalDetails);
+    console.log(JSON.stringify(personalDetails));
   };
 
   return (
@@ -94,8 +113,15 @@ export default function CVBuilder() {
             height: "100vh",
           }}
         >
-          <LinearProgress variant="determinate" value={progress} />
-          <Box sx={{ marginTop: "4rem", width: "100%" }}>
+          <LinearProgress
+            variant="determinate"
+            value={progress}
+            sx={{
+              marginTop: "10px",
+              width: "93%",
+            }}
+          />
+          <Box sx={{ marginTop: "4rem", width: "100%", height: "100vh" }}>
             <form ref={formData} onSubmit={handleSubmit}>
               <PersonalDetails />
               <ProfessionalSummary />
@@ -107,9 +133,18 @@ export default function CVBuilder() {
                 setAllSections={setAllSections}
                 deleteCustomSection={deleteCustomSection}
               />
-              <Button type="submit" variant="contained">
-                Submit
-              </Button>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "end",
+                  width: "90%",
+                  marginTop: "50px",
+                }}
+              >
+                <Button type="submit" variant="contained">
+                  Submit
+                </Button>
+              </Box>
             </form>
           </Box>
         </Box>

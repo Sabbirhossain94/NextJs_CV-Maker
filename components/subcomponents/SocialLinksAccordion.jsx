@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -8,8 +9,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 
 export default function SocialLinksAccordion() {
-     const [expanded, setExpanded] = React.useState(false);
 
+     const [expanded, setExpanded] = React.useState(false);
+     const [websites, setWebsites]= useState("")
      const handleChange = (panel) => (event, isExpanded) => {
        setExpanded(isExpanded ? panel : false);
      };
@@ -30,7 +32,7 @@ export default function SocialLinksAccordion() {
         id="panel1bh-header"
       >
         <Typography sx={{ width: "33%", flexShrink: 0 }}>
-          Not Specified
+          {websites ? websites : "(Not Specified)"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -39,8 +41,10 @@ export default function SocialLinksAccordion() {
             <TextField
               id="outlined-basic"
               label="Label"
+              type="text"
+              name="label"
               variant="filled"
-              sx={{ width: "100%", background: "#e7eaf4",borderRadius: "5px" }}
+              sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",
@@ -49,14 +53,17 @@ export default function SocialLinksAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={(e) => setWebsites(e.target.value)}
             />
           </Grid>
           <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
               label="Link"
+              type="url"
+              name="linkurl"
               variant="filled"
-              sx={{ width: "100%", background: "#e7eaf4",borderRadius: "5px" }}
+              sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
                   color: "#828ba2",

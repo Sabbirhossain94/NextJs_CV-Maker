@@ -1,14 +1,31 @@
 import * as React from "react";
-import { useRef } from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import AdditionalDetails from "./subcomponents/AdditionalDetails";
-import { FormControl } from "@mui/material";
 
 export default function PersonalDetails() {
- // const formData = useRef();
+  
+  
+  const [values, setValues] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    country: "",
+    city: "",
+  });
+
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setValues({
+        ...values,
+        [name]: value,
+      });
+    // console.log()
+    };
 
   return (
     <Box>
@@ -28,64 +45,150 @@ export default function PersonalDetails() {
         columnSpacing={{ xs: 1, sm: 2, md: 4 }}
         columns={15}
       >
-        {[
-          {
-            label: "First Name",
-            name: "firstname",
-            type: "text",
-          },
-          {
-            label: "Last Name",
-            name: "lastname",
-            type: "text",
-          },
-          {
-            label: "Email",
-            name: "email",
-            type: "email",
-          },
-          {
-            label: "Phone",
-            name: "phone",
-            type: "tel",
-          },
-          {
-            label: "Country",
-            name: "country",
-            type: "text",
-          },
-          {
-            label: "City",
-            name: "city",
-            type: "text",
-          },
-        ].map((item, key) => (
-          <Grid item xs={4} md={7} key={key}>
-            
-              <TextField
-                id="outlined-basic"
-                label={item.label}
-                name={item.name}
-                variant="filled"
-                type={item.type}
-                sx={{
-                  width: "100%",
-                  background: "#e7eaf4",
-                  borderRadius: "5px",
-                }}
-                InputLabelProps={{
-                  sx: {
-                    color: "#828ba2",
-                  },
-                }}
-                InputProps={{
-                  disableUnderline: true,
-                }}
-                onSubmit={(e) => setFormValues(e.target.value)}
-              />
-            
-          </Grid>
-        ))}
+        <Grid item xs={4} md={7}>
+          <TextField
+            id="outlined-basic"
+            label="First Name"
+            name="firstname"
+            variant="filled"
+            value={values.firstname}
+            type="text"
+            sx={{
+              width: "100%",
+              background: "#e7eaf4",
+              borderRadius: "5px",
+            }}
+            InputLabelProps={{
+              sx: {
+                color: "#828ba2",
+              },
+            }}
+            InputProps={{
+              disableUnderline: true,
+            }}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item xs={4} md={7}>
+          <TextField
+            id="outlined-basic"
+            label="Last Name"
+            name="lastname"
+            variant="filled"
+            value={values.lastname}
+            type="text"
+            sx={{
+              width: "100%",
+              background: "#e7eaf4",
+              borderRadius: "5px",
+            }}
+            InputLabelProps={{
+              sx: {
+                color: "#828ba2",
+              },
+            }}
+            InputProps={{
+              disableUnderline: true,
+            }}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item xs={4} md={7}>
+          <TextField
+            id="outlined-basic"
+            label="Email"
+            name="email"
+            variant="filled"
+            value={values.email}
+            type="text"
+            sx={{
+              width: "100%",
+              background: "#e7eaf4",
+              borderRadius: "5px",
+            }}
+            InputLabelProps={{
+              sx: {
+                color: "#828ba2",
+              },
+            }}
+            InputProps={{
+              disableUnderline: true,
+            }}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item xs={4} md={7}>
+          <TextField
+            id="outlined-basic"
+            label="Phone"
+            name="phone"
+            variant="filled"
+            value={values.phone}
+            type="text"
+            sx={{
+              width: "100%",
+              background: "#e7eaf4",
+              borderRadius: "5px",
+            }}
+            InputLabelProps={{
+              sx: {
+                color: "#828ba2",
+              },
+            }}
+            InputProps={{
+              disableUnderline: true,
+            }}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item xs={4} md={7}>
+          <TextField
+            id="outlined-basic"
+            label="Country"
+            name="country"
+            variant="filled"
+            value={values.country}
+            type="text"
+            sx={{
+              width: "100%",
+              background: "#e7eaf4",
+              borderRadius: "5px",
+            }}
+            InputLabelProps={{
+              sx: {
+                color: "#828ba2",
+              },
+            }}
+            InputProps={{
+              disableUnderline: true,
+            }}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item xs={4} md={7}>
+          <TextField
+            id="outlined-basic"
+            label="City"
+            name="city"
+            variant="filled"
+            value={values.city}
+            type="text"
+            sx={{
+              width: "100%",
+              background: "#e7eaf4",
+              borderRadius: "5px",
+            }}
+            InputLabelProps={{
+              sx: {
+                color: "#828ba2",
+              },
+            }}
+            InputProps={{
+              disableUnderline: true,
+            }}
+            onChange={handleInputChange}
+          />
+        </Grid>
       </Grid>
       <AdditionalDetails />
     </Box>

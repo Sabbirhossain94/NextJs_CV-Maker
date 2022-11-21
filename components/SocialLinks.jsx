@@ -8,15 +8,20 @@ import SocialLinksAccordion from "./subcomponents/SocialLinksAccordion";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function SocialLinks() {
-  const [accordionId, setAccordionId] = useState(0);
+  const [accordionId, setAccordionId] = useState(1);
   const deleteAccordionSection = (id) => {
+
+   if(id > 1){
+    setAccordionId(accordionId - 1);
     const result = accordionField.filter((item) => {
       if (item.id !== id) {
         return item;
       }
     });
     setAccordionField(result);
-  };
+    }
+  }
+
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
@@ -29,11 +34,12 @@ export default function SocialLinks() {
     setAccordionField([
       ...accordionField,
       {
-        id: accordionId,
+        id: accordionId+1,
         name: <SocialLinksAccordion />,
       },
     ]);
   };
+ 
   return (
     <div>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -61,7 +67,6 @@ export default function SocialLinks() {
                     marginTop: "25px",
                     marginLeft: "5px",
                     fontSize: "20px",
-
                     color: "white",
                     "&:hover": {
                       color: "#2196f3",
@@ -78,7 +83,7 @@ export default function SocialLinks() {
           sx={{
             width: "94%",
             fontWeight: "700",
-            marginTop: "20px",
+            marginTop: "10px",
             padding: "5px",
             display: "flex",
             borderRadius: "5px",

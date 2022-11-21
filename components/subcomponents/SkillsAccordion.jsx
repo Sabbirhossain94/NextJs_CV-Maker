@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -10,11 +11,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { inputLabelClasses } from "@mui/material/InputLabel";
+
 
 export default function SkillsAccordion({toggleSwitch}) {
-  console.log(toggleSwitch)
+ 
   const [expanded, setExpanded] = React.useState(false);
+  const [skills,setSkills]= useState("")
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
     
@@ -64,7 +66,7 @@ export default function SkillsAccordion({toggleSwitch}) {
         id="panel1bh-header"
       >
         <Typography sx={{ width: "33%", flexShrink: 0 }}>
-          Not Specified
+          {skills ? skills : "(Not Specified)"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -83,6 +85,7 @@ export default function SkillsAccordion({toggleSwitch}) {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={(e) => setSkills(e.target.value)}
             />
           </Grid>
           <Grid item xs={6} md={6}>

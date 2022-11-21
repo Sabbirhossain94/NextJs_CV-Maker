@@ -11,14 +11,19 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Skills() {
-  const [accordionId, setAccordionId] = useState(0);
+
+  const [accordionId, setAccordionId] = useState(1);
+
   const deleteAccordionSection = (id) => {
-    const result = accordionField.filter((item) => {
-      if (item.id !== id) {
-        return item;
+      if (id > 1) {
+        setAccordionId(accordionId - 1);
+        const result = accordionField.filter((item) => {
+          if (item.id !== id) {
+            return item;
+          }
+        });
+        setAccordionField(result);
       }
-    });
-    setAccordionField(result);
   };
   const [toggleSwitch, setToggleSwitch] = useState(false);
   const [accordionField, setAccordionField] = useState([
@@ -33,7 +38,7 @@ export default function Skills() {
     setAccordionField([
       ...accordionField,
       {
-        id: accordionId,
+        id: accordionId+1,
         name: <SkillsAccordion toggleSwitch={toggleSwitch} />,
       },
     ]);

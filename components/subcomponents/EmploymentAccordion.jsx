@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -8,22 +9,38 @@ import Grid from "@mui/material/Grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import DatePicker from "../../components/DatePicker";
-import DeleteIcon from "@mui/icons-material/Delete";
 import MUIRichTextEditor from "mui-rte";
 
 export default function EmploymentAccordion() {
- 
   const [expanded, setExpanded] = React.useState(false);
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  const [values, setValues] = useState({
+    jobtitle: "",
+    employer: "",
+    startdate: "",
+    enddate: "",
+    city: "",
+    description: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+    console.log(JSON.stringify(values));
+  };
+
   return (
     <Accordion
       expanded={expanded === "panel1"}
       onChange={handleChange("panel1")}
       sx={{
         backgroundColor: "white",
-
         cursor: "none",
         boxShadow: "none",
         border: "1px solid",
@@ -46,6 +63,7 @@ export default function EmploymentAccordion() {
               id="outlined-basic"
               label="Job title"
               type="text"
+              value={values.jobtitle}
               name="jobtitle"
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
@@ -57,6 +75,7 @@ export default function EmploymentAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={6}>
@@ -64,6 +83,7 @@ export default function EmploymentAccordion() {
               id="outlined-basic"
               label="Employer"
               type="text"
+              value={values.employer}
               name="employer"
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
@@ -75,17 +95,64 @@ export default function EmploymentAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={6} sx={{ display: "flex" }}>
-            <DatePicker />
+            <TextField
+              variant="filled"
+              label="Start Date"
+              name="startdate"
+              value={values.startdate}
+              type="date"
+              sx={{
+                width: "200px",
+                background: "#e7eaf4",
+                borderRadius: "5px",
+              }}
+              InputProps={{
+                disableUnderline: true,
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: "12px",
+                  color: "#828ba2",
+                },
+              }}
+              onChange={handleInputChange}
+            />
+
+            <TextField
+              variant="filled"
+              label="End Date"
+              name="enddate"
+              value={values.enddate}
+              type="date"
+              sx={{
+                marginLeft: "20px",
+                width: "200px",
+                background: "#e7eaf4",
+                borderRadius: "5px",
+              }}
+              InputProps={{
+                disableUnderline: true,
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: "12px",
+                  color: "#828ba2",
+                },
+              }}
+              onChange={handleInputChange}
+            />
           </Grid>
           <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
               label="City"
               type="text"
-              name="employmentcity"
+              value={values.city}
+              name="city"
               variant="filled"
               sx={{
                 width: "100%",
@@ -100,6 +167,7 @@ export default function EmploymentAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={12}>
@@ -124,7 +192,10 @@ export default function EmploymentAccordion() {
                 background: "#e7eaf4",
               }}
             >
-              <MUIRichTextEditor label="Start typing..." />
+              <MUIRichTextEditor
+                label="Start typing..."
+                defaultValue={values.description}
+              />
             </Box>
           </Grid>
         </Grid>

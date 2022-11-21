@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -11,10 +12,9 @@ import DatePicker from "../../components/DatePicker";
 import MUIRichTextEditor from "mui-rte";
 
 export default function EducationAccordion() {
-     const [expanded, setExpanded] = React.useState(false);
-     const [startDateValue, setStartDateValue] = React.useState(null);
-     const [endDateValue, setEndDateValue] = React.useState(null);
 
+     const [expanded, setExpanded] = React.useState(false);
+     const [institution, setInstitution] = useState("");
      const handleChange = (panel) => (event, isExpanded) => {
        setExpanded(isExpanded ? panel : false);
      };
@@ -35,7 +35,7 @@ export default function EducationAccordion() {
         id="panel1bh-header"
       >
         <Typography sx={{ width: "33%", flexShrink: 0 }}>
-          Not Specified
+          {institution ? institution : "(Not Specified)"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -43,7 +43,9 @@ export default function EducationAccordion() {
           <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
-              label="School"
+              label="Institution"
+              name="institution"
+              type="text"
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -54,12 +56,15 @@ export default function EducationAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={(e) => setInstitution(e.target.value)}
             />
           </Grid>
           <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
               label="Degree"
+              name="degree"
+              type="text"
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -79,6 +84,8 @@ export default function EducationAccordion() {
             <TextField
               id="outlined-basic"
               label="City"
+              name="institutioncity"
+              type="text"
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
