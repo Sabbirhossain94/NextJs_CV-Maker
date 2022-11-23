@@ -24,7 +24,7 @@ export default function PersonalDetails() {
         ...values,
         [name]: value,
       });
-    // console.log()
+    
     };
 
   return (

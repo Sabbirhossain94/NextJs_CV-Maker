@@ -11,30 +11,30 @@ import TextField from "@mui/material/TextField";
 import DatePicker from "../../components/DatePicker";
 import MUIRichTextEditor from "mui-rte";
 
-export default function EducationAccordion() {
+export default function EducationAccordion({ getValuesFromEducation }) {
+  const [expanded, setExpanded] = React.useState(false);
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+  const [values, setValues] = useState({
+    institution: "",
+    degree: "",
+    startdate: "",
+    enddate: "",
+    institutioncity: "",
+    description: "",
+  });
 
-     const [expanded, setExpanded] = React.useState(false);
-    // const [institution, setInstitution] = useState("");
-     const handleChange = (panel) => (event, isExpanded) => {
-       setExpanded(isExpanded ? panel : false);
-     };
-      const [values, setValues] = useState({
-        institution: "",
-        degree: "",
-        startdate: "",
-        enddate: "",
-        institutioncity: "",
-        description: "",
-      });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+    
+  };
+  getValuesFromEducation(values);
 
-      const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setValues({
-          ...values,
-          [name]: value,
-        });
-        console.log(JSON.stringify(values));
-      };
   return (
     <Accordion
       expanded={expanded === "panel1"}

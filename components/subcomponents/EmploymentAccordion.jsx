@@ -10,7 +10,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import MUIRichTextEditor from "mui-rte";
 
-export default function EmploymentAccordion() {
+export default function EmploymentAccordion({ getValuesFromEmployment }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -31,9 +31,9 @@ export default function EmploymentAccordion() {
       ...values,
       [name]: value,
     });
-    console.log(JSON.stringify(values));
+    //console.log(JSON.stringify(values));
   };
-
+  getValuesFromEmployment(values);
   return (
     <Accordion
       expanded={expanded === "panel1"}

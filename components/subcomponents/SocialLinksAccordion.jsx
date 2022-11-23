@@ -22,8 +22,10 @@ export default function SocialLinksAccordion({ getValuesFromSocialLinks }) {
     setValues({
       ...values,
       [name]: value,
-    });   
+    }); 
+     
   };
+
   getValuesFromSocialLinks(values);
 
   return (
@@ -72,7 +74,7 @@ export default function SocialLinksAccordion({ getValuesFromSocialLinks }) {
             <TextField
               id="outlined-basic"
               label="Link"
-              type="text"
+              type="url"
               name="linkurl"
               value={values.linkurl}
               variant="filled"

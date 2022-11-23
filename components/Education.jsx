@@ -8,12 +8,36 @@ import EducationAccordion from "./subcomponents/EducationAccordion";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Education() {
-  
   const [accordionId, setAccordionId] = useState(1);
+  const [accordionValues, setAccordionValues] = useState({
+    institution: "",
+    degree: "",
+    startdate: "",
+    enddate: "",
+    institutioncity: "",
+    description: "",
+  });
+
+  const getValuesFromEducation = (getValues) => {
+    const {
+      institution,
+      degree,
+      startdate,
+      enddate,
+      institutioncity,
+      description,
+    } = getValues;
+    setAccordionValues({
+      institution: institution,
+      degree: degree,
+      startdate: startdate,
+      enddate: enddate,
+      institutioncity: institutioncity,
+      description: description,
+    });
+  };
 
   const deleteAccordionSection = (id) => {
-
-    if(id > 1){
     setAccordionId(accordionId - 1);
     const result = accordionField.filter((item) => {
       if (item.id !== id) {
@@ -21,14 +45,20 @@ export default function Education() {
       }
     });
     setAccordionField(result);
-    }
-    
   };
-  
+
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      name: <EducationAccordion />,
+      institution: accordionValues.institution,
+      degree: accordionValues.degree,
+      startdate: accordionValues.startdate,
+      enddate: accordionValues.enddate,
+      institutioncity: accordionValues.institutioncity,
+      description: accordionValues.description,
+      component: (
+        <EducationAccordion getValuesFromEducation={getValuesFromEducation} />
+      ),
     },
   ]);
 
@@ -37,12 +67,20 @@ export default function Education() {
     setAccordionField([
       ...accordionField,
       {
-        id: accordionId+1,
-        name: <EducationAccordion />,
+        id: accordionId + 1,
+        institution: accordionValues.institution,
+        degree: accordionValues.degree,
+        startdate: accordionValues.startdate,
+        enddate: accordionValues.enddate,
+        institutioncity: accordionValues.institutioncity,
+        description: accordionValues.description,
+        component: (
+          <EducationAccordion getValuesFromEducation={getValuesFromEducation} />
+        ),
       },
     ]);
   };
-   //console.log(accordionField);
+  //console.log(accordionField);
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography
@@ -61,7 +99,7 @@ export default function Education() {
         {accordionField.map((item) => (
           <Grid key={item.id} container columns={16}>
             <Grid item md={15}>
-              {item.name}
+              {item.component}
             </Grid>
             <Grid item md="auto">
               <DeleteIcon

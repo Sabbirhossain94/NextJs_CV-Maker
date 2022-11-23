@@ -9,22 +9,49 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Employment() {
   const [accordionId, setAccordionId] = useState(1);
-
+  const [accordionValues, setAccordionValues] = useState({
+    jobtitle: "",
+    employer: "",
+    startdate: "",
+    enddate: "",
+    city: "",
+    description: "",
+  });
+  const getValuesFromEmployment = (getValues) => {
+    const { jobtitle, employer, startdate, enddate, city, description } =
+      getValues;
+    setAccordionValues({
+      jobtitle: jobtitle,
+      employer: employer,
+      startdate: startdate,
+      enddate: enddate,
+      city: city,
+      description: description,
+    });
+  };
   const deleteAccordionSection = (id) => {
-    if (id > 1) {
-      setAccordionId(accordionId - 1);
-      const result = accordionField.filter((item) => {
-        if (item.id !== id) {
-          return item;
-        }
-      });
-      setAccordionField(result);
-    }
+    setAccordionId(accordionId - 1);
+    const result = accordionField.filter((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+    });
+    setAccordionField(result);
   };
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      name: <EmploymentAccordion />,
+      jobtitle: accordionValues.jobtitle,
+      employer: accordionValues.employer,
+      startdate: accordionValues.startdate,
+      enddate: accordionValues.enddate,
+      city: accordionValues.city,
+      description: accordionValues.description,
+      component: (
+        <EmploymentAccordion
+          getValuesFromEmployment={getValuesFromEmployment}
+        />
+      ),
     },
   ]);
 
@@ -34,7 +61,17 @@ export default function Employment() {
       ...accordionField,
       {
         id: accordionId + 1,
-        name: <EmploymentAccordion />,
+        jobtitle: accordionValues.jobtitle,
+        employer: accordionValues.employer,
+        startdate: accordionValues.startdate,
+        enddate: accordionValues.enddate,
+        city: accordionValues.city,
+        description: accordionValues.description,
+        component: (
+          <EmploymentAccordion
+            getValuesFromEmployment={getValuesFromEmployment}
+          />
+        ),
       },
     ]);
   };
@@ -57,7 +94,7 @@ export default function Employment() {
         {accordionField.map((item) => (
           <Grid key={item.id} container columns={16}>
             <Grid item md={15}>
-              {item.name}
+              {item.component}
             </Grid>
             <Grid item md="auto">
               <DeleteIcon

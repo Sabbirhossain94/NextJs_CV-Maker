@@ -11,7 +11,7 @@ export default function SocialLinks() {
   const [accordionId, setAccordionId] = useState(1);
   const [accordionValues, setAccordionValues] = useState({
     label: "",
-    urllink: null,
+    urllink: "",
   });
   const getValuesFromSocialLinks = (getValues) => {
     const { label, urllink } = getValues;
@@ -20,6 +20,7 @@ export default function SocialLinks() {
       urllink: urllink,
     });
   };
+  
   const deleteAccordionSection = (id) => {
     setAccordionId(accordionId - 1);
     const result = accordionField.filter((item) => {

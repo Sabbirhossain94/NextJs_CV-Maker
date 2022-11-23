@@ -24,7 +24,7 @@ export default function Skills() {
       level: level,
     });
   };
-  //console.log(accordionValues.level);
+
   const deleteAccordionSection = (id) => {
     setAccordionId(accordionId - 1);
     const result = accordionField.filter((item) => {
