@@ -15,6 +15,19 @@ export default function SocialLinksAccordion() {
      const handleChange = (panel) => (event, isExpanded) => {
        setExpanded(isExpanded ? panel : false);
      };
+      const [values, setValues] = useState({
+        label: "",
+        link: "", 
+      });
+        const handleInputChange = (e) => {
+          const { name, value } = e.target;
+          setValues({
+            ...values,
+            [name]: value,
+          });
+          console.log(JSON.stringify(values));
+        };
+
   return (
     <Accordion
       expanded={expanded === "panel1"}
@@ -43,6 +56,7 @@ export default function SocialLinksAccordion() {
               label="Label"
               type="text"
               name="label"
+              value={values.label}
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -53,7 +67,7 @@ export default function SocialLinksAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
-              onChange={(e) => setWebsites(e.target.value)}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={6}>
@@ -62,6 +76,7 @@ export default function SocialLinksAccordion() {
               label="Link"
               type="url"
               name="linkurl"
+              value={values.link}
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -72,6 +87,7 @@ export default function SocialLinksAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={handleInputChange}
             />
           </Grid>
         </Grid>

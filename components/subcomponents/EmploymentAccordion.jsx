@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import DatePicker from "../../components/DatePicker";
 import MUIRichTextEditor from "mui-rte";
 
 export default function EmploymentAccordion() {
@@ -53,7 +52,7 @@ export default function EmploymentAccordion() {
         id="panel1bh-header"
       >
         <Typography sx={{ width: "90%", flexShrink: 0 }}>
-          Not Specified
+          {values.jobtitle ? values.jobtitle : "(Not Specified)"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -106,7 +105,6 @@ export default function EmploymentAccordion() {
               value={values.startdate}
               type="date"
               sx={{
-                width: "200px",
                 background: "#e7eaf4",
                 borderRadius: "5px",
               }}
@@ -130,7 +128,7 @@ export default function EmploymentAccordion() {
               type="date"
               sx={{
                 marginLeft: "20px",
-                width: "200px",
+
                 background: "#e7eaf4",
                 borderRadius: "5px",
               }}

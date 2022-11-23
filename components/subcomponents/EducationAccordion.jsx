@@ -14,10 +14,27 @@ import MUIRichTextEditor from "mui-rte";
 export default function EducationAccordion() {
 
      const [expanded, setExpanded] = React.useState(false);
-     const [institution, setInstitution] = useState("");
+    // const [institution, setInstitution] = useState("");
      const handleChange = (panel) => (event, isExpanded) => {
        setExpanded(isExpanded ? panel : false);
      };
+      const [values, setValues] = useState({
+        institution: "",
+        degree: "",
+        startdate: "",
+        enddate: "",
+        institutioncity: "",
+        description: "",
+      });
+
+      const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setValues({
+          ...values,
+          [name]: value,
+        });
+        console.log(JSON.stringify(values));
+      };
   return (
     <Accordion
       expanded={expanded === "panel1"}
@@ -35,7 +52,7 @@ export default function EducationAccordion() {
         id="panel1bh-header"
       >
         <Typography sx={{ width: "33%", flexShrink: 0 }}>
-          {institution ? institution : "(Not Specified)"}
+          {values.institution ? values.institution : "(Not Specified)"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -45,6 +62,7 @@ export default function EducationAccordion() {
               id="outlined-basic"
               label="Institution"
               name="institution"
+              value={values.institution}
               type="text"
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
@@ -56,7 +74,7 @@ export default function EducationAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
-              onChange={(e) => setInstitution(e.target.value)}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={6}>
@@ -64,6 +82,7 @@ export default function EducationAccordion() {
               id="outlined-basic"
               label="Degree"
               name="degree"
+              value={values.degree}
               type="text"
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
@@ -75,10 +94,55 @@ export default function EducationAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={6} sx={{ display: "flex" }}>
-            <DatePicker />
+            <TextField
+              variant="filled"
+              label="Start Date"
+              name="startdate"
+              value={values.startdate}
+              type="date"
+              sx={{
+                background: "#e7eaf4",
+                borderRadius: "5px",
+              }}
+              InputProps={{
+                disableUnderline: true,
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: "12px",
+                  color: "#828ba2",
+                },
+              }}
+              onChange={handleInputChange}
+            />
+
+            <TextField
+              variant="filled"
+              label="End Date"
+              name="enddate"
+              value={values.enddate}
+              type="date"
+              sx={{
+                marginLeft: "20px",
+
+                background: "#e7eaf4",
+                borderRadius: "5px",
+              }}
+              InputProps={{
+                disableUnderline: true,
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: "12px",
+                  color: "#828ba2",
+                },
+              }}
+              onChange={handleInputChange}
+            />
           </Grid>
           <Grid item xs={6} md={6}>
             <TextField
@@ -86,6 +150,7 @@ export default function EducationAccordion() {
               label="City"
               name="institutioncity"
               type="text"
+              value={values.city}
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -96,6 +161,7 @@ export default function EducationAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={12}>

@@ -13,13 +13,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 
-export default function SkillsAccordion({toggleSwitch}) {
- 
+export default function SkillsAccordion({ getValuesFromSkill }) {
   const [expanded, setExpanded] = React.useState(false);
-  const [skills,setSkills]= useState("")
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
-    
   };
 
   const optionValue = [
@@ -48,6 +46,20 @@ export default function SkillsAccordion({toggleSwitch}) {
       name: "Expert",
     },
   ];
+  const [values, setValues] = useState({
+    skill: "",
+    level: "",
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+
+    console.log(JSON.stringify(values));
+  };
+  getValuesFromSkill(values);
   return (
     <Accordion
       expanded={expanded === "panel1"}
@@ -66,7 +78,7 @@ export default function SkillsAccordion({toggleSwitch}) {
         id="panel1bh-header"
       >
         <Typography sx={{ width: "33%", flexShrink: 0 }}>
-          {skills ? skills : "(Not Specified)"}
+          {values.skill ? values.skill : "(Not Specified)"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -76,6 +88,8 @@ export default function SkillsAccordion({toggleSwitch}) {
               id="outlined-basic"
               label="Skill"
               variant="filled"
+              value={values.skill}
+              name="skill"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
                 sx: {
@@ -85,12 +99,15 @@ export default function SkillsAccordion({toggleSwitch}) {
               InputProps={{
                 disableUnderline: true,
               }}
-              onChange={(e) => setSkills(e.target.value)}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={6}>
             <FormControl sx={{ width: "80%", marginLeft: "50px" }}>
-              <InputLabel id="demo-simple-select-helper-label">
+              <InputLabel
+                id="demo-simple-select-helper-label"
+                sx={{ marginTop: "5px" }}
+              >
                 Level
               </InputLabel>
               <Select
@@ -99,13 +116,19 @@ export default function SkillsAccordion({toggleSwitch}) {
                 label="level"
                 defaultValue=""
                 variant="filled"
+                name="level"
                 sx={{ background: "#e7eaf4", borderRadius: "5px" }}
                 InputProps={{
                   disableUnderline: true,
                 }}
+                onChange={handleInputChange}
               >
                 {optionValue.map((item, key) => (
-                  <MenuItem value={item.value} key={key}>
+                  <MenuItem
+                    defaultValue={values.level}
+                    value={item.name}
+                    key={key}
+                  >
                     {item.name}
                   </MenuItem>
                 ))}

@@ -11,38 +11,59 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Skills() {
-
   const [accordionId, setAccordionId] = useState(1);
+  const [accordionValues,setAccordionValues]=useState([])
 
-  const deleteAccordionSection = (id) => {
-      if (id > 1) {
-        setAccordionId(accordionId - 1);
-        const result = accordionField.filter((item) => {
-          if (item.id !== id) {
-            return item;
-          }
-        });
-        setAccordionField(result);
-      }
+  const getValuesFromSkill = (getValues) => {
+    console.log(getValues.skill)
+    console.log(getValues.level);
+    // setAccordionValues(getValues);
+    // console.log(accordionValues);
   };
+  const deleteAccordionSection = (id) => {
+    setAccordionId(accordionId - 1);
+    const result = accordionField.filter((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+    });
+    setAccordionField(result);
+  };
+
   const [toggleSwitch, setToggleSwitch] = useState(false);
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      name: <SkillsAccordion toggleSwitch={toggleSwitch} />,
+      skill: null,
+      level: null,
+      name: (
+        <SkillsAccordion
+          toggleSwitch={toggleSwitch}
+          getValuesFromSkill={getValuesFromSkill}
+        />
+      ),
     },
   ]);
 
-  const addAccordionSection = () => {
+  const addAccordionSection = (textFieldValues) => {
+    console.log(textFieldValues);
     setAccordionId(accordionId + 1);
     setAccordionField([
       ...accordionField,
       {
-        id: accordionId+1,
-        name: <SkillsAccordion toggleSwitch={toggleSwitch} />,
+        id: accordionId + 1,
+        skill: null,
+        level: null,
+        name: (
+          <SkillsAccordion
+            toggleSwitch={toggleSwitch}
+            getValuesFromSkill={getValuesFromSkill}
+          />
+        ),
       },
     ]);
   };
+
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
     height: 16,
@@ -89,7 +110,7 @@ export default function Skills() {
   }));
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column"}}>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography
         sx={{
           width: "33%",
@@ -108,7 +129,6 @@ export default function Skills() {
           inputProps={{ "aria-label": "ant design" }}
           onChange={() => {
             setToggleSwitch(!toggleSwitch);
-            console.log(toggleSwitch);
           }}
         />
         <Typography sx={{ fontSize: "15px" }}>
