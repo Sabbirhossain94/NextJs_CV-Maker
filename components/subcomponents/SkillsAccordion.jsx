@@ -56,8 +56,6 @@ export default function SkillsAccordion({ getValuesFromSkill }) {
       ...values,
       [name]: value,
     });
-
-    console.log(JSON.stringify(values));
   };
   getValuesFromSkill(values);
   return (

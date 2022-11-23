@@ -12,14 +12,19 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Skills() {
   const [accordionId, setAccordionId] = useState(1);
-  const [accordionValues,setAccordionValues]=useState([])
+  const [accordionValues, setAccordionValues] = useState({
+    skill: "",
+    level: "",
+  });
 
   const getValuesFromSkill = (getValues) => {
-    console.log(getValues.skill)
-    console.log(getValues.level);
-    // setAccordionValues(getValues);
-    // console.log(accordionValues);
+    const { skill, level } = getValues;
+    setAccordionValues({
+      skill: skill,
+      level: level,
+    });
   };
+  //console.log(accordionValues.level);
   const deleteAccordionSection = (id) => {
     setAccordionId(accordionId - 1);
     const result = accordionField.filter((item) => {
@@ -34,9 +39,9 @@ export default function Skills() {
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      skill: null,
-      level: null,
-      name: (
+      skill: accordionValues.skill,
+      level: accordionValues.level,
+      component: (
         <SkillsAccordion
           toggleSwitch={toggleSwitch}
           getValuesFromSkill={getValuesFromSkill}
@@ -45,16 +50,15 @@ export default function Skills() {
     },
   ]);
 
-  const addAccordionSection = (textFieldValues) => {
-    console.log(textFieldValues);
+  const addAccordionSection = () => {
     setAccordionId(accordionId + 1);
     setAccordionField([
       ...accordionField,
       {
         id: accordionId + 1,
-        skill: null,
-        level: null,
-        name: (
+        skill: accordionValues.skill,
+        level: accordionValues.level,
+        component: (
           <SkillsAccordion
             toggleSwitch={toggleSwitch}
             getValuesFromSkill={getValuesFromSkill}
@@ -140,7 +144,7 @@ export default function Skills() {
         {accordionField.map((item) => (
           <Grid key={item.id} container columns={16}>
             <Grid item md={15}>
-              {item.name}
+              {item.component}
             </Grid>
             <Grid item md="auto">
               <DeleteIcon

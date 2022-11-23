@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -8,25 +8,23 @@ import Grid from "@mui/material/Grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 
-export default function SocialLinksAccordion() {
-
-     const [expanded, setExpanded] = React.useState(false);
-     const [websites, setWebsites]= useState("")
-     const handleChange = (panel) => (event, isExpanded) => {
-       setExpanded(isExpanded ? panel : false);
-     };
-      const [values, setValues] = useState({
-        label: "",
-        link: "", 
-      });
-        const handleInputChange = (e) => {
-          const { name, value } = e.target;
-          setValues({
-            ...values,
-            [name]: value,
-          });
-          console.log(JSON.stringify(values));
-        };
+export default function SocialLinksAccordion({ getValuesFromSocialLinks }) {
+  const [expanded, setExpanded] = React.useState(false);
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+  const [values, setValues] = useState({
+    label: "",
+    linkurl: "",
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });   
+  };
+  getValuesFromSocialLinks(values);
 
   return (
     <Accordion
@@ -45,7 +43,7 @@ export default function SocialLinksAccordion() {
         id="panel1bh-header"
       >
         <Typography sx={{ width: "33%", flexShrink: 0 }}>
-          {websites ? websites : "(Not Specified)"}
+          {values.label ? values.label : "(Not Specified)"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -74,9 +72,9 @@ export default function SocialLinksAccordion() {
             <TextField
               id="outlined-basic"
               label="Link"
-              type="url"
+              type="text"
               name="linkurl"
-              value={values.link}
+              value={values.linkurl}
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{

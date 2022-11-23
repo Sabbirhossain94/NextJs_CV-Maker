@@ -9,9 +9,18 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function SocialLinks() {
   const [accordionId, setAccordionId] = useState(1);
+  const [accordionValues, setAccordionValues] = useState({
+    label: "",
+    urllink: null,
+  });
+  const getValuesFromSocialLinks = (getValues) => {
+    const { label, urllink } = getValues;
+    setAccordionValues({
+      label: label,
+      urllink: urllink,
+    });
+  };
   const deleteAccordionSection = (id) => {
-
-   if(id > 1){
     setAccordionId(accordionId - 1);
     const result = accordionField.filter((item) => {
       if (item.id !== id) {
@@ -19,13 +28,18 @@ export default function SocialLinks() {
       }
     });
     setAccordionField(result);
-    }
-  }
+  };
 
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      name: <SocialLinksAccordion />,
+      label: accordionValues.label,
+      link: accordionValues.urllink,
+      component: (
+        <SocialLinksAccordion
+          getValuesFromSocialLinks={getValuesFromSocialLinks}
+        />
+      ),
     },
   ]);
 
@@ -34,12 +48,18 @@ export default function SocialLinks() {
     setAccordionField([
       ...accordionField,
       {
-        id: accordionId+1,
-        name: <SocialLinksAccordion />,
+        id: accordionId + 1,
+        label: accordionValues.label,
+        link: accordionValues.urllink,
+        component: (
+          <SocialLinksAccordion
+            getValuesFromSocialLinks={getValuesFromSocialLinks}
+          />
+        ),
       },
     ]);
   };
- 
+
   return (
     <div>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -59,7 +79,7 @@ export default function SocialLinks() {
           {accordionField.map((item) => (
             <Grid key={item.id} container columns={16}>
               <Grid item md={15}>
-                {item.name}
+                {item.component}
               </Grid>
               <Grid item md="auto">
                 <DeleteIcon
