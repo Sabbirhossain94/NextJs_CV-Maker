@@ -10,14 +10,12 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
 export default function AdditionalDetails() {
-  
-   const [values, setValues] = useState({
+  const [values, setValues] = useState({
     address: "",
     postalcode: "",
     nationality: "",
     placeofbirth: "",
     dateofbirth: "",
-    
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,10 +24,10 @@ export default function AdditionalDetails() {
       [name]: value,
     });
   };
-    const [expanded, setExpanded] = React.useState(false);
-      const handleChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-      };
+  const [expanded, setExpanded] = React.useState(false);
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
   return (
     <Box
       sx={{
@@ -77,7 +75,6 @@ export default function AdditionalDetails() {
             columnSpacing={{ xs: 1, sm: 2, md: 6 }}
             columns={15}
           >
-            
             <Grid item xs={4} md={7}>
               <TextField
                 id="outlined-basic"

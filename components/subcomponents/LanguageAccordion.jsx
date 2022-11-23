@@ -11,7 +11,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-
 export default function SkillsAccordion({ toggleSwitch }) {
   console.log(toggleSwitch);
   const [expanded, setExpanded] = React.useState(false);

@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import DatePicker from "../../components/DatePicker";
+
 
 export default function EducationAccordion() {
   const [expanded, setExpanded] = React.useState(false);

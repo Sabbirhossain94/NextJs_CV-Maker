@@ -6,7 +6,6 @@ import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CourseAccordion from "../components/subcomponents/CourseAccordion";
 
-
 export default function Courses({
   deleteCustomSection,
   sectionId,

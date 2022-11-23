@@ -1,12 +1,12 @@
-import { useState} from "react";
+import { useState } from "react";
+import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import MUIRichTextEditor from "mui-rte";
 
 export default function ProfessionalSummary() {
-
   const [professionalhistory, setProfessionalHistory] = useState("");
+
   return (
     <Box>
       <Typography
@@ -24,8 +24,7 @@ export default function ProfessionalSummary() {
         <Grid item xs={6} md={15} variant="contained">
           <Box
             sx={{
-              height: "250px",
-              padding: "10px",
+              height: "219px",
               overflow: "auto",
               border: "1px solid",
               borderColor: "#e7eaf4",
@@ -33,10 +32,13 @@ export default function ProfessionalSummary() {
               backgroundColor: "#e7eaf4",
             }}
           >
-            <MUIRichTextEditor
-              label="Start typing..."
+            <TextField
+              name="professionalsummary"
               value={professionalhistory}
-              
+              multiline
+              rows={8}
+              sx={{ width: "100%" }}
+              onChange={(e)=>setProfessionalHistory(e.target.value)}
             />
           </Box>
         </Grid>

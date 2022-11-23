@@ -7,8 +7,6 @@ import Typography from "@mui/material/Typography";
 import AdditionalDetails from "./subcomponents/AdditionalDetails";
 
 export default function PersonalDetails() {
-  
-  
   const [values, setValues] = useState({
     firstname: "",
     lastname: "",
@@ -18,14 +16,13 @@ export default function PersonalDetails() {
     city: "",
   });
 
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setValues({
-        ...values,
-        [name]: value,
-      });
-    
-    };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
 
   return (
     <Box>

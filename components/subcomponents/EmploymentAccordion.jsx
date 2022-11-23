@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import MUIRichTextEditor from "mui-rte";
+
 
 export default function EmploymentAccordion({ getValuesFromEmployment }) {
   const [expanded, setExpanded] = React.useState(false);
@@ -31,7 +31,7 @@ export default function EmploymentAccordion({ getValuesFromEmployment }) {
       ...values,
       [name]: value,
     });
-    //console.log(JSON.stringify(values));
+    
   };
   getValuesFromEmployment(values);
   return (
@@ -169,32 +169,21 @@ export default function EmploymentAccordion({ getValuesFromEmployment }) {
             />
           </Grid>
           <Grid item xs={6} md={12}>
-            <Typography
-              sx={{
-                paddingBottom: "5px",
-                fontWeight: "400",
+            <TextField
+              label="Description"
+              type="text"
+              value={values.description}
+              name="description"
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
               }}
-              color="#757575"
-            >
-              Description
-            </Typography>
-            <Box
-              sx={{
-                height: "250px",
-                padding: "10px",
-                overflow: "auto",
-                border: "1px solid",
-                borderColor: "#e7eaf4",
-                borderRadius: "5px",
-                marginTop: "10px",
-                background: "#e7eaf4",
-              }}
-            >
-              <MUIRichTextEditor
-                label="Start typing..."
-                defaultValue={values.description}
-              />
-            </Box>
+              multiline
+              rows={8}
+              sx={{ width: "100%", background: "#e7eaf4" }}
+              onChange={handleInputChange}
+            />
           </Grid>
         </Grid>
       </AccordionDetails>

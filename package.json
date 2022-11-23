@@ -21,13 +21,14 @@
     "@supabase/supabase-js": "^2.0.5",
     "add": "^2.0.6",
     "dayjs": "^1.11.6",
+    "draft-js": "^0.11.7",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.2",
     "mui-rte": "^2.0.1",
     "next": "13.0.2",
     "or": "^0.2.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "yarn": "^1.22.19"
   },
   "devDependencies": {}
