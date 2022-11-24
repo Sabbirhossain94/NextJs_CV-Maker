@@ -7,7 +7,7 @@ import EmploymentAccordion from "./subcomponents/EmploymentAccordion";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function Employment() {
+export default function Employment({ getEmploymentDetails }) {
   const [accordionId, setAccordionId] = useState(1);
   const [accordionValues, setAccordionValues] = useState({
     jobtitle: "",
@@ -54,7 +54,7 @@ export default function Employment() {
       ),
     },
   ]);
-
+  getEmploymentDetails(accordionValues);
   const addAccordionSection = () => {
     setAccordionId(accordionId + 1);
     setAccordionField([

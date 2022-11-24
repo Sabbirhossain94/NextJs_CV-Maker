@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import EducationAccordion from "./subcomponents/EducationAccordion";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function Education() {
+export default function Education({ getEducationDetails }) {
   const [accordionId, setAccordionId] = useState(1);
   const [accordionValues, setAccordionValues] = useState({
     institution: "",
@@ -80,7 +80,7 @@ export default function Education() {
       },
     ]);
   };
-  //console.log(accordionField);
+  getEducationDetails(accordionValues);
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Typography

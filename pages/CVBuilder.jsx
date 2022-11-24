@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import PersonalDetails from "../components/PersonalDetails";
 import Education from "../components/Education";
 import SocialLinks from "../components/SocialLinks";
@@ -16,24 +16,61 @@ import "@fontsource/roboto/700.css";
 import Button from "@mui/material/Button";
 
 export default function CVBuilder() {
-  const formData = useRef();
   const [progress, setProgress] = useState(0);
+  const [personalDetails, setPersonalDetails] = useState(null);
+  const [professionalSummary, setProfessionalSummary] = useState(null);
+  const [employmentDetails, setEmploymentDetails] = useState(null);
+  const [educationDetails, setEducationDetails] = useState(null);
+  const [socialLinksDetails, setSocialLinksDetails] = useState(null);
+  const [skillDetails, setSkillDetails] = useState(null);
+  const [finalDetails, setFinalDetails] = useState([]);
+
+  const getPersonalDetails = (values) => {
+    setPersonalDetails(values);
+  };
+  const getProfessionalSummary = (values) => {
+    setProfessionalSummary(values);
+  };
+  const getEmploymentDetails = (values) => {
+    setEmploymentDetails(values);
+  };
+  const getEducationDetails = (values) => {
+    setEducationDetails(values);
+  };
+  const getSocialLinksDetails = (values) => {
+    setSocialLinksDetails(values);
+  };
+  const getSkillDetails = (values) => {
+    setSkillDetails(values);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    setFinalDetails([{
+      personaldetails: personalDetails,
+      professionalsummary: professionalSummary,
+      employmenthistory: employmentDetails,
+      education: educationDetails,
+      sociallinks: socialLinksDetails,
+      skills: skillDetails,
+    }]);
+    console.log(JSON.stringify(finalDetails));
+  };
   const [allSections, setAllSections] = useState([
     {
       id: 1,
-      name: <Employment />,
+      name: <Employment getEmploymentDetails={getEmploymentDetails} />,
     },
     {
       id: 2,
-      name: <Education />,
+      name: <Education getEducationDetails={getEducationDetails} />,
     },
     {
       id: 3,
-      name: <SocialLinks />,
+      name: <SocialLinks getSocialLinksDetails={getSocialLinksDetails} />,
     },
     {
       id: 4,
-      name: <Skills />,
+      name: <Skills getSkillDetails={getSkillDetails} />,
     },
   ]);
 
@@ -44,51 +81,6 @@ export default function CVBuilder() {
       }
     });
     setAllSections(result);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const {
-      firstname,
-      lastname,
-      email,
-      phone,
-      country,
-      city,
-      address,
-      postalcode,
-      nationality,
-      placeofbirth,
-      dateofbirth,
-      jobtitle,
-      employer,
-      employmentcity,
-      startdate,
-      enddate,
-      institution,
-      degree,
-      institutioncity,
-      label,
-      linkurl,
-    } = formData.current;
-
-    const personalDetails = {
-      FirstName: firstname.value,
-      LastName: lastname.value,
-      Email: email.value,
-      Phone: phone.value,
-      Country: country.value,
-      City: city.value,
-      Address: address.value,
-      PostalCode: postalcode.value,
-      Nationality: nationality.value,
-      PlaceOfBirth: placeofbirth.value,
-      DateOfBirth: dateofbirth.value,
-      
-    };
-
-     console.log(personalDetails);
-    console.log(JSON.stringify(personalDetails));
   };
 
   return (
@@ -122,30 +114,30 @@ export default function CVBuilder() {
             }}
           />
           <Box sx={{ marginTop: "4rem", width: "100%", height: "100vh" }}>
-            <form ref={formData} onSubmit={handleSubmit}>
-              <PersonalDetails />
-              <ProfessionalSummary />
-              {allSections.map((item) => (
-                <List key={item.id}> {item.name}</List>
-              ))}
-              <AddSection
-                allSections={allSections}
-                setAllSections={setAllSections}
-                deleteCustomSection={deleteCustomSection}
-              />
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "end",
-                  width: "90%",
-                  marginTop: "50px",
-                }}
-              >
-                <Button type="submit" variant="contained">
-                  Submit
-                </Button>
-              </Box>
-            </form>
+            <PersonalDetails getPersonalDetails={getPersonalDetails} />
+            <ProfessionalSummary
+              getProfessionalSummary={getProfessionalSummary}
+            />
+            {allSections.map((item) => (
+              <List key={item.id}> {item.name}</List>
+            ))}
+            <AddSection
+              allSections={allSections}
+              setAllSections={setAllSections}
+              deleteCustomSection={deleteCustomSection}
+            />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "end",
+                width: "90%",
+                marginTop: "50px",
+              }}
+            >
+              <Button type="submit" variant="contained" onClick={handleSubmit} download>
+                Submit
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Box>

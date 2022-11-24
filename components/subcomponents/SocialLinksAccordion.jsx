@@ -74,7 +74,8 @@ export default function SocialLinksAccordion({ getValuesFromSocialLinks }) {
             <TextField
               id="outlined-basic"
               label="Link"
-              type="url"
+              placeholder="https://example.com"
+              type="text"
               name="linkurl"
               value={values.linkurl}
               variant="filled"

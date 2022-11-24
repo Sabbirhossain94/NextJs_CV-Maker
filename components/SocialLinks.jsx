@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import SocialLinksAccordion from "./subcomponents/SocialLinksAccordion";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function SocialLinks() {
+export default function SocialLinks({ getSocialLinksDetails }) {
   const [accordionId, setAccordionId] = useState(1);
   const [accordionValues, setAccordionValues] = useState({
     label: "",
@@ -20,7 +20,7 @@ export default function SocialLinks() {
       urllink: urllink,
     });
   };
-  
+
   const deleteAccordionSection = (id) => {
     setAccordionId(accordionId - 1);
     const result = accordionField.filter((item) => {
@@ -43,7 +43,7 @@ export default function SocialLinks() {
       ),
     },
   ]);
-
+getSocialLinksDetails(accordionValues)
   const addAccordionSection = () => {
     setAccordionId(accordionId + 1);
     setAccordionField([

@@ -4,9 +4,17 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-export default function ProfessionalSummary() {
-  const [professionalhistory, setProfessionalHistory] = useState("");
-
+export default function ProfessionalSummary({ getProfessionalSummary }) {
+  const [professionalhistory, setProfessionalHistory] = useState({
+    summary: "",
+  });
+  const handleInputChange =(event)=>{
+    const {name, value} = event.target
+    setProfessionalHistory({
+      [name]: value
+    });
+  }
+  getProfessionalSummary(professionalhistory);
   return (
     <Box>
       <Typography
@@ -34,11 +42,11 @@ export default function ProfessionalSummary() {
           >
             <TextField
               name="professionalsummary"
-              value={professionalhistory}
+              value={professionalhistory.summary}
               multiline
               rows={8}
               sx={{ width: "100%" }}
-              onChange={(e)=>setProfessionalHistory(e.target.value)}
+              onChange={handleInputChange}
             />
           </Box>
         </Grid>

@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function Skills() {
+export default function Skills({ getSkillDetails }) {
   const [accordionId, setAccordionId] = useState(1);
   const [accordionValues, setAccordionValues] = useState({
     skill: "",
@@ -67,7 +67,7 @@ export default function Skills() {
       },
     ]);
   };
-
+getSkillDetails(accordionValues)
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
     height: 16,
