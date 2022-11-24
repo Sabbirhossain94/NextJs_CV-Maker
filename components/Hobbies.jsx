@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -6,6 +7,9 @@ import TextField from "@mui/material/TextField";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Hobbies({ deleteCustomSection, sectionId, setActiveSectionId }) {
+
+  const [hobbies,setHobbies]=useState("")
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
       <Grid container item md={6}>
@@ -44,6 +48,9 @@ export default function Hobbies({ deleteCustomSection, sectionId, setActiveSecti
           <TextField
             id="outlined-basic"
             label="What do you like?"
+            type="text"
+            name="hobbies"
+            value={hobbies}
             variant="filled"
             sx={{
               width: "100%",
@@ -58,6 +65,7 @@ export default function Hobbies({ deleteCustomSection, sectionId, setActiveSecti
             InputProps={{
               disableUnderline: true,
             }}
+            onChange={(e)=>setHobbies(e.target.value)}
           />
         </Grid>
       </Grid>

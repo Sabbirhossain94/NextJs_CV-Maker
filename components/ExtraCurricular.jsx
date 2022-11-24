@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ExtraCurricularAccordion from "../components/subcomponents/ExtraCurricularAccordion"
+import ExtraCurricularAccordion from "../components/subcomponents/ExtraCurricularAccordion";
 
 export default function ExtraCurricular({
   deleteCustomSection,
@@ -13,22 +13,49 @@ export default function ExtraCurricular({
   setActiveSectionId,
 }) {
   const [accordionId, setAccordionId] = useState(1);
-
+  const [accordionValues, setAccordionValues] = useState({
+    activity: "",
+    employer: "",
+    startdate: "",
+    enddate: "",
+    city: "",
+    description: "",
+  });
+  const getValuesFromExtraCurricular = (getValues) => {
+    const { activity, employer, startdate, enddate, city, description } =
+      getValues;
+    setAccordionValues({
+      activity: activity,
+      employer: employer,
+      startdate: startdate,
+      enddate: enddate,
+      city: city,
+      description: description,
+    });
+  };
   const deleteAccordionSection = (id) => {
-     if (id > 1) {
-       setAccordionId(accordionId - 1);
-       const result = accordionField.filter((item) => {
-         if (item.id !== id) {
-           return item;
-         }
-       });
-       setAccordionField(result);
-     }
+    setAccordionId(accordionId - 1);
+    const result = accordionField.filter((item) => {
+      if (item.id !== id) {
+        return item;
+      }
+    });
+    setAccordionField(result);
   };
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      name: <ExtraCurricularAccordion />,
+      activity: accordionValues.activity,
+      employer: accordionValues.employer,
+      startdate: accordionValues.startdate,
+      enddate: accordionValues.enddate,
+      city: accordionValues.city,
+      description: accordionValues.description,
+      component: (
+        <ExtraCurricularAccordion
+          getValuesFromExtraCurricular={getValuesFromExtraCurricular}
+        />
+      ),
     },
   ]);
 
@@ -37,8 +64,18 @@ export default function ExtraCurricular({
     setAccordionField([
       ...accordionField,
       {
-        id: accordionId+1,
-        name: <ExtraCurricularAccordion />,
+        id: accordionId + 1,
+        activity: accordionValues.activity,
+        employer: accordionValues.employer,
+        startdate: accordionValues.startdate,
+        enddate: accordionValues.enddate,
+        city: accordionValues.city,
+        description: accordionValues.description,
+        component: (
+          <ExtraCurricularAccordion
+            getValuesFromExtraCurricular={getValuesFromExtraCurricular}
+          />
+        ),
       },
     ]);
   };
@@ -79,7 +116,7 @@ export default function ExtraCurricular({
         {accordionField.map((item) => (
           <Grid key={item.id} container columns={16}>
             <Grid item md={15}>
-              {item.name}
+              {item.component}
             </Grid>
             <Grid item md="auto">
               <DeleteIcon

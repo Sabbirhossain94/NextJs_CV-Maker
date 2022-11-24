@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState } from "react";
-import Box from "@mui/material/Box";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -8,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-
 
 export default function EmploymentAccordion({ getValuesFromEmployment }) {
   const [expanded, setExpanded] = React.useState(false);
@@ -31,7 +29,6 @@ export default function EmploymentAccordion({ getValuesFromEmployment }) {
       ...values,
       [name]: value,
     });
-    
   };
   getValuesFromEmployment(values);
   return (
@@ -171,6 +168,7 @@ export default function EmploymentAccordion({ getValuesFromEmployment }) {
           <Grid item xs={6} md={12}>
             <TextField
               label="Description"
+              variant="filled"
               type="text"
               value={values.description}
               name="description"

@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -11,12 +12,19 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-export default function SkillsAccordion({ toggleSwitch }) {
-  console.log(toggleSwitch);
+export default function SkillsAccordion({
+  toggleSwitch,
+  getValuesFromLanguage ,
+}) {
+  //console.log(toggleSwitch);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  const [values, setValues] = useState({
+    language: "",
+    level: "",
+  });
 
   const optionValue = [
     {
@@ -35,8 +43,16 @@ export default function SkillsAccordion({ toggleSwitch }) {
       value: 3,
       name: "Very good command",
     },
-    
   ];
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+  getValuesFromLanguage(values)
   return (
     <Accordion
       expanded={expanded === "panel1"}
@@ -64,6 +80,9 @@ export default function SkillsAccordion({ toggleSwitch }) {
             <TextField
               id="outlined-basic"
               label="Language"
+              type="text"
+              name="language"
+              value={values.language}
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -74,6 +93,7 @@ export default function SkillsAccordion({ toggleSwitch }) {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={6}>
@@ -87,13 +107,19 @@ export default function SkillsAccordion({ toggleSwitch }) {
                 label="level"
                 defaultValue=""
                 variant="filled"
+                name="level"
                 sx={{ background: "#e7eaf4", borderRadius: "5px" }}
                 InputProps={{
                   disableUnderline: true,
                 }}
+                onChange={handleInputChange}
               >
                 {optionValue.map((item, key) => (
-                  <MenuItem value={item.value} key={key}>
+                  <MenuItem
+                    defaultValue={values.level}
+                    value={item.name}
+                    key={key}
+                  >
                     {item.name}
                   </MenuItem>
                 ))}

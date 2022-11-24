@@ -11,23 +11,41 @@ export default function Courses({
   sectionId,
   setActiveSectionId,
 }) {
-  const [accordionId, setAccordionId] = useState(1);
-
+  const [accordionId, setAccordionId] = useState(0);
+  const [accordionValues, setAccordionValues] = useState({
+    course: "",
+    institution: "",
+    startdate: "",
+    enddate: "",
+  });
+  const getValuesFromCourses = (getValues) => {
+    const { course, institution, startdate, enddate } = getValues;
+    setAccordionValues({
+      course: course,
+      institution: institution,
+      startdate: startdate,
+      enddate: enddate,
+    });
+  };
   const deleteAccordionSection = (id) => {
-      if (id > 1) {
-        setAccordionId(accordionId - 1);
-        const result = accordionField.filter((item) => {
-          if (item.id !== id) {
-            return item;
-          }
-        });
-        setAccordionField(result);
+    
+    const result = accordionField.filter((item) => {
+      if (item.id !== id) {
+        return item;
       }
+    });
+    setAccordionField(result);
   };
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      name: <CourseAccordion />,
+      course: accordionValues.course,
+      institution: accordionValues.institution,
+      startdate: accordionValues.startdate,
+      enddate: accordionValues.enddate,
+      component: (
+        <CourseAccordion getValuesFromCourses={getValuesFromCourses} />
+      ),
     },
   ]);
 
@@ -36,8 +54,14 @@ export default function Courses({
     setAccordionField([
       ...accordionField,
       {
-        id: accordionId+1,
-        name: <CourseAccordion />,
+        id: accordionId + 1,
+        course: accordionValues.course,
+        institution: accordionValues.institution,
+        startdate: accordionValues.startdate,
+        enddate: accordionValues.enddate,
+        component: (
+          <CourseAccordion getValuesFromCourses={getValuesFromCourses} />
+        ),
       },
     ]);
   };
@@ -70,7 +94,6 @@ export default function Courses({
             onClick={() => {
               deleteCustomSection(sectionId);
               setActiveSectionId(null);
-             
             }}
           />
         </Grid>
@@ -80,7 +103,7 @@ export default function Courses({
         {accordionField.map((item) => (
           <Grid key={item.id} container columns={16}>
             <Grid item md={15}>
-              {item.name}
+              {item.component}
             </Grid>
             <Grid item md="auto">
               <DeleteIcon

@@ -5,28 +5,47 @@ import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import LanguageAccordion from "../components/subcomponents/LanguageAccordion"
+import LanguageAccordion from "../components/subcomponents/LanguageAccordion";
 
-export default function Language({ deleteCustomSection, sectionId, setActiveSectionId }) {
-
+export default function Language({
+  deleteCustomSection,
+  sectionId,
+  setActiveSectionId,
+}) {
   const [accordionId, setAccordionId] = useState(1);
-
+  const [accordionValues, setAccordionValues] = useState({
+    language: "",
+    level: "",
+  });
+   const getValuesFromLanguage = (getValues) => {
+     const { language, level} =
+       getValues;
+     setAccordionValues({
+       language: language,
+       level: level,
+     });
+   };
   const deleteAccordionSection = (id) => {
-      if (id > 1) {
-        setAccordionId(accordionId - 1);
-        const result = accordionField.filter((item) => {
-          if (item.id !== id) {
-            return item;
-          }
-        });
-        setAccordionField(result);
+    setAccordionId(accordionId - 1);
+    const result = accordionField.filter((item) => {
+      if (item.id !== id) {
+        return item;
       }
+    });
+    setAccordionField(result);
   };
   const [toggleSwitch, setToggleSwitch] = useState(false);
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      name: <LanguageAccordion toggleSwitch={toggleSwitch} />,
+      language: "",
+      level: "",
+      component: (
+        <LanguageAccordion
+          toggleSwitch={toggleSwitch}
+          getValuesFromLanguage={getValuesFromLanguage}
+        />
+      ),
     },
   ]);
 
@@ -35,8 +54,15 @@ export default function Language({ deleteCustomSection, sectionId, setActiveSect
     setAccordionField([
       ...accordionField,
       {
-        id: accordionId+1,
-        name: <LanguageAccordion toggleSwitch={toggleSwitch} />,
+        id: accordionId + 1,
+        language: "",
+        level: "",
+        component: (
+          <LanguageAccordion
+            toggleSwitch={toggleSwitch}
+            getValuesFromLanguage={getValuesFromLanguage}
+          />
+        ),
       },
     ]);
   };
@@ -77,7 +103,7 @@ export default function Language({ deleteCustomSection, sectionId, setActiveSect
         {accordionField.map((item) => (
           <Grid key={item.id} container columns={16}>
             <Grid item md={15}>
-              {item.name}
+              {item.component}
             </Grid>
             <Grid item md="auto">
               <DeleteIcon

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState } from "react";
-import Box from "@mui/material/Box";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -8,15 +7,30 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import MUIRichTextEditor from "mui-rte";
 
-export default function EducationAccordion() {
 
+export default function EducationAccordion({ getValuesFromExtraCurricular }) {
   const [expanded, setExpanded] = React.useState(false);
-  const [activity, setActivity] = useState("");
+  
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  const [values, setValues] = useState({
+    activity: "",
+    employer: "",
+    startdate: "",
+    enddate: "",
+    city: "",
+    description: "",
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+  getValuesFromExtraCurricular(values)
   return (
     <Accordion
       expanded={expanded === "panel1"}
@@ -34,7 +48,7 @@ export default function EducationAccordion() {
         id="panel1bh-header"
       >
         <Typography sx={{ width: "33%", flexShrink: 0 }}>
-         {activity ? activity : "(Not Specified)"}
+          {values.activity ? values.activity : "(Not Specified)"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -43,6 +57,9 @@ export default function EducationAccordion() {
             <TextField
               id="outlined-basic"
               label="Activity title"
+              type="text"
+              name="activity"
+              value={values.activity}
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -53,13 +70,16 @@ export default function EducationAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
-              onChange={(e) => setActivity(e.target.value)}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
               label="Employer"
+              type="text"
+              name="employer"
+              value={values.employer}
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -70,15 +90,63 @@ export default function EducationAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={6} sx={{ display: "flex" }}>
-            <DatePicker />
+            {" "}
+            <TextField
+              variant="filled"
+              label="Start Date"
+              name="startdate"
+              value={values.startdate}
+              type="date"
+              sx={{
+                background: "#e7eaf4",
+                borderRadius: "5px",
+              }}
+              InputProps={{
+                disableUnderline: true,
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: "12px",
+                  color: "#828ba2",
+                },
+              }}
+              onChange={handleInputChange}
+            />
+            <TextField
+              variant="filled"
+              label="End Date"
+              name="enddate"
+              value={values.enddate}
+              type="date"
+              sx={{
+                marginLeft: "20px",
+
+                background: "#e7eaf4",
+                borderRadius: "5px",
+              }}
+              InputProps={{
+                disableUnderline: true,
+              }}
+              InputLabelProps={{
+                sx: {
+                  fontSize: "12px",
+                  color: "#828ba2",
+                },
+              }}
+              onChange={handleInputChange}
+            />
           </Grid>
           <Grid item xs={6} md={6}>
             <TextField
               id="outlined-basic"
               label="City"
+              type="text"
+              name="city"
+              value={values.city}
               variant="filled"
               sx={{ width: "100%", background: "#e7eaf4", borderRadius: "5px" }}
               InputLabelProps={{
@@ -89,32 +157,26 @@ export default function EducationAccordion() {
               InputProps={{
                 disableUnderline: true,
               }}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={6} md={12}>
-            <Typography
-              sx={{
-                paddingBottom: "5px",
-                fontWeight: "400",
+            <TextField
+              label="Description"
+              variant="filled"
+              type="text"
+              value={values.description}
+              name="description"
+              InputLabelProps={{
+                sx: {
+                  color: "#828ba2",
+                },
               }}
-              color="#757575"
-            >
-              Description
-            </Typography>
-            <Box
-              sx={{
-                height: "250px",
-                padding: "10px",
-                overflow: "auto",
-                border: "1px solid",
-                borderColor: "#e7eaf4",
-                borderRadius: "5px",
-                marginTop: "10px",
-                background: "#e7eaf4",
-              }}
-            >
-              <MUIRichTextEditor label="Start typing..." />
-            </Box>
+              multiline
+              rows={8}
+              sx={{ width: "100%", background: "#e7eaf4" }}
+              onChange={handleInputChange}
+            />
           </Grid>
         </Grid>
       </AccordionDetails>
