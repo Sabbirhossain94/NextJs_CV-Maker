@@ -17,12 +17,12 @@ import Button from "@mui/material/Button";
 
 export default function CVBuilder() {
   const [progress, setProgress] = useState(0);
-  const [personalDetails, setPersonalDetails] = useState(null);
-  const [professionalSummary, setProfessionalSummary] = useState(null);
-  const [employmentDetails, setEmploymentDetails] = useState(null);
-  const [educationDetails, setEducationDetails] = useState(null);
-  const [socialLinksDetails, setSocialLinksDetails] = useState(null);
-  const [skillDetails, setSkillDetails] = useState(null);
+  const [personalDetails, setPersonalDetails] = useState([]);
+  const [professionalSummary, setProfessionalSummary] = useState([]);
+  const [employmentDetails, setEmploymentDetails] = useState([]);
+  const [educationDetails, setEducationDetails] = useState([]);
+  const [socialLinksDetails, setSocialLinksDetails] = useState([]);
+  const [skillDetails, setSkillDetails] = useState([]);
   const [finalDetails, setFinalDetails] = useState([]);
 
   const getPersonalDetails = (values) => {
@@ -43,17 +43,20 @@ export default function CVBuilder() {
   const getSkillDetails = (values) => {
     setSkillDetails(values);
   };
+
   const handleSubmit = (event) => {
-    event.preventDefault()
-    setFinalDetails([{
-      personaldetails: personalDetails,
-      professionalsummary: professionalSummary,
-      employmenthistory: employmentDetails,
-      education: educationDetails,
-      sociallinks: socialLinksDetails,
-      skills: skillDetails,
-    }]);
-    console.log(JSON.stringify(finalDetails));
+    event.preventDefault();
+    setFinalDetails([
+      {
+        personaldetails: personalDetails,
+        professionalhistory: professionalSummary,
+        employmenthistory: employmentDetails,
+        education: educationDetails,
+        sociallinks: socialLinksDetails,
+        skills: skillDetails,
+      },
+    ]);
+    console.log(JSON.stringify(finalDetails, null, " "));
   };
   const [allSections, setAllSections] = useState([
     {
@@ -134,7 +137,12 @@ export default function CVBuilder() {
                 marginTop: "50px",
               }}
             >
-              <Button type="submit" variant="contained" onClick={handleSubmit} download>
+              <Button
+                type="submit"
+                variant="contained"
+                onClick={handleSubmit}
+                download
+              >
                 Submit
               </Button>
             </Box>

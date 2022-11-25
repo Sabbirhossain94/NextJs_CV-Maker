@@ -41,7 +41,7 @@ export default function ProfessionalSummary({ getProfessionalSummary }) {
             }}
           >
             <TextField
-              name="professionalsummary"
+              name="summary"
               value={professionalhistory.summary}
               multiline
               rows={8}

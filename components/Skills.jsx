@@ -3,14 +3,27 @@ import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import SkillsAccordion from "./subcomponents/SkillsAccordion";
+import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 export default function Skills({ getSkillDetails }) {
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
   const [accordionId, setAccordionId] = useState(1);
   const [accordionValues, setAccordionValues] = useState({
     skill: "",
@@ -39,14 +52,7 @@ export default function Skills({ getSkillDetails }) {
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      skill: accordionValues.skill,
-      level: accordionValues.level,
-      component: (
-        <SkillsAccordion
-          toggleSwitch={toggleSwitch}
-          getValuesFromSkill={getValuesFromSkill}
-        />
-      ),
+     
     },
   ]);
 
@@ -56,18 +62,18 @@ export default function Skills({ getSkillDetails }) {
       ...accordionField,
       {
         id: accordionId + 1,
-        skill: accordionValues.skill,
-        level: accordionValues.level,
-        component: (
-          <SkillsAccordion
-            toggleSwitch={toggleSwitch}
-            getValuesFromSkill={getValuesFromSkill}
-          />
-        ),
+       
       },
     ]);
   };
-getSkillDetails(accordionValues)
+  getSkillDetails(accordionValues);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAccordionValues({
+      ...accordionValues,
+      [name]: value,
+    });
+  };
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
     height: 16,
@@ -144,7 +150,118 @@ getSkillDetails(accordionValues)
         {accordionField.map((item) => (
           <Grid key={item.id} container columns={16}>
             <Grid item md={15}>
-              {item.component}
+              <Accordion
+                expanded={expanded === item.id}
+                onChange={handleChange(item.id)}
+                sx={{
+                  backgroundColor: "white",
+                  marginTop: "10px",
+                  boxShadow: "none",
+                  border: "1px solid",
+                  borderColor: "#e7eaf4",
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon color="#e7eaf4" />}
+                  aria-controls="panel1bh-content"
+                  id="panel1bh-header"
+                >
+                  <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                    {accordionValues.skill
+                      ? accordionValues.skill
+                      : "(Not Specified)"}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Grid
+                    container
+                    rowSpacing={3}
+                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                  >
+                    <Grid item xs={6} md={6}>
+                      <TextField
+                        id="outlined-basic"
+                        label="Skill"
+                        variant="filled"
+                        value={accordionValues.skill}
+                        name="skill"
+                        sx={{
+                          width: "100%",
+                          background: "#e7eaf4",
+                          borderRadius: "5px",
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            color: "#828ba2",
+                          },
+                        }}
+                        InputProps={{
+                          disableUnderline: true,
+                        }}
+                        onChange={handleInputChange}
+                      />
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                      <FormControl sx={{ width: "80%", marginLeft: "50px" }}>
+                        <InputLabel
+                          id="demo-simple-select-helper-label"
+                          sx={{ marginTop: "5px" }}
+                        >
+                          Level
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-helper-label"
+                          id="demo-simple-select-helper"
+                          label="level"
+                          defaultValue=""
+                          variant="filled"
+                          name="level"
+                          sx={{ background: "#e7eaf4", borderRadius: "5px" }}
+                          InputProps={{
+                            disableUnderline: true,
+                          }}
+                          onChange={handleInputChange}
+                        >
+                          {[
+                            {
+                              value: 0,
+                              name: "None",
+                            },
+                            {
+                              value: 1,
+                              name: "Novice",
+                            },
+                            {
+                              value: 2,
+                              name: "Beginner",
+                            },
+                            {
+                              value: 3,
+                              name: "Skillfull",
+                            },
+                            {
+                              value: 4,
+                              name: "Experienced",
+                            },
+                            {
+                              value: 5,
+                              name: "Expert",
+                            },
+                          ].map((item, key) => (
+                            <MenuItem
+                              defaultValue={accordionValues.level}
+                              value={item.name}
+                              key={key}
+                            >
+                              {item.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
             </Grid>
             <Grid item md="auto">
               <DeleteIcon

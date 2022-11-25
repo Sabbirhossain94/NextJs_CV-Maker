@@ -3,15 +3,24 @@ import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ExtraCurricularAccordion from "../components/subcomponents/ExtraCurricularAccordion";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function ExtraCurricular({
   deleteCustomSection,
   sectionId,
   setActiveSectionId,
 }) {
+
+  const [expanded, setExpanded] = React.useState(false);
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
   const [accordionId, setAccordionId] = useState(1);
   const [accordionValues, setAccordionValues] = useState({
     activity: "",
@@ -21,18 +30,7 @@ export default function ExtraCurricular({
     city: "",
     description: "",
   });
-  const getValuesFromExtraCurricular = (getValues) => {
-    const { activity, employer, startdate, enddate, city, description } =
-      getValues;
-    setAccordionValues({
-      activity: activity,
-      employer: employer,
-      startdate: startdate,
-      enddate: enddate,
-      city: city,
-      description: description,
-    });
-  };
+ 
   const deleteAccordionSection = (id) => {
     setAccordionId(accordionId - 1);
     const result = accordionField.filter((item) => {
@@ -45,17 +43,8 @@ export default function ExtraCurricular({
   const [accordionField, setAccordionField] = useState([
     {
       id: accordionId,
-      activity: accordionValues.activity,
-      employer: accordionValues.employer,
-      startdate: accordionValues.startdate,
-      enddate: accordionValues.enddate,
-      city: accordionValues.city,
-      description: accordionValues.description,
-      component: (
-        <ExtraCurricularAccordion
-          getValuesFromExtraCurricular={getValuesFromExtraCurricular}
-        />
-      ),
+      
+    
     },
   ]);
 
@@ -65,20 +54,20 @@ export default function ExtraCurricular({
       ...accordionField,
       {
         id: accordionId + 1,
-        activity: accordionValues.activity,
-        employer: accordionValues.employer,
-        startdate: accordionValues.startdate,
-        enddate: accordionValues.enddate,
-        city: accordionValues.city,
-        description: accordionValues.description,
-        component: (
-          <ExtraCurricularAccordion
-            getValuesFromExtraCurricular={getValuesFromExtraCurricular}
-          />
-        ),
+       
+      
       },
     ]);
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAccordionValues({
+      ...accordionValues,
+      [name]: value,
+    });
+  };
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
       <Grid container item md={8}>
@@ -116,7 +105,173 @@ export default function ExtraCurricular({
         {accordionField.map((item) => (
           <Grid key={item.id} container columns={16}>
             <Grid item md={15}>
-              {item.component}
+              <Accordion
+                expanded={expanded === item.id}
+                onChange={handleChange(item.id)}
+                sx={{
+                  backgroundColor: "white",
+                  boxShadow: "none",
+                  border: "1px solid",
+                  borderColor: "#e7eaf4",
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon color="#e7eaf4" />}
+                  aria-controls="panel1bh-content"
+                  id="panel1bh-header"
+                >
+                  <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                    {accordionValues.activity
+                      ? accordionValues.activity
+                      : "(Not Specified)"}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Grid
+                    container
+                    rowSpacing={3}
+                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                  >
+                    <Grid item xs={6} md={6}>
+                      <TextField
+                        id="outlined-basic"
+                        label="Activity title"
+                        type="text"
+                        name="activity"
+                        value={accordionValues.activity}
+                        variant="filled"
+                        sx={{
+                          width: "100%",
+                          background: "#e7eaf4",
+                          borderRadius: "5px",
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            color: "#828ba2",
+                          },
+                        }}
+                        InputProps={{
+                          disableUnderline: true,
+                        }}
+                        onChange={handleInputChange}
+                      />
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                      <TextField
+                        id="outlined-basic"
+                        label="Employer"
+                        type="text"
+                        name="employer"
+                        value={accordionValues.employer}
+                        variant="filled"
+                        sx={{
+                          width: "100%",
+                          background: "#e7eaf4",
+                          borderRadius: "5px",
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            color: "#828ba2",
+                          },
+                        }}
+                        InputProps={{
+                          disableUnderline: true,
+                        }}
+                        onChange={handleInputChange}
+                      />
+                    </Grid>
+                    <Grid item xs={6} md={6} sx={{ display: "flex" }}>
+                      {" "}
+                      <TextField
+                        variant="filled"
+                        label="Start Date"
+                        name="startdate"
+                        value={accordionValues.startdate}
+                        type="date"
+                        sx={{
+                          background: "#e7eaf4",
+                          borderRadius: "5px",
+                        }}
+                        InputProps={{
+                          disableUnderline: true,
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            fontSize: "12px",
+                            color: "#828ba2",
+                          },
+                        }}
+                        onChange={handleInputChange}
+                      />
+                      <TextField
+                        variant="filled"
+                        label="End Date"
+                        name="enddate"
+                        value={accordionValues.enddate}
+                        type="date"
+                        sx={{
+                          marginLeft: "20px",
+
+                          background: "#e7eaf4",
+                          borderRadius: "5px",
+                        }}
+                        InputProps={{
+                          disableUnderline: true,
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            fontSize: "12px",
+                            color: "#828ba2",
+                          },
+                        }}
+                        onChange={handleInputChange}
+                      />
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                      <TextField
+                        id="outlined-basic"
+                        label="City"
+                        type="text"
+                        name="city"
+                        value={accordionValues.city}
+                        variant="filled"
+                        sx={{
+                          width: "100%",
+                          background: "#e7eaf4",
+                          borderRadius: "5px",
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            color: "#828ba2",
+                          },
+                        }}
+                        InputProps={{
+                          disableUnderline: true,
+                        }}
+                        onChange={handleInputChange}
+                      />
+                    </Grid>
+                    <Grid item xs={6} md={12}>
+                      <TextField
+                        label="Description"
+                        variant="filled"
+                        type="text"
+                        value={accordionValues.description}
+                        name="description"
+                        InputLabelProps={{
+                          sx: {
+                            color: "#828ba2",
+                          },
+                        }}
+                        multiline
+                        rows={8}
+                        sx={{ width: "100%", background: "#e7eaf4" }}
+                        onChange={handleInputChange}
+                      />
+                    </Grid>
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
             </Grid>
             <Grid item md="auto">
               <DeleteIcon
