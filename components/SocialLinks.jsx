@@ -16,46 +16,40 @@ export default function SocialLinks({ getSocialLinksDetails }) {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [accordionId, setAccordionId] = useState(1);
-  const [accordionValues, setAccordionValues] = useState({
-    label: "",
-    linkurl: "",
-  });
   
-  const deleteAccordionSection = (id) => {
-    setAccordionId(accordionId - 1);
-    const result = accordionField.filter((item) => {
-      if (item.id !== id) {
-        return item;
-      }
-    });
-    setAccordionField(result);
-  };
-
-  const [accordionField, setAccordionField] = useState([
+  const [accordionValues, setAccordionValues] = useState([
     {
-      id: accordionId,
-     
+      label: "",
+      linkurl: "",
     },
   ]);
 
-  getSocialLinksDetails(accordionValues);
+  const deleteAccordionSection = (id) => {
+    const result = accordionValues.filter((item, key) => {
+      if (key !== id) {
+        return item;
+      }
+    });
+    setAccordionValues(result);
+  };
+
   const addAccordionSection = () => {
-    setAccordionId(accordionId + 1);
-    setAccordionField([
-      ...accordionField,
+    setAccordionValues([
+      ...accordionValues,
       {
-        id: accordionId + 1,
-       
+        label: "",
+        linkurl: "",
       },
     ]);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    setAccordionValues({
-      ...accordionValues,
-      [name]: value,
+    accordionValues.map((item, key) => {
+      if (key === inputKey) {
+        item[name] = value;
+        console.log(item);
+      }
     });
   };
   getSocialLinksDetails(accordionValues);
@@ -76,12 +70,12 @@ export default function SocialLinks({ getSocialLinksDetails }) {
         </Typography>
 
         <Box sx={{ flexGrow: 1 }}>
-          {accordionField.map((item) => (
-            <Grid key={item.id} container columns={16}>
+          {accordionValues.map((item, key) => (
+            <Grid key={key} container columns={16}>
               <Grid item md={15}>
                 <Accordion
-                  expanded={expanded === item.id}
-                  onChange={handleChange(item.id)}
+                  expanded={expanded === key}
+                  onChange={handleChange(key)}
                   sx={{
                     backgroundColor: "white",
                     boxShadow: "none",
@@ -127,7 +121,7 @@ export default function SocialLinks({ getSocialLinksDetails }) {
                           InputProps={{
                             disableUnderline: true,
                           }}
-                          onChange={handleInputChange}
+                          onChange={(e) => handleInputChange(e, key)}
                         />
                       </Grid>
                       <Grid item xs={6} md={6}>
@@ -152,7 +146,7 @@ export default function SocialLinks({ getSocialLinksDetails }) {
                           InputProps={{
                             disableUnderline: true,
                           }}
-                          onChange={handleInputChange}
+                          onChange={(e) => handleInputChange(e, key)}
                         />
                       </Grid>
                     </Grid>
@@ -171,7 +165,7 @@ export default function SocialLinks({ getSocialLinksDetails }) {
                       cursor: "pointer",
                     },
                   }}
-                  onClick={() => deleteAccordionSection(item.id)}
+                  onClick={() => deleteAccordionSection(key)}
                 />
               </Grid>
             </Grid>

@@ -24,54 +24,43 @@ export default function Skills({ getSkillDetails }) {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [accordionId, setAccordionId] = useState(1);
-  const [accordionValues, setAccordionValues] = useState({
-    skill: "",
-    level: "",
-  });
-
-  const getValuesFromSkill = (getValues) => {
-    const { skill, level } = getValues;
-    setAccordionValues({
-      skill: skill,
-      level: level,
-    });
-  };
-
-  const deleteAccordionSection = (id) => {
-    setAccordionId(accordionId - 1);
-    const result = accordionField.filter((item) => {
-      if (item.id !== id) {
-        return item;
-      }
-    });
-    setAccordionField(result);
-  };
-
-  const [toggleSwitch, setToggleSwitch] = useState(false);
-  const [accordionField, setAccordionField] = useState([
+  const [accordionValues, setAccordionValues] = useState([
     {
-      id: accordionId,
-     
+      skill: "",
+      level: "",
     },
   ]);
 
+  const deleteAccordionSection = (id) => {
+    const result = accordionValues.filter((item, key) => {
+      if (key !== id) {
+        return item;
+      }
+    });
+    setAccordionValues(result);
+  };
+
+  const [toggleSwitch, setToggleSwitch] = useState(false);
+
   const addAccordionSection = () => {
-    setAccordionId(accordionId + 1);
-    setAccordionField([
-      ...accordionField,
+    setAccordionValues([
+      ...accordionValues,
       {
-        id: accordionId + 1,
-       
+        skill: "",
+        level: "",
       },
     ]);
   };
   getSkillDetails(accordionValues);
-  const handleInputChange = (e) => {
+
+  const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    setAccordionValues({
-      ...accordionValues,
-      [name]: value,
+    accordionValues.map((item, key) => {
+      if (key === inputKey) {
+        item[name] = value;
+
+        console.log(item);
+      }
     });
   };
   const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -147,12 +136,12 @@ export default function Skills({ getSkillDetails }) {
       </Stack>
 
       <Box sx={{ flexGrow: 1 }}>
-        {accordionField.map((item) => (
-          <Grid key={item.id} container columns={16}>
+        {accordionValues.map((item, key) => (
+          <Grid key={key} container columns={16}>
             <Grid item md={15}>
               <Accordion
-                expanded={expanded === item.id}
-                onChange={handleChange(item.id)}
+                expanded={expanded === key}
+                onChange={handleChange(key)}
                 sx={{
                   backgroundColor: "white",
                   marginTop: "10px",
@@ -167,9 +156,7 @@ export default function Skills({ getSkillDetails }) {
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    {accordionValues.skill
-                      ? accordionValues.skill
-                      : "(Not Specified)"}
+                    {item.skill ? item.skill : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -198,7 +185,7 @@ export default function Skills({ getSkillDetails }) {
                         InputProps={{
                           disableUnderline: true,
                         }}
-                        onChange={handleInputChange}
+                        onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
                     <Grid item xs={6} md={6}>
@@ -214,13 +201,14 @@ export default function Skills({ getSkillDetails }) {
                           id="demo-simple-select-helper"
                           label="level"
                           defaultValue=""
+                          value={accordionValues.level}
                           variant="filled"
                           name="level"
                           sx={{ background: "#e7eaf4", borderRadius: "5px" }}
                           InputProps={{
                             disableUnderline: true,
                           }}
-                          onChange={handleInputChange}
+                          onChange={(e) => handleInputChange(e, key)}
                         >
                           {[
                             {
@@ -276,12 +264,13 @@ export default function Skills({ getSkillDetails }) {
                     cursor: "pointer",
                   },
                 }}
-                onClick={() => deleteAccordionSection(item.id)}
+                onClick={() => deleteAccordionSection(key)}
               />
             </Grid>
           </Grid>
         ))}
       </Box>
+      {/* add one more skill area */}
       <Typography
         sx={{
           width: "94%",

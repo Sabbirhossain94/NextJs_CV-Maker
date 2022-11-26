@@ -23,6 +23,10 @@ export default function CVBuilder() {
   const [educationDetails, setEducationDetails] = useState([]);
   const [socialLinksDetails, setSocialLinksDetails] = useState([]);
   const [skillDetails, setSkillDetails] = useState([]);
+  const [courseDetails, setCourseDetails] = useState([]);
+  const [extraCurricularDetails, setExtraCurricularDetails] = useState([]);
+  const [languageDetails, setLanguageDetails] = useState([]);
+  const [hobbiesDetails, setHobbiesDetails] = useState([]);
   const [finalDetails, setFinalDetails] = useState([]);
 
   const getPersonalDetails = (values) => {
@@ -43,6 +47,18 @@ export default function CVBuilder() {
   const getSkillDetails = (values) => {
     setSkillDetails(values);
   };
+  const getCourseDetails = (values) => {
+    setCourseDetails(values);
+  };
+  const getExtraCurriculatDetails = (values) => {
+    setExtraCurricularDetails(values);
+  };
+  const getLanguageDetails = (values) => {
+    setLanguageDetails(values);
+  };
+  const getHobbiesDetails = (values) => {
+    setHobbiesDetails(values);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -54,6 +70,10 @@ export default function CVBuilder() {
         education: educationDetails,
         sociallinks: socialLinksDetails,
         skills: skillDetails,
+        courses: courseDetails,
+        extracurricularactivities: extraCurricularDetails,
+        languages: languageDetails,
+        hobbies: hobbiesDetails
       },
     ]);
     console.log(JSON.stringify(finalDetails, null, " "));
@@ -128,6 +148,10 @@ export default function CVBuilder() {
               allSections={allSections}
               setAllSections={setAllSections}
               deleteCustomSection={deleteCustomSection}
+              getCourseDetails={getCourseDetails}
+              getExtraCurriculatDetails={getExtraCurriculatDetails}
+              getLanguageDetails={getLanguageDetails}
+              getHobbiesDetails={getHobbiesDetails}
             />
             <Box
               sx={{

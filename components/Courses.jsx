@@ -14,53 +14,55 @@ export default function Courses({
   deleteCustomSection,
   sectionId,
   setActiveSectionId,
+  getCourseDetails,
 }) {
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [accordionId, setAccordionId] = useState(0);
-  const [accordionValues, setAccordionValues] = useState({
-    course: "",
-    institution: "",
-    startdate: "",
-    enddate: "",
-  });
-
-  const deleteAccordionSection = (id) => {
-    const result = accordionField.filter((item) => {
-      if (item.id !== id) {
-        return item;
-      }
-    });
-    setAccordionField(result);
-  };
-  const [accordionField, setAccordionField] = useState([
+  const [accordionValues, setAccordionValues] = useState([
     {
-      id: accordionId,
-      
+      course: "",
+      institution: "",
+      startdate: "",
+      enddate: "",
     },
   ]);
 
+  const deleteAccordionSection = (id) => {
+    const result = accordionValues.filter((item,key) => {
+      if (key !== id) {
+        return item;
+      }
+    });
+    setAccordionValues(result);
+  };
+
   const addAccordionSection = () => {
-    setAccordionId(accordionId + 1);
-    setAccordionField([
-      ...accordionField,
+    setAccordionValues([
+      ...accordionValues,
       {
-        id: accordionId + 1,
-       
+        course: "",
+        institution: "",
+        startdate: "",
+        enddate: "",
       },
     ]);
   };
-  const handleInputChange = (e) => {
+  const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    setAccordionValues({
-      ...accordionValues,
-      [name]: value,
+    accordionValues.map((item, key) => {
+      if (key === inputKey) {
+        item[name] = value;
+
+        console.log(item);
+      }
     });
   };
-  
+
+  getCourseDetails(accordionValues);
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
       <Grid container item md={6}>
@@ -95,12 +97,12 @@ export default function Courses({
       </Grid>
 
       <Box sx={{ flexGrow: 1 }}>
-        {accordionField.map((item) => (
-          <Grid key={item.id} container columns={16}>
+        {accordionValues.map((item, key) => (
+          <Grid key={key} container columns={16}>
             <Grid item md={15}>
               <Accordion
-                expanded={expanded === item.id}
-                onChange={handleChange(item.id)}
+                expanded={expanded === key}
+                onChange={handleChange(key)}
                 sx={{
                   backgroundColor: "white",
                   boxShadow: "none",
@@ -114,9 +116,7 @@ export default function Courses({
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    {accordionValues.course
-                      ? accordionValues.course
-                      : "(Not Specified)"}
+                    {item.course ? item.course : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -146,7 +146,7 @@ export default function Courses({
                         InputProps={{
                           disableUnderline: true,
                         }}
-                        onChange={handleInputChange}
+                        onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
                     <Grid item xs={6} md={6}>
@@ -170,7 +170,7 @@ export default function Courses({
                         InputProps={{
                           disableUnderline: true,
                         }}
-                        onChange={handleInputChange}
+                        onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
                     <Grid item xs={6} md={6} sx={{ display: "flex" }}>
@@ -193,7 +193,7 @@ export default function Courses({
                             color: "#828ba2",
                           },
                         }}
-                        onChange={handleInputChange}
+                        onChange={(e) => handleInputChange(e, key)}
                       />
                       <TextField
                         variant="filled"
@@ -215,7 +215,7 @@ export default function Courses({
                             color: "#828ba2",
                           },
                         }}
-                        onChange={handleInputChange}
+                        onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
                   </Grid>
@@ -234,7 +234,7 @@ export default function Courses({
                     cursor: "pointer",
                   },
                 }}
-                onClick={() => deleteAccordionSection(item.id)}
+                onClick={() => deleteAccordionSection(key)}
               />
             </Grid>
           </Grid>

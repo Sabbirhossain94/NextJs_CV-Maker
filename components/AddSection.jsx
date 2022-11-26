@@ -15,17 +15,19 @@ export default function AddSection({
   allSections,
   setAllSections,
   deleteCustomSection,
+  getCourseDetails,
+  getExtraCurriculatDetails,
+  getLanguageDetails,
+  getHobbiesDetails,
 }) {
   const [activeSectionId, setActiveSectionId] = useState(null);
- 
+
   const addToDraggableSections = (newSectionId, newSectionName) => {
     setAllSections([
       ...allSections,
       { id: newSectionId, name: newSectionName },
     ]);
   };
-
- 
 
   const addSectionElements = [
     {
@@ -45,6 +47,7 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={5}
           setActiveSectionId={setActiveSectionId}
+          getCourseDetails={getCourseDetails}
         />
       ),
     },
@@ -65,6 +68,7 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={6}
           setActiveSectionId={setActiveSectionId}
+          getExtraCurriculatDetails={getExtraCurriculatDetails}
         />
       ),
     },
@@ -85,6 +89,7 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={7}
           setActiveSectionId={setActiveSectionId}
+          getHobbiesDetails={getHobbiesDetails}
         />
       ),
     },
@@ -105,6 +110,7 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={8}
           setActiveSectionId={setActiveSectionId}
+          getLanguageDetails={getLanguageDetails}
         />
       ),
     },
@@ -116,7 +122,6 @@ export default function AddSection({
       }
     });
     setActiveSectionId(activeId[0].id);
-    
   };
 
   return (

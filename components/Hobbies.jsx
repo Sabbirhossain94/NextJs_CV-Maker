@@ -6,10 +6,15 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function Hobbies({ deleteCustomSection, sectionId, setActiveSectionId }) {
-
-  const [hobbies,setHobbies]=useState("")
-
+export default function Hobbies({
+  deleteCustomSection,
+  sectionId,
+  setActiveSectionId,
+  getHobbiesDetails,
+}) {
+  const [hobbies, setHobbies] = useState("");
+  getHobbiesDetails(hobbies);
+  
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
       <Grid container item md={6}>
@@ -65,7 +70,7 @@ export default function Hobbies({ deleteCustomSection, sectionId, setActiveSecti
             InputProps={{
               disableUnderline: true,
             }}
-            onChange={(e)=>setHobbies(e.target.value)}
+            onChange={(e) => setHobbies(e.target.value)}
           />
         </Grid>
       </Grid>
