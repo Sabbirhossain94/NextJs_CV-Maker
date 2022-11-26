@@ -14,6 +14,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Button from "@mui/material/Button";
+import Viewer from "../components/Viewer"
 
 export default function CVBuilder() {
   const [progress, setProgress] = useState(0);
@@ -176,14 +177,16 @@ export default function CVBuilder() {
       <Box
         sx={{
           width: "50vw",
-          height: "100vh",
+         
           backgroundColor: "#e0e0e0",
           "&:hover": {
-            backgroundColor: "primary.main",
+            backgroundColor: "#656e83",
             opacity: [0.9, 0.8, 0.7],
           },
         }}
-      ></Box>
+      >
+   <Viewer/>
+      </Box>
     </Box>
   );
 }
