@@ -1,3 +1,4 @@
+import React from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -14,9 +15,13 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Button from "@mui/material/Button";
-import Viewer from "../components/Viewer"
+import Viewer from "../components/Viewer";
+// import CodeForPDF from "../components/CodeForPDF"
+
+export const DataContext = React.createContext();
 
 export default function CVBuilder() {
+  
   const [progress, setProgress] = useState(0);
   const [personalDetails, setPersonalDetails] = useState([]);
   const [professionalSummary, setProfessionalSummary] = useState([]);
@@ -74,7 +79,7 @@ export default function CVBuilder() {
         courses: courseDetails,
         extracurricularactivities: extraCurricularDetails,
         languages: languageDetails,
-        hobbies: hobbiesDetails
+        hobbies: hobbiesDetails,
       },
     ]);
     console.log(JSON.stringify(finalDetails, null, " "));
@@ -114,79 +119,82 @@ export default function CVBuilder() {
         flexDirection: "row",
       }}
     >
-      <Box
-        sx={{
-          width: "50vw",
-          height: "100%",
-          padding: "5%",
-          backgroundColor: "white",
-        }}
-      >
+      <DataContext.Provider value={finalDetails}>
         <Box
           sx={{
-            marginTop: "10px",
-            width: "100%",
-            height: "100vh",
+            width: "50vw",
+            height: "100%",
+            padding: "5%",
+            backgroundColor: "white",
           }}
         >
-          <LinearProgress
-            variant="determinate"
-            value={progress}
+          <Box
             sx={{
               marginTop: "10px",
-              width: "93%",
+              width: "100%",
+              height: "100vh",
             }}
-          />
-          <Box sx={{ marginTop: "4rem", width: "100%", height: "100vh" }}>
-            <PersonalDetails getPersonalDetails={getPersonalDetails} />
-            <ProfessionalSummary
-              getProfessionalSummary={getProfessionalSummary}
-            />
-            {allSections.map((item) => (
-              <List key={item.id}> {item.name}</List>
-            ))}
-            <AddSection
-              allSections={allSections}
-              setAllSections={setAllSections}
-              deleteCustomSection={deleteCustomSection}
-              getCourseDetails={getCourseDetails}
-              getExtraCurriculatDetails={getExtraCurriculatDetails}
-              getLanguageDetails={getLanguageDetails}
-              getHobbiesDetails={getHobbiesDetails}
-            />
-            <Box
+          >
+            <LinearProgress
+              variant="determinate"
+              value={progress}
               sx={{
-                display: "flex",
-                justifyContent: "end",
-                width: "90%",
-                marginTop: "50px",
+                marginTop: "10px",
+                width: "93%",
               }}
-            >
-              <Button
-                type="submit"
-                variant="contained"
-                onClick={handleSubmit}
-                download
+            />
+            <Box sx={{ marginTop: "4rem", width: "100%", height: "100vh" }}>
+              <PersonalDetails getPersonalDetails={getPersonalDetails} />
+              <ProfessionalSummary
+                getProfessionalSummary={getProfessionalSummary}
+              />
+              {allSections.map((item) => (
+                <List key={item.id}> {item.name}</List>
+              ))}
+              <AddSection
+                allSections={allSections}
+                setAllSections={setAllSections}
+                deleteCustomSection={deleteCustomSection}
+                getCourseDetails={getCourseDetails}
+                getExtraCurriculatDetails={getExtraCurriculatDetails}
+                getLanguageDetails={getLanguageDetails}
+                getHobbiesDetails={getHobbiesDetails}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "end",
+                  width: "90%",
+                  marginTop: "50px",
+                }}
               >
-                Submit
-              </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  onClick={handleSubmit}
+                  download
+                >
+                  Submit
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          width: "50vw",
-         
-          backgroundColor: "#e0e0e0",
-          "&:hover": {
-            backgroundColor: "#656e83",
-            opacity: [0.9, 0.8, 0.7],
-          },
-        }}
-      >
-   <Viewer/>
-      </Box>
+        <Box
+          sx={{
+            width: "50vw",
+
+            backgroundColor: "#e0e0e0",
+            "&:hover": {
+              backgroundColor: "#656e83",
+              opacity: [0.9, 0.8, 0.7],
+            },
+          }}
+        >
+          <Viewer />
+          {/* <CodeForPDF/> */}
+        </Box>
+      </DataContext.Provider>
     </Box>
   );
 }

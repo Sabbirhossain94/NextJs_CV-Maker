@@ -1,6 +1,10 @@
 import React from "react";
+import { useContext } from "react";
+import { DataContext } from "../pages/CVBuilder";
 // import "../App.css";
 export default function Template() {
+  const data= useContext(DataContext)
+  console.log(data)
   return (
     <div>
       <div id="body">
