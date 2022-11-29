@@ -56,8 +56,6 @@ export default function Language({
     accordionValues.map((item, key) => {
       if (key === inputKey) {
         item[name] = value;
-
-        console.log(item);
       }
     });
   };

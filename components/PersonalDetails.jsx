@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Accordion from "@mui/material/Accordion";
@@ -8,34 +8,24 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
+import { DataContext } from "../pages/CVBuilder";
 
-export default function PersonalDetails({ getPersonalDetails }) {
+export default function PersonalDetails() {
+  const getData = useContext(DataContext);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [values, setValues] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    phone: "",
-    country: "",
-    city: "",
-    address: "",
-    postalcode: "",
-    nationality: "",
-    placeofbirth: "",
-    dateofbirth: "",
-  });
+  const [stateValue, setStateValue] = getData.value1;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setValues({
-      ...values,
+    setStateValue({
+      ...stateValue,
       [name]: value,
     });
   };
-getPersonalDetails(values)
+  //console.log(stateValue);
   return (
     <Box>
       <Typography
@@ -60,7 +50,7 @@ getPersonalDetails(values)
             label="First Name"
             name="firstname"
             variant="filled"
-            value={values.firstname}
+            value={stateValue.firstname}
             type="text"
             sx={{
               width: "100%",
@@ -84,7 +74,7 @@ getPersonalDetails(values)
             label="Last Name"
             name="lastname"
             variant="filled"
-            value={values.lastname}
+            value={stateValue.lastname}
             type="text"
             sx={{
               width: "100%",
@@ -108,7 +98,7 @@ getPersonalDetails(values)
             label="Email"
             name="email"
             variant="filled"
-            value={values.email}
+            value={stateValue.email}
             type="text"
             sx={{
               width: "100%",
@@ -132,7 +122,7 @@ getPersonalDetails(values)
             label="Phone"
             name="phone"
             variant="filled"
-            value={values.phone}
+            value={stateValue.phone}
             type="text"
             sx={{
               width: "100%",
@@ -156,7 +146,7 @@ getPersonalDetails(values)
             label="Country"
             name="country"
             variant="filled"
-            value={values.country}
+            value={stateValue.country}
             type="text"
             sx={{
               width: "100%",
@@ -180,7 +170,7 @@ getPersonalDetails(values)
             label="City"
             name="city"
             variant="filled"
-            value={values.city}
+            value={stateValue.city}
             type="text"
             sx={{
               width: "100%",
@@ -253,7 +243,7 @@ getPersonalDetails(values)
                   name="address"
                   variant="filled"
                   type="text"
-                  value={values.address}
+                  value={stateValue.address}
                   sx={{
                     width: "105%",
                     background: "#e7eaf4",
@@ -278,7 +268,7 @@ getPersonalDetails(values)
                   name="postalcode"
                   variant="filled"
                   type="text"
-                  value={values.postalcode}
+                  value={stateValue.postalcode}
                   sx={{
                     width: "105%",
                     background: "#e7eaf4",
@@ -303,7 +293,7 @@ getPersonalDetails(values)
                   name="nationality"
                   variant="filled"
                   type="text"
-                  value={values.nationality}
+                  value={stateValue.nationality}
                   sx={{
                     width: "105%",
                     background: "#e7eaf4",
@@ -328,7 +318,7 @@ getPersonalDetails(values)
                   name="placeofbirth"
                   variant="filled"
                   type="text"
-                  value={values.placeofbirth}
+                  value={stateValue.placeofbirth}
                   sx={{
                     width: "105%",
                     background: "#e7eaf4",
@@ -353,7 +343,7 @@ getPersonalDetails(values)
                   name="dateofbirth"
                   variant="filled"
                   type="text"
-                  value={values.dateofbirth}
+                  value={stateValue.dateofbirth}
                   sx={{
                     width: "105%",
                     background: "#e7eaf4",

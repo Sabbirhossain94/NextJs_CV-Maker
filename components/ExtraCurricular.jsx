@@ -58,8 +58,6 @@ export default function ExtraCurricular({
      accordionValues.map((item, key) => {
        if (key === inputKey) {
          item[name] = value;
-
-         console.log(item);
        }
      });
    };

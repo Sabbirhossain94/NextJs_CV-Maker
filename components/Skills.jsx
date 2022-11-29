@@ -51,7 +51,7 @@ export default function Skills({ getSkillDetails }) {
       },
     ]);
   };
-  getSkillDetails(accordionValues);
+  // getSkillDetails(accordionValues);
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;

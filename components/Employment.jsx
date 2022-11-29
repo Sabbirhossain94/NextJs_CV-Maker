@@ -11,7 +11,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 
-export default function Employment({ getEmploymentDetails }) {
+export default function Employment() {
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -62,7 +62,7 @@ export default function Employment({ getEmploymentDetails }) {
      });
    };
 
-  getEmploymentDetails(accordionValues);
+  // getEmploymentDetails(accordionValues);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>

@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { DataContext } from "../pages/CVBuilder";
 
-export default function ProfessionalSummary({ getProfessionalSummary }) {
-  const [professionalhistory, setProfessionalHistory] = useState({
-    summary: "",
-  });
+export default function ProfessionalSummary() {
+
+  const getData = useContext(DataContext);
+
+  const [stateValue, setStateValue] = getData.value2;
+
   const handleInputChange =(event)=>{
     const {name, value} = event.target
-    setProfessionalHistory({
-      [name]: value
+    setStateValue({
+      [name]: value,
     });
   }
-  getProfessionalSummary(professionalhistory);
+  // getProfessionalSummary(professionalhistory);
   return (
     <Box>
       <Typography
@@ -26,7 +29,7 @@ export default function ProfessionalSummary({ getProfessionalSummary }) {
           fontSize: "20px",
         }}
       >
-        Professional History
+        About
       </Typography>
       <Grid container columns={16}>
         <Grid item xs={6} md={15} variant="contained">
@@ -42,7 +45,7 @@ export default function ProfessionalSummary({ getProfessionalSummary }) {
           >
             <TextField
               name="summary"
-              value={professionalhistory.summary}
+              value={stateValue.summary}
               multiline
               rows={8}
               sx={{ width: "100%" }}

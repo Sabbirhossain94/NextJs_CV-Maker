@@ -55,8 +55,6 @@ export default function Courses({
     accordionValues.map((item, key) => {
       if (key === inputKey) {
         item[name] = value;
-
-        console.log(item);
       }
     });
   };

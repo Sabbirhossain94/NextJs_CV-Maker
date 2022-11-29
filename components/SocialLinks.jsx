@@ -11,7 +11,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 
-export default function SocialLinks({ getSocialLinksDetails }) {
+export default function SocialLinks() {
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -52,7 +52,7 @@ export default function SocialLinks({ getSocialLinksDetails }) {
       }
     });
   };
-  getSocialLinksDetails(accordionValues);
+  // getSocialLinksDetails(accordionValues);
 
   return (
     <div>

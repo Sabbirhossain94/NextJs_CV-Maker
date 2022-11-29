@@ -14,92 +14,107 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import Button from "@mui/material/Button";
-import Viewer from "../components/Viewer";
-// import CodeForPDF from "../components/CodeForPDF"
+import CodeForPDF from "../components/CodeForPDF";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 export const DataContext = React.createContext();
 
 export default function CVBuilder() {
-  
   const [progress, setProgress] = useState(0);
-  const [personalDetails, setPersonalDetails] = useState([]);
-  const [professionalSummary, setProfessionalSummary] = useState([]);
-  const [employmentDetails, setEmploymentDetails] = useState([]);
-  const [educationDetails, setEducationDetails] = useState([]);
-  const [socialLinksDetails, setSocialLinksDetails] = useState([]);
-  const [skillDetails, setSkillDetails] = useState([]);
-  const [courseDetails, setCourseDetails] = useState([]);
-  const [extraCurricularDetails, setExtraCurricularDetails] = useState([]);
-  const [languageDetails, setLanguageDetails] = useState([]);
-  const [hobbiesDetails, setHobbiesDetails] = useState([]);
-  const [finalDetails, setFinalDetails] = useState([]);
+  const [personalDetails, setPersonalDetails] = useState([
+    {
+      firstname: "",
+      lastname: "",
+      email: "",
+      phone: "",
+      country: "",
+      city: "",
+      address: "",
+      postalcode: "",
+      nationality: "",
+      placeofbirth: "",
+      dateofbirth: "",
+    },
+  ]);
+  const [professionalSummary, setProfessionalSummary] = useState([
+    {
+      summary: "",
+    },
+  ]);
+  const [employmentDetails, setEmploymentDetails] = useState([
+    {
+      jobtitle: "",
+      employer: "",
+      startdate: "",
+      enddate: "",
+      city: "",
+      description: "",
+    },
+  ]);
+  const [educationDetails, setEducationDetails] = useState([
+    {
+      institution: "",
+      degree: "",
+      startdate: "",
+      enddate: "",
+      institutioncity: "",
+      description: "",
+    },
+  ]);
+  const [socialLinksDetails, setSocialLinksDetails] = useState([
+    {
+      label: "",
+      linkurl: "",
+    },
+  ]);
+  const [skillDetails, setSkillDetails] = useState([
+    {
+      skill: "",
+      level: "",
+    },
+  ]);
+  const [courseDetails, setCourseDetails] = useState([
+    {
+      course: "",
+      institution: "",
+      startdate: "",
+      enddate: "",
+    },
+  ]);
+  const [extraCurricularDetails, setExtraCurricularDetails] = useState([
+    {
+      activity: "",
+      employer: "",
+      startdate: "",
+      enddate: "",
+      city: "",
+      description: "",
+    },
+  ]);
+  const [languageDetails, setLanguageDetails] = useState([
+    {
+      language: "",
+      level: "",
+    },
+  ]);
+  const [hobbiesDetails, setHobbiesDetails] = useState([{ hobbies: "" }]);
 
-  const getPersonalDetails = (values) => {
-    setPersonalDetails(values);
-  };
-  const getProfessionalSummary = (values) => {
-    setProfessionalSummary(values);
-  };
-  const getEmploymentDetails = (values) => {
-    setEmploymentDetails(values);
-  };
-  const getEducationDetails = (values) => {
-    setEducationDetails(values);
-  };
-  const getSocialLinksDetails = (values) => {
-    setSocialLinksDetails(values);
-  };
-  const getSkillDetails = (values) => {
-    setSkillDetails(values);
-  };
-  const getCourseDetails = (values) => {
-    setCourseDetails(values);
-  };
-  const getExtraCurriculatDetails = (values) => {
-    setExtraCurricularDetails(values);
-  };
-  const getLanguageDetails = (values) => {
-    setLanguageDetails(values);
-  };
-  const getHobbiesDetails = (values) => {
-    setHobbiesDetails(values);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setFinalDetails([
-      {
-        personaldetails: personalDetails,
-        professionalhistory: professionalSummary,
-        employmenthistory: employmentDetails,
-        education: educationDetails,
-        sociallinks: socialLinksDetails,
-        skills: skillDetails,
-        courses: courseDetails,
-        extracurricularactivities: extraCurricularDetails,
-        languages: languageDetails,
-        hobbies: hobbiesDetails,
-      },
-    ]);
-    console.log(JSON.stringify(finalDetails, null, " "));
-  };
   const [allSections, setAllSections] = useState([
     {
       id: 1,
-      name: <Employment getEmploymentDetails={getEmploymentDetails} />,
+      name: <Employment />,
     },
     {
       id: 2,
-      name: <Education getEducationDetails={getEducationDetails} />,
+      name: <Education />,
     },
     {
       id: 3,
-      name: <SocialLinks getSocialLinksDetails={getSocialLinksDetails} />,
+      name: <SocialLinks />,
     },
     {
       id: 4,
-      name: <Skills getSkillDetails={getSkillDetails} />,
+      name: <Skills />,
     },
   ]);
 
@@ -116,83 +131,78 @@ export default function CVBuilder() {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
       }}
     >
-      <DataContext.Provider value={finalDetails}>
+      <DataContext.Provider
+        value={{
+          value1: [personalDetails, setPersonalDetails],
+          value2: [professionalSummary, setProfessionalSummary],
+          value3: [employmentDetails, setEmploymentDetails],
+          value4: [educationDetails, setEducationDetails],
+          value5: [socialLinksDetails, setSocialLinksDetails],
+          value6: [skillDetails, setSkillDetails],
+          value7: [courseDetails, setCourseDetails],
+          value8: [extraCurricularDetails, setExtraCurricularDetails],
+          value9: [languageDetails, setLanguageDetails],
+          value10: [hobbiesDetails, setHobbiesDetails],
+        }}
+      >
         <Box
           sx={{
-            width: "50vw",
+            width: "50%",
             height: "100%",
             padding: "5%",
             backgroundColor: "white",
           }}
         >
-          <Box
+          <LinearProgress
+            variant="determinate"
+            value={progress}
             sx={{
               marginTop: "10px",
-              width: "100%",
-              height: "100vh",
+              width: "93%",
             }}
-          >
-            <LinearProgress
-              variant="determinate"
-              value={progress}
-              sx={{
-                marginTop: "10px",
-                width: "93%",
-              }}
+          />
+          <Box sx={{ marginTop: "4rem", width: "100%", height: "100vh" }}>
+            <PersonalDetails />
+            <ProfessionalSummary />
+            {allSections.map((item) => (
+              <List key={item.id}> {item.name}</List>
+            ))}
+            <AddSection
+              allSections={allSections}
+              setAllSections={setAllSections}
+              deleteCustomSection={deleteCustomSection}
             />
-            <Box sx={{ marginTop: "4rem", width: "100%", height: "100vh" }}>
-              <PersonalDetails getPersonalDetails={getPersonalDetails} />
-              <ProfessionalSummary
-                getProfessionalSummary={getProfessionalSummary}
-              />
-              {allSections.map((item) => (
-                <List key={item.id}> {item.name}</List>
-              ))}
-              <AddSection
-                allSections={allSections}
-                setAllSections={setAllSections}
-                deleteCustomSection={deleteCustomSection}
-                getCourseDetails={getCourseDetails}
-                getExtraCurriculatDetails={getExtraCurriculatDetails}
-                getLanguageDetails={getLanguageDetails}
-                getHobbiesDetails={getHobbiesDetails}
-              />
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "end",
-                  width: "90%",
-                  marginTop: "50px",
-                }}
-              >
-                <Button
-                  type="submit"
-                  variant="contained"
-                  onClick={handleSubmit}
-                  download
-                >
-                  Submit
-                </Button>
-              </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "end",
+                width: "90%",
+                marginTop: "50px",
+              }}
+            >
+              {/* <PDFDownloadLink document={<CodeForPDF />} fileName="CV">
+                  {({ blob, url, loading, error }) =>
+                    loading ? (
+                      <button>"Loading document..."</button>
+                    ) : (
+                     <button> "Download now!"</button>
+                    )
+                  }
+                </PDFDownloadLink> */}
             </Box>
           </Box>
         </Box>
         <Box
           sx={{
-            width: "50vw",
-
-            backgroundColor: "#e0e0e0",
-            "&:hover": {
-              backgroundColor: "#656e83",
-              opacity: [0.9, 0.8, 0.7],
-            },
+            width: "50%",
+            backgroundColor: "#656e83",
+           
           }}
         >
-          <Viewer />
-          {/* <CodeForPDF/> */}
+          {/* <Viewer /> */}
+          <CodeForPDF />
         </Box>
       </DataContext.Provider>
     </Box>

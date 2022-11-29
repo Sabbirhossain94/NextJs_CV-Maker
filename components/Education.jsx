@@ -11,7 +11,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function Education({ getEducationDetails }) {
+export default function Education() {
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -61,7 +61,7 @@ export default function Education({ getEducationDetails }) {
     };
 
 
-  getEducationDetails(accordionValues);
+  // getEducationDetails(accordionValues);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
