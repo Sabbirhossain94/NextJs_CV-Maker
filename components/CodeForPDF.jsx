@@ -11,10 +11,9 @@ import {
 } from "@react-pdf/renderer";
 const styles = StyleSheet.create({
   body: {
-    
     paddingBottom: 65,
     paddingHorizontal: 35,
-    height: "100vh"
+    height: "100vh",
   },
   page: {
     flexDirection: "column",
@@ -44,16 +43,29 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "Regular",
   },
+  pageNumber: {
+    position: "absolute",
+    fontSize: 12,
+    bottom: 30,
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    color: "grey",
+  },
 });
 
 export default function PDFFile() {
   return (
     <Document>
       <Page size="A4" style={styles.body}>
-       < Viewer />
+        <Viewer />
+        <Text
+          style={styles.pageNumber}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+        />
       </Page>
     </Document>
-    
-
   );
 }

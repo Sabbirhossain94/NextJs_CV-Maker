@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -10,36 +10,30 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { DataContext } from "../pages/CVBuilder";
 
 export default function Education() {
+  const getData = useContext(DataContext);
+
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [accordionValues, setAccordionValues] = useState([{
-    institution: "",
-    degree: "",
-    startdate: "",
-    enddate: "",
-    institutioncity: "",
-    description: "",
-  }]);
+  const [stateValue, setStateValue] = getData.value4;
 
   const deleteAccordionSection = (id) => {
-    const result = accordionValues.filter((item, key) => {
+    const result = stateValue.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setAccordionValues(result);
+    setStateValue(result);
   };
 
-
   const addAccordionSection = () => {
-    
-    setAccordionValues([
-      ...accordionValues,
+    setStateValue([
+      ...stateValue,
       {
         institution: "",
         degree: "",
@@ -50,16 +44,14 @@ export default function Education() {
       },
     ]);
   };
-    const handleInputChange = (e, inputKey) => {
-      const { name, value } = e.target;
-      accordionValues.map((item, key) => {
-        if (key === inputKey) {
-          item[name] = value;
-          console.log(item);
-        }
-      });
-    };
-
+  const handleInputChange = (e, inputKey) => {
+    const { name, value } = e.target;
+    stateValue.map((item, key) => {
+      if (key === inputKey) {
+        item[name] = value;
+      }
+    });
+  };
 
   // getEducationDetails(accordionValues);
 
@@ -78,7 +70,7 @@ export default function Education() {
       </Typography>
 
       <Box sx={{ flexGrow: 1 }}>
-        {accordionValues.map((item, key) => (
+        {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item md={15}>
               <Accordion
@@ -97,8 +89,8 @@ export default function Education() {
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    {accordionValues.institution
-                      ? accordionValues.institution
+                    {stateValue.institution
+                      ? stateValue.institution
                       : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
@@ -112,7 +104,7 @@ export default function Education() {
                       <TextField
                         label="Institution"
                         name="institution"
-                        value={accordionValues.institution}
+                        value={stateValue.institution}
                         type="text"
                         variant="filled"
                         sx={{
@@ -135,7 +127,7 @@ export default function Education() {
                       <TextField
                         label="Degree"
                         name="degree"
-                        value={accordionValues.degree}
+                        value={stateValue.degree}
                         type="text"
                         variant="filled"
                         sx={{
@@ -159,7 +151,7 @@ export default function Education() {
                         variant="filled"
                         label="Start Date"
                         name="startdate"
-                        value={accordionValues.startdate}
+                        value={stateValue.startdate}
                         type="date"
                         sx={{
                           background: "#e7eaf4",
@@ -181,7 +173,7 @@ export default function Education() {
                         variant="filled"
                         label="End Date"
                         name="enddate"
-                        value={accordionValues.enddate}
+                        value={stateValue.enddate}
                         type="date"
                         sx={{
                           marginLeft: "20px",
@@ -206,7 +198,7 @@ export default function Education() {
                         label="City"
                         name="institutioncity"
                         type="text"
-                        value={accordionValues.city}
+                        value={stateValue.city}
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -228,7 +220,7 @@ export default function Education() {
                       <TextField
                         label="Description"
                         type="text"
-                        value={accordionValues.description}
+                        value={stateValue.description}
                         name="description"
                         InputLabelProps={{
                           sx: {

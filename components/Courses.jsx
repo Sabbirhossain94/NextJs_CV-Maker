@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,39 +9,34 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { DataContext } from "../pages/CVBuilder";
 
 export default function Courses({
   deleteCustomSection,
   sectionId,
   setActiveSectionId,
-  getCourseDetails,
 }) {
+  const getData = useContext(DataContext);
+
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [accordionValues, setAccordionValues] = useState([
-    {
-      course: "",
-      institution: "",
-      startdate: "",
-      enddate: "",
-    },
-  ]);
+  const [stateValue, setStateValue] = getData.value7;
 
   const deleteAccordionSection = (id) => {
-    const result = accordionValues.filter((item,key) => {
+    const result = stateValue.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setAccordionValues(result);
+    setStateValue(result);
   };
 
   const addAccordionSection = () => {
-    setAccordionValues([
-      ...accordionValues,
+    setStateValue([
+      ...stateValue,
       {
         course: "",
         institution: "",
@@ -52,14 +47,13 @@ export default function Courses({
   };
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    accordionValues.map((item, key) => {
+    stateValue.map((item, key) => {
       if (key === inputKey) {
         item[name] = value;
       }
     });
   };
 
-  getCourseDetails(accordionValues);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
@@ -95,7 +89,7 @@ export default function Courses({
       </Grid>
 
       <Box sx={{ flexGrow: 1 }}>
-        {accordionValues.map((item, key) => (
+        {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item md={15}>
               <Accordion
@@ -114,7 +108,7 @@ export default function Courses({
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    {item.course ? item.course : "(Not Specified)"}
+                    {stateValue.course ? stateValue.course : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -128,7 +122,7 @@ export default function Courses({
                         id="outlined-basic"
                         label="Course"
                         type="text"
-                        value={accordionValues.course}
+                        value={stateValue.course}
                         name="course"
                         variant="filled"
                         sx={{
@@ -152,7 +146,7 @@ export default function Courses({
                         id="outlined-basic"
                         label="Institution"
                         type="text"
-                        value={accordionValues.institution}
+                        value={stateValue.institution}
                         name="institution"
                         variant="filled"
                         sx={{
@@ -176,7 +170,7 @@ export default function Courses({
                         variant="filled"
                         label="Start Date"
                         name="startdate"
-                        value={accordionValues.startdate}
+                        value={stateValue.startdate}
                         type="date"
                         sx={{
                           background: "#e7eaf4",
@@ -197,7 +191,7 @@ export default function Courses({
                         variant="filled"
                         label="End Date"
                         name="enddate"
-                        value={accordionValues.enddate}
+                        value={stateValue.enddate}
                         type="date"
                         sx={{
                           marginLeft: "20px",

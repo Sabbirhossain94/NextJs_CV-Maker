@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -17,34 +17,34 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import { DataContext } from "../pages/CVBuilder";
 
-export default function Skills({ getSkillDetails }) {
+export default function Skills() {
+
+  const getData = useContext(DataContext);
+
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [accordionValues, setAccordionValues] = useState([
-    {
-      skill: "",
-      level: "",
-    },
-  ]);
+  const [stateValue, setStateValue] = getData.value6;
+
 
   const deleteAccordionSection = (id) => {
-    const result = accordionValues.filter((item, key) => {
+    const result = stateValue.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setAccordionValues(result);
+    setStateValue(result);
   };
 
   const [toggleSwitch, setToggleSwitch] = useState(false);
 
   const addAccordionSection = () => {
-    setAccordionValues([
-      ...accordionValues,
+    setStateValue([
+      ...stateValue,
       {
         skill: "",
         level: "",
@@ -55,11 +55,9 @@ export default function Skills({ getSkillDetails }) {
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    accordionValues.map((item, key) => {
+    stateValue.map((item, key) => {
       if (key === inputKey) {
         item[name] = value;
-
-        console.log(item);
       }
     });
   };
@@ -136,7 +134,7 @@ export default function Skills({ getSkillDetails }) {
       </Stack>
 
       <Box sx={{ flexGrow: 1 }}>
-        {accordionValues.map((item, key) => (
+        {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item md={15}>
               <Accordion
@@ -156,7 +154,7 @@ export default function Skills({ getSkillDetails }) {
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    {item.skill ? item.skill : "(Not Specified)"}
+                    {stateValue.skill ? stateValue.skill : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -170,7 +168,7 @@ export default function Skills({ getSkillDetails }) {
                         id="outlined-basic"
                         label="Skill"
                         variant="filled"
-                        value={accordionValues.skill}
+                        value={stateValue.skill}
                         name="skill"
                         sx={{
                           width: "100%",
@@ -201,7 +199,7 @@ export default function Skills({ getSkillDetails }) {
                           id="demo-simple-select-helper"
                           label="level"
                           defaultValue=""
-                          value={accordionValues.level}
+                          value={stateValue.level}
                           variant="filled"
                           name="level"
                           sx={{ background: "#e7eaf4", borderRadius: "5px" }}
@@ -237,7 +235,7 @@ export default function Skills({ getSkillDetails }) {
                             },
                           ].map((item, key) => (
                             <MenuItem
-                              defaultValue={accordionValues.level}
+                              defaultValue={stateValue.level}
                               value={item.name}
                               key={key}
                             >

@@ -23,6 +23,7 @@ export default function CVBuilder() {
   const [progress, setProgress] = useState(0);
   const [personalDetails, setPersonalDetails] = useState([
     {
+      wantedjobtitle: "",
       firstname: "",
       lastname: "",
       email: "",
@@ -44,7 +45,7 @@ export default function CVBuilder() {
   const [employmentDetails, setEmploymentDetails] = useState([
     {
       jobtitle: "",
-      employer: "",
+      company: "",
       startdate: "",
       enddate: "",
       city: "",
@@ -198,7 +199,6 @@ export default function CVBuilder() {
           sx={{
             width: "50%",
             backgroundColor: "#656e83",
-           
           }}
         >
           {/* <Viewer /> */}

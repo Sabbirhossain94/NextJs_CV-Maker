@@ -25,7 +25,7 @@ export default function PersonalDetails() {
       [name]: value,
     });
   };
-  //console.log(stateValue);
+
   return (
     <Box>
       <Typography
@@ -44,6 +44,30 @@ export default function PersonalDetails() {
         columnSpacing={{ xs: 1, sm: 2, md: 4 }}
         columns={15}
       >
+        <Grid item xs={4} md={7}>
+          <TextField
+            id="outlined-basic"
+            label="Wanted Job Title"
+            name="wantedjobtitle"
+            variant="filled"
+            value={stateValue.firstname}
+            type="text"
+            sx={{
+              width: "100%",
+              background: "#e7eaf4",
+              borderRadius: "5px",
+            }}
+            InputLabelProps={{
+              sx: {
+                color: "#828ba2",
+              },
+            }}
+            InputProps={{
+              disableUnderline: true,
+            }}
+            onChange={handleInputChange}
+          />
+        </Grid>
         <Grid item xs={4} md={7}>
           <TextField
             id="outlined-basic"

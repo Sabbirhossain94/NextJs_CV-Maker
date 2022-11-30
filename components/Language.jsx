@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
@@ -14,37 +14,35 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { DataContext } from "../pages/CVBuilder";
 
 export default function Language({
   deleteCustomSection,
   sectionId,
   setActiveSectionId,
-  getLanguageDetails,
 }) {
+
+  const getData = useContext(DataContext);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [accordionValues, setAccordionValues] = useState([
-    {
-      language: "",
-      level: "",
-    },
-  ]);
+   const [stateValue, setStateValue] = getData.value9;
+
 
   const deleteAccordionSection = (id) => {
-    const result = accordionValues.filter((item, key) => {
+    const result = stateValue.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setAccordionValues(result);
+    setStateValue(result);
   };
   // const [toggleSwitch, setToggleSwitch] = useState(false);
 
   const addAccordionSection = () => {
-    setAccordionValues([
-      ...accordionValues,
+    setStateValue([
+      ...stateValue,
       {
         language: "",
         level: "",
@@ -53,14 +51,13 @@ export default function Language({
   };
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    accordionValues.map((item, key) => {
+    stateValue.map((item, key) => {
       if (key === inputKey) {
         item[name] = value;
       }
     });
   };
 
-  getLanguageDetails(accordionValues);
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
       <Grid container item md={6}>
@@ -94,7 +91,7 @@ export default function Language({
       </Grid>
 
       <Box sx={{ flexGrow: 1 }}>
-        {accordionValues.map((item, key) => (
+        {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item md={15}>
               <Accordion
@@ -129,7 +126,7 @@ export default function Language({
                         label="Language"
                         type="text"
                         name="language"
-                        value={accordionValues.language}
+                        value={stateValue.language}
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -159,7 +156,7 @@ export default function Language({
                           defaultValue=""
                           variant="filled"
                           name="level"
-                          value={accordionValues.level}
+                          value={stateValue.level}
                           sx={{ background: "#e7eaf4", borderRadius: "5px" }}
                           InputProps={{
                             disableUnderline: true,
@@ -185,7 +182,7 @@ export default function Language({
                             },
                           ].map((item, key) => (
                             <MenuItem
-                              defaultValue={accordionValues.level}
+                              defaultValue={stateValue.level}
                               value={item.name}
                               key={key}
                             >
