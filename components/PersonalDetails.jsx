@@ -8,16 +8,15 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import { DataContext } from "../pages/CVBuilder";
+import DataContext from "./Context";
 
 export default function PersonalDetails() {
-  const getData = useContext(DataContext);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [stateValue, setStateValue] = getData.value1;
-
+  const data = useContext(DataContext);
+  const [stateValue, setStateValue] = data;
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setStateValue({
@@ -25,7 +24,7 @@ export default function PersonalDetails() {
       [name]: value,
     });
   };
-
+  console.log(stateValue);
   return (
     <Box>
       <Typography
@@ -50,7 +49,7 @@ export default function PersonalDetails() {
             label="Wanted Job Title"
             name="wantedjobtitle"
             variant="filled"
-            value={stateValue.firstname}
+            value={stateValue.wantedjobtitle}
             type="text"
             sx={{
               width: "100%",

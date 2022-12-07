@@ -10,17 +10,18 @@ import TextField from "@mui/material/TextField";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import { DataContext } from "../pages/CVBuilder";
+import DataContext from "./Context";
+
 
 export default function SocialLinks() {
 
-  const getData = useContext(DataContext);
+  const data = useContext(DataContext);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.value5;
+  const [stateValue, setStateValue] = data;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {

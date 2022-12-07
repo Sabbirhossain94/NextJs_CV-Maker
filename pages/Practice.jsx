@@ -1,30 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import DataContext from "../components/Context";
+import TextField from "@mui/material/TextField";
 
 export default function Practice() {
-    const active = {backgroundColor: 'green'}
-     const inactive = {}
+  const [data] = useContext(DataContext);
+  const [changeData, setChangeData] = useState(data.personalDetails);
+  console.log(changeData);
 
-function SelectableDiv(props) {
-  const [selected, setSelected] = useState(false);
-  const handleClick = () => {
-    setSelected(!selected);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setChangeData({
+      [name]: value,
+    });
   };
   return (
-    <div style={selected ? active : inactive} onClick={handleClick}>
-      click here {props.number}
-    </div>
-  );
-}
-  return (
     <div>
-      {[1, 2, 3, 4].map((item) => (
-       
-        <SelectableDiv number={item} /> 
-         
-      ))}
-
-   
+      <button>click me</button>
+      <TextField
+        label="first name"
+        name="firstname"
+        type="text"
+        value={changeData.wantedjobtitle}
+        onChange={handleInputChange}
+      />
     </div>
   );
 }
-

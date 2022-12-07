@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import PersonalDetails from "../components/PersonalDetails";
 import Education from "../components/Education";
 import SocialLinks from "../components/SocialLinks";
@@ -14,92 +14,16 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import CodeForPDF from "../components/CodeForPDF";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-
-export const DataContext = React.createContext();
+import PDFFile from "../components/PDFFile";
+import { PDFDownloadLink } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
+import DataContext from "../components/Context";
+// import Viewer from "../components/Viewer";
 
 export default function CVBuilder() {
   const [progress, setProgress] = useState(0);
-  const [personalDetails, setPersonalDetails] = useState([
-    {
-      wantedjobtitle: "",
-      firstname: "",
-      lastname: "",
-      email: "",
-      phone: "",
-      country: "",
-      city: "",
-      address: "",
-      postalcode: "",
-      nationality: "",
-      placeofbirth: "",
-      dateofbirth: "",
-    },
-  ]);
-  const [professionalSummary, setProfessionalSummary] = useState([
-    {
-      summary: "",
-    },
-  ]);
-  const [employmentDetails, setEmploymentDetails] = useState([
-    {
-      jobtitle: "",
-      company: "",
-      startdate: "",
-      enddate: "",
-      city: "",
-      description: "",
-    },
-  ]);
-  const [educationDetails, setEducationDetails] = useState([
-    {
-      institution: "",
-      degree: "",
-      startdate: "",
-      enddate: "",
-      institutioncity: "",
-      description: "",
-    },
-  ]);
-  const [socialLinksDetails, setSocialLinksDetails] = useState([
-    {
-      label: "",
-      linkurl: "",
-    },
-  ]);
-  const [skillDetails, setSkillDetails] = useState([
-    {
-      skill: "",
-      level: "",
-    },
-  ]);
-  const [courseDetails, setCourseDetails] = useState([
-    {
-      course: "",
-      institution: "",
-      startdate: "",
-      enddate: "",
-    },
-  ]);
-  const [extraCurricularDetails, setExtraCurricularDetails] = useState([
-    {
-      activity: "",
-      employer: "",
-      startdate: "",
-      enddate: "",
-      city: "",
-      description: "",
-    },
-  ]);
-  const [languageDetails, setLanguageDetails] = useState([
-    {
-      language: "",
-      level: "",
-    },
-  ]);
-  const [hobbiesDetails, setHobbiesDetails] = useState([{ hobbies: "" }]);
-
+  const data = useContext(DataContext);
+  const [formDetails, setFormDetails] = useState(data);
+  console.log(formDetails);
   const [allSections, setAllSections] = useState([
     {
       id: 1,
@@ -129,23 +53,10 @@ export default function CVBuilder() {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-      }}
-    >
-      <DataContext.Provider
-        value={{
-          value1: [personalDetails, setPersonalDetails],
-          value2: [professionalSummary, setProfessionalSummary],
-          value3: [employmentDetails, setEmploymentDetails],
-          value4: [educationDetails, setEducationDetails],
-          value5: [socialLinksDetails, setSocialLinksDetails],
-          value6: [skillDetails, setSkillDetails],
-          value7: [courseDetails, setCourseDetails],
-          value8: [extraCurricularDetails, setExtraCurricularDetails],
-          value9: [languageDetails, setLanguageDetails],
-          value10: [hobbiesDetails, setHobbiesDetails],
+    <DataContext.Provider value={[formDetails, setFormDetails]}>
+      <Box
+        sx={{
+          display: "flex",
         }}
       >
         <Box
@@ -175,6 +86,7 @@ export default function CVBuilder() {
               setAllSections={setAllSections}
               deleteCustomSection={deleteCustomSection}
             />
+
             <Box
               sx={{
                 display: "flex",
@@ -182,17 +94,7 @@ export default function CVBuilder() {
                 width: "90%",
                 marginTop: "50px",
               }}
-            >
-              {/* <PDFDownloadLink document={<CodeForPDF />} fileName="CV">
-                  {({ blob, url, loading, error }) =>
-                    loading ? (
-                      <button>"Loading document..."</button>
-                    ) : (
-                     <button> "Download now!"</button>
-                    )
-                  }
-                </PDFDownloadLink> */}
-            </Box>
+            ></Box>
           </Box>
         </Box>
         <Box
@@ -202,9 +104,12 @@ export default function CVBuilder() {
           }}
         >
           {/* <Viewer /> */}
-          <CodeForPDF />
+          <PDFDownloadLink document={<PDFFile />} fileName="CV">
+            Download
+          </PDFDownloadLink>
+          <PDFFile />
         </Box>
-      </DataContext.Provider>
-    </Box>
+      </Box>
+    </DataContext.Provider>
   );
 }

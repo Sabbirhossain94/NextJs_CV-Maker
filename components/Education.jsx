@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useContext } from "react";
+import { useState,useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -10,18 +10,18 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { DataContext } from "../pages/CVBuilder";
+import DataContext from "./Context";
+
 
 export default function Education() {
-  const getData = useContext(DataContext);
 
+  const data = useContext(DataContext);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.value4;
-
+  const [stateValue, setStateValue] = data;
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
       if (key !== id) {

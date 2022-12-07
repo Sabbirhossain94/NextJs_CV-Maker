@@ -3,13 +3,14 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { DataContext } from "../pages/CVBuilder";
+import DataContext from "./Context";
+
 
 export default function ProfessionalSummary() {
 
-  const getData = useContext(DataContext);
+  const data = useContext(DataContext);
 
-  const [stateValue, setStateValue] = getData.value2;
+  const [stateValue, setStateValue] = data;
 
   const handleInputChange =(event)=>{
     const {name, value} = event.target
@@ -17,7 +18,7 @@ export default function ProfessionalSummary() {
       [name]: value,
     });
   }
-  // getProfessionalSummary(professionalhistory);
+ 
   return (
     <Box>
       <Typography

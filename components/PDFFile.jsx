@@ -1,6 +1,6 @@
 import React from "react";
-
-import Viewer from "../components/Viewer"
+import { useContext, useEffect } from "react";
+import DataContext from "./Context";
 import {
   Page,
   Text,
@@ -9,6 +9,9 @@ import {
   Image,
   StyleSheet,
 } from "@react-pdf/renderer";
+import { valueToPercent } from "@mui/base";
+import { useState } from "react";
+
 const styles = StyleSheet.create({
   body: {
     paddingBottom: 65,
@@ -55,17 +58,23 @@ const styles = StyleSheet.create({
 });
 
 export default function PDFFile() {
+  const data = useContext(DataContext);
+  console.log(data)
   return (
     <Document>
-      <Page size="A4" style={styles.body}>
-        <Viewer />
-        <Text
-          style={styles.pageNumber}
-          render={({ pageNumber, totalPages }) =>
-            `${pageNumber} / ${totalPages}`
-          }
-        />
+      <Page size="A4">
+        <View>
+          <Text>hello world!</Text>
+        </View>
       </Page>
     </Document>
   );
 }
+
+// export default function CodeForPDF() {
+//   return (
+//     <div>
+
+//     </div>
+//   );
+// }

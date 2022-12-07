@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -17,19 +17,17 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { DataContext } from "../pages/CVBuilder";
+import DataContext from "./Context";
 
 export default function Skills() {
-
-  const getData = useContext(DataContext);
+  const data = useContext(DataContext);
 
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [stateValue, setStateValue] = getData.value6;
-
+  const [stateValue, setStateValue] = data;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {

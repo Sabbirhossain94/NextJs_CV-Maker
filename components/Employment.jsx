@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
@@ -10,21 +10,18 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import { DataContext } from "../pages/CVBuilder";
+import DataContext from "./Context";
 
 export default function Employment() {
-  const getData = useContext(DataContext);
-
+  const [data] = useContext(DataContext);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  
-   const [stateValue, setStateValue] = getData.value3;
 
-
+  const [stateValue, setStateValue] = data;
+  console.log(stateValue[0]);
   const deleteAccordionSection = (id) => {
-  
     const result = stateValue.filter((item, key) => {
       if (key !== id) {
         return item;
@@ -32,10 +29,8 @@ export default function Employment() {
     });
     setStateValue(result);
   };
- 
 
   const addAccordionSection = () => {
-   
     setStateValue([
       ...stateValue,
       {
@@ -49,16 +44,14 @@ export default function Employment() {
     ]);
   };
 
-   const handleInputChange = (e, inputKey) => {
-     const { name, value } = e.target;
-     stateValue.map((item, key) => {
-       if (key === inputKey) {
-         item[name] = value;
-       }
-     });
-   };
-
-  // getEmploymentDetails(accordionValues);
+  const handleInputChange = (e, inputKey) => {
+    const { name, value } = e.target;
+    stateValue.map((item, key) => {
+      if (key === inputKey) {
+        item[name] = value;
+      }
+    });
+  };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
