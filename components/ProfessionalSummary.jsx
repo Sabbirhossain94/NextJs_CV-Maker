@@ -17,7 +17,6 @@ export default function ProfessionalSummary() {
       [name]: value,
     });
   }
-  // getProfessionalSummary(professionalhistory);
   return (
     <Box>
       <Typography

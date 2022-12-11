@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -10,32 +10,31 @@ import TextField from "@mui/material/TextField";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import { DataContext } from "../pages/CVBuilder";
 
 export default function SocialLinks() {
+
+  const getData = useContext(DataContext);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
   
-  const [accordionValues, setAccordionValues] = useState([
-    {
-      label: "",
-      linkurl: "",
-    },
-  ]);
+  const [stateValue, setStateValue] = getData.value5;
+  
 
   const deleteAccordionSection = (id) => {
-    const result = accordionValues.filter((item, key) => {
+    const result = stateValue.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setAccordionValues(result);
+    setStateValue(result);
   };
 
   const addAccordionSection = () => {
-    setAccordionValues([
-      ...accordionValues,
+    setStateValue([
+      ...stateValue,
       {
         label: "",
         linkurl: "",
@@ -45,14 +44,13 @@ export default function SocialLinks() {
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    accordionValues.map((item, key) => {
+    stateValue.map((item, key) => {
       if (key === inputKey) {
         item[name] = value;
         console.log(item);
       }
     });
   };
-  // getSocialLinksDetails(accordionValues);
 
   return (
     <div>
@@ -70,7 +68,7 @@ export default function SocialLinks() {
         </Typography>
 
         <Box sx={{ flexGrow: 1 }}>
-          {accordionValues.map((item, key) => (
+          {stateValue.map((item, key) => (
             <Grid key={key} container columns={16}>
               <Grid item md={15}>
                 <Accordion
@@ -89,9 +87,7 @@ export default function SocialLinks() {
                     id="panel1bh-header"
                   >
                     <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                      {accordionValues.label
-                        ? accordionValues.label
-                        : "(Not Specified)"}
+                      {item.label ? item.label : "(Not Specified)"}
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
@@ -106,7 +102,7 @@ export default function SocialLinks() {
                           label="Label"
                           type="text"
                           name="label"
-                          value={accordionValues.label}
+                          value={stateValue.label}
                           variant="filled"
                           sx={{
                             width: "100%",
@@ -131,7 +127,7 @@ export default function SocialLinks() {
                           placeholder="https://example.com"
                           type="text"
                           name="linkurl"
-                          value={accordionValues.linkurl}
+                          value={stateValue.linkurl}
                           variant="filled"
                           sx={{
                             width: "100%",

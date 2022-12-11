@@ -3,12 +3,17 @@ import { useContext } from "react";
 import { DataContext } from "../pages/CVBuilder";
 import Head from "next/head";
 
-// import "../App.css";
 export default function Template() {
   const getData = useContext(DataContext);
   const [stateValue1, setStateValue1] = getData.value1;
   const [stateValue2, setStateValue2] = getData.value2;
-
+  const [stateValue3, setStateValue3] = getData.value3;
+  const [stateValue4, setStateValue4] = getData.value4;
+  const [stateValue5, setStateValue5] = getData.value5;
+  const [stateValue6, setStateValue6] = getData.value6;
+  const [stateValue7, setStateValue7] = getData.value7;
+  const [stateValue8, setStateValue8] = getData.value8;
+  console.log(stateValue4);
   return (
     <div>
       <div>
@@ -17,35 +22,44 @@ export default function Template() {
         </Head>
       </div>
 
-      <div id="body" style={{height: "100%"}}>
-        <div id="container" style={{ width: "50.076em", margin: "auto" }}>
+      <div id="body" style={{ height: "100vh" }}>
+        <div
+          id="container"
+          style={{ width: "50.076em", margin: "auto", height: "100%" }}
+        >
           <div
             id="inner"
             style={{
               padding: "10px 80px",
               margin: "80px auto",
               background: "#f5f5f5",
-              border: "solid #666",
-              borderWidth: "8px 0 2px 0",
+              height: "100%",
             }}
           >
             <div id="hd">
-              <div class="yui-gc">
+              <div
+                class="yui-gc"
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
                 <div class="yui-u first">
                   <h1>
                     {stateValue1.firstname} {stateValue1.lastname}
                   </h1>
-                  <h2>Web Designer, Director</h2>
+                  <h2>{stateValue1.occupation}</h2>
                 </div>
 
-                <div class="yui-u">
+                <div class="yui-u" style={{ marginTop: "15px" }}>
                   <div class="contact-info">
-                    <h3>
+                    <h4>
+                      {stateValue1.address} {stateValue1.postalcode}
+                    </h4>
+                    <h4>
                       <a href="mailto:name@yourdomain.com">
                         {stateValue1.email}
                       </a>
-                    </h3>
-                    <h3>{stateValue1.phone}</h3>
+                    </h4>
+                    <h4>{stateValue1.phone}</h4>
+                    <h4>{stateValue5.linkurl}</h4>
                   </div>
                 </div>
               </div>
@@ -54,156 +68,114 @@ export default function Template() {
             <div id="bd">
               <div id="yui-main">
                 <div class="yui-b">
-                  <div class="yui-gf">
-                    <div class="yui-u first">
-                      <h2>Profile</h2>
+                  {/* about section */}
+                  <div>
+                    <div>
+                      {stateValue2.summary && (
+                        <div>
+                          <h2>About </h2>
+                          <hr></hr>
+                        </div>
+                      )}
                     </div>
                     <div class="yui-u">
                       <p class="enlarge">{stateValue2.summary}</p>
                     </div>
                   </div>
+                  {/* about section */}
 
+                  {/* skill section */}
                   <div class="yui-gf">
-                    <div class="yui-u first">
-                      <h2>Skills</h2>
-                    </div>
-                    <div class="yui-u">
-                      <div class="talent">
-                        <h2>Web Design</h2>
-                        <p>
-                          Assertively exploit wireless initiatives rather than
-                          synergistic core competencies.{" "}
-                        </p>
+                    {stateValue6[0].skill && (
+                      <div>
+                        <h2>Skill</h2>
+                        <hr></hr>
                       </div>
-
-                      <div class="talent">
-                        <h2>Interface Design</h2>
-                        <p>
-                          Credibly streamline mission-critical value with
-                          multifunctional functionalities.{" "}
-                        </p>
-                      </div>
-
-                      <div class="talent">
-                        <h2>Project Direction</h2>
-                        <p>
-                          Proven ability to lead and manage a wide variety of
-                          design and development projects in team and
-                          independent situations.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="yui-gf">
-                    <div class="yui-u first">
-                      <h2>Technical</h2>
-                    </div>
-                    <div class="yui-u">
-                      <ul class="talent">
-                        <li>XHTML</li>
-                        <li>CSS</li>
-                        <li class="last">Javascript</li>
-                      </ul>
-
-                      <ul class="talent">
-                        <li>Jquery</li>
-                        <li>PHP</li>
-                        <li class="last">CVS / Subversion</li>
-                      </ul>
-
-                      <ul class="talent">
-                        <li>OS X</li>
-                        <li>Windows XP/Vista</li>
-                        <li class="last">Linux</li>
+                    )}
+                    <div style={{ display: "flex" }}>
+                      <ul class="skills">
+                        {stateValue6.map((item) => (
+                          <li>{item.skill}</li>
+                        ))}
                       </ul>
                     </div>
                   </div>
+                  {/* skill section */}
 
+                  {/* experience section */}
                   <div class="yui-gf">
-                    <div class="yui-u first">
-                      <h2>Experience</h2>
-                    </div>
+                    {stateValue3[0].jobtitle && (
+                      <div>
+                        <h2>Experience</h2>
+                        <hr></hr>
+                      </div>
+                    )}
 
                     <div class="yui-u">
-                      <div class="job">
-                        <h2>Facebook</h2>
-                        <h3>Senior Interface Designer</h3>
-                        <h4>2005-2007</h4>
-                        <p>
-                          Intrinsicly enable optimal core competencies through
-                          corporate relationships. Phosfluorescently implement
-                          worldwide vortals and client-focused imperatives.
-                          Conveniently initiate virtual paradigms and top-line
-                          convergence.{" "}
-                        </p>
-                      </div>
-
-                      <div class="job">
-                        <h2>Apple Inc.</h2>
-                        <h3>Senior Interface Designer</h3>
-                        <h4>2005-2007</h4>
-                        <p>
-                          Progressively reconceptualize multifunctional "outside
-                          the box" thinking through inexpensive methods of
-                          empowerment. Compellingly morph extensive niche
-                          markets with mission-critical ideas. Phosfluorescently
-                          deliver bricks-and-clicks strategic theme areas rather
-                          than scalable benefits.{" "}
-                        </p>
-                      </div>
-
-                      <div class="job">
-                        <h2>Microsoft</h2>
-                        <h3>Principal and Creative Lead</h3>
-                        <h4>2004-2005</h4>
-                        <p>
-                          Intrinsicly transform flexible manufactured products
-                          without excellent intellectual capital. Energistically
-                          evisculate orthogonal architectures through covalent
-                          action items. Assertively incentivize sticky platforms
-                          without synergistic materials.{" "}
-                        </p>
-                      </div>
-
-                      <div class="job last">
-                        <h2>International Business Machines (IBM)</h2>
-                        <h3>Lead Web Designer</h3>
-                        <h4>2001-2004</h4>
-                        <p>
-                          Globally re-engineer cross-media schemas through viral
-                          methods of empowerment. Proactively grow long-term
-                          high-impact human capital and highly efficient
-                          innovation. Intrinsicly iterate excellent e-tailers
-                          with timely e-markets.
-                        </p>
-                      </div>
+                      {stateValue3.map((item) => (
+                        <div class="experience">
+                          <h2>{item.jobtitle}</h2>
+                          <h3>{item.employer}</h3>
+                          <h4>{`${item.startdate} ${item.enddate}`}</h4>
+                          <p>{item.description}</p>
+                        </div>
+                      ))}
                     </div>
                   </div>
+                  {/* experience section */}
 
+                  {/* education section */}
                   <div class="yui-gf last">
-                    <div class="yui-u first">
-                      <h2>Education</h2>
+                    <div>
+                      {stateValue4[0].institution && (
+                        <div>
+                          <h2>Education</h2>
+                          <hr></hr>
+                        </div>
+                      )}
+                      {stateValue4.map((item) => (
+                        <div class="yui-u">
+                          <h2>
+                            {`${item.institution}${item.institutioncity}`}
+                          </h2>
+                          <h3>
+                            {item.degree}
+                            <strong>{`${item.startdate} ${item.enddate}`}</strong>{" "}
+                          </h3>
+                        </div>
+                      ))}
                     </div>
-                    <div class="yui-u">
-                      <h2>Indiana University - Bloomington, Indiana</h2>
-                      <h3>
-                        Dual Major, Economics and English —{" "}
-                        <strong>4.0 GPA</strong>{" "}
-                      </h3>
+                  </div>
+                  {/* education section */}
+                  <div class="yui-gf last">
+                    <div>
+                      {stateValue7[0].course && (
+                        <div>
+                          <h2>Courses</h2>
+                          <hr></hr>
+                        </div>
+                      )}
+                      {stateValue7.map((item) => (
+                        <div class="yui-u">
+                          <h2>{`${item.course}${item.institution}`}</h2>
+                          <h3>
+                            <strong>{`${item.startdate} ${item.enddate}`}</strong>
+                          </h3>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div id="ft">
+            {/* <div id="ft">
               <p>
                 Jonathan Doe —{" "}
                 <a href="mailto:name@yourdomain.com">name@yourdomain.com</a> —
                 (313) - 867-5309
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

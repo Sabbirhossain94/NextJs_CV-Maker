@@ -196,7 +196,7 @@ export default function PersonalDetails() {
           display: "flex",
           flexDirection: "column",
           marginLeft: "-15px",
-          marginTop: "15px",
+          marginTop: "25px",
         }}
       >
         <Accordion
@@ -239,6 +239,30 @@ export default function PersonalDetails() {
               <Grid item xs={4} md={7}>
                 <TextField
                   id="outlined-basic"
+                  label="Occupation"
+                  name="occupation"
+                  variant="filled"
+                  type="text"
+                  value={stateValue.occupation}
+                  sx={{
+                    width: "105%",
+                    background: "#e7eaf4",
+                    borderRadius: "5px",
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      color: "#828ba2",
+                    },
+                  }}
+                  InputProps={{
+                    disableUnderline: true,
+                  }}
+                  onChange={handleInputChange}
+                />
+              </Grid>
+              <Grid item xs={4} md={7}>
+                <TextField
+                  id="outlined-basic"
                   label="Address"
                   name="address"
                   variant="filled"
@@ -248,9 +272,8 @@ export default function PersonalDetails() {
                     width: "105%",
                     background: "#e7eaf4",
                     borderRadius: "5px",
-                    textDecoration: "none",
                   }}
-                  inputLabelProps={{
+                  InputLabelProps={{
                     sx: {
                       color: "#828ba2",
                     },
@@ -273,9 +296,8 @@ export default function PersonalDetails() {
                     width: "105%",
                     background: "#e7eaf4",
                     borderRadius: "5px",
-                    textDecoration: "none",
                   }}
-                  inputLabelProps={{
+                  InputLabelProps={{
                     sx: {
                       color: "#828ba2",
                     },
@@ -298,9 +320,8 @@ export default function PersonalDetails() {
                     width: "105%",
                     background: "#e7eaf4",
                     borderRadius: "5px",
-                    textDecoration: "none",
                   }}
-                  inputLabelProps={{
+                  InputLabelProps={{
                     sx: {
                       color: "#828ba2",
                     },
@@ -323,9 +344,8 @@ export default function PersonalDetails() {
                     width: "105%",
                     background: "#e7eaf4",
                     borderRadius: "5px",
-                    textDecoration: "none",
                   }}
-                  inputLabelProps={{
+                  InputLabelProps={{
                     sx: {
                       color: "#828ba2",
                     },
@@ -350,7 +370,7 @@ export default function PersonalDetails() {
                     borderRadius: "5px",
                     textDecoration: "none",
                   }}
-                  inputLabelProps={{
+                  InputLabelProps={{
                     sx: {
                       color: "#828ba2",
                     },

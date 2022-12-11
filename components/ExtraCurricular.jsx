@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -10,38 +10,33 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { DataContext } from "../pages/CVBuilder";
 
 export default function ExtraCurricular({
   deleteCustomSection,
   sectionId,
   setActiveSectionId,
-  getExtraCurriculatDetails,
+ 
 }) {
+  const getData= useContext(DataContext)
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [accordionValues, setAccordionValues] = useState([{
-    activity: "",
-    employer: "",
-    startdate: "",
-    enddate: "",
-    city: "",
-    description: "",
-  }]);
+const [stateValue, setStateValue]= getData.value8
 
   const deleteAccordionSection = (id) => {
-    const result = accordionValues.filter((item,key) => {
+    const result = stateValue.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setAccordionValues(result);
+    setStateValue(result);
   };
 
   const addAccordionSection = () => {
-    setAccordionValues([
-      ...accordionValues,
+    setStateValue([
+      ...stateValue,
       {
         activity: "",
         employer: "",
@@ -55,14 +50,14 @@ export default function ExtraCurricular({
 
    const handleInputChange = (e, inputKey) => {
      const { name, value } = e.target;
-     accordionValues.map((item, key) => {
+     stateValue.map((item, key) => {
        if (key === inputKey) {
          item[name] = value;
        }
      });
    };
 
-getExtraCurriculatDetails(accordionValues)
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
       <Grid container item md={8}>
@@ -97,7 +92,7 @@ getExtraCurriculatDetails(accordionValues)
       </Grid>
 
       <Box sx={{ flexGrow: 1 }}>
-        {accordionValues.map((item, key) => (
+        {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item md={15}>
               <Accordion
@@ -130,7 +125,7 @@ getExtraCurriculatDetails(accordionValues)
                         label="Activity title"
                         type="text"
                         name="activity"
-                        value={accordionValues.activity}
+                        value={stateValue.activity}
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -153,7 +148,7 @@ getExtraCurriculatDetails(accordionValues)
                         label="Employer"
                         type="text"
                         name="employer"
-                        value={accordionValues.employer}
+                        value={stateValue.employer}
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -177,7 +172,7 @@ getExtraCurriculatDetails(accordionValues)
                         variant="filled"
                         label="Start Date"
                         name="startdate"
-                        value={accordionValues.startdate}
+                        value={stateValue.startdate}
                         type="date"
                         sx={{
                           background: "#e7eaf4",
@@ -198,7 +193,7 @@ getExtraCurriculatDetails(accordionValues)
                         variant="filled"
                         label="End Date"
                         name="enddate"
-                        value={accordionValues.enddate}
+                        value={stateValue.enddate}
                         type="date"
                         sx={{
                           marginLeft: "20px",
@@ -223,7 +218,7 @@ getExtraCurriculatDetails(accordionValues)
                         label="City"
                         type="text"
                         name="city"
-                        value={accordionValues.city}
+                        value={stateValue.city}
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -246,7 +241,7 @@ getExtraCurriculatDetails(accordionValues)
                         label="Description"
                         variant="filled"
                         type="text"
-                        value={accordionValues.description}
+                        value={stateValue.description}
                         name="description"
                         InputLabelProps={{
                           sx: {

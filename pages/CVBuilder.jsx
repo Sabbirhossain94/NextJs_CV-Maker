@@ -29,6 +29,7 @@ export default function CVBuilder() {
       phone: "",
       country: "",
       city: "",
+      occupation: "",
       address: "",
       postalcode: "",
       nationality: "",
@@ -153,6 +154,7 @@ export default function CVBuilder() {
             height: "100%",
             padding: "5%",
             backgroundColor: "white",
+            overflowY: "scroll",
           }}
         >
           <LinearProgress
@@ -198,7 +200,6 @@ export default function CVBuilder() {
           sx={{
             width: "50%",
             backgroundColor: "#656e83",
-           
           }}
         >
           {/* <Viewer /> */}
