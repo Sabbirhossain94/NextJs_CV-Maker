@@ -1,20 +1,25 @@
 import React from "react";
-import { useState } from "react";
+import { useContext } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { DataContext } from "../pages/CVBuilder";
 
 export default function Hobbies({
   deleteCustomSection,
   sectionId,
   setActiveSectionId,
-  getHobbiesDetails,
 }) {
-  const [hobbies, setHobbies] = useState("");
-  getHobbiesDetails(hobbies);
-  
+  const getData = useContext(DataContext);
+  const [stateValue, setStateValue] = getData.value10;
+  console.log(stateValue);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setStateValue({ [name]: value });
+  };
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
       <Grid container item md={6}>
@@ -43,6 +48,7 @@ export default function Hobbies({
             onClick={() => {
               deleteCustomSection(sectionId);
               setActiveSectionId(null);
+              setStateValue({ hobbies: "" });
             }}
           />
         </Grid>
@@ -55,7 +61,7 @@ export default function Hobbies({
             label="What do you like?"
             type="text"
             name="hobbies"
-            value={hobbies}
+            value={stateValue.hobbies}
             variant="filled"
             sx={{
               width: "100%",
@@ -70,7 +76,7 @@ export default function Hobbies({
             InputProps={{
               disableUnderline: true,
             }}
-            onChange={(e) => setHobbies(e.target.value)}
+            onChange={(e) => handleInputChange(e)}
           />
         </Grid>
       </Grid>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -16,14 +16,13 @@ export default function ExtraCurricular({
   deleteCustomSection,
   sectionId,
   setActiveSectionId,
- 
 }) {
-  const getData= useContext(DataContext)
+  const getData = useContext(DataContext);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-const [stateValue, setStateValue]= getData.value8
+  const [stateValue, setStateValue] = getData.value8;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -48,15 +47,14 @@ const [stateValue, setStateValue]= getData.value8
     ]);
   };
 
-   const handleInputChange = (e, inputKey) => {
-     const { name, value } = e.target;
-     stateValue.map((item, key) => {
-       if (key === inputKey) {
-         item[name] = value;
-       }
-     });
-   };
-
+  const handleInputChange = (e, inputKey) => {
+    const { name, value } = e.target;
+    let clone = [...stateValue];
+    let obj = clone[inputKey];
+    obj[name] = value;
+    clone[inputKey] = obj;
+    setStateValue([...clone]);
+  };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
@@ -86,6 +84,16 @@ const [stateValue, setStateValue]= getData.value8
             onClick={() => {
               deleteCustomSection(sectionId);
               setActiveSectionId(null);
+              setStateValue([
+                {
+                  activity: "",
+                  employer: "",
+                  startdate: "",
+                  enddate: "",
+                  city: "",
+                  description: "",
+                },
+              ]);
             }}
           />
         </Grid>

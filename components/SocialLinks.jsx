@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -13,15 +13,13 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import { DataContext } from "../pages/CVBuilder";
 
 export default function SocialLinks() {
-
   const getData = useContext(DataContext);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  
+
   const [stateValue, setStateValue] = getData.value5;
-  
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -43,13 +41,12 @@ export default function SocialLinks() {
   };
 
   const handleInputChange = (e, inputKey) => {
-    const { name, value } = e.target;
-    stateValue.map((item, key) => {
-      if (key === inputKey) {
-        item[name] = value;
-        console.log(item);
-      }
-    });
+   const { name, value } = e.target;
+   let clone = [...stateValue];
+   let obj = clone[inputKey];
+   obj[name] = value;
+   clone[inputKey] = obj;
+   setStateValue([...clone]);
   };
 
   return (

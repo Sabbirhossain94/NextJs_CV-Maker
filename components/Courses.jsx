@@ -14,7 +14,6 @@ export default function Courses({
   deleteCustomSection,
   sectionId,
   setActiveSectionId,
-  getCourseDetails,
 }) {
   const getData = useContext(DataContext);
   const [expanded, setExpanded] = useState(false);
@@ -23,7 +22,6 @@ export default function Courses({
     setExpanded(isExpanded ? panel : false);
   };
   const [stateValue, setStateValue] = getData.value7;
- 
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -47,13 +45,12 @@ export default function Courses({
   };
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    stateValue.map((item, key) => {
-      if (key === inputKey) {
-        item[name] = value;
-      }
-    });
+    let clone = [...stateValue];
+    let obj = clone[inputKey];
+    obj[name] = value;
+    clone[inputKey] = obj;
+    setStateValue([...clone]);
   };
-
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
@@ -83,6 +80,14 @@ export default function Courses({
             onClick={() => {
               deleteCustomSection(sectionId);
               setActiveSectionId(null);
+              setStateValue([
+                {
+                  course: "",
+                  institution: "",
+                  startdate: "",
+                  enddate: "",
+                },
+              ]);
             }}
           />
         </Grid>

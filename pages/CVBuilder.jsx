@@ -98,7 +98,7 @@ export default function CVBuilder() {
       level: "",
     },
   ]);
-  const [hobbiesDetails, setHobbiesDetails] = useState([{ hobbies: "" }]);
+  const [hobbiesDetails, setHobbiesDetails] = useState({ hobbies: "" });
 
   const [allSections, setAllSections] = useState([
     {

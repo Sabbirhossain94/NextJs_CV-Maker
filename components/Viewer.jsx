@@ -13,7 +13,9 @@ export default function Template() {
   const [stateValue6, setStateValue6] = getData.value6;
   const [stateValue7, setStateValue7] = getData.value7;
   const [stateValue8, setStateValue8] = getData.value8;
-  console.log(stateValue4);
+  const [stateValue9, setStateValue9] = getData.value9;
+  const [stateValue10, setStateValue10] = getData.value10;
+  console.log(stateValue10);
   return (
     <div>
       <div>
@@ -140,13 +142,15 @@ export default function Template() {
                           </h2>
                           <h3>
                             {item.degree}
-                            <strong>{`${item.startdate} ${item.enddate}`}</strong>{" "}
+                            <strong>{`${item.startdate} ${item.enddate}`}</strong>
                           </h3>
                         </div>
                       ))}
                     </div>
                   </div>
                   {/* education section */}
+
+                  {/* course section */}
                   <div class="yui-gf last">
                     <div>
                       {stateValue7[0].course && (
@@ -165,6 +169,68 @@ export default function Template() {
                       ))}
                     </div>
                   </div>
+                  {/* course section */}
+
+                  {/* Extra Curricular Details section*/}
+                  <div class="yui-gf last">
+                    <div>
+                      {stateValue8[0].activity && (
+                        <div>
+                          <h2>Extra Curricular Details</h2>
+                          <hr></hr>
+                        </div>
+                      )}
+                      {stateValue8.map((item) => (
+                        <div class="yui-u">
+                          <h2>{`${item.activity}${item.employer}${item.city}`}</h2>
+                          <h3>
+                            <strong>{`${item.startdate} ${item.enddate}`}</strong>
+                          </h3>
+                          <p>{item.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Extra Curricular Details section*/}
+
+                  {/* Language section*/}
+                  <div class="yui-gf last">
+                    <div>
+                      {stateValue9[0].language && (
+                        <div>
+                          <h2>Languages</h2>
+                          <hr></hr>
+                        </div>
+                      )}
+                      {stateValue9.map((item) => (
+                        <div class="yui-u">
+                          <h3>
+                            <strong>{`${item.language}`}</strong>
+                          </h3>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Language section*/}
+
+                  {/* Hobbies section*/}
+                  <div class="yui-gf last">
+                    <div>
+                      {stateValue10.hobbies && (
+                        <div>
+                          <h2>Hobbies</h2>
+                          <hr></hr>
+                        </div>
+                      )}
+
+                      <div class="yui-u">
+                        <h3>
+                          <strong>{`${stateValue10.hobbies}`}</strong>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Hobbies section*/}
                 </div>
               </div>
             </div>

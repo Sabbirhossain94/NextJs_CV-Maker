@@ -46,11 +46,11 @@ export default function Employment() {
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    stateValue.map((item, key) => {
-      if (key === inputKey) {
-        item[name] = value;
-      }
-    });
+    let clone = [...stateValue];
+    let obj = clone[inputKey];
+    obj[name] = value;
+    clone[inputKey] = obj;
+    setStateValue([...clone]);
   };
 
   return (

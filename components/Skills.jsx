@@ -52,11 +52,11 @@ export default function Skills() {
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    stateValue.map((item, key) => {
-      if (key === inputKey) {
-        item[name] = value;
-      }
-    });
+    let clone = [...stateValue];
+    let obj = clone[inputKey];
+    obj[name] = value;
+    clone[inputKey] = obj;
+    setStateValue([...clone]);
   };
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
