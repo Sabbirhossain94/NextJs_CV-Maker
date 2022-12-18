@@ -16,11 +16,11 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import CodeForPDF from "../components/CodeForPDF";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-
+import Viewer from "../components/Viewer"
 export const DataContext = React.createContext();
 
 export default function CVBuilder() {
-  const [progress, setProgress] = useState(0);
+  // const [progress, setProgress] = useState(0);
   const [personalDetails, setPersonalDetails] = useState([
     {
       firstname: "",
@@ -157,14 +157,14 @@ export default function CVBuilder() {
             overflowY: "scroll",
           }}
         >
-          <LinearProgress
+          {/* <LinearProgress
             variant="determinate"
             value={progress}
             sx={{
               marginTop: "10px",
               width: "93%",
             }}
-          />
+          /> */}
           <Box sx={{ marginTop: "4rem", width: "100%", height: "100vh" }}>
             <PersonalDetails />
             <ProfessionalSummary />
@@ -202,8 +202,8 @@ export default function CVBuilder() {
             backgroundColor: "#656e83",
           }}
         >
-          {/* <Viewer /> */}
-          <CodeForPDF />
+          <Viewer />
+          {/* <CodeForPDF /> */}
         </Box>
       </DataContext.Provider>
     </Box>

@@ -25,7 +25,7 @@ export default function PersonalDetails() {
       [name]: value,
     });
   };
-  //console.log(stateValue);
+ 
   return (
     <Box>
       <Typography

@@ -1,59 +1,19 @@
 import React from "react";
+import { useState, useRef } from "react";
+import Button from "@mui/material/Button";
+import Viewer from "../components/Viewer";
+import ReactDOMServer from "react-dom/server";
+import jsPDF from "jspdf";
 
-import Viewer from "../components/Viewer"
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  Image,
-  StyleSheet,
-} from "@react-pdf/renderer";
-const styles = StyleSheet.create({
-  body: {
-    
-    paddingBottom: 65,
-    paddingHorizontal: 35,
-    height: "100vh"
-  },
-  page: {
-    flexDirection: "column",
-    border: "2px solid rgba(0, 0, 0, 0.233)",
-    padding: 20,
-    paddingHorizontal: 40,
-    width: "100vw",
-  },
-  section: {
-    padding: 10,
-    flexGrow: 1,
-  },
-  heading: {
-    backgroundColor: "blue",
-    color: "white",
-    paddingVertical: 10,
-  },
-  header: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-    backgroundColor: "blue",
-    height: "20px",
-  },
-  text: {
-    marginVertical: 4,
-    fontSize: 14,
-    fontFamily: "Regular",
-  },
-});
 
 export default function PDFFile() {
-  return (
-    <Document>
-      <Page size="A4" style={styles.body}>
-       < Viewer />
-      </Page>
-    </Document>
+  
+  const generatePDF = () => {
     
-
+  };
+  return (
+    <div>
+      
+    </div>
   );
 }
