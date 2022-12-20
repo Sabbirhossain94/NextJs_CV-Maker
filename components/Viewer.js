@@ -3,7 +3,6 @@ import { useState, useContext } from "react";
 import { DataContext } from "../pages/CVBuilder";
 import LinearProgress from "@mui/material/LinearProgress";
 import Button from "@mui/material/Button";
-import jsPDF from "jspdf";
 
 export default function Template() {
   const [progress, setProgress] = useState(20);
@@ -21,20 +20,20 @@ export default function Template() {
   const [stateValue10, setStateValue10] = getData.value10;
 
   const createPDF = () => {
-      var doc = new jsPDF("p","pt","a4");
-      doc.html(document.querySelector("#pdf"),{
-        callback: function(pdf){
-          pdf.save("cv.pdf")
-        }
-      })
+  
   };
   return (
-    <div >
+    <div>
       <div id="pdf" style={{ height: "100vh" }}>
         <div style={{ height: "100vh" }}>
           <div
             id="container"
-            style={{ width: "50.076em", margin: "auto", height: "100%", background:"red" }}
+            style={{
+              width: "50.076em",
+              margin: "auto",
+              height: "100%",
+              background: "red",
+            }}
           >
             <div
               id="inner"
@@ -51,7 +50,7 @@ export default function Template() {
                 >
                   <div>
                     <h1>
-                     Sabbir {stateValue1.firstname} {stateValue1.lastname}
+                      {stateValue1.firstname} {stateValue1.lastname}
                     </h1>
                     <h2>{stateValue1.occupation}</h2>
                   </div>
