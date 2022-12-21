@@ -3,7 +3,21 @@ import { useState, useContext } from "react";
 import { DataContext } from "../pages/CVBuilder";
 import LinearProgress from "@mui/material/LinearProgress";
 import Button from "@mui/material/Button";
+import { PDFViewer } from "@react-pdf/renderer";
+import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: "row",
+    backgroundColor: "#E4E4E4",
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+  },
+});
 export default function Template() {
   const [progress, setProgress] = useState(20);
   const getData = useContext(DataContext);
@@ -19,9 +33,7 @@ export default function Template() {
   const [stateValue9, setStateValue9] = getData.value9;
   const [stateValue10, setStateValue10] = getData.value10;
 
-  const createPDF = () => {
-  
-  };
+
   return (
     <div>
       <div id="pdf" style={{ height: "100vh" }}>
@@ -32,7 +44,6 @@ export default function Template() {
               width: "50.076em",
               margin: "auto",
               height: "100%",
-              background: "red",
             }}
           >
             <div
@@ -259,10 +270,29 @@ export default function Template() {
         </div>
       </div>
       <div style={{ float: "right", marginRight: "75px", marginTop: "20px" }}>
-        <Button variant="contained" onClick={createPDF} class="ToHide">
-          Download
-        </Button>
+        <PDFDownloadLink
+          document={<PDFTemplate data={[stateValue1]} />}
+          filename="CV.pdf"
+        >
+          <Button variant="contained">Download</Button>
+        </PDFDownloadLink>
       </div>
     </div>
   );
 }
+
+const PDFTemplate = ({data}) => {
+console.log(data)
+  return (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        {data.map((item) => (
+          <View>
+            <Text>{item.firstname}</Text>
+            <Text>{item.lastname}</Text>
+          </View>
+        ))}
+      </Page>
+    </Document>
+  );
+};

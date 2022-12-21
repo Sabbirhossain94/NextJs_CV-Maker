@@ -14,13 +14,19 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import CodeForPDF from "../components/CodeForPDF";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import Viewer from "../components/Viewer"
+import Viewer from "../components/Viewer";
+import { PDFDownloadLink } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
+import Document from "../components/Document";
+import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
+import Button from "@mui/material/Button";
+
 export const DataContext = React.createContext();
 
 export default function CVBuilder() {
   // const [progress, setProgress] = useState(0);
+  const Doc = <Document />;
+  const [instance, update] = usePDF({ document: Doc });
+  // console.log(instance);
   const [personalDetails, setPersonalDetails] = useState([
     {
       firstname: "",
@@ -183,17 +189,7 @@ export default function CVBuilder() {
                 width: "90%",
                 marginTop: "50px",
               }}
-            >
-              {/* <PDFDownloadLink document={<CodeForPDF />} fileName="CV">
-                  {({ blob, url, loading, error }) =>
-                    loading ? (
-                      <button>"Loading document..."</button>
-                    ) : (
-                     <button> "Download now!"</button>
-                    )
-                  }
-                </PDFDownloadLink> */}
-            </Box>
+            ></Box>
           </Box>
         </Box>
         <Box
@@ -203,7 +199,32 @@ export default function CVBuilder() {
           }}
         >
           <Viewer />
-          {/* <CodeForPDF /> */}
+          <div
+            style={{ float: "right", marginRight: "75px", marginTop: "20px" }}
+          >
+            {/* <PDFDownloadLink
+              document={
+                <Document
+                  value={{
+                    value1: [personalDetails, setPersonalDetails],
+                    value2: [professionalSummary, setProfessionalSummary],
+                    value3: [employmentDetails, setEmploymentDetails],
+                    value4: [educationDetails, setEducationDetails],
+                    value5: [socialLinksDetails, setSocialLinksDetails],
+                    value6: [skillDetails, setSkillDetails],
+                    value7: [courseDetails, setCourseDetails],
+                    value8: [extraCurricularDetails, setExtraCurricularDetails],
+                    value9: [languageDetails, setLanguageDetails],
+                    value10: [hobbiesDetails, setHobbiesDetails],
+                  }}
+                />
+              }
+              filename="sample.pdf"
+              style={{ listStyle: "none" }}
+            >
+              <Button variant="contained">Download</Button>
+            </PDFDownloadLink> */}
+          </div>
         </Box>
       </DataContext.Provider>
     </Box>
