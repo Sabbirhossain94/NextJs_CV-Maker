@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 export default function MyDocument() {
   const getData = useContext(DataContext);
-  console.log(getData);
+  // console.log(getData);
   //   const {a,b,c,d,e,f,g,h,i,j}=value
   //    const [stateValue1, setStateValue1] = value.value1;
   //    const [stateValue2, setStateValue2] = value.value2;

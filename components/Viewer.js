@@ -33,7 +33,6 @@ export default function Template() {
   const [stateValue9, setStateValue9] = getData.value9;
   const [stateValue10, setStateValue10] = getData.value10;
 
-
   return (
     <div>
       <div id="pdf" style={{ height: "100vh" }}>
@@ -72,9 +71,7 @@ export default function Template() {
                         {stateValue1.address} {stateValue1.postalcode}
                       </h4>
                       <h4>
-                        <a href="mailto:name@yourdomain.com">
-                          {stateValue1.email}
-                        </a>
+                        <a href="#">{stateValue1.email}</a>
                       </h4>
                       <h4>{stateValue1.phone}</h4>
                       <h4>{stateValue5.linkurl}</h4>
@@ -271,8 +268,24 @@ export default function Template() {
       </div>
       <div style={{ float: "right", marginRight: "75px", marginTop: "20px" }}>
         <PDFDownloadLink
-          document={<PDFTemplate data={[stateValue1]} />}
+          document={
+            <PDFTemplate
+              data={{
+                personalDetails: stateValue1,
+                professionalSummary: stateValue2,
+                employmentDetails: stateValue3,
+                educationDetails: stateValue4,
+                socialLinksDetails: stateValue5,
+                skillDetails: stateValue6,
+                courseDetails: stateValue7,
+                extraCurricularDetails: stateValue8,
+                languageDetails: stateValue9,
+                hobbiesDetails: stateValue10,
+              }}
+            />
+          }
           filename="CV.pdf"
+          style={{ listStyle: "none", textDecoration: "none" }}
         >
           <Button variant="contained">Download</Button>
         </PDFDownloadLink>
@@ -281,17 +294,48 @@ export default function Template() {
   );
 }
 
-const PDFTemplate = ({data}) => {
-console.log(data)
+const PDFTemplate = ({ data } ) => {
+   
+  const personalDetails=data.personalDetails
+  const professionalSummary = data.professionalSummary;
+  const employmentDetails = data.employmentDetails;
+  console.log(personalDetails, professionalSummary, employmentDetails);
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {data.map((item) => (
+        {/* {employmentDetails.map((item) => ( */}
+          {/* // <View style={{ flexDirection: "row" }}>
+          //   <Text>
+          //     {item.firstname} {item.lastname}
+          //   </Text>
+          //   <Text>{item.occupation}</Text>
+          //   <Text>
+          //     {item.address} {item.postalcode}
+          //   </Text>
+          //   <Text>{item.email}</Text>
+          //   <Text>{item.phone}</Text>
+          //   <Text>{item.linkurl}</Text>
+          // </View> */}
           <View>
-            <Text>{item.firstname}</Text>
-            <Text>{item.lastname}</Text>
+            {employmentDetails.jobtitle && (
+              <View>
+                <Text>Experience</Text>
+                {/* <hr></hr> */}
+              </View>
+            )}
+
+            <View>
+              {employmentDetails.map((item, key) => (
+                <View key={key}>
+                  <Text>{item.jobtitle}</Text>
+                  <Text>{item.employer}</Text>
+                  <Text>{`${item.startdate} ${item.enddate}`}</Text>
+                  <Text>{item.description}</Text>
+                </View>
+              ))}
+            </View>
           </View>
-        ))}
+        {/* // ))} */}
       </Page>
     </Document>
   );
