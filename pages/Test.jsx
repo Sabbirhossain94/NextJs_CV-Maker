@@ -1,15 +1,20 @@
-import React from "react";
-import { useContext, useState } from "react";
-import { DataContext } from "./CVBuilder";
-import PDF from "./Practice";
-import { PDFDownloadLink } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
-export default function Test() {
+import dynamic from "next/dynamic";
+import { useEffect,useState } from "react";
+
+const InvoicePDF= dynamic(()=> import("./PDFSection"),{
+  ssr: false,
+});
+
+const View =()=>{
+  const [client,setClient]=useState(false)
+
+  useEffect(()=>{
+    setClient(true)
+  },[])
+
   return (
-    <div>
-      <PDF />
-      <PDFDownloadLink document={<PDF />} filename="sample.pdf">
-        <button>Download</button>
-      </PDFDownloadLink>
-    </div>
-  );
+    <InvoicePDF/>
+  )
 }
+
+export default View;

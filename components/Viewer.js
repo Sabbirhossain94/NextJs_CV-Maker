@@ -3,19 +3,65 @@ import { useState, useContext } from "react";
 import { DataContext } from "../pages/CVBuilder";
 import LinearProgress from "@mui/material/LinearProgress";
 import Button from "@mui/material/Button";
-import { PDFViewer } from "@react-pdf/renderer";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
-import { PDFDownloadLink } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  PDFDownloadLink,
+  PDFViewer,
+} from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 
-const styles = StyleSheet.create({
+
+const styles = StyleSheet.create;
+({
   page: {
+    display: "flex",
     flexDirection: "row",
-    backgroundColor: "#E4E4E4",
   },
-  section: {
+  section_right: {
     margin: 10,
     padding: 10,
-    flexGrow: 1,
+    paddingTop: 20,
+    width: "75%",
+  },
+  section_left: {
+    width: "25%",
+    height: "100%",
+    backgroundColor: "#084c41",
+  },
+  profile_container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: "20",
+    marginBottom: "20px",
+    height: "150",
+    fontFamily: "Helvetica-Bold",
+  },
+  name_text: {
+    paddingTop: "10px",
+    paddingBottom: "5px",
+    fontSize: "14px",
+    fontWeight: "900",
+    color: "white",
+  },
+  profession_text: {
+    color: "#d1d5db",
+    fontSize: "11px",
+  },
+  profile_img: {
+    width: "60px",
+    height: "60px",
+    borderRadius: "90",
+  },
+  profile_line: {
+    marginTop: "10px",
+    width: "10%",
+    height: "1px",
+    backgroundColor: "#FFF",
+    textAlign: "center",
   },
 });
 export default function Template() {
@@ -35,7 +81,7 @@ export default function Template() {
 
   return (
     <div>
-      <div id="pdf" style={{ height: "100vh" }}>
+      {/* <div id="pdf" style={{ height: "100vh" }}>
         <div style={{ height: "100vh" }}>
           <div
             id="container"
@@ -83,7 +129,7 @@ export default function Template() {
               <div>
                 <div>
                   <div>
-                    {/* about section */}
+                     about section 
                     <div>
                       <div>
                         {stateValue2.summary && (
@@ -97,9 +143,9 @@ export default function Template() {
                         <p>{stateValue2.summary}</p>
                       </div>
                     </div>
-                    {/* about section */}
+                  about section 
 
-                    {/* skill section */}
+                     skill section 
                     <div>
                       {stateValue6[0].skill && (
                         <div>
@@ -123,16 +169,16 @@ export default function Template() {
                                   height: "20px",
                                   width: "50%",
                                 }}
-                              /> */}
+                              /> 
                               </li>
                             </div>
                           ))}
                         </ul>
                       </div>
                     </div>
-                    {/* skill section */}
+                     skill section 
 
-                    {/* experience section */}
+                     experience section 
                     <div>
                       {stateValue3[0].jobtitle && (
                         <div>
@@ -152,9 +198,9 @@ export default function Template() {
                         ))}
                       </div>
                     </div>
-                    {/* experience section */}
+                     experience section 
 
-                    {/* education section */}
+                     education section 
                     <div>
                       <div>
                         {stateValue4[0].institution && (
@@ -176,9 +222,9 @@ export default function Template() {
                         ))}
                       </div>
                     </div>
-                    {/* education section */}
+                     education section 
 
-                    {/* course section */}
+                     course section 
                     <div>
                       <div>
                         {stateValue7[0].course && (
@@ -197,9 +243,9 @@ export default function Template() {
                         ))}
                       </div>
                     </div>
-                    {/* course section */}
+                     course section
 
-                    {/* Extra Curricular Details section*/}
+                     Extra Curricular Details section
                     <div>
                       <div>
                         {stateValue8[0].activity && (
@@ -219,9 +265,9 @@ export default function Template() {
                         ))}
                       </div>
                     </div>
-                    {/* Extra Curricular Details section*/}
+                    {/* Extra Curricular Details section
 
-                    {/* Language section*/}
+                    {/* Language section
                     <div>
                       <div>
                         {stateValue9[0].language && (
@@ -239,9 +285,9 @@ export default function Template() {
                         ))}
                       </div>
                     </div>
-                    {/* Language section*/}
+                    {/* Language section
 
-                    {/* Hobbies section*/}
+                    {/* Hobbies section
                     <div>
                       <div>
                         {stateValue10.hobbies && (
@@ -258,84 +304,73 @@ export default function Template() {
                         </div>
                       </div>
                     </div>
-                    {/* Hobbies section*/}
+                    {/* Hobbies section
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div style={{ float: "right", marginRight: "75px", marginTop: "20px" }}>
-        <PDFDownloadLink
-          document={
-            <PDFTemplate
-              data={{
-                personalDetails: stateValue1,
-                professionalSummary: stateValue2,
-                employmentDetails: stateValue3,
-                educationDetails: stateValue4,
-                socialLinksDetails: stateValue5,
-                skillDetails: stateValue6,
-                courseDetails: stateValue7,
-                extraCurricularDetails: stateValue8,
-                languageDetails: stateValue9,
-                hobbiesDetails: stateValue10,
-              }}
-            />
-          }
-          filename="CV.pdf"
-          style={{ listStyle: "none", textDecoration: "none" }}
-        >
-          <Button variant="contained">Download</Button>
-        </PDFDownloadLink>
-      </div>
+      </div> */}
+      <PDFViewer>
+        <Document>
+          {/* <div style={{ float: "right", marginRight: "75px", marginTop: "20px" }}> */}
+          <PDFTemplate />
+          <PDFDownloadLink
+            document={
+              <PDFTemplate
+                data={{
+                  personalDetails: stateValue1,
+                  professionalSummary: stateValue2,
+                  employmentDetails: stateValue3,
+                  educationDetails: stateValue4,
+                  socialLinksDetails: stateValue5,
+                  skillDetails: stateValue6,
+                  courseDetails: stateValue7,
+                  extraCurricularDetails: stateValue8,
+                  languageDetails: stateValue9,
+                  hobbiesDetails: stateValue10,
+                }}
+              />
+            }
+            filename="CV.pdf"
+            style={{ listStyle: "none", textDecoration: "none" }}
+          >
+            <Button variant="contained">Download</Button>
+          </PDFDownloadLink>
+          {/* </div> */}
+        </Document>
+      </PDFViewer>
     </div>
   );
 }
 
-const PDFTemplate = ({ data } ) => {
-   
-  const personalDetails=data.personalDetails
+const PDFTemplate = ({ data }) => {
+  const personalDetails = data.personalDetails;
   const professionalSummary = data.professionalSummary;
   const employmentDetails = data.employmentDetails;
   console.log(personalDetails, professionalSummary, employmentDetails);
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* {employmentDetails.map((item) => ( */}
-          {/* // <View style={{ flexDirection: "row" }}>
-          //   <Text>
-          //     {item.firstname} {item.lastname}
-          //   </Text>
-          //   <Text>{item.occupation}</Text>
-          //   <Text>
-          //     {item.address} {item.postalcode}
-          //   </Text>
-          //   <Text>{item.email}</Text>
-          //   <Text>{item.phone}</Text>
-          //   <Text>{item.linkurl}</Text>
-          // </View> */}
-          <View>
-            {employmentDetails.jobtitle && (
-              <View>
-                <Text>Experience</Text>
-                {/* <hr></hr> */}
-              </View>
-            )}
+        <View style={styles.section_left}>
+          <View style={styles.profile_container}>
+            <Image style={styles.profile_img} src={profile.profileImageURL} />
 
-            <View>
-              {employmentDetails.map((item, key) => (
-                <View key={key}>
-                  <Text>{item.jobtitle}</Text>
-                  <Text>{item.employer}</Text>
-                  <Text>{`${item.startdate} ${item.enddate}`}</Text>
-                  <Text>{item.description}</Text>
-                </View>
-              ))}
+            <View
+              style={{
+                justifyContent: "center",
+              }}
+            >
+              <Text style={styles.name_text}>{""}</Text>
             </View>
+            <Text style={styles.profession_text}>{""}</Text>
+            <View style={styles.profile_line} />
           </View>
-        {/* // ))} */}
+        </View>
+        <View style={styles.section_right}>
+          <Text>{""}</Text>
+        </View>
       </Page>
     </Document>
   );

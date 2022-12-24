@@ -1,8 +1,9 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
+import Button from "@mui/material/Button";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PersonalDetails from "../components/PersonalDetails";
 import Education from "../components/Education";
 import SocialLinks from "../components/SocialLinks";
@@ -14,19 +15,20 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import Viewer from "../components/Viewer";
-import { PDFDownloadLink } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
-import Document from "../components/Document";
-import { usePDF } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
-import Button from "@mui/material/Button";
-
+import PDFView from "./PDFSection";
+import dynamic from "next/dynamic";
+import Test from "../pages/Test";
 export const DataContext = React.createContext();
+// const PDF = dynamic(() => import("./Practice"), {
+//   ssr: false,
+// });
 
 export default function CVBuilder() {
   // const [progress, setProgress] = useState(0);
-  const Doc = <Document />;
-  const [instance, update] = usePDF({ document: Doc });
-  // console.log(instance);
+  // const [client, setClient] = useState(false);
+  // useEffect(() => {
+  //   setClient(true);
+  // }, [<PDF/>]);
   const [personalDetails, setPersonalDetails] = useState([
     {
       firstname: "",
@@ -195,36 +197,11 @@ export default function CVBuilder() {
         <Box
           sx={{
             width: "50%",
+
             backgroundColor: "#656e83",
           }}
         >
-          <Viewer />
-          <div
-            style={{ float: "right", marginRight: "75px", marginTop: "20px" }}
-          >
-            {/* <PDFDownloadLink
-              document={
-                <Document
-                  value={{
-                    value1: [personalDetails, setPersonalDetails],
-                    value2: [professionalSummary, setProfessionalSummary],
-                    value3: [employmentDetails, setEmploymentDetails],
-                    value4: [educationDetails, setEducationDetails],
-                    value5: [socialLinksDetails, setSocialLinksDetails],
-                    value6: [skillDetails, setSkillDetails],
-                    value7: [courseDetails, setCourseDetails],
-                    value8: [extraCurricularDetails, setExtraCurricularDetails],
-                    value9: [languageDetails, setLanguageDetails],
-                    value10: [hobbiesDetails, setHobbiesDetails],
-                  }}
-                />
-              }
-              filename="sample.pdf"
-              style={{ listStyle: "none" }}
-            >
-              <Button variant="contained">Download</Button>
-            </PDFDownloadLink> */}
-          </div>
+          <PDFView />
         </Box>
       </DataContext.Provider>
     </Box>
