@@ -19,16 +19,10 @@ import PDFView from "./PDFSection";
 import dynamic from "next/dynamic";
 import Test from "../pages/Test";
 export const DataContext = React.createContext();
-// const PDF = dynamic(() => import("./Practice"), {
-//   ssr: false,
-// });
+
 
 export default function CVBuilder() {
-  // const [progress, setProgress] = useState(0);
-  // const [client, setClient] = useState(false);
-  // useEffect(() => {
-  //   setClient(true);
-  // }, [<PDF/>]);
+ 
   const [personalDetails, setPersonalDetails] = useState([
     {
       firstname: "",

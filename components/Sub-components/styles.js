@@ -10,9 +10,11 @@ export default StyleSheet.create({
     padding: 10,
     paddingTop: 20,
     width: "75%",
+    textAlign: "left",
+
   },
   section_left: {
-    width: "25%",
+    width: "30%",
     height: "100%",
     backgroundColor: "#0061c2",
   },
@@ -28,13 +30,15 @@ export default StyleSheet.create({
   name_text: {
     paddingTop: "10px",
     paddingBottom: "5px",
-    fontSize: "14px",
+    fontSize: "18px",
     fontWeight: "900",
     color: "white",
   },
   profession_text: {
+    paddingTop: "5px",
     color: "#d1d5db",
-    fontSize: "11px",
+    fontSize: "15px",
+    fontWeight: "900",
   },
   profile_img: {
     width: "60px",
@@ -42,10 +46,12 @@ export default StyleSheet.create({
     borderRadius: "90",
   },
   profile_line: {
-    marginTop: "10px",
-    width: "10%",
+    marginTop: "15px",
+    width: "95%",
     height: "1px",
-    backgroundColor: "#FFF",
+    backgroundColor: "black",
     textAlign: "center",
+    margin: "auto"
+    
   },
 });
