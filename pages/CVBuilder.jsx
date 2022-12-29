@@ -20,9 +20,7 @@ import dynamic from "next/dynamic";
 import Test from "../pages/Test";
 export const DataContext = React.createContext();
 
-
 export default function CVBuilder() {
- 
   const [personalDetails, setPersonalDetails] = useState([
     {
       firstname: "",
@@ -191,7 +189,6 @@ export default function CVBuilder() {
         <Box
           sx={{
             width: "50%",
-
             backgroundColor: "#656e83",
           }}
         >

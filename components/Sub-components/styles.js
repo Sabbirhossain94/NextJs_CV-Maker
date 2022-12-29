@@ -16,7 +16,7 @@ export default StyleSheet.create({
   section_left: {
     width: "30%",
     height: "100%",
-    backgroundColor: "#0061c2",
+    backgroundColor: "#003d74",
   },
   profile_container: {
     display: "flex",
