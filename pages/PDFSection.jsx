@@ -33,11 +33,13 @@ const PDFView = () => {
             {/* left section */}
             <View style={styles.section_left}>
               {stateValue1.map((item) => (
-                <View style={styles.profile_container}>
-                  {/* <Image style={styles.profile_img} /> */}
+                <View>
                   <View
                     style={{
                       justifyContent: "center",
+                      marginLeft: "10px",
+                      fontFamily: "Helvetica-Bold",
+                      marginTop: "20px",
                     }}
                   >
                     <Text style={styles.name_text}>
@@ -48,82 +50,107 @@ const PDFView = () => {
                     </Text>
                   </View>
 
-                  <View>
-                    <ul
+                  <View
+                    style={{
+                      backgroundColor: "#002e58",
+                      width: "100%",
+                      padding: "5px",
+                      marginTop: "15px",
+                      fontFamily: "Helvetica-Bold",
+                    }}
+                  >
+                    <Text
                       style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        flexWrap: "wrap",
-                        padding: "10px",
+                        fontSize: "15px",
+                        color: "white",
+                        marginLeft: "5px",
                       }}
                     >
-                      <View
+                      Personal Info
+                    </Text>
+                  </View>
+                  <View
+                    style={{ marginLeft: "10px", fontFamily: "Helvetica-Bold" }}
+                  >
+                    <View style={{ marginTop: "10px" }}>
+                      <Text
                         style={{
-                          marginTop: "40px",
-                          display: "flex",
-                          fontSize: "10px",
+                          fontSize: "12px",
                           color: "white",
                         }}
                       >
-                        <li>
-                          <View>
-                            <Text
-                              style={{
-                                fontSize: "12px",
-                              }}
-                            >
-                              {item.address ? "Address" : ""}
-                            </Text>
-                            <Text
-                              style={{ marginTop: "15px", color: "#d1d5db" }}
-                            >
-                              {item.address}
-                            </Text>
-                          </View>
-                        </li>
+                        {item.address ? "Address" : ""}
+                      </Text>
+                      <Text
+                        style={{
+                          marginTop: "5px",
+                          fontSize: "10px",
+                          color: "#d1d5db",
+                        }}
+                      >
+                        {item.address}
+                      </Text>
+                    </View>
 
-                        <li>
-                          <View style={{ marginTop: "30px" }}>
-                            <Text style={{ fontSize: "12px" }}>
-                              {item.phone ? "Phone" : ""}
-                            </Text>
-                            <Text
-                              style={{ marginTop: "15px", color: "#d1d5db" }}
-                            >
-                              {item.phone}
-                            </Text>
-                          </View>
-                        </li>
+                    <View style={{ marginTop: "10px" }}>
+                      <Text
+                        style={{
+                          fontSize: "12px",
+                          color: "white",
+                        }}
+                      >
+                        {item.phone ? "Phone" : ""}
+                      </Text>
+                      <Text
+                        style={{
+                          marginTop: "5px",
+                          fontSize: "10px",
+                          color: "#d1d5db",
+                        }}
+                      >
+                        {item.phone}
+                      </Text>
+                    </View>
 
-                        <li>
-                          <View style={{ marginTop: "50px" }}>
-                            <Text style={{ fontSize: "12px" }}>
-                              {item.email ? "Email" : ""}
-                            </Text>
-                            <Text
-                              style={{ marginTop: "15px", color: "#d1d5db" }}
-                            >
-                              {item.email}
-                            </Text>
-                          </View>
-                        </li>
+                    <View style={{ marginTop: "10px" }}>
+                      <Text
+                        style={{
+                          fontSize: "12px",
+                          color: "white",
+                        }}
+                      >
+                        {item.email ? "Email" : ""}
+                      </Text>
+                      <Text
+                        style={{
+                          marginTop: "5px",
+                          fontSize: "10px",
+                          color: "#d1d5db",
+                        }}
+                      >
+                        {item.email}
+                      </Text>
+                    </View>
 
-                        <li>
-                          <View style={{ marginTop: "70px" }}>
-                            <Text style={{ fontSize: "12px" }}>
-                              {item.nationality ? "Nationality" : ""}
-                            </Text>
-                            <Text
-                              style={{ marginTop: "15px", color: "#d1d5db" }}
-                            >
-                              {item.nationality}
-                            </Text>
-                          </View>
-                        </li>
-
-                        <li></li>
-                      </View>
-                    </ul>
+                    <View style={{ marginTop: "10px" }}>
+                      <Text
+                        style={{
+                          fontSize: "12px",
+                          color: "white",
+                        }}
+                      >
+                        {item.nationality ? "Nationality" : ""}
+                      </Text>
+                      <Text
+                        style={{
+                          marginTop: "5px",
+                          fontSize: "10px",
+                          color: "#d1d5db",
+                        }}
+                      >
+                        {item.nationality}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               ))}
@@ -131,7 +158,7 @@ const PDFView = () => {
               {/* links section */}
               <View
                 style={{
-                  marginTop: "20px",
+                  marginTop: "15px",
                   color: "white",
                   width: "100%",
                   fontFamily: "Helvetica-Bold",
