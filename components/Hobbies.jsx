@@ -58,6 +58,7 @@ export default function Hobbies({
           <TextField
             id="outlined-basic"
             label="What do you like?"
+            placeholder="e.g. Painting,Skydiving,Gaming"
             type="text"
             name="hobbies"
             value={stateValue.hobbies}
@@ -66,6 +67,7 @@ export default function Hobbies({
               width: "100%",
               background: "#e7eaf4",
               borderRadius: "5px",
+              
             }}
             InputLabelProps={{
               sx: {

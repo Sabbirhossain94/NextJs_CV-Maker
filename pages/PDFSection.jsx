@@ -23,8 +23,7 @@ const PDFView = () => {
   const [stateValue8, setStateValue8] = getData.value8;
   const [stateValue9, setStateValue9] = getData.value9;
   const [stateValue10, setStateValue10] = getData.value10;
-
-  console.log(stateValue3);
+  const newArr = stateValue10.hobbies.split(",");
   return (
     <div style={{ flexGrow: 1 }}>
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
@@ -316,13 +315,19 @@ const PDFView = () => {
               ))}
 
               {stateValue3[0].jobtitle && (
-                <View>
-                  <Text style={{ fontSize: "15px", marginTop: "15px" }}>
+                <View style={{ marginTop: "15px" }}>
+                  <Text
+                    style={{
+                      fontSize: "15px",
+                      marginTop: "15px",
+                      color: "#003d74",
+                    }}
+                  >
                     Experience
                   </Text>
                   <View
                     style={{
-                      height: "1px",
+                      height: "0.5px",
                       width: "100%",
                       backgroundColor: "black",
                       marginTop: "5px",
@@ -354,7 +359,7 @@ const PDFView = () => {
                         }}
                       >
                         <Text>{item.jobtitle}</Text>
-                        <Text>{item.city}</Text>
+                        <Text style={{ fontSize: "12px" }}>{item.city}</Text>
                         <Text>{item.description}</Text>
                       </View>
                     </View>
@@ -363,13 +368,19 @@ const PDFView = () => {
               )}
 
               {stateValue4[0].institution && (
-                <View>
-                  <Text style={{ fontSize: "15px", marginTop: "15px" }}>
+                <View style={{ marginTop: "15px" }}>
+                  <Text
+                    style={{
+                      fontSize: "15px",
+                      marginTop: "15px",
+                      color: "#003d74",
+                    }}
+                  >
                     Education
                   </Text>
                   <View
                     style={{
-                      height: "1px",
+                      height: "0.5px",
                       width: "100%",
                       backgroundColor: "black",
                       marginTop: "5px",
@@ -405,6 +416,136 @@ const PDFView = () => {
                         </Text>
                       </View>
                     </View>
+                  ))}
+                </View>
+              )}
+              {stateValue7[0].course && (
+                <View style={{ marginTop: "15px" }}>
+                  <Text
+                    style={{
+                      fontSize: "15px",
+                      marginTop: "15px",
+                      color: "#003d74",
+                    }}
+                  >
+                    Courses
+                  </Text>
+                  <View
+                    style={{
+                      height: "0.5px",
+                      width: "100%",
+                      backgroundColor: "black",
+                      marginTop: "5px",
+                    }}
+                  />
+                  {stateValue7.map((item, key) => (
+                    <View
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        marginTop: "10px",
+                      }}
+                      key={key}
+                    >
+                      <Text style={{ fontSize: "12px" }}>
+                        {`${
+                          item.startdate.slice(0, 7) +
+                          " - " +
+                          item.enddate.slice(0, 7)
+                        }`}
+                      </Text>
+                      <View
+                        style={{
+                          fontSize: "15px",
+                          display: "flex",
+                          flexDirection: "row",
+                          marginLeft: "40px",
+                        }}
+                      >
+                        <Text>{`${item.course}` + ","}</Text>
+                        <Text style={{ marginLeft: "5px" }}>
+                          {item.institution}
+                        </Text>
+                      </View>
+                    </View>
+                  ))}
+                </View>
+              )}
+              {stateValue8[0].activity && (
+                <View style={{ marginTop: "15px" }}>
+                  <Text
+                    style={{
+                      fontSize: "15px",
+                      marginTop: "15px",
+                      color: "#003d74",
+                    }}
+                  >
+                    Extra-Curricular Activities
+                  </Text>
+                  <View
+                    style={{
+                      height: "0.5px",
+                      width: "100%",
+                      backgroundColor: "black",
+                      marginTop: "5px",
+                    }}
+                  />
+                  {stateValue8.map((item, key) => (
+                    <View
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        marginTop: "10px",
+                      }}
+                      key={key}
+                    >
+                      <Text style={{ fontSize: "12px" }}>
+                        {`${
+                          item.startdate.slice(0, 7) +
+                          " - " +
+                          item.enddate.slice(0, 7)
+                        }`}
+                      </Text>
+                      <View
+                        style={{
+                          fontSize: "15px",
+                          display: "flex",
+                          flexDirection: "row",
+                          marginLeft: "40px",
+                        }}
+                      >
+                        <Text>
+                          {`${item.activity}` + ` at ${item.employer},`}
+                        </Text>
+                        <Text style={{ marginLeft: "5px" }}>{item.city}</Text>
+                      </View>
+                    </View>
+                  ))}
+                </View>
+              )}
+              {stateValue10.hobbies && (
+                <View style={{ marginTop: "15px" }}>
+                  <Text
+                    style={{
+                      fontSize: "15px",
+                      marginTop: "15px",
+                      color: "#003d74",
+                    }}
+                  >
+                    Hobbies
+                  </Text>
+                  <View
+                    style={{
+                      height: "0.5px",
+                      width: "100%",
+                      backgroundColor: "black",
+                      marginTop: "5px",
+                    }}
+                  />
+                  {newArr.map((item) => (
+                    <Text
+                      style={{ fontSize: "15px", marginTop: "10px" }}
+                    >{item}</Text>
                   ))}
                 </View>
               )}
