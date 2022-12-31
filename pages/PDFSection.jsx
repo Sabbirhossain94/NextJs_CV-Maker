@@ -50,25 +50,32 @@ const PDFView = () => {
                     </Text>
                   </View>
 
-                  <View
-                    style={{
-                      backgroundColor: "#002e58",
-                      width: "100%",
-                      padding: "5px",
-                      marginTop: "15px",
-                      fontFamily: "Helvetica-Bold",
-                    }}
-                  >
-                    <Text
+                  {item.address ||
+                  item.phone ||
+                  item.email ||
+                  item.nationality ? (
+                    <View
                       style={{
-                        fontSize: "15px",
-                        color: "white",
-                        marginLeft: "5px",
+                        backgroundColor: "#002e58",
+                        width: "100%",
+                        padding: "5px",
+                        marginTop: "15px",
+                        fontFamily: "Helvetica-Bold",
                       }}
                     >
-                      Personal Info
-                    </Text>
-                  </View>
+                      <Text
+                        style={{
+                          fontSize: "15px",
+                          color: "white",
+                          marginLeft: "5px",
+                        }}
+                      >
+                        Personal Info
+                      </Text>
+                    </View>
+                  ) : (
+                    ""
+                  )}
                   <View
                     style={{ marginLeft: "10px", fontFamily: "Helvetica-Bold" }}
                   >
@@ -301,26 +308,33 @@ const PDFView = () => {
             </View>
 
             {/* right section */}
-            <View>
+            <View style={styles.section_right}>
               {stateValue2.map((item) => (
-                <View style={{ padding: "10px", width: "100%" }}>
+                <View>
                   <Text style={{ fontSize: "12px" }}>{item.summary}</Text>
                 </View>
               ))}
 
               {stateValue3[0].jobtitle && (
                 <View>
-                  <Text style={{ fontSize: "15px", padding: "10px" }}>
+                  <Text style={{ fontSize: "15px", marginTop: "15px" }}>
                     Experience
                   </Text>
-                  <View style={[styles.profile_line, { marginTop: "10px" }]} />
+                  <View
+                    style={{
+                      height: "1px",
+                      width: "100%",
+                      backgroundColor: "black",
+                      marginTop: "5px",
+                    }}
+                  />
 
                   {stateValue3.map((item, key) => (
                     <View
                       style={{
                         display: "flex",
                         flexDirection: "row",
-                        padding: "10px",
+                        marginTop: "10px",
                       }}
                       key={key}
                     >
@@ -350,16 +364,23 @@ const PDFView = () => {
 
               {stateValue4[0].institution && (
                 <View>
-                  <Text style={{ fontSize: "15px", padding: "10px" }}>
+                  <Text style={{ fontSize: "15px", marginTop: "15px" }}>
                     Education
                   </Text>
-                  <View style={[styles.profile_line, { marginTop: "10px" }]} />
+                  <View
+                    style={{
+                      height: "1px",
+                      width: "100%",
+                      backgroundColor: "black",
+                      marginTop: "5px",
+                    }}
+                  />
                   {stateValue4.map((item, key) => (
                     <View
                       style={{
                         display: "flex",
                         flexDirection: "row",
-                        padding: "10px",
+                        marginTop: "10px",
                       }}
                       key={key}
                     >
