@@ -4,6 +4,8 @@ import {
   Document,
   PDFViewer,
   PDFDownloadLink,
+  Svg,
+  Line,
 } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 import { Text, View } from "@react-pdf/renderer";
 import { useState, useEffect, useContext } from "react";
@@ -24,11 +26,12 @@ const PDFView = () => {
   const [stateValue9, setStateValue9] = getData.value9;
   const [stateValue10, setStateValue10] = getData.value10;
   const newArr = stateValue10.hobbies.split(",");
+  console.log(stateValue3);
   return (
     <div style={{ flexGrow: 1 }}>
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
         <Document>
-          <Page size="A4" style={styles.page}>
+          <Page size="A4" style={styles.page} fixed >
             {/* left section */}
             <View style={styles.section_left}>
               {stateValue1.map((item) => (
@@ -313,9 +316,9 @@ const PDFView = () => {
                   <Text style={{ fontSize: "12px" }}>{item.summary}</Text>
                 </View>
               ))}
-
+              {/* experience section */}
               {stateValue3[0].jobtitle && (
-                <View style={{ marginTop: "15px" }}>
+                <View>
                   <Text
                     style={{
                       fontSize: "15px",
@@ -333,42 +336,54 @@ const PDFView = () => {
                       marginTop: "5px",
                     }}
                   />
-
-                  {stateValue3.map((item, key) => (
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        marginTop: "10px",
-                      }}
-                      key={key}
-                    >
-                      <Text style={{ fontSize: "12px" }}>
-                        {`${
-                          item.startdate.slice(0, 7) +
-                          " - " +
-                          item.enddate.slice(0, 7)
-                        }`}
-                      </Text>
-                      <View
-                        style={{
-                          fontSize: "15px",
-                          display: "flex",
-                          flexDirection: "column",
-                          marginLeft: "40px",
-                        }}
-                      >
-                        <Text>{item.jobtitle}</Text>
-                        <Text style={{ fontSize: "12px" }}>{item.city}</Text>
-                        <Text>{item.description}</Text>
-                      </View>
-                    </View>
-                  ))}
                 </View>
               )}
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginTop: "10px",
+                }}
+              >
+                {stateValue3.map((item, key) => (
+                  <View
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "row",
+                      marginTop: "10px",
+                    }}
+                  >
+                    <View style={{ width: "25%" }}>
+                      <Text style={{ fontSize: "12px" }}>
+                        {`${item.startdate.slice(0, 7)}` +
+                          `${item.enddate ? " - " : ""}` +
+                          `${item.enddate.slice(0, 7)}`}
+                      </Text>
+                    </View>
 
+                    <View style={{ width: "75%", marginLeft: "100px" }}>
+                      <Text style={{ fontSize: "15px" }}>
+                        {`${item.jobtitle}` +
+                          `${item.employer ? "," : ""}` +
+                          `${item.employer}`}
+                      </Text>
+                      <Text
+                        style={{
+                          fontSize: "12px",
+                          marginTop: "3px",
+                        }}
+                      >
+                        {item.city}
+                      </Text>
+                      <Text>{item.description}</Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+              {/* education section */}
               {stateValue4[0].institution && (
-                <View style={{ marginTop: "15px" }}>
+                <View>
                   <Text
                     style={{
                       fontSize: "15px",
@@ -386,41 +401,54 @@ const PDFView = () => {
                       marginTop: "5px",
                     }}
                   />
-                  {stateValue4.map((item, key) => (
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        marginTop: "10px",
-                      }}
-                      key={key}
-                    >
-                      <Text style={{ fontSize: "12px" }}>
-                        {`${
-                          item.startdate.slice(0, 7) +
-                          " - " +
-                          item.enddate.slice(0, 7)
-                        }`}
-                      </Text>
-                      <View
-                        style={{
-                          fontSize: "15px",
-                          display: "flex",
-                          flexDirection: "row",
-                          marginLeft: "40px",
-                        }}
-                      >
-                        <Text>{`${item.degree}` + ","}</Text>
-                        <Text style={{ marginLeft: "5px" }}>
-                          {item.institution}
-                        </Text>
-                      </View>
-                    </View>
-                  ))}
                 </View>
               )}
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginTop: "10px",
+                }}
+              >
+                {stateValue4.map((item, key) => (
+                  <View
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "row",
+                      marginTop: "10px",
+                    }}
+                  >
+                    <View style={{ width: "25%" }}>
+                      <Text style={{ fontSize: "12px" }}>
+                        {`${item.startdate.slice(0, 7)}` +
+                          `${item.enddate ? " - " : ""}` +
+                          `${item.enddate.slice(0, 7)}`}
+                      </Text>
+                    </View>
+
+                    <View style={{ width: "75%", marginLeft: "100px" }}>
+                      <Text style={{ fontSize: "15px" }}>
+                        {`${item.institution}` +
+                          `${item.institutioncity ? "," : ""}` +
+                          `${item.institutioncity}`}
+                      </Text>
+                      <Text
+                        style={{
+                          fontSize: "12px",
+                          marginTop: "3px",
+                          fontFamily: "Times-BoldItalic",
+                        }}
+                      >
+                        {item.degree}
+                      </Text>
+                      <Text>{item.description}</Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
               {stateValue7[0].course && (
-                <View style={{ marginTop: "15px" }}>
+                <View>
                   <Text
                     style={{
                       fontSize: "15px",
@@ -438,41 +466,50 @@ const PDFView = () => {
                       marginTop: "5px",
                     }}
                   />
-                  {stateValue7.map((item, key) => (
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        marginTop: "10px",
-                      }}
-                      key={key}
-                    >
-                      <Text style={{ fontSize: "12px" }}>
-                        {`${
-                          item.startdate.slice(0, 7) +
-                          " - " +
-                          item.enddate.slice(0, 7)
-                        }`}
-                      </Text>
-                      <View
-                        style={{
-                          fontSize: "15px",
-                          display: "flex",
-                          flexDirection: "row",
-                          marginLeft: "40px",
-                        }}
-                      >
-                        <Text>{`${item.course}` + ","}</Text>
-                        <Text style={{ marginLeft: "5px" }}>
-                          {item.institution}
-                        </Text>
-                      </View>
-                    </View>
-                  ))}
                 </View>
               )}
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginTop: "10px",
+                }}
+              >
+                {stateValue7.map((item, key) => (
+                  <View
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "row",
+                      marginTop: "10px",
+                    }}
+                  >
+                    <View style={{ width: "25%" }}>
+                      <Text style={{ fontSize: "12px" }}>
+                        {`${item.startdate.slice(0, 7)}` +
+                          `${item.enddate ? " - " : ""}` +
+                          `${item.enddate.slice(0, 7)}`}
+                      </Text>
+                    </View>
+
+                    <View style={{ width: "75%", marginLeft: "100px" }}>
+                      <Text style={{ fontSize: "15px" }}>{item.course}</Text>
+                      <Text
+                        style={{
+                          fontSize: "12px",
+                          marginTop: "3px",
+                          fontFamily: "Times-BoldItalic",
+                        }}
+                      >
+                        {item.institution}
+                      </Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+
               {stateValue8[0].activity && (
-                <View style={{ marginTop: "15px" }}>
+                <View>
                   <Text
                     style={{
                       fontSize: "15px",
@@ -480,7 +517,7 @@ const PDFView = () => {
                       color: "#003d74",
                     }}
                   >
-                    Extra-Curricular Activities
+                    Extra-Curricular Activites
                   </Text>
                   <View
                     style={{
@@ -490,39 +527,52 @@ const PDFView = () => {
                       marginTop: "5px",
                     }}
                   />
-                  {stateValue8.map((item, key) => (
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        marginTop: "10px",
-                      }}
-                      key={key}
-                    >
-                      <Text style={{ fontSize: "12px" }}>
-                        {`${
-                          item.startdate.slice(0, 7) +
-                          " - " +
-                          item.enddate.slice(0, 7)
-                        }`}
-                      </Text>
-                      <View
-                        style={{
-                          fontSize: "15px",
-                          display: "flex",
-                          flexDirection: "row",
-                          marginLeft: "40px",
-                        }}
-                      >
-                        <Text>
-                          {`${item.activity}` + ` at ${item.employer},`}
-                        </Text>
-                        <Text style={{ marginLeft: "5px" }}>{item.city}</Text>
-                      </View>
-                    </View>
-                  ))}
                 </View>
               )}
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginTop: "10px",
+                }}
+              >
+                {stateValue8.map((item, key) => (
+                  <View
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "row",
+                      marginTop: "10px",
+                    }}
+                  >
+                    <View style={{ width: "25%" }}>
+                      <Text style={{ fontSize: "12px" }}>
+                        {`${item.startdate.slice(0, 7)}` +
+                          `${item.enddate ? " - " : ""}` +
+                          `${item.enddate.slice(0, 7)}`}
+                      </Text>
+                    </View>
+
+                    <View style={{ width: "75%", marginLeft: "100px" }}>
+                      <Text style={{ fontSize: "15px" }}>
+                        {`${item.activity}` +
+                          `${item.employer ? "," : ""}` +
+                          `${item.employer}`}
+                      </Text>
+                      <Text
+                        style={{
+                          fontSize: "12px",
+                          marginTop: "3px",
+                          fontFamily: "Times-BoldItalic",
+                        }}
+                      >
+                        {item.city}
+                      </Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+
               {stateValue10.hobbies && (
                 <View style={{ marginTop: "15px" }}>
                   <Text
@@ -543,9 +593,9 @@ const PDFView = () => {
                     }}
                   />
                   {newArr.map((item) => (
-                    <Text
-                      style={{ fontSize: "15px", marginTop: "10px" }}
-                    >{item}</Text>
+                    <Text style={{ fontSize: "15px", marginTop: "10px" }}>
+                      {item}
+                    </Text>
                   ))}
                 </View>
               )}

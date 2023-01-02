@@ -173,7 +173,6 @@ export default function Education() {
                         type="date"
                         sx={{
                           marginLeft: "20px",
-
                           background: "#e7eaf4",
                           borderRadius: "5px",
                         }}

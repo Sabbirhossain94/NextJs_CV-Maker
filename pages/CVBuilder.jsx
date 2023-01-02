@@ -176,20 +176,13 @@ export default function CVBuilder() {
               setAllSections={setAllSections}
               deleteCustomSection={deleteCustomSection}
             />
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "end",
-                width: "90%",
-                marginTop: "50px",
-              }}
-            ></Box>
           </Box>
         </Box>
         <Box
           sx={{
             width: "50%",
             backgroundColor: "#656e83",
+           
           }}
         >
           <PDFView />
