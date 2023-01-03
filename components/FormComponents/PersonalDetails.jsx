@@ -8,7 +8,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import { DataContext } from "../pages/CVBuilder";
+import { DataContext } from "../../pages/CVBuilder";
 
 export default function PersonalDetails() {
   const getData = useContext(DataContext);

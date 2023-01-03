@@ -2,24 +2,25 @@ import * as React from "react";
 import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import AddIcon from "@mui/icons-material/Add";
+import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import TextField from "@mui/material/TextField";
-import { DataContext } from "../pages/CVBuilder";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { DataContext } from "../../pages/CVBuilder";
 
-export default function Employment() {
+export default function Education() {
   const getData = useContext(DataContext);
+
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.value3;
+  const [stateValue, setStateValue] = getData.value4;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -34,16 +35,15 @@ export default function Employment() {
     setStateValue([
       ...stateValue,
       {
-        jobtitle: "",
-        employer: "",
+        institution: "",
+        degree: "",
         startdate: "",
         enddate: "",
-        city: "",
+        institutioncity: "",
         description: "",
       },
     ]);
   };
-
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
     let clone = [...stateValue];
@@ -58,13 +58,13 @@ export default function Employment() {
       <Typography
         sx={{
           width: "33%",
-          marginTop: "50px",
+          marginTop: "30px",
           paddingBottom: "20px",
           fontWeight: "700",
           fontSize: "20px",
         }}
       >
-        Experience
+        Education
       </Typography>
 
       <Box sx={{ flexGrow: 1 }}>
@@ -76,7 +76,6 @@ export default function Employment() {
                 onChange={handleChange(key)}
                 sx={{
                   backgroundColor: "white",
-                  cursor: "none",
                   boxShadow: "none",
                   border: "1px solid",
                   borderColor: "#e7eaf4",
@@ -87,8 +86,8 @@ export default function Employment() {
                   aria-controls="panel1bh-content"
                   id="panel1bh-header"
                 >
-                  <Typography sx={{ width: "90%", flexShrink: 0 }}>
-                    {item.jobtitle ? item.jobtitle : "(Not Specified)"}
+                  <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                    {item.institution ? item.institution : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -97,13 +96,12 @@ export default function Employment() {
                     rowSpacing={3}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                   >
-                    <Grid item sm={6} md={6}>
+                    <Grid item xs={6} md={6}>
                       <TextField
-                        id={item.id}
-                        label="Job title"
+                        label="Institution"
+                        name="institution"
+                        value={stateValue.institution}
                         type="text"
-                        value={stateValue.jobtitle}
-                        name="jobtitle"
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -123,11 +121,10 @@ export default function Employment() {
                     </Grid>
                     <Grid item xs={6} md={6}>
                       <TextField
-                        id={item.id}
-                        label="Employer"
+                        label="Degree"
+                        name="degree"
+                        value={stateValue.degree}
                         type="text"
-                        value={stateValue.employer}
-                        name="employer"
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -147,7 +144,6 @@ export default function Employment() {
                     </Grid>
                     <Grid item xs={6} md={6} sx={{ display: "flex" }}>
                       <TextField
-                        id={item.id}
                         variant="filled"
                         label="Start Date"
                         name="startdate"
@@ -170,7 +166,6 @@ export default function Employment() {
                       />
 
                       <TextField
-                        id={item.id}
                         variant="filled"
                         label="End Date"
                         name="enddate"
@@ -178,7 +173,6 @@ export default function Employment() {
                         type="date"
                         sx={{
                           marginLeft: "20px",
-
                           background: "#e7eaf4",
                           borderRadius: "5px",
                         }}
@@ -196,11 +190,10 @@ export default function Employment() {
                     </Grid>
                     <Grid item xs={6} md={6}>
                       <TextField
-                        id={item.id}
                         label="City"
+                        name="institutioncity"
                         type="text"
                         value={stateValue.city}
-                        name="city"
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -220,9 +213,7 @@ export default function Employment() {
                     </Grid>
                     <Grid item xs={6} md={12}>
                       <TextField
-                        id={item.id}
                         label="Description"
-                        variant="filled"
                         type="text"
                         value={stateValue.description}
                         name="description"
@@ -264,8 +255,8 @@ export default function Employment() {
           width: "94%",
           fontWeight: "700",
           marginTop: "10px",
-          display: "flex",
           padding: "5px",
+          display: "flex",
           borderRadius: "5px",
           "&:hover": {
             backgroundColor: "#e3f2fd",
@@ -275,7 +266,7 @@ export default function Employment() {
         color="primary"
         onClick={addAccordionSection}
       >
-        <AddIcon sx={{ fontSize: "20px" }} /> Add one more employment
+        <AddIcon sx={{ fontSize: "20px" }} /> Add one more education
       </Typography>
     </Box>
   );

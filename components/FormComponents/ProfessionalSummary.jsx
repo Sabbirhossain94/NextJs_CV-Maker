@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { DataContext } from "../pages/CVBuilder";
+import { DataContext } from "../../pages/CVBuilder";
 
 export default function ProfessionalSummary() {
 

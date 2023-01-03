@@ -6,8 +6,8 @@ import GTranslateOutlinedIcon from "@mui/icons-material/GTranslateOutlined";
 import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import NordicWalkingOutlinedIcon from "@mui/icons-material/NordicWalkingOutlined";
-import Courses from "../components/Courses";
-import ExtraCurricular from "../components/ExtraCurricular";
+import Courses from "./Courses";
+import ExtraCurricular from "./ExtraCurricular";
 import Hobbies from "./Hobbies";
 import Language from "./Language";
 

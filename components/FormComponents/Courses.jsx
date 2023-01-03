@@ -1,26 +1,27 @@
-import * as React from "react";
 import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { DataContext } from "../pages/CVBuilder";
-
-export default function Education() {
+import { DataContext } from "../../pages/CVBuilder";
+export default function Courses({
+  deleteCustomSection,
+  sectionId,
+  setActiveSectionId,
+}) {
   const getData = useContext(DataContext);
+  const [expanded, setExpanded] = useState(false);
 
-  const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
-  const [stateValue, setStateValue] = getData.value4;
+  const [stateValue, setStateValue] = getData.value7;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -35,12 +36,10 @@ export default function Education() {
     setStateValue([
       ...stateValue,
       {
+        course: "",
         institution: "",
-        degree: "",
         startdate: "",
         enddate: "",
-        institutioncity: "",
-        description: "",
       },
     ]);
   };
@@ -54,18 +53,45 @@ export default function Education() {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Typography
-        sx={{
-          width: "33%",
-          marginTop: "30px",
-          paddingBottom: "20px",
-          fontWeight: "700",
-          fontSize: "20px",
-        }}
-      >
-        Education
-      </Typography>
+    <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
+      <Grid container item md={6}>
+        <Grid container item md={4}>
+          <Typography
+            sx={{
+              fontWeight: "700",
+              fontSize: "20px",
+              paddingBottom: "10px",
+            }}
+          >
+            Courses
+          </Typography>
+          <DeleteIcon
+            sx={{
+              marginTop: "7px",
+              marginLeft: "5px",
+              fontSize: "18px",
+              color: "white",
+
+              "&:hover": {
+                color: "#2196f3",
+                cursor: "pointer",
+              },
+            }}
+            onClick={() => {
+              deleteCustomSection(sectionId);
+              setActiveSectionId(null);
+              setStateValue([
+                {
+                  course: "",
+                  institution: "",
+                  startdate: "",
+                  enddate: "",
+                },
+              ]);
+            }}
+          />
+        </Grid>
+      </Grid>
 
       <Box sx={{ flexGrow: 1 }}>
         {stateValue.map((item, key) => (
@@ -87,7 +113,7 @@ export default function Education() {
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    {item.institution ? item.institution : "(Not Specified)"}
+                    {item.course ? item.course : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -98,10 +124,11 @@ export default function Education() {
                   >
                     <Grid item xs={6} md={6}>
                       <TextField
-                        label="Institution"
-                        name="institution"
-                        value={stateValue.institution}
+                        id="outlined-basic"
+                        label="Course"
                         type="text"
+                        value={stateValue.course}
+                        name="course"
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -121,10 +148,11 @@ export default function Education() {
                     </Grid>
                     <Grid item xs={6} md={6}>
                       <TextField
-                        label="Degree"
-                        name="degree"
-                        value={stateValue.degree}
+                        id="outlined-basic"
+                        label="Institution"
                         type="text"
+                        value={stateValue.institution}
+                        name="institution"
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -164,7 +192,6 @@ export default function Education() {
                         }}
                         onChange={(e) => handleInputChange(e, key)}
                       />
-
                       <TextField
                         variant="filled"
                         label="End Date"
@@ -185,46 +212,6 @@ export default function Education() {
                             color: "#828ba2",
                           },
                         }}
-                        onChange={(e) => handleInputChange(e, key)}
-                      />
-                    </Grid>
-                    <Grid item xs={6} md={6}>
-                      <TextField
-                        label="City"
-                        name="institutioncity"
-                        type="text"
-                        value={stateValue.city}
-                        variant="filled"
-                        sx={{
-                          width: "100%",
-                          background: "#e7eaf4",
-                          borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
-                        }}
-                        InputProps={{
-                          disableUnderline: true,
-                        }}
-                        onChange={(e) => handleInputChange(e, key)}
-                      />
-                    </Grid>
-                    <Grid item xs={6} md={12}>
-                      <TextField
-                        label="Description"
-                        type="text"
-                        value={stateValue.description}
-                        name="description"
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
-                        }}
-                        multiline
-                        rows={8}
-                        sx={{ width: "100%", background: "#e7eaf4" }}
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
@@ -255,8 +242,8 @@ export default function Education() {
           width: "94%",
           fontWeight: "700",
           marginTop: "10px",
-          padding: "5px",
           display: "flex",
+          padding: "5px",
           borderRadius: "5px",
           "&:hover": {
             backgroundColor: "#e3f2fd",
@@ -266,7 +253,7 @@ export default function Education() {
         color="primary"
         onClick={addAccordionSection}
       >
-        <AddIcon sx={{ fontSize: "20px" }} /> Add one more education
+        <AddIcon sx={{ fontSize: "20px" }} /> Add one more course
       </Typography>
     </Box>
   );

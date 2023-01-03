@@ -1,32 +1,33 @@
 import * as React from "react";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
+import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Switch from "@mui/material/Switch";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
-import { DataContext } from "../pages/CVBuilder";
+import MenuItem from "@mui/material/MenuItem";
+import { DataContext } from "../../pages/CVBuilder";
 
-export default function Language({
-  deleteCustomSection,
-  sectionId,
-  setActiveSectionId,
-}) {
-  const getData= useContext(DataContext)
+export default function Skills() {
+  const getData = useContext(DataContext);
   const [expanded, setExpanded] = React.useState(false);
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-   const [stateValue, setStateValue] = getData.value9;
+
+  const [stateValue, setStateValue] = getData.value6;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -34,19 +35,21 @@ export default function Language({
         return item;
       }
     });
-    setAccordionValues(result);
+    setStateValue(result);
   };
-  // const [toggleSwitch, setToggleSwitch] = useState(false);
+
+  const [toggleSwitch, setToggleSwitch] = useState(false);
 
   const addAccordionSection = () => {
     setStateValue([
       ...stateValue,
       {
-        language: "",
+        skill: "",
         level: "",
       },
     ]);
   };
+
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
     let clone = [...stateValue];
@@ -55,44 +58,77 @@ export default function Language({
     clone[inputKey] = obj;
     setStateValue([...clone]);
   };
+  const AntSwitch = styled(Switch)(({ theme }) => ({
+    width: 28,
+    height: 16,
+    padding: 0,
+    display: "flex",
+    "&:active": {
+      "& .MuiSwitch-thumb": {
+        width: 15,
+      },
+      "& .MuiSwitch-switchBase.Mui-checked": {
+        transform: "translateX(9px)",
+      },
+    },
+    "& .MuiSwitch-switchBase": {
+      padding: 2,
+      "&.Mui-checked": {
+        transform: "translateX(12px)",
+        color: "#fff",
+        "& + .MuiSwitch-track": {
+          opacity: 1,
+          backgroundColor:
+            theme.palette.mode === "dark" ? "#177ddc" : "#1890ff",
+        },
+      },
+    },
+    "& .MuiSwitch-thumb": {
+      boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
+      width: 12,
+      height: 12,
+      borderRadius: 6,
+      transition: theme.transitions.create(["width"], {
+        duration: 200,
+      }),
+    },
+    "& .MuiSwitch-track": {
+      borderRadius: 16 / 2,
+      opacity: 1,
+      backgroundColor:
+        theme.palette.mode === "dark"
+          ? "rgba(255,255,255,.35)"
+          : "rgba(0,0,0,.25)",
+      boxSizing: "border-box",
+    },
+  }));
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
-      <Grid container item md={6}>
-        <Grid container item md={4}>
-          <Typography
-            sx={{
-              fontWeight: "700",
-              fontSize: "20px",
-              paddingBottom: "10px",
-            }}
-          >
-            Language
-          </Typography>
-          <DeleteIcon
-            sx={{
-              marginTop: "7px",
-              marginLeft: "5px",
-              fontSize: "18px",
-              color: "white",
-              "&:hover": {
-                color: "#2196f3",
-                cursor: "pointer",
-              },
-            }}
-            onClick={() => {
-              deleteCustomSection(sectionId);
-              setActiveSectionId(null);
-              setStateValue([
-                {
-                  language: "",
-                  level: "",
-                },
-              ]);
-            }}
-          />
-        </Grid>
-      </Grid>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Typography
+        sx={{
+          width: "33%",
+          marginTop: "30px",
+          paddingBottom: "20px",
+          fontWeight: "700",
+          fontSize: "20px",
+        }}
+      >
+        Skills
+      </Typography>
+
+      <Stack direction="row" spacing={1} alignItems="center">
+        <AntSwitch
+          defaultChecked={!toggleSwitch}
+          inputProps={{ "aria-label": "ant design" }}
+          onChange={() => {
+            setToggleSwitch(!toggleSwitch);
+          }}
+        />
+        <Typography sx={{ fontSize: "15px" }}>
+          Don't show experience level
+        </Typography>
+      </Stack>
 
       <Box sx={{ flexGrow: 1 }}>
         {stateValue.map((item, key) => (
@@ -115,7 +151,7 @@ export default function Language({
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    {item.language ? item.language : "(Not Specified)"}
+                    {item.skill ? item.skill : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -127,11 +163,10 @@ export default function Language({
                     <Grid item xs={6} md={6}>
                       <TextField
                         id="outlined-basic"
-                        label="Language"
-                        type="text"
-                        name="language"
-                        value={stateValue.language}
+                        label="Skill"
                         variant="filled"
+                        value={stateValue.skill}
+                        name="skill"
                         sx={{
                           width: "100%",
                           background: "#e7eaf4",
@@ -150,7 +185,10 @@ export default function Language({
                     </Grid>
                     <Grid item xs={6} md={6}>
                       <FormControl sx={{ width: "80%", marginLeft: "50px" }}>
-                        <InputLabel id="demo-simple-select-helper-label">
+                        <InputLabel
+                          id="demo-simple-select-helper-label"
+                          sx={{ marginTop: "5px" }}
+                        >
                           Level
                         </InputLabel>
                         <Select
@@ -158,9 +196,9 @@ export default function Language({
                           id="demo-simple-select-helper"
                           label="level"
                           defaultValue=""
+                          value={stateValue.level}
                           variant="filled"
                           name="level"
-                          value={stateValue.level}
                           sx={{ background: "#e7eaf4", borderRadius: "5px" }}
                           InputProps={{
                             disableUnderline: true,
@@ -174,15 +212,23 @@ export default function Language({
                             },
                             {
                               value: 1,
-                              name: "Native speaker",
+                              name: "Novice",
                             },
                             {
                               value: 2,
-                              name: "Highly proficient",
+                              name: "Beginner",
                             },
                             {
                               value: 3,
-                              name: "Very good command",
+                              name: "Skillfull",
+                            },
+                            {
+                              value: 4,
+                              name: "Experienced",
+                            },
+                            {
+                              value: 5,
+                              name: "Expert",
                             },
                           ].map((item, key) => (
                             <MenuItem
@@ -219,6 +265,7 @@ export default function Language({
           </Grid>
         ))}
       </Box>
+      {/* add one more skill area */}
       <Typography
         sx={{
           width: "94%",
@@ -235,7 +282,7 @@ export default function Language({
         color="primary"
         onClick={addAccordionSection}
       >
-        <AddIcon sx={{ fontSize: "20px" }} /> Add one more language
+        <AddIcon sx={{ fontSize: "20px" }} /> Add one more skill
       </Typography>
     </Box>
   );

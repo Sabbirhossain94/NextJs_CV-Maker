@@ -10,7 +10,7 @@ import TextField from "@mui/material/TextField";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import { DataContext } from "../pages/CVBuilder";
+import { DataContext } from "../../pages/CVBuilder";
 
 export default function SocialLinks() {
   const getData = useContext(DataContext);

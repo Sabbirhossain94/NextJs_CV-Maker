@@ -1,23 +1,21 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import Button from "@mui/material/Button";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useState, useEffect } from "react";
-import PersonalDetails from "../components/PersonalDetails";
-import Education from "../components/Education";
-import SocialLinks from "../components/SocialLinks";
-import Employment from "../components/Employment";
-import ProfessionalSummary from "../components/ProfessionalSummary";
-import Skills from "../components/Skills";
-import AddSection from "../components/AddSection";
+import PersonalDetails from "../components/FormComponents/PersonalDetails";
+import Education from "../components/FormComponents/Education";
+import SocialLinks from "../components/FormComponents/SocialLinks";
+import Employment from "../components/FormComponents/Employment";
+import ProfessionalSummary from "../components/FormComponents/ProfessionalSummary";
+import Skills from "../components/FormComponents/Skills";
+import AddSection from "../components/FormComponents/AddSection";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import PDFView from "./PDFSection";
-import dynamic from "next/dynamic";
-import Test from "../pages/Test";
+
 export const DataContext = React.createContext();
 
 export default function CVBuilder() {
@@ -151,10 +149,8 @@ export default function CVBuilder() {
         <Box
           sx={{
             width: "50%",
-            height: "100%",
             padding: "5%",
             backgroundColor: "white",
-            overflowY: "scroll",
           }}
         >
           {/* <LinearProgress
@@ -181,8 +177,10 @@ export default function CVBuilder() {
         <Box
           sx={{
             width: "50%",
+            height: "100%",
             backgroundColor: "#656e83",
-           
+            position: "fixed",
+            right: 0,
           }}
         >
           <PDFView />

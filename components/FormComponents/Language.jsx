@@ -1,27 +1,32 @@
-import { useState, useContext } from "react";
+import * as React from "react";
+import { useState,useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { DataContext } from "../pages/CVBuilder";
-export default function Courses({
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { DataContext } from "../../pages/CVBuilder";
+
+export default function Language({
   deleteCustomSection,
   sectionId,
   setActiveSectionId,
 }) {
-  const getData = useContext(DataContext);
-  const [expanded, setExpanded] = useState(false);
-
+  const getData= useContext(DataContext)
+  const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [stateValue, setStateValue] = getData.value7;
+   const [stateValue, setStateValue] = getData.value9;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -29,17 +34,16 @@ export default function Courses({
         return item;
       }
     });
-    setStateValue(result);
+    setAccordionValues(result);
   };
+  // const [toggleSwitch, setToggleSwitch] = useState(false);
 
   const addAccordionSection = () => {
     setStateValue([
       ...stateValue,
       {
-        course: "",
-        institution: "",
-        startdate: "",
-        enddate: "",
+        language: "",
+        level: "",
       },
     ]);
   };
@@ -63,7 +67,7 @@ export default function Courses({
               paddingBottom: "10px",
             }}
           >
-            Courses
+            Language
           </Typography>
           <DeleteIcon
             sx={{
@@ -71,7 +75,6 @@ export default function Courses({
               marginLeft: "5px",
               fontSize: "18px",
               color: "white",
-
               "&:hover": {
                 color: "#2196f3",
                 cursor: "pointer",
@@ -82,10 +85,8 @@ export default function Courses({
               setActiveSectionId(null);
               setStateValue([
                 {
-                  course: "",
-                  institution: "",
-                  startdate: "",
-                  enddate: "",
+                  language: "",
+                  level: "",
                 },
               ]);
             }}
@@ -102,6 +103,7 @@ export default function Courses({
                 onChange={handleChange(key)}
                 sx={{
                   backgroundColor: "white",
+                  marginTop: "10px",
                   boxShadow: "none",
                   border: "1px solid",
                   borderColor: "#e7eaf4",
@@ -113,7 +115,7 @@ export default function Courses({
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    {item.course ? item.course : "(Not Specified)"}
+                    {item.language ? item.language : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -125,10 +127,10 @@ export default function Courses({
                     <Grid item xs={6} md={6}>
                       <TextField
                         id="outlined-basic"
-                        label="Course"
+                        label="Language"
                         type="text"
-                        value={stateValue.course}
-                        name="course"
+                        name="language"
+                        value={stateValue.language}
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -147,73 +149,52 @@ export default function Courses({
                       />
                     </Grid>
                     <Grid item xs={6} md={6}>
-                      <TextField
-                        id="outlined-basic"
-                        label="Institution"
-                        type="text"
-                        value={stateValue.institution}
-                        name="institution"
-                        variant="filled"
-                        sx={{
-                          width: "100%",
-                          background: "#e7eaf4",
-                          borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
-                        }}
-                        InputProps={{
-                          disableUnderline: true,
-                        }}
-                        onChange={(e) => handleInputChange(e, key)}
-                      />
-                    </Grid>
-                    <Grid item xs={6} md={6} sx={{ display: "flex" }}>
-                      <TextField
-                        variant="filled"
-                        label="Start Date"
-                        name="startdate"
-                        value={stateValue.startdate}
-                        type="date"
-                        sx={{
-                          background: "#e7eaf4",
-                          borderRadius: "5px",
-                        }}
-                        InputProps={{
-                          disableUnderline: true,
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            fontSize: "12px",
-                            color: "#828ba2",
-                          },
-                        }}
-                        onChange={(e) => handleInputChange(e, key)}
-                      />
-                      <TextField
-                        variant="filled"
-                        label="End Date"
-                        name="enddate"
-                        value={stateValue.enddate}
-                        type="date"
-                        sx={{
-                          marginLeft: "20px",
-                          background: "#e7eaf4",
-                          borderRadius: "5px",
-                        }}
-                        InputProps={{
-                          disableUnderline: true,
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            fontSize: "12px",
-                            color: "#828ba2",
-                          },
-                        }}
-                        onChange={(e) => handleInputChange(e, key)}
-                      />
+                      <FormControl sx={{ width: "80%", marginLeft: "50px" }}>
+                        <InputLabel id="demo-simple-select-helper-label">
+                          Level
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-helper-label"
+                          id="demo-simple-select-helper"
+                          label="level"
+                          defaultValue=""
+                          variant="filled"
+                          name="level"
+                          value={stateValue.level}
+                          sx={{ background: "#e7eaf4", borderRadius: "5px" }}
+                          InputProps={{
+                            disableUnderline: true,
+                          }}
+                          onChange={(e) => handleInputChange(e, key)}
+                        >
+                          {[
+                            {
+                              value: 0,
+                              name: "None",
+                            },
+                            {
+                              value: 1,
+                              name: "Native speaker",
+                            },
+                            {
+                              value: 2,
+                              name: "Highly proficient",
+                            },
+                            {
+                              value: 3,
+                              name: "Very good command",
+                            },
+                          ].map((item, key) => (
+                            <MenuItem
+                              defaultValue={stateValue.level}
+                              value={item.name}
+                              key={key}
+                            >
+                              {item.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                     </Grid>
                   </Grid>
                 </AccordionDetails>
@@ -225,6 +206,7 @@ export default function Courses({
                   marginTop: "25px",
                   marginLeft: "5px",
                   fontSize: "20px",
+
                   color: "white",
                   "&:hover": {
                     color: "#2196f3",
@@ -242,8 +224,8 @@ export default function Courses({
           width: "94%",
           fontWeight: "700",
           marginTop: "10px",
-          display: "flex",
           padding: "5px",
+          display: "flex",
           borderRadius: "5px",
           "&:hover": {
             backgroundColor: "#e3f2fd",
@@ -253,7 +235,7 @@ export default function Courses({
         color="primary"
         onClick={addAccordionSection}
       >
-        <AddIcon sx={{ fontSize: "20px" }} /> Add one more course
+        <AddIcon sx={{ fontSize: "20px" }} /> Add one more language
       </Typography>
     </Box>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useRef } from "react";
 import Button from "@mui/material/Button";
-import Viewer from "../components/Viewer";
+import Viewer from "../Viewer";
 import ReactDOMServer from "react-dom/server";
 
 
