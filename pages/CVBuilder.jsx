@@ -15,10 +15,13 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import PDFView from "./PDFSection";
+import Practice from "./Practice";
 
 export const DataContext = React.createContext();
 
 export default function CVBuilder() {
+  const [images, setImages] = useState([]);
+  const [imageURLs, setImageURLs] = useState([]);
   const [personalDetails, setPersonalDetails] = useState([
     {
       firstname: "",
@@ -134,6 +137,8 @@ export default function CVBuilder() {
     >
       <DataContext.Provider
         value={{
+          image: [images, setImages],
+          imageUrls: [imageURLs, setImageURLs],
           value1: [personalDetails, setPersonalDetails],
           value2: [professionalSummary, setProfessionalSummary],
           value3: [employmentDetails, setEmploymentDetails],
@@ -162,6 +167,7 @@ export default function CVBuilder() {
             }}
           /> */}
           <Box sx={{ marginTop: "4rem", width: "100%", height: "100vh" }}>
+            <Practice />
             <PersonalDetails />
             <ProfessionalSummary />
             {allSections.map((item) => (
@@ -177,8 +183,6 @@ export default function CVBuilder() {
         <Box
           sx={{
             width: "50%",
-            height: "100%",
-            backgroundColor: "#656e83",
             position: "fixed",
             right: 0,
           }}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Button from "@mui/material/Button";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 export default function Home() {
@@ -45,7 +45,13 @@ export default function Home() {
         </Button>
       </div>
       <div
-        style={{ background: "#f5f7fd", display: "flex", flexDirection: "row",marginTop: "200px" }}
+        style={{
+          background: "#f5f7fd",
+          display: "flex",
+          flexDirection: "row",
+          marginTop: "200px",
+          flexWrap: "wrap"
+        }}
       >
         <img
           src="/images/sample.jpg"

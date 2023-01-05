@@ -30,7 +30,7 @@ export default function PersonalDetails() {
   return (
     <Box>
       {stateValue.map((item, key) => (
-        <Box key={key}>
+        <Box key={key} style={{marginTop: "40px"}}>
           <Typography
             sx={{
               width: "33%",
