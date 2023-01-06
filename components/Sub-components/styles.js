@@ -41,10 +41,11 @@ export default StyleSheet.create({
     fontWeight: "900",
   },
   profile_img: {
-    marginLeft: "30px",
+    marginLeft: "35px",
     width: "60px",
     height: "60px",
     borderRadius: "100",
+    objectFit: "cover"
   },
   profile_line: {
     marginTop: "15px",

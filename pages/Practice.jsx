@@ -1,79 +1,43 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useContext } from "react";
-import { DataContext } from "./CVBuilder";
-import Typography from "@mui/material/Typography";
-import { Button } from "@mui/material";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import EditIcon from "@mui/icons-material/Edit";
+import LinearProgress from "@mui/material/LinearProgress";
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 export default function Practice() {
-  const getData = useContext(DataContext);
-  const [imageData, setImageData] = getData.image;
-  const [imageUrlData, setImageUrlData] = getData.imageUrls;
-  console.log(imageData);
-
-  useEffect(() => {
-    if (imageData.length < 1) return;
-    const newImageUrls = [];
-    imageData.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
-    setImageUrlData(newImageUrls);
-  }, [imageData]);
-  const imageHandler = (e) => {
-    setImageData([...e.target.files]);
-  };
-  const deleteImage = () => {
-    setImageUrlData([]);
-    setImageData([]);
-  };
+  const [progress, setProgress] = useState(30);
+  const details = [
+    {
+      firstname: "",
+      lastname: "",
+      email: "",
+      phone: "",
+      country: "",
+      city: "",
+      occupation: "",
+      address: "",
+      postalcode: "",
+      nationality: "",
+      placeofbirth: "",
+      dateofbirth: "",
+    },
+  ];
   return (
     <div>
-      <Typography
+      <LinearProgress
+        variant="determinate"
+        value={progress}
         sx={{
-          width: "33%",
-          paddingBottom: "20px",
-          fontWeight: "700",
-          fontSize: "20px",
+          margin: "auto",
+          marginTop: "50px",
+          width: "50%",
         }}
-      >
-        Upload Photo
-      </Typography>
-      {imageUrlData.length > 0 ? (
-        <div style={{ display: "flex"}}>
-          <img src={imageUrlData} width="70px" height="70px" />
-          <label htmlFor="upload-photo">
-            <input
-              style={{ display: "none" }}
-              id="upload-photo"
-              name="upload-photo"
-              type="file"
-              onChange={imageHandler}
-            />
-            <div style={{display: "flex",flexDirection: "column"}}>
-              <Button color="primary" component="span">
-                <EditIcon />
-              </Button>
-              <Button onClick={deleteImage}>
-                <DeleteOutlineOutlinedIcon />
-              </Button>
-            </div>
-          </label>
-        </div>
-      ) : (
-        <label htmlFor="upload-photo">
-          <input
-            style={{ display: "none" }}
-            id="upload-photo"
-            name="upload-photo"
-            type="file"
-            onChange={imageHandler}
-          />
-
-          <Button color="primary" variant="contained" component="span">
-            Upload
-          </Button>
-        </label>
-      )}
+      />
+      <Box style={{ display: "flex", margin: "auto" }}>
+        {details.map((item) => (
+          <TextField variant="filled" value={item.firstname} type="text" />
+        ))}
+      </Box>
     </div>
   );
 }

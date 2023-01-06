@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Accordion from "@mui/material/Accordion";
@@ -17,7 +17,7 @@ export default function PersonalDetails() {
     setExpanded(isExpanded ? panel : false);
   };
   const [stateValue, setStateValue] = getData.value1;
-
+  const [progressValue, setProgressValue] = getData.progressbar;
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
     let clone = [...stateValue];
@@ -26,11 +26,19 @@ export default function PersonalDetails() {
     clone[inputKey] = obj;
     setStateValue([...clone]);
   };
- 
+  useEffect(() => {
+    if (Object.values(stateValue[0]).every((item) => item !== "")) {
+      setProgressValue(progressValue + 10);
+    } else if (Object.values(stateValue[0]).every((item) => item === "")) {
+      
+      setProgressValue(0);
+    }
+  }, [Object.values(stateValue[0]).every((item) => item !== "")]);
+
   return (
     <Box>
       {stateValue.map((item, key) => (
-        <Box key={key} style={{marginTop: "40px"}}>
+        <Box key={key} style={{ marginTop: "40px" }}>
           <Typography
             sx={{
               width: "33%",

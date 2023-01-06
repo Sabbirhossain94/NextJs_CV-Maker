@@ -1,6 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useState, useEffect } from "react";
 import PersonalDetails from "../components/FormComponents/PersonalDetails";
@@ -15,11 +16,12 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import PDFView from "./PDFSection";
-import Practice from "./Practice";
+import ImageUpload from "../components/ImageUpload";
 
 export const DataContext = React.createContext();
 
 export default function CVBuilder() {
+  const [progress, setProgress]= useState(0)
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
   const [personalDetails, setPersonalDetails] = useState([
@@ -128,7 +130,6 @@ export default function CVBuilder() {
     });
     setAllSections(result);
   };
-
   return (
     <Box
       sx={{
@@ -137,6 +138,7 @@ export default function CVBuilder() {
     >
       <DataContext.Provider
         value={{
+          progressbar: [progress, setProgress],
           image: [images, setImages],
           imageUrls: [imageURLs, setImageURLs],
           value1: [personalDetails, setPersonalDetails],
@@ -158,16 +160,20 @@ export default function CVBuilder() {
             backgroundColor: "white",
           }}
         >
-          {/* <LinearProgress
-            variant="determinate"
-            value={progress}
-            sx={{
-              marginTop: "10px",
-              width: "93%",
-            }}
-          /> */}
+          <Box>
+            <Typography>{progress}% Profile completeness</Typography>
+            <LinearProgress
+              variant="determinate"
+              value={progress}
+              sx={{
+                marginTop: "10px",
+                width: "93%",
+                height: "5px",
+              }}
+            />
+          </Box>
           <Box sx={{ marginTop: "4rem", width: "100%", height: "100vh" }}>
-            <Practice />
+            <ImageUpload />
             <PersonalDetails />
             <ProfessionalSummary />
             {allSections.map((item) => (
