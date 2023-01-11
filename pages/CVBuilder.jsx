@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import PersonalDetails from "../components/FormComponents/PersonalDetails";
 import Education from "../components/FormComponents/Education";
 import SocialLinks from "../components/FormComponents/SocialLinks";
@@ -16,14 +16,18 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import PDFView from "./PDFSection";
-import ImageUpload from "../components/ImageUpload";
+import ImageUpload from "../components/FormComponents/ImageUpload";
 
 export const DataContext = React.createContext();
+export const ProgressContext = React.createContext();
 
 export default function CVBuilder() {
-  const [progress, setProgress]= useState(0)
+  const [progress,setProgress]=useState(0)
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
+  let counter = 0;
+  let totalFormField = 11;
+
   const [personalDetails, setPersonalDetails] = useState([
     {
       firstname: "",
@@ -130,6 +134,40 @@ export default function CVBuilder() {
     });
     setAllSections(result);
   };
+  // if (imageURLs.length > 0) {
+  //   setProgress(prevState=>prevState+1);
+  // }
+  // if (Object.values(personalDetails[0]).every((item) => item !== "")) {
+  //   counter++;
+  // }
+
+  // if (Object.values(professionalSummary[0]).every((item) => item !== "")) {
+  //   counter++;
+  // }
+  // if (Object.values(employmentDetails[0]).every((item) => item !== "")) {
+  //   counter++;
+  // }
+  // if (Object.values(educationDetails[0]).every((item) => item !== "")) {
+  //   counter++;
+  // }
+  // if (Object.values(socialLinksDetails[0]).every((item) => item !== "")) {
+  //   counter++;
+  // }
+  // if (Object.values(skillDetails[0]).every((item) => item !== "")) {
+  //   counter++;
+  // }
+  //  if (Object.values(courseDetails[0]).every((item) => item !== "")) {
+  //    counter++;
+  //  }
+  //   if (Object.values(extraCurricularDetails[0]).every((item) => item !== "")) {
+  //     counter++;
+  //   }
+  //    if (Object.values(languageDetails[0]).every((item) => item !== "")) {
+  //      counter++;
+  //    }
+  //    if (Object.values(hobbiesDetails[0]).every((item) => item !== "")) {
+  //      counter++;
+  //    }
   return (
     <Box
       sx={{
@@ -138,7 +176,7 @@ export default function CVBuilder() {
     >
       <DataContext.Provider
         value={{
-          progressbar: [progress, setProgress],
+          progressState: [progress, setProgress],
           image: [images, setImages],
           imageUrls: [imageURLs, setImageURLs],
           value1: [personalDetails, setPersonalDetails],
@@ -161,10 +199,13 @@ export default function CVBuilder() {
           }}
         >
           <Box>
-            <Typography>{progress}% Profile completeness</Typography>
+            <Typography>
+              {Math.round((progress / totalFormField) * 100)}% Profile
+              completeness
+            </Typography>
             <LinearProgress
               variant="determinate"
-              value={progress}
+              value={(progress / totalFormField) * 100}
               sx={{
                 marginTop: "10px",
                 width: "93%",
@@ -172,7 +213,8 @@ export default function CVBuilder() {
               }}
             />
           </Box>
-          <Box sx={{ marginTop: "4rem", width: "100%", height: "100vh" }}>
+
+          <Box sx={{ marginTop: "2rem", width: "100%", height: "100vh" }}>
             <ImageUpload />
             <PersonalDetails />
             <ProfessionalSummary />

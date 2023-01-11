@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -69,7 +69,7 @@ export default function Language({
           >
             Language
           </Typography>
-          <DeleteIcon
+          <DeleteOutlineOutlinedIcon
             sx={{
               marginTop: "7px",
               marginLeft: "5px",
@@ -201,12 +201,11 @@ export default function Language({
               </Accordion>
             </Grid>
             <Grid item md="auto">
-              <DeleteIcon
+              <DeleteOutlineOutlinedIcon
                 sx={{
-                  marginTop: "25px",
+                  marginTop: "20px",
                   marginLeft: "5px",
-                  fontSize: "20px",
-
+                  fontSize: "25px",
                   color: "white",
                   "&:hover": {
                     color: "#2196f3",

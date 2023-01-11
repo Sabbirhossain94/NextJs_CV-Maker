@@ -15,7 +15,6 @@ export default function AddSection({
   allSections,
   setAllSections,
   deleteCustomSection,
-  
 }) {
   const [activeSectionId, setActiveSectionId] = useState(null);
 
@@ -44,7 +43,6 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={5}
           setActiveSectionId={setActiveSectionId}
-          
         />
       ),
     },
@@ -65,7 +63,6 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={6}
           setActiveSectionId={setActiveSectionId}
-          
         />
       ),
     },
@@ -86,7 +83,6 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={7}
           setActiveSectionId={setActiveSectionId}
-          
         />
       ),
     },
@@ -107,7 +103,6 @@ export default function AddSection({
           deleteCustomSection={deleteCustomSection}
           sectionId={8}
           setActiveSectionId={setActiveSectionId}
-         
         />
       ),
     },

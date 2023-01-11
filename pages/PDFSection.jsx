@@ -6,7 +6,7 @@ import {
 } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 import { Text, View, Image } from "@react-pdf/renderer";
 import { useContext } from "react";
-import styles from "../components/Sub-components/styles";
+import styles from "../components/StyleComponents/styles";
 import { DataContext } from "./CVBuilder";
 
 const PDFView = () => {
@@ -23,11 +23,27 @@ const PDFView = () => {
   const [stateValue10, setStateValue10] = getData.value10;
   const [imageUrlData, setImageUrlData] = getData.imageUrls;
   const newArr = stateValue10.hobbies.split(",");
+
+  var months = [
+    "Jan",
+    "Feb",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
   return (
     <div style={{ flexGrow: 1 }}>
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
-        <Document>
-          <Page size="A4" style={styles.page} fixed>
+        <Document singlePage>
+          <Page size="A4" style={styles.page} wrap>
             {/* left section */}
             <View style={styles.section_left}>
               {stateValue1.map((item) => (
@@ -41,11 +57,7 @@ const PDFView = () => {
                     }}
                   >
                     {imageUrlData.map((imageSrc) => (
-                      <Image
-                        style={styles.profile_img}
-                        src={imageSrc}
-                        
-                      />
+                      <Image style={styles.profile_img} src={imageSrc} />
                     ))}
                     <Text style={styles.name_text}>
                       {item.firstname} {item.lastname}
@@ -352,6 +364,7 @@ const PDFView = () => {
               >
                 {stateValue3.map((item, key) => (
                   <View
+                    key={key}
                     style={{
                       width: "100%",
                       display: "flex",
@@ -361,9 +374,21 @@ const PDFView = () => {
                   >
                     <View style={{ width: "25%" }}>
                       <Text style={{ fontSize: "12px" }}>
-                        {`${item.startdate.slice(0, 7)}` +
-                          `${item.enddate ? " - " : ""}` +
-                          `${item.enddate.slice(0, 7)}`}
+                        {item.startdate
+                          ? `${
+                              months[parseInt(item.startdate.slice(5, 7)) - 1]
+                            }` +
+                            " " +
+                            `${item.startdate.slice(0, 4)}`
+                          : ""}
+                        {item.enddate
+                          ? ` ${
+                              "- " +
+                              months[parseInt(item.enddate.slice(5, 7)) - 1]
+                            }` +
+                            " " +
+                            `${item.enddate.slice(0, 4)}`
+                          : ""}
                       </Text>
                     </View>
 
@@ -435,9 +460,21 @@ const PDFView = () => {
                   >
                     <View style={{ width: "25%" }}>
                       <Text style={{ fontSize: "12px" }}>
-                        {`${item.startdate.slice(0, 7)}` +
-                          `${item.enddate ? " - " : ""}` +
-                          `${item.enddate.slice(0, 7)}`}
+                        {item.startdate
+                          ? `${
+                              months[parseInt(item.startdate.slice(5, 7)) - 1]
+                            }` +
+                            " " +
+                            `${item.startdate.slice(0, 4)}`
+                          : ""}
+                        {item.enddate
+                          ? ` ${
+                              "- " +
+                              months[parseInt(item.enddate.slice(5, 7)) - 1]
+                            }` +
+                            " " +
+                            `${item.enddate.slice(0, 4)}`
+                          : ""}
                       </Text>
                     </View>
 
@@ -502,9 +539,21 @@ const PDFView = () => {
                   >
                     <View style={{ width: "25%" }}>
                       <Text style={{ fontSize: "12px" }}>
-                        {`${item.startdate.slice(0, 7)}` +
-                          `${item.enddate ? " - " : ""}` +
-                          `${item.enddate.slice(0, 7)}`}
+                        {item.startdate
+                          ? `${
+                              months[parseInt(item.startdate.slice(5, 7)) - 1]
+                            }` +
+                            " " +
+                            `${item.startdate.slice(0, 4)}`
+                          : ""}
+                        {item.enddate
+                          ? ` ${
+                              "- " +
+                              months[parseInt(item.enddate.slice(5, 7)) - 1]
+                            }` +
+                            " " +
+                            `${item.enddate.slice(0, 4)}`
+                          : ""}
                       </Text>
                     </View>
 
@@ -565,9 +614,21 @@ const PDFView = () => {
                   >
                     <View style={{ width: "25%" }}>
                       <Text style={{ fontSize: "12px" }}>
-                        {`${item.startdate.slice(0, 7)}` +
-                          `${item.enddate ? " - " : ""}` +
-                          `${item.enddate.slice(0, 7)}`}
+                        {item.startdate
+                          ? `${
+                              months[parseInt(item.startdate.slice(5, 7)) - 1]
+                            }` +
+                            " " +
+                            `${item.startdate.slice(0, 4)}`
+                          : ""}
+                        {item.enddate
+                          ? ` ${
+                              "- " +
+                              months[parseInt(item.enddate.slice(5, 7)) - 1]
+                            }` +
+                            " " +
+                            `${item.enddate.slice(0, 4)}`
+                          : ""}
                       </Text>
                     </View>
 
@@ -627,4 +688,4 @@ const PDFView = () => {
   );
 };
 
-export default PDFView;
+export default React.memo(PDFView);

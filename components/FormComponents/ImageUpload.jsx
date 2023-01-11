@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
-import { DataContext } from "../pages/CVBuilder";
+import { DataContext, ProgressContext } from "../../pages/CVBuilder";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -11,8 +11,7 @@ export default function Practice() {
   const getData = useContext(DataContext);
   const [imageData, setImageData] = getData.image;
   const [imageUrlData, setImageUrlData] = getData.imageUrls;
-  const [progressValue, setProgressValue] = getData.progressbar;
-
+  const [getProgress, setGetProgress] = getData.progressState;
   useEffect(() => {
     if (imageData.length < 1) return;
     const newImageUrls = [];
@@ -27,14 +26,9 @@ export default function Practice() {
     setImageData([]);
   };
 
-  useEffect(() => {
-    if (imageUrlData.length > 0) {
-      setProgressValue(progressValue + 9);
-    } else {
-      setProgressValue((prevState) => prevState - 9);
-    }
-  }, [imageUrlData.length > 0]);
-  console.log(imageData.length);
+  if (imageData.length > 0) {
+    setGetProgress(getProgress + 1);
+  }
   return (
     <div>
       <Typography

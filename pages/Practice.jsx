@@ -3,7 +3,13 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-
+import {
+  Page,
+  Document,
+  PDFViewer,
+} from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
+import { Text, View, Image } from "@react-pdf/renderer";
+import styles from "../components/StyleComponents/styles";
 export default function Practice() {
   const [progress, setProgress] = useState(30);
   const details = [
@@ -24,20 +30,17 @@ export default function Practice() {
   ];
   return (
     <div>
-      <LinearProgress
-        variant="determinate"
-        value={progress}
-        sx={{
-          margin: "auto",
-          marginTop: "50px",
-          width: "50%",
-        }}
-      />
-      <Box style={{ display: "flex", margin: "auto" }}>
-        {details.map((item) => (
-          <TextField variant="filled" value={item.firstname} type="text" />
-        ))}
-      </Box>
+      <PDFViewer style={{ width: "100%", height: "100vh" }}>
+        <Document>
+          {[1, 2, 3].map((item) => (
+            <Page size="A4" style={styles.page}>
+              <View style={styles.section_left}>
+                <Text></Text>
+              </View>
+            </Page>
+          ))}
+        </Document>
+      </PDFViewer>
     </div>
   );
 }

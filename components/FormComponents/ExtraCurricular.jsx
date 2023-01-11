@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -69,7 +69,7 @@ export default function ExtraCurricular({
           >
             Extra-curricular Activities
           </Typography>
-          <DeleteIcon
+          <DeleteOutlineOutlinedIcon
             sx={{
               marginTop: "7px",
               marginLeft: "5px",
@@ -181,7 +181,7 @@ export default function ExtraCurricular({
                         label="Start Date"
                         name="startdate"
                         value={stateValue.startdate}
-                        type="date"
+                        type="month"
                         sx={{
                           background: "#e7eaf4",
                           borderRadius: "5px",
@@ -202,7 +202,7 @@ export default function ExtraCurricular({
                         label="End Date"
                         name="enddate"
                         value={stateValue.enddate}
-                        type="date"
+                        type="month"
                         sx={{
                           marginLeft: "20px",
 
@@ -267,11 +267,11 @@ export default function ExtraCurricular({
               </Accordion>
             </Grid>
             <Grid item md="auto">
-              <DeleteIcon
+              <DeleteOutlineOutlinedIcon
                 sx={{
-                  marginTop: "25px",
+                  marginTop: "20px",
                   marginLeft: "5px",
-                  fontSize: "20px",
+                  fontSize: "25px",
                   color: "white",
                   "&:hover": {
                     color: "#2196f3",

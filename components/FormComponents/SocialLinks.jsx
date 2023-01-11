@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import Accordion from "@mui/material/Accordion";
@@ -147,11 +147,11 @@ export default function SocialLinks() {
                 </Accordion>
               </Grid>
               <Grid item md="auto">
-                <DeleteIcon
+                <DeleteOutlineOutlinedIcon
                   sx={{
-                    marginTop: "25px",
+                    marginTop: "20px",
                     marginLeft: "5px",
-                    fontSize: "20px",
+                    fontSize: "25px",
                     color: "white",
                     "&:hover": {
                       color: "#2196f3",

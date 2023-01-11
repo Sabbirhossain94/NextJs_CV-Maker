@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { DataContext } from "../../pages/CVBuilder";
 
 export default function Hobbies({
@@ -32,7 +32,7 @@ export default function Hobbies({
           >
             Hobbies
           </Typography>
-          <DeleteIcon
+          <DeleteOutlineOutlinedIcon
             sx={{
               marginTop: "7px",
               marginLeft: "5px",
@@ -67,7 +67,6 @@ export default function Hobbies({
               width: "100%",
               background: "#e7eaf4",
               borderRadius: "5px",
-              
             }}
             InputLabelProps={{
               sx: {

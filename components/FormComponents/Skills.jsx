@@ -8,7 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -195,6 +195,7 @@ export default function Skills() {
                           labelId="demo-simple-select-helper-label"
                           id="demo-simple-select-helper"
                           label="level"
+                          disabled={toggleSwitch ? "" : "true"}
                           defaultValue=""
                           value={stateValue.level}
                           variant="filled"
@@ -247,12 +248,11 @@ export default function Skills() {
               </Accordion>
             </Grid>
             <Grid item md="auto">
-              <DeleteIcon
+              <DeleteOutlineOutlinedIcon
                 sx={{
-                  marginTop: "25px",
+                  marginTop: "20px",
                   marginLeft: "5px",
-                  fontSize: "20px",
-
+                  fontSize: "25px",
                   color: "white",
                   "&:hover": {
                     color: "#2196f3",
