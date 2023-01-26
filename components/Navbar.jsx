@@ -24,7 +24,7 @@ export default function Home() {
             justifyContent: "center",
           }}
         >
-          <img src="images/cvmaker.png" width="200px" height="60px" />
+          <img src="images/cvmaker.png" alt="error" width="200px" height="60px" />
         </Box>
       </AppBar>
     </Box>

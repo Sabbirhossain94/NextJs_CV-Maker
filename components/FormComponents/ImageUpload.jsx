@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 
+
 export default function Practice() {
   const getData = useContext(DataContext);
   const [imageData, setImageData] = getData.image;
@@ -17,7 +18,7 @@ export default function Practice() {
     const newImageUrls = [];
     imageData.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
     setImageUrlData(newImageUrls);
-  }, [imageData]);
+  }, [imageData, setImageUrlData]);
   const imageHandler = (e) => {
     setImageData([...e.target.files]);
   };
@@ -25,7 +26,6 @@ export default function Practice() {
     setImageUrlData([]);
     setImageData([]);
   };
-
 
   return (
     <div>
@@ -37,14 +37,15 @@ export default function Practice() {
           fontSize: "20px",
         }}
       >
-         Photo
+        Photo
       </Typography>
       {imageUrlData.length > 0 ? (
         <div style={{ display: "flex" }}>
           <img
             src={imageUrlData}
-            width="70px"
-            height="70px"
+            width={70}
+            height={70}
+            alt="error"
             style={{ objectFit: "contain" }}
           />
           <label htmlFor="upload-photo">

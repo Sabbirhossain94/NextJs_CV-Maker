@@ -38,9 +38,11 @@ const PDFView = () => {
     "Nov",
     "Dec",
   ];
-const handleRenderSuccess =(page)=>{
- console.log(`Viewport size: ${page.viewport.width} x ${page.viewport.height}`);
-}
+  const handleRenderSuccess = (page) => {
+    console.log(
+      `Viewport size: ${page.viewport.width} x ${page.viewport.height}`
+    );
+  };
   return (
     <div style={{ flexGrow: 1 }}>
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
@@ -48,8 +50,8 @@ const handleRenderSuccess =(page)=>{
           <Page size="A4" style={styles.page} pageNumber={1}>
             {/* left section */}
             <View style={styles.section_left}>
-              {stateValue1.map((item) => (
-                <View>
+              {stateValue1.map((item, key) => (
+                <View key={key}>
                   <View
                     style={{
                       justifyContent: "center",
@@ -211,8 +213,11 @@ const handleRenderSuccess =(page)=>{
                 ) : (
                   <Text> {""}</Text>
                 )}
-                {stateValue5.map((item) => (
-                  <View style={{ marginTop: "10px", marginLeft: "10px" }}>
+                {stateValue5.map((item, key) => (
+                  <View
+                    style={{ marginTop: "10px", marginLeft: "10px" }}
+                    key={key}
+                  >
                     <Text style={{ fontSize: "12px", color: "white" }}>
                       {item.label}
                     </Text>
@@ -259,8 +264,11 @@ const handleRenderSuccess =(page)=>{
                 ) : (
                   <Text> {""}</Text>
                 )}
-                {stateValue6.map((item) => (
-                  <View style={{ marginTop: "10px", marginLeft: "10px" }}>
+                {stateValue6.map((item, key) => (
+                  <View
+                    style={{ marginTop: "10px", marginLeft: "10px" }}
+                    key={key}
+                  >
                     <Text style={{ fontSize: "12px", color: "white" }}>
                       {item.skill}
                     </Text>
@@ -307,8 +315,11 @@ const handleRenderSuccess =(page)=>{
                 ) : (
                   <Text> {""}</Text>
                 )}
-                {stateValue9.map((item) => (
-                  <View style={{ marginTop: "10px", marginLeft: "10px" }}>
+                {stateValue9.map((item, key) => (
+                  <View
+                    style={{ marginTop: "10px", marginLeft: "10px" }}
+                    key={key}
+                  >
                     <Text style={{ fontSize: "12px", color: "white" }}>
                       {item.language}
                     </Text>
@@ -328,8 +339,8 @@ const handleRenderSuccess =(page)=>{
 
             {/* right section */}
             <View style={styles.section_right}>
-              {stateValue2.map((item) => (
-                <View>
+              {stateValue2.map((item, key) => (
+                <View key={key}>
                   <Text style={{ fontSize: "12px" }}>{item.summary}</Text>
                 </View>
               ))}
@@ -459,6 +470,7 @@ const handleRenderSuccess =(page)=>{
                       flexDirection: "row",
                       marginTop: "10px",
                     }}
+                    key={key}
                   >
                     <View style={{ width: "25%" }}>
                       <Text style={{ fontSize: "12px" }}>
@@ -532,6 +544,7 @@ const handleRenderSuccess =(page)=>{
               >
                 {stateValue7.map((item, key) => (
                   <View
+                    key={key}
                     style={{
                       width: "100%",
                       display: "flex",
@@ -607,6 +620,7 @@ const handleRenderSuccess =(page)=>{
               >
                 {stateValue8.map((item, key) => (
                   <View
+                    key={key}
                     style={{
                       width: "100%",
                       display: "flex",
@@ -673,8 +687,11 @@ const handleRenderSuccess =(page)=>{
                       marginTop: "5px",
                     }}
                   />
-                  {newArr.map((item) => (
-                    <Text style={{ fontSize: "15px", marginTop: "10px" }}>
+                  {newArr.map((item, key) => (
+                    <Text
+                      style={{ fontSize: "15px", marginTop: "10px" }}
+                      key={key}
+                    >
                       {item}
                     </Text>
                   ))}

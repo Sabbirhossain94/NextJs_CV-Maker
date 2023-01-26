@@ -18,7 +18,6 @@ export default function PersonalDetails() {
     setExpanded(isExpanded ? panel : false);
   };
   const [stateValue, setStateValue] = getData.value1;
-  let [getProgress, setProgress] = getData.progressState;
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
@@ -28,10 +27,7 @@ export default function PersonalDetails() {
     clone[inputKey] = obj;
     setStateValue([...clone]);
   };
-  // if (Object.values(stateValue[0]).every((item) => item !== "")) {
-  //   getProgress.push(1);
-  // }
-   Object.values(stateValue[0]).every((item) => item !== "") ? setProgress(getProgress+1) : "";
+  
 
   return (
     <Box>

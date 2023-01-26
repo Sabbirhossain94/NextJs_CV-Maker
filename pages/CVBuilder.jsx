@@ -22,10 +22,8 @@ import ImageUpload from "../components/FormComponents/ImageUpload";
 export const DataContext = React.createContext();
 
 export default function CVBuilder() {
-  const [progress, setProgress] = useState(0);
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
-  let totalFormField = 11;
 
   const [personalDetails, setPersonalDetails] = useState([
     {
@@ -145,7 +143,6 @@ export default function CVBuilder() {
       </Head>
       <DataContext.Provider
         value={{
-          progressState: [progress, setProgress],
           image: [images, setImages],
           imageUrls: [imageURLs, setImageURLs],
           value1: [personalDetails, setPersonalDetails],

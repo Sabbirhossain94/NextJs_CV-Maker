@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
+import Link from "next/link";
 export default function Home() {
   return (
     <Box>
@@ -30,7 +30,7 @@ export default function Home() {
         <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
           Create your resume easily with this free builder
         </Typography>
-        <a href="/CVBuilder" style={{ textDecoration: "none" }}>
+        <Link href="/CVBuilder" style={{ textDecoration: "none" }}>
           <Button
             variant="contained"
             component="span"
@@ -44,7 +44,7 @@ export default function Home() {
           >
             <Typography>Create Resume</Typography>
           </Button>
-        </a>
+        </Link>
       </Box>
       {/*  */}
       <Box
@@ -58,6 +58,7 @@ export default function Home() {
       >
         <img
           src="/images/sample.jpg"
+          alt="error"
           style={{ marginLeft: "100px", marginTop: "100px", padding: "20px" }}
         />
         <Box
@@ -72,7 +73,7 @@ export default function Home() {
           <Box
             style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
           >
-            <img src="/images/feature.png" width="35px" height="35px" />
+            <img src="/images/feature.png" alt="error" width="35px" height="35px" />
             <Typography
               style={{
                 marginLeft: "15px",
@@ -104,6 +105,7 @@ export default function Home() {
           >
             <img
               src="/images/download_icon.png"
+              alt="error"
               width="35px"
               height="35px"
               style={{ opacity: "0.6" }}
