@@ -8,16 +8,17 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import { DataContext,ProgressContext } from "../../pages/CVBuilder";
+import { DataContext } from "../../pages/CVBuilder";
 
 export default function PersonalDetails() {
+  let counter = 0;
   const getData = useContext(DataContext);
-  const getProgressCounter = useContext(ProgressContext);
   const [expanded, setExpanded] = React.useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
   const [stateValue, setStateValue] = getData.value1;
+  let [getProgress, setProgress] = getData.progressState;
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
@@ -28,9 +29,10 @@ export default function PersonalDetails() {
     setStateValue([...clone]);
   };
   // if (Object.values(stateValue[0]).every((item) => item !== "")) {
-  //   counter+1;
-  //   getData.progressValue.current = counter;
+  //   getProgress.push(1);
   // }
+   Object.values(stateValue[0]).every((item) => item !== "") ? setProgress(getProgress+1) : "";
+
   return (
     <Box>
       {stateValue.map((item, key) => (

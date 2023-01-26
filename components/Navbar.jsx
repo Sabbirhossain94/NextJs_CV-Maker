@@ -1,21 +1,31 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 export default function Home() {
   return (
-    <Box sx={{ flexGrow: 1, position: "fixed" }}>
-      <AppBar elevation={1} color="primary" style={{ height: "60px" }}>
-        <Typography
-          style={{
-            padding: "15px",
-            fontFamily: "Arial",
-            fontSize: "20px",
-            marginLeft: "15px",
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        elevation={1}
+        style={{
+          height: "60px",
+          background: "#fff",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: "50px",
+            marginLeft: "30px",
+            justifyContent: "center",
           }}
         >
-          CVBuilder
-        </Typography>
+          <img src="images/cvmaker.png" width="200px" height="60px" />
+        </Box>
       </AppBar>
     </Box>
   );

@@ -1,63 +1,66 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+
 export default function Home() {
   return (
-    <div>
-      <div
-        style={{
-          height: "70%",
+    <Box>
+      <Box
+        sx={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          flexDirection: "column",
           marginTop: "200px",
-          padding: "10px",
-          lineHeight: "5px",
+          width: "100%",
         }}
       >
-        <p
-          style={{
+        <Typography
+          sx={{
+            paddingBottom: "20px",
+            fontWeight: "700",
+            fontSize: "40px",
             textAlign: "center",
-            fontSize: "50px",
-            fontFamily: "Segoe UI",
-            marginTop: "50px",
           }}
         >
-          <b>Build a professional resume for free</b>
-        </p>
-        <p
-          style={{
-            fontSize: "20px",
-            fontFamily: "Segoe UI",
-          }}
-        >
-          Create your resume easily with our free builder and professional
-          templates.
-        </p>
-        <Button
-          href="/CVBuilder"
-          variant="contained"
-          size="large"
-          style={{ fontSize: "20px", marginTop: "30px" }}
-        >
-          Create Resume
-        </Button>
-      </div>
-      <div
+          Build a professional resume for free
+        </Typography>
+        <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
+          Create your resume easily with this free builder
+        </Typography>
+        <a href="/CVBuilder" style={{ textDecoration: "none" }}>
+          <Button
+            variant="contained"
+            component="span"
+            sx={{
+              marginTop: "25px",
+              background: "#34c09e",
+              ":hover": {
+                background: "#2eac8e",
+              },
+            }}
+          >
+            <Typography>Create Resume</Typography>
+          </Button>
+        </a>
+      </Box>
+      {/*  */}
+      <Box
         style={{
           background: "#f5f7fd",
           display: "flex",
           flexDirection: "row",
           marginTop: "200px",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
         }}
       >
         <img
           src="/images/sample.jpg"
           style={{ marginLeft: "100px", marginTop: "100px", padding: "20px" }}
         />
-        <div
+        <Box
           style={{
             marginTop: "100px",
             padding: "20px",
@@ -66,23 +69,37 @@ export default function Home() {
             fontFamily: "Segoe UI",
           }}
         >
-          <div
+          <Box
             style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
           >
             <img src="/images/feature.png" width="35px" height="35px" />
-            <b style={{ marginLeft: "15px" }}>
+            <Typography
+              style={{
+                marginLeft: "15px",
+                fontWeight: "600",
+                fontSize: "25px",
+              }}
+            >
               Build your resume easily with step by step
-            </b>
-          </div>
-          <div
+            </Typography>
+          </Box>
+          <Box
             style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
           >
             <PictureAsPdfIcon
               style={{ width: "32px", height: "32px", opacity: "0.6" }}
             />
-            <b style={{ marginLeft: "20px" }}>Live PDF Viewer</b>
-          </div>
-          <div
+            <Typography
+              style={{
+                marginLeft: "19px",
+                fontWeight: "600",
+                fontSize: "25px",
+              }}
+            >
+              Live PDF Viewer
+            </Typography>
+          </Box>
+          <Box
             style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
           >
             <img
@@ -91,10 +108,18 @@ export default function Home() {
               height="35px"
               style={{ opacity: "0.6" }}
             />
-            <b style={{ marginLeft: "15px" }}>Free Download</b>
-          </div>
-        </div>
-      </div>
+            <Typography
+              style={{
+                marginLeft: "15px",
+                fontWeight: "600",
+                fontSize: "25px",
+              }}
+            >
+              Free Download
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
       <footer
         style={{
           display: "flex",
@@ -110,6 +135,6 @@ export default function Home() {
           &copy; 2023 CV Builder. All rights reserved
         </p>
       </footer>
-    </div>
+    </Box>
   );
 }

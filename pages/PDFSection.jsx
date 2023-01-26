@@ -38,12 +38,14 @@ const PDFView = () => {
     "Nov",
     "Dec",
   ];
-
+const handleRenderSuccess =(page)=>{
+ console.log(`Viewport size: ${page.viewport.width} x ${page.viewport.height}`);
+}
   return (
     <div style={{ flexGrow: 1 }}>
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
-        <Document singlePage>
-          <Page size="A4" style={styles.page} wrap>
+        <Document onPageRenderSuccess={handleRenderSuccess}>
+          <Page size="A4" style={styles.page} pageNumber={1}>
             {/* left section */}
             <View style={styles.section_left}>
               {stateValue1.map((item) => (
@@ -91,7 +93,7 @@ const PDFView = () => {
                       </Text>
                     </View>
                   ) : (
-                    ""
+                    <Text> {""}</Text>
                   )}
                   <View
                     style={{ marginLeft: "10px", fontFamily: "Helvetica-Bold" }}
@@ -207,7 +209,7 @@ const PDFView = () => {
                     </Text>
                   </View>
                 ) : (
-                  ""
+                  <Text> {""}</Text>
                 )}
                 {stateValue5.map((item) => (
                   <View style={{ marginTop: "10px", marginLeft: "10px" }}>
@@ -255,7 +257,7 @@ const PDFView = () => {
                     </Text>
                   </View>
                 ) : (
-                  ""
+                  <Text> {""}</Text>
                 )}
                 {stateValue6.map((item) => (
                   <View style={{ marginTop: "10px", marginLeft: "10px" }}>
@@ -303,7 +305,7 @@ const PDFView = () => {
                     </Text>
                   </View>
                 ) : (
-                  ""
+                  <Text> {""}</Text>
                 )}
                 {stateValue9.map((item) => (
                   <View style={{ marginTop: "10px", marginLeft: "10px" }}>
@@ -353,7 +355,7 @@ const PDFView = () => {
                   />
                 </View>
               ) : (
-                ""
+                <Text> {""}</Text>
               )}
               <View
                 style={{
@@ -440,7 +442,7 @@ const PDFView = () => {
                   />
                 </View>
               ) : (
-                ""
+                <Text> {""}</Text>
               )}
               <View
                 style={{
@@ -519,7 +521,7 @@ const PDFView = () => {
                   />
                 </View>
               ) : (
-                ""
+                <Text> {""}</Text>
               )}
               <View
                 style={{
@@ -594,7 +596,7 @@ const PDFView = () => {
                   />
                 </View>
               ) : (
-                ""
+                <Text> {""}</Text>
               )}
               <View
                 style={{
@@ -678,7 +680,7 @@ const PDFView = () => {
                   ))}
                 </View>
               ) : (
-                ""
+                <Text> {""}</Text>
               )}
             </View>
           </Page>

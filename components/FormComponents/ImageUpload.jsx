@@ -11,7 +11,7 @@ export default function Practice() {
   const getData = useContext(DataContext);
   const [imageData, setImageData] = getData.image;
   const [imageUrlData, setImageUrlData] = getData.imageUrls;
-  const [getProgress, setGetProgress] = getData.progressState;
+  const getProgress = getData.progressArray;
   useEffect(() => {
     if (imageData.length < 1) return;
     const newImageUrls = [];
@@ -26,9 +26,7 @@ export default function Practice() {
     setImageData([]);
   };
 
-  if (imageData.length > 0) {
-    setGetProgress(getProgress + 1);
-  }
+
   return (
     <div>
       <Typography
@@ -39,7 +37,7 @@ export default function Practice() {
           fontSize: "20px",
         }}
       >
-        Upload Photo
+         Photo
       </Typography>
       {imageUrlData.length > 0 ? (
         <div style={{ display: "flex" }}>
