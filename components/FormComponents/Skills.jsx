@@ -195,7 +195,7 @@ export default function Skills() {
                           labelId="demo-simple-select-helper-label"
                           id="demo-simple-select-helper"
                           label="level"
-                          disabled={toggleSwitch ? "" : "true"}
+                          disabled={toggleSwitch ? false : true}
                           defaultValue=""
                           value={stateValue.level}
                           variant="filled"

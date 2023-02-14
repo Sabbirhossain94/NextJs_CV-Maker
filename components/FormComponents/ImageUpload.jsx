@@ -12,7 +12,6 @@ export default function Practice() {
   const getData = useContext(DataContext);
   const [imageData, setImageData] = getData.image;
   const [imageUrlData, setImageUrlData] = getData.imageUrls;
-  const getProgress = getData.progressArray;
   useEffect(() => {
     if (imageData.length < 1) return;
     const newImageUrls = [];
@@ -28,7 +27,7 @@ export default function Practice() {
   };
 
   return (
-    <div>
+    <div style={{marginTop: "30px"}}>
       <Typography
         sx={{
           width: "33%",

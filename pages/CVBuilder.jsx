@@ -1,9 +1,8 @@
 import React from "react";
 import Head from "next/head";
+import Image from "next/image";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import LinearProgress from "@mui/material/LinearProgress";
 import { useState, useRef } from "react";
 import PersonalDetails from "../components/FormComponents/PersonalDetails";
 import Education from "../components/FormComponents/Education";
@@ -165,6 +164,7 @@ export default function CVBuilder() {
           }}
         >
           <Box sx={{ marginTop: "1rem", width: "100%", height: "100vh" }}>
+            {/* <Image src="/images/home.svg" alt="error" width={25} height={25} style={{marginTop: "20px",border: "blue"}}/> */}
             <ImageUpload />
             <PersonalDetails />
             <ProfessionalSummary />
