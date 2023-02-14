@@ -46,6 +46,7 @@ export default function Practice() {
           <Image
             loader={imageLoader}
             src="/Images/resume_icon.png"
+            
             width={90}
             height={90}
             alt="error"
@@ -57,6 +58,7 @@ export default function Practice() {
               id="upload-photo"
               name="upload-photo"
               type="file"
+              accept="image/png, image/jpg "
               onChange={imageHandler}
             />
             <div style={{ display: "flex", flexDirection: "column" }}>

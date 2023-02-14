@@ -37,9 +37,9 @@ export default function Home() {
             component="span"
             sx={{
               marginTop: "25px",
-              background: "#34c09e",
+              background: "#1976d2",
               ":hover": {
-                background: "#2eac8e",
+                background: "#0d47a1",
               },
             }}
           >
@@ -57,9 +57,10 @@ export default function Home() {
           flexWrap: "wrap",
         }}
       >
-        <img
-          src="/images/sample.jpg"
+        <Image
+          src="/Images/sample.jpg"
           alt="error"
+          priority
           height={750}
           width={750}
           style={{ marginLeft: "100px", marginTop: "100px", padding: "20px" }}
@@ -77,7 +78,7 @@ export default function Home() {
             style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
           >
             <Image
-              src="/images/feature.png"
+              src="/Images/feature.png"
               alt="error"
               width={35}
               height={35}
@@ -112,7 +113,7 @@ export default function Home() {
             style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
           >
             <Image
-              src="/images/download_icon.png"
+              src="/Images/download_icon.png"
               alt="error"
               width={35}
               height={35}
