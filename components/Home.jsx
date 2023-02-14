@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Button from "@mui/material/Button";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import Typography from "@mui/material/Typography";
@@ -59,6 +60,8 @@ export default function Home() {
         <img
           src="/images/sample.jpg"
           alt="error"
+          height={750}
+          width={750}
           style={{ marginLeft: "100px", marginTop: "100px", padding: "20px" }}
         />
         <Box
@@ -73,7 +76,12 @@ export default function Home() {
           <Box
             style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
           >
-            <img src="/images/feature.png" alt="error" width="35px" height="35px" />
+            <Image
+              src="/images/feature.png"
+              alt="error"
+              width={35}
+              height={35}
+            />
             <Typography
               style={{
                 marginLeft: "15px",
@@ -103,11 +111,11 @@ export default function Home() {
           <Box
             style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
           >
-            <img
+            <Image
               src="/images/download_icon.png"
               alt="error"
-              width="35px"
-              height="35px"
+              width={35}
+              height={35}
               style={{ opacity: "0.6" }}
             />
             <Typography

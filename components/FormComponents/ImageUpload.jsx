@@ -1,7 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
-import { DataContext, ProgressContext } from "../../pages/CVBuilder";
+import Image from "next/image";
+import { DataContext } from "../../pages/CVBuilder";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -25,9 +26,11 @@ export default function Practice() {
     setImageUrlData([]);
     setImageData([]);
   };
-
+ const imageLoader= ()=>{
+  return imageUrlData
+ }
   return (
-    <div style={{marginTop: "30px"}}>
+    <div style={{ marginTop: "30px" }}>
       <Typography
         sx={{
           width: "33%",
@@ -40,10 +43,11 @@ export default function Practice() {
       </Typography>
       {imageUrlData.length > 0 ? (
         <div style={{ display: "flex" }}>
-          <img
-            src={imageUrlData}
-            width={70}
-            height={70}
+          <Image
+            loader={imageLoader}
+            src="/Images/resume_icon.png"
+            width={90}
+            height={90}
             alt="error"
             style={{ objectFit: "contain" }}
           />

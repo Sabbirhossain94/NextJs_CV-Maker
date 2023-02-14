@@ -1,6 +1,6 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-
+import Image from "next/image";
 export default function Home() {
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -24,7 +24,12 @@ export default function Home() {
             justifyContent: "center",
           }}
         >
-          <img src="images/cvmaker.png" alt="error" width="200px" height="60px" />
+          <Image
+            src="/Images/cvmaker.png"
+            alt="error"
+            width={200}
+            height={60}
+          />
         </Box>
       </AppBar>
     </Box>

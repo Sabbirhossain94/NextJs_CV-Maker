@@ -117,7 +117,12 @@ export default function Skills() {
         Skills
       </Typography>
 
-      <Stack direction="row" spacing={1} alignItems="center" style={{marginTop: "-10px"}}>
+      <Stack
+        direction="row"
+        spacing={1}
+        alignItems="center"
+        style={{ marginTop: "-10px" }}
+      >
         <AntSwitch
           defaultChecked={!toggleSwitch}
           inputProps={{ "aria-label": "ant design" }}
@@ -126,11 +131,11 @@ export default function Skills() {
           }}
         />
         <Typography sx={{ fontSize: "15px" }}>
-          Don't show experience level
+          Don&apos;t show experience level
         </Typography>
       </Stack>
 
-      <Box >
+      <Box>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item md={15}>
