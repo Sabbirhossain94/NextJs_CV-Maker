@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
@@ -21,12 +21,12 @@ export default function Language({
   sectionId,
   setActiveSectionId,
 }) {
-  const getData= useContext(DataContext)
-  const [expanded, setExpanded] = React.useState(false);
+  const getData = useContext(DataContext);
+  const [expanded, setExpanded] = useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-   const [stateValue, setStateValue] = getData.value9;
+  const [stateValue, setStateValue] = getData.value9;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {

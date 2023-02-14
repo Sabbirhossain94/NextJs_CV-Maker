@@ -60,8 +60,13 @@ const PDFView = () => {
                       marginTop: "20px",
                     }}
                   >
-                    {imageUrlData.map((imageSrc,key) => (
-                      <Image key={key} style={styles.profile_img} src={imageSrc} alt="error"/>
+                    {imageUrlData.map((imageSrc, key) => (
+                      <Image
+                        key={key}
+                        style={styles.profile_img}
+                        src={imageSrc}
+                        alt="error"
+                      />
                     ))}
                     <Text style={styles.name_text}>
                       {item.firstname} {item.lastname}

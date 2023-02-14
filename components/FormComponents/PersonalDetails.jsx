@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Accordion from "@mui/material/Accordion";
@@ -11,9 +11,8 @@ import TextField from "@mui/material/TextField";
 import { DataContext } from "../../pages/CVBuilder";
 
 export default function PersonalDetails() {
-  let counter = 0;
   const getData = useContext(DataContext);
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -27,7 +26,6 @@ export default function PersonalDetails() {
     clone[inputKey] = obj;
     setStateValue([...clone]);
   };
-  
 
   return (
     <Box>

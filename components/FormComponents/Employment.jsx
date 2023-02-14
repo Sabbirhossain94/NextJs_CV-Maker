@@ -14,7 +14,7 @@ import { DataContext } from "../../pages/CVBuilder";
 
 export default function Employment() {
   const getData = useContext(DataContext);
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };

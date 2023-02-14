@@ -14,7 +14,7 @@ import { DataContext } from "../../pages/CVBuilder";
 
 export default function SocialLinks() {
   const getData = useContext(DataContext);
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -41,12 +41,12 @@ export default function SocialLinks() {
   };
 
   const handleInputChange = (e, inputKey) => {
-   const { name, value } = e.target;
-   let clone = [...stateValue];
-   let obj = clone[inputKey];
-   obj[name] = value;
-   clone[inputKey] = obj;
-   setStateValue([...clone]);
+    const { name, value } = e.target;
+    let clone = [...stateValue];
+    let obj = clone[inputKey];
+    obj[name] = value;
+    clone[inputKey] = obj;
+    setStateValue([...clone]);
   };
 
   return (

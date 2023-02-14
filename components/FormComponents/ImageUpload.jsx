@@ -8,7 +8,6 @@ import { Button } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 
-
 export default function Practice() {
   const getData = useContext(DataContext);
   const [imageData, setImageData] = getData.image;
@@ -26,9 +25,9 @@ export default function Practice() {
     setImageUrlData([]);
     setImageData([]);
   };
- const imageLoader= ()=>{
-  return imageUrlData
- }
+  const imageLoader = () => {
+    return imageUrlData;
+  };
   return (
     <div style={{ marginTop: "30px" }}>
       <Typography
@@ -46,7 +45,6 @@ export default function Practice() {
           <Image
             loader={imageLoader}
             src="/Images/resume_icon.png"
-            
             width={90}
             height={90}
             alt="error"

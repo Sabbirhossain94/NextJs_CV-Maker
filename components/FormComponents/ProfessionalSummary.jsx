@@ -6,19 +6,16 @@ import Typography from "@mui/material/Typography";
 import { DataContext } from "../../pages/CVBuilder";
 
 export default function ProfessionalSummary() {
-
   const getData = useContext(DataContext);
-
   const [stateValue, setStateValue] = getData.value2;
-
- const handleInputChange = (e, inputKey) => {
-   const { name, value } = e.target;
-   let clone = [...stateValue];
-   let obj = clone[inputKey];
-   obj[name] = value;
-   clone[inputKey] = obj;
-   setStateValue([...clone]);
- };
+  const handleInputChange = (e, inputKey) => {
+    const { name, value } = e.target;
+    let clone = [...stateValue];
+    let obj = clone[inputKey];
+    obj[name] = value;
+    clone[inputKey] = obj;
+    setStateValue([...clone]);
+  };
   return (
     <Box>
       <Typography
