@@ -15,7 +15,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import PDFView from "./PDFSection";
+import PDFView from "../components/PDFSection";
 import ImageUpload from "../components/FormComponents/ImageUpload";
 
 export const DataContext = React.createContext();

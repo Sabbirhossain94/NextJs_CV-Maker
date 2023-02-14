@@ -6,8 +6,8 @@ import {
 } from "@react-pdf/renderer/lib/react-pdf.browser.cjs.js";
 import { Text, View, Image } from "@react-pdf/renderer";
 import { useContext } from "react";
-import styles from "../components/StyleComponents/styles";
-import { DataContext } from "./CVBuilder";
+import styles from "./StyleComponents/styles";
+import { DataContext } from "../pages/CVBuilder";
 
 const PDFView = () => {
   const getData = useContext(DataContext);
