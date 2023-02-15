@@ -1,16 +1,23 @@
 import Home from "../components/Home";
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 import Head from "next/head";
+import Box from "@mui/material/Box";
+
 export default function index() {
   return (
-    <div>
+    <Box
+      sx={{
+        width: "100%",
+        overflow: "hidden"
+      }}
+    >
       <Head>
         <title>CV Builder</title>
       </Head>
-      <div>
+      <Box>
         <Navbar />
-      </div>
+      </Box>
       <Home />
-    </div>
+    </Box>
   );
 }

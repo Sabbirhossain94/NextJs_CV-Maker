@@ -13,7 +13,7 @@ const MyApp = (props) => {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={lightTheme}>

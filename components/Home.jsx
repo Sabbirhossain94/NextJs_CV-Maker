@@ -1,7 +1,9 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Button from "@mui/material/Button";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import HandymanIcon from "@mui/icons-material/Handyman";
+import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Link from "next/link";
@@ -15,7 +17,13 @@ export default function Home() {
           justifyContent: "center",
           alignItems: "center",
           marginTop: "200px",
-          width: "100%",
+          width: {
+            xs: "100%",
+            sm: "100%",
+            md: "100%",
+            lg: "100%",
+            xl: "100%",
+          },
         }}
       >
         <Typography
@@ -28,7 +36,9 @@ export default function Home() {
         >
           Build a professional resume for free
         </Typography>
-        <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
+        <Typography
+          sx={{ fontSize: "20px", fontWeight: "400", textAlign: "center" }}
+        >
           Create your resume easily with this free builder
         </Typography>
         <Link href="/CVBuilder" style={{ textDecoration: "none" }}>
@@ -50,44 +60,53 @@ export default function Home() {
       {/*  */}
       <Box
         style={{
-          background: "#f5f7fd",
+          background: "#e6ecf7",
           display: "flex",
           flexDirection: "row",
+          justifyContent: "center",
           marginTop: "200px",
           flexWrap: "wrap",
+          position: "relative",
+          padding: "100px",
         }}
       >
         <Image
           src="/Images/sample.jpg"
-          alt="error"
+          alt="cv"
           priority
-          height={750}
           width={750}
-          style={{ marginLeft: "100px", marginTop: "100px", padding: "20px" }}
+          height={750}
+          layout="intrinsic"
         />
         <Box
           style={{
-            marginTop: "100px",
             padding: "20px",
             marginLeft: "50px",
             fontSize: "25px",
             fontFamily: "Segoe UI",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "start",
           }}
         >
           <Box
-            style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: "30px",
+              width: "100%",
+            }}
           >
-            <Image
-              src="/Images/feature.png"
-              alt="error"
-              width={35}
-              height={35}
+            <HandymanIcon
+              style={{ width: "32px", height: "32px", opacity: "0.6" }}
             />
             <Typography
               style={{
                 marginLeft: "15px",
                 fontWeight: "600",
                 fontSize: "25px",
+                textAlign: "left",
               }}
             >
               Build your resume easily with step by step
@@ -112,12 +131,8 @@ export default function Home() {
           <Box
             style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
           >
-            <Image
-              src="/Images/download_icon.png"
-              alt="error"
-              width={35}
-              height={35}
-              style={{ opacity: "0.6" }}
+            <DownloadOutlinedIcon
+              style={{ width: "32px", height: "32px", opacity: "0.6" }}
             />
             <Typography
               style={{
@@ -131,21 +146,23 @@ export default function Home() {
           </Box>
         </Box>
       </Box>
-      <footer
+      <Box
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
           height: "100px",
-          background: "#1976d2",
+          background: "linear-gradient(to right bottom, #64b5f6, #1565c0)",
           fontFamily: "Segoe UI",
         }}
       >
-        <p style={{ textAlign: "center", color: "white" }}>
+        <Typography
+          style={{ textAlign: "center", color: "white", fontWeight: "600" }}
+        >
           &copy; 2023 CV Builder. All rights reserved
-        </p>
-      </footer>
+        </Typography>
+      </Box>
     </Box>
   );
 }
