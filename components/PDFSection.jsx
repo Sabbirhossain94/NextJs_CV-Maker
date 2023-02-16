@@ -10,7 +10,7 @@ import styles from "./StyleComponents/styles";
 import { DataContext } from "../pages/CVBuilder";
 import Box from "@mui/material/Box";
 
-const PDFView = React.memo(() => {
+const PDFView = () => {
   const getData = useContext(DataContext);
   const [stateValue1, setStateValue1] = getData.value1;
   const [stateValue2, setStateValue2] = getData.value2;
@@ -741,6 +741,6 @@ const handlePageChange =()=> {
       </PDFViewer>
     </Box>
   );
-});
+};
 
 export default PDFView;
