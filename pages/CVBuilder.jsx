@@ -16,13 +16,15 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import PDFView from "../components/PDFSection";
 import ImageUpload from "../components/FormComponents/ImageUpload";
+import LoadingAnimation from "../components/StyleComponents/LoadingAnimation";
 
 export const DataContext = React.createContext();
 
 export default function CVBuilder() {
+  const [delay, setDelay] = useState(0);
+  setTimeout(() => setDelay(1), 1000);
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
-
   const [personalDetails, setPersonalDetails] = useState([
     {
       firstname: "",
@@ -130,7 +132,9 @@ export default function CVBuilder() {
     setAllSections(result);
   };
 
-  return (
+  return delay === 0 ? (
+    <LoadingAnimation />
+  ) : (
     <Box
       sx={{
         display: "flex",
@@ -143,7 +147,6 @@ export default function CVBuilder() {
         },
         height: "100%",
       }}
-      
     >
       <Head>
         <title>CV Builder</title>
@@ -181,7 +184,7 @@ export default function CVBuilder() {
             backgroundColor: "white",
           }}
         >
-          <Box sx={{  }}>
+          <Box sx={{}}>
             <ImageUpload />
             <PersonalDetails />
             <ProfessionalSummary />
@@ -206,11 +209,11 @@ export default function CVBuilder() {
             },
             position: {
               lg: "relative",
-              xl: "fixed"
+              xl: "fixed",
             },
             top: {
               lg: "50%",
-              xl: 0
+              xl: 0,
             },
             right: 0,
             height: "50%",

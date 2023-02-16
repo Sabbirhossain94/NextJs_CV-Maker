@@ -25,7 +25,7 @@ export default function Home() {
             justifyContent: "center",
           }}
         >
-          <Image src="/favicon.png" alt="error" width={45} height={45} />
+          <Image src="/favicon.ico" alt="error" width={45} height={45} />
           <Typography
             sx={{
               color: "black",

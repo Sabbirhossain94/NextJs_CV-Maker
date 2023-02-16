@@ -2,13 +2,20 @@ import Home from "../components/Home";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
 import Box from "@mui/material/Box";
+import LoadingAnimation from "../components/StyleComponents/LoadingAnimation";
+import { useState } from "react";
 
 export default function index() {
-  return (
+  const [delay, setDelay] = useState(0);
+
+  setTimeout(() => setDelay(1), 1000);
+  return delay === 0 ? (
+    <LoadingAnimation />
+  ) : (
     <Box
       sx={{
         width: "100%",
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     >
       <Head>
