@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import PersonalDetails from "../components/FormComponents/PersonalDetails";
 import Education from "../components/FormComponents/Education";
 import SocialLinks from "../components/FormComponents/SocialLinks";
@@ -134,7 +134,16 @@ export default function CVBuilder() {
     <Box
       sx={{
         display: "flex",
+        flexDirection: {
+          xs: "column",
+          sm: "column",
+          md: "column",
+          lg: "column",
+          xl: "row",
+        },
+        height: "100%",
       }}
+      
     >
       <Head>
         <title>CV Builder</title>
@@ -157,12 +166,22 @@ export default function CVBuilder() {
       >
         <Box
           sx={{
-            width: "50%",
+            width: {
+              xs: "100%",
+              sm: "100%",
+              md: "100%",
+              lg: "100%",
+              xl: "50%",
+            },
+            height: {
+              lg: "50%",
+              xl: "50%",
+            },
             padding: "5%",
             backgroundColor: "white",
           }}
         >
-          <Box sx={{ marginTop: "1rem", width: "100%", height: "100vh" }}>
+          <Box sx={{  }}>
             <ImageUpload />
             <PersonalDetails />
             <ProfessionalSummary />
@@ -178,9 +197,23 @@ export default function CVBuilder() {
         </Box>
         <Box
           sx={{
-            width: "50%",
-            position: "fixed",
+            width: {
+              xs: "100%",
+              sm: "100%",
+              md: "100%",
+              lg: "100%",
+              xl: "50%",
+            },
+            position: {
+              lg: "relative",
+              xl: "fixed"
+            },
+            top: {
+              lg: "50%",
+              xl: 0
+            },
             right: 0,
+            height: "50%",
           }}
         >
           <PDFView />

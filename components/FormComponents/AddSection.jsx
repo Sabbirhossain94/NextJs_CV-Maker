@@ -141,6 +141,7 @@ export default function AddSection({
             key={item.id}
             container
             item
+            xs={3}
             lg={5}
             md={10}
             sm={3}

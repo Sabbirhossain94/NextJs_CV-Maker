@@ -54,7 +54,7 @@ export default function Hobbies({
       </Grid>
 
       <Grid container columns={14}>
-        <Grid item xs={4} md={13}>
+        <Grid item xs={12} md={13}>
           <TextField
             id="outlined-basic"
             label="What do you like?"

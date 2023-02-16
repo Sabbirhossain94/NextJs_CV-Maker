@@ -31,7 +31,7 @@ export default function ProfessionalSummary() {
       </Typography>
       {stateValue.map((item, key) => (
         <Grid key={key} container columns={16}>
-          <Grid item xs={6} md={15} variant="contained">
+          <Grid item xs={14} md={15} variant="contained">
             <Box
               sx={{
                 height: "219px",

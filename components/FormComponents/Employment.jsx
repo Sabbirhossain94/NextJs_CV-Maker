@@ -70,7 +70,7 @@ export default function Employment() {
       <Box sx={{ flexGrow: 1 }}>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
-            <Grid item md={15}>
+            <Grid item xs={14} sm={15} md={15}>
               <Accordion
                 expanded={expanded === key}
                 onChange={handleChange(key)}
@@ -97,7 +97,7 @@ export default function Employment() {
                     rowSpacing={3}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                   >
-                    <Grid item sm={6} md={6}>
+                    <Grid item xs={16} sm={6} md={6}>
                       <TextField
                         id={item.id}
                         label="Job title"
@@ -121,7 +121,7 @@ export default function Employment() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={16} md={6}>
                       <TextField
                         id={item.id}
                         label="Employer"
@@ -145,7 +145,7 @@ export default function Employment() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={6} sx={{ display: "flex" }}>
+                    <Grid item xs={12} md={6} sx={{ display: "flex" }}>
                       <TextField
                         id={item.id}
                         variant="filled"
@@ -193,7 +193,7 @@ export default function Employment() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={16} md={6}>
                       <TextField
                         id={item.id}
                         label="City"
@@ -217,11 +217,11 @@ export default function Employment() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={12}>
+                    <Grid item xs={16} md={12}>
                       <TextField
                         id={item.id}
                         label="Description"
-                        variant="filled"
+                        
                         type="text"
                         value={stateValue.description}
                         name="description"

@@ -70,7 +70,7 @@ export default function Education() {
       <Box sx={{ flexGrow: 1 }}>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
-            <Grid item md={15}>
+            <Grid item xs={14} sm={15} md={15}>
               <Accordion
                 expanded={expanded === key}
                 onChange={handleChange(key)}
@@ -96,7 +96,7 @@ export default function Education() {
                     rowSpacing={3}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                   >
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={16} md={6}>
                       <TextField
                         label="Institution"
                         name="institution"
@@ -119,7 +119,7 @@ export default function Education() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={16} md={6}>
                       <TextField
                         label="Degree"
                         name="degree"
@@ -142,7 +142,7 @@ export default function Education() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={6} sx={{ display: "flex" }}>
+                    <Grid item xs={12} md={6} sx={{ display: "flex" }}>
                       <TextField
                         variant="filled"
                         label="Start Date"
@@ -188,7 +188,7 @@ export default function Education() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={16} md={6}>
                       <TextField
                         label="City"
                         name="institutioncity"
@@ -211,7 +211,7 @@ export default function Education() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={12}>
+                    <Grid item xs={16} md={12}>
                       <TextField
                         label="Description"
                         type="text"

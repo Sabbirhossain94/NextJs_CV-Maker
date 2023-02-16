@@ -45,10 +45,10 @@ export default function PersonalDetails() {
           <Grid
             container
             rowSpacing={5}
-            columnSpacing={{ xs: 1, sm: 2, md: 4 }}
+            columnSpacing={{ xs: 3, sm: 2, md: 4 }}
             columns={15}
           >
-            <Grid item xs={4} md={7}>
+            <Grid item xs={7} md={7}>
               <TextField
                 id="outlined-basic"
                 label="First Name"
@@ -72,7 +72,7 @@ export default function PersonalDetails() {
                 onChange={(e) => handleInputChange(e, key)}
               />
             </Grid>
-            <Grid item xs={4} md={7}>
+            <Grid item xs={7} md={7}>
               <TextField
                 id="outlined-basic"
                 label="Last Name"
@@ -96,7 +96,7 @@ export default function PersonalDetails() {
                 onChange={(e) => handleInputChange(e, key)}
               />
             </Grid>
-            <Grid item xs={4} md={7}>
+            <Grid item xs={7} md={7}>
               <TextField
                 id="outlined-basic"
                 label="Email"
@@ -120,7 +120,7 @@ export default function PersonalDetails() {
                 onChange={(e) => handleInputChange(e, key)}
               />
             </Grid>
-            <Grid item xs={4} md={7}>
+            <Grid item xs={7} md={7}>
               <TextField
                 id="outlined-basic"
                 label="Phone"
@@ -144,7 +144,7 @@ export default function PersonalDetails() {
                 onChange={(e) => handleInputChange(e, key)}
               />
             </Grid>
-            <Grid item xs={4} md={7}>
+            <Grid item xs={7} md={7}>
               <TextField
                 id="outlined-basic"
                 label="Country"
@@ -168,7 +168,7 @@ export default function PersonalDetails() {
                 onChange={(e) => handleInputChange(e, key)}
               />
             </Grid>
-            <Grid item xs={4} md={7}>
+            <Grid item xs={7} md={7}>
               <TextField
                 id="outlined-basic"
                 label="City"
@@ -238,10 +238,10 @@ export default function PersonalDetails() {
                 <Grid
                   container
                   rowSpacing={5}
-                  columnSpacing={{ xs: 1, sm: 2, md: 6 }}
+                  columnSpacing={{ xs:3, sm: 2, md: 4 }}
                   columns={15}
                 >
-                  <Grid item xs={4} md={7}>
+                  <Grid item xs={7} md={7}>
                     <TextField
                       id="outlined-basic"
                       label="Occupation"
@@ -250,7 +250,7 @@ export default function PersonalDetails() {
                       type="text"
                       value={item.occupation}
                       sx={{
-                        width: "105%",
+                        width: "102%",
                         background: "#e7eaf4",
                         borderRadius: "5px",
                       }}
@@ -265,7 +265,7 @@ export default function PersonalDetails() {
                       onChange={(e) => handleInputChange(e, key)}
                     />
                   </Grid>
-                  <Grid item xs={4} md={7}>
+                  <Grid item xs={7} md={7}>
                     <TextField
                       id="outlined-basic"
                       label="Address"
@@ -274,9 +274,10 @@ export default function PersonalDetails() {
                       type="text"
                       value={item.address}
                       sx={{
-                        width: "105%",
+                        width: "102%",
                         background: "#e7eaf4",
                         borderRadius: "5px",
+                        marginLeft: "8px",
                       }}
                       InputLabelProps={{
                         sx: {
@@ -289,7 +290,7 @@ export default function PersonalDetails() {
                       onChange={(e) => handleInputChange(e, key)}
                     />
                   </Grid>
-                  <Grid item xs={4} md={7}>
+                  <Grid item xs={7} md={7}>
                     <TextField
                       id="outlined-basic"
                       label="Postal Code"
@@ -298,7 +299,7 @@ export default function PersonalDetails() {
                       type="text"
                       value={item.postalcode}
                       sx={{
-                        width: "105%",
+                        width: "102%",
                         background: "#e7eaf4",
                         borderRadius: "5px",
                       }}
@@ -313,7 +314,7 @@ export default function PersonalDetails() {
                       onChange={(e) => handleInputChange(e, key)}
                     />
                   </Grid>
-                  <Grid item xs={4} md={7}>
+                  <Grid item xs={7} md={7}>
                     <TextField
                       id="outlined-basic"
                       label="Nationality"
@@ -322,9 +323,10 @@ export default function PersonalDetails() {
                       type="text"
                       value={item.nationality}
                       sx={{
-                        width: "105%",
+                        width: "102%",
                         background: "#e7eaf4",
                         borderRadius: "5px",
+                        marginLeft: "8px",
                       }}
                       InputLabelProps={{
                         sx: {
@@ -337,7 +339,7 @@ export default function PersonalDetails() {
                       onChange={(e) => handleInputChange(e, key)}
                     />
                   </Grid>
-                  <Grid item xs={4} md={7}>
+                  <Grid item xs={7} md={7}>
                     <TextField
                       id="outlined-basic"
                       label="Place Of Birth"
@@ -346,7 +348,7 @@ export default function PersonalDetails() {
                       type="text"
                       value={item.placeofbirth}
                       sx={{
-                        width: "105%",
+                        width: "102%",
                         background: "#e7eaf4",
                         borderRadius: "5px",
                       }}
@@ -361,7 +363,7 @@ export default function PersonalDetails() {
                       onChange={(e) => handleInputChange(e, key)}
                     />
                   </Grid>
-                  <Grid item xs={4} md={7}>
+                  <Grid item xs={7} md={7}>
                     <TextField
                       id="outlined-basic"
                       label="Date Of Birth"
@@ -370,10 +372,11 @@ export default function PersonalDetails() {
                       type="text"
                       value={item.dateofbirth}
                       sx={{
-                        width: "105%",
+                        width: "102%",
                         background: "#e7eaf4",
                         borderRadius: "5px",
                         textDecoration: "none",
+                        marginLeft: "8px",
                       }}
                       InputLabelProps={{
                         sx: {

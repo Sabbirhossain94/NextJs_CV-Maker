@@ -8,8 +8,9 @@ import { Text, View, Image } from "@react-pdf/renderer";
 import { useContext } from "react";
 import styles from "./StyleComponents/styles";
 import { DataContext } from "../pages/CVBuilder";
+import Box from "@mui/material/Box";
 
-const PDFView = () => {
+const PDFView = React.memo(() => {
   const getData = useContext(DataContext);
   const [stateValue1, setStateValue1] = getData.value1;
   const [stateValue2, setStateValue2] = getData.value2;
@@ -38,16 +39,18 @@ const PDFView = () => {
     "Nov",
     "Dec",
   ];
-  const handleRenderSuccess = (page) => {
-    console.log(
-      `Viewport size: ${page.viewport.width} x ${page.viewport.height}`
-    );
-  };
+const handlePageChange =()=> {
+  alert()
+}
   return (
-    <div style={{ flexGrow: 1 }}>
+    <Box>
       <PDFViewer style={{ width: "100%", height: "100vh" }}>
-        <Document onPageRenderSuccess={handleRenderSuccess}>
-          <Page size="A4" style={styles.page} pageNumber={1}>
+        <Document>
+          <Page
+            size="A4"
+            style={styles.page}
+            onPageChange={{ handlePageChange }}
+          >
             {/* left section */}
             <View style={styles.section_left}>
               {stateValue1.map((item, key) => (
@@ -197,24 +200,28 @@ const PDFView = () => {
                   fontFamily: "Helvetica-Bold",
                 }}
               >
-                {stateValue5[0].label ? (
-                  <View
-                    style={{
-                      backgroundColor: "#002e58",
-                      width: "100%",
-                      padding: "5px",
-                    }}
-                  >
-                    <Text
+                {stateValue5.length > 0 ? (
+                  stateValue5[0].label ? (
+                    <View
                       style={{
-                        fontSize: "15px",
-                        color: "white",
-                        marginLeft: "5px",
+                        backgroundColor: "#002e58",
+                        width: "100%",
+                        padding: "5px",
                       }}
                     >
-                      Links
-                    </Text>
-                  </View>
+                      <Text
+                        style={{
+                          fontSize: "15px",
+                          color: "white",
+                          marginLeft: "5px",
+                        }}
+                      >
+                        Links
+                      </Text>
+                    </View>
+                  ) : (
+                    <Text> {""}</Text>
+                  )
                 ) : (
                   <Text> {""}</Text>
                 )}
@@ -248,24 +255,28 @@ const PDFView = () => {
                   fontFamily: "Helvetica-Bold",
                 }}
               >
-                {stateValue6[0].skill ? (
-                  <View
-                    style={{
-                      backgroundColor: "#002e58",
-                      width: "100%",
-                      padding: "5px",
-                    }}
-                  >
-                    <Text
+                {stateValue6.length > 0 ? (
+                  stateValue6[0].skill ? (
+                    <View
                       style={{
-                        fontSize: "15px",
-                        color: "white",
-                        marginLeft: "5px",
+                        backgroundColor: "#002e58",
+                        width: "100%",
+                        padding: "5px",
                       }}
                     >
-                      Skills
-                    </Text>
-                  </View>
+                      <Text
+                        style={{
+                          fontSize: "15px",
+                          color: "white",
+                          marginLeft: "5px",
+                        }}
+                      >
+                        Skills
+                      </Text>
+                    </View>
+                  ) : (
+                    <Text> {""}</Text>
+                  )
                 ) : (
                   <Text> {""}</Text>
                 )}
@@ -299,24 +310,28 @@ const PDFView = () => {
                   fontFamily: "Helvetica-Bold",
                 }}
               >
-                {stateValue9[0].language ? (
-                  <View
-                    style={{
-                      backgroundColor: "#002e58",
-                      width: "100%",
-                      padding: "5px",
-                    }}
-                  >
-                    <Text
+                {stateValue9.length > 0 ? (
+                  stateValue9[0].language ? (
+                    <View
                       style={{
-                        fontSize: "15px",
-                        color: "white",
-                        marginLeft: "5px",
+                        backgroundColor: "#002e58",
+                        width: "100%",
+                        padding: "5px",
                       }}
                     >
-                      Languages
-                    </Text>
-                  </View>
+                      <Text
+                        style={{
+                          fontSize: "15px",
+                          color: "white",
+                          marginLeft: "5px",
+                        }}
+                      >
+                        Languages
+                      </Text>
+                    </View>
+                  ) : (
+                    <Text> {""}</Text>
+                  )
                 ) : (
                   <Text> {""}</Text>
                 )}
@@ -350,26 +365,30 @@ const PDFView = () => {
                 </View>
               ))}
               {/* experience section */}
-              {stateValue3[0].jobtitle ? (
-                <View>
-                  <Text
-                    style={{
-                      fontSize: "15px",
-                      marginTop: "15px",
-                      color: "#003d74",
-                    }}
-                  >
-                    Experience
-                  </Text>
-                  <View
-                    style={{
-                      height: "0.5px",
-                      width: "100%",
-                      backgroundColor: "black",
-                      marginTop: "5px",
-                    }}
-                  />
-                </View>
+              {stateValue3.length > 0 ? (
+                stateValue3[0].jobtitle !== "" ? (
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: "15px",
+                        marginTop: "15px",
+                        color: "#003d74",
+                      }}
+                    >
+                      Experience
+                    </Text>
+                    <View
+                      style={{
+                        height: "0.5px",
+                        width: "100%",
+                        backgroundColor: "black",
+                        marginTop: "5px",
+                      }}
+                    />
+                  </View>
+                ) : (
+                  <Text> {""}</Text>
+                )
               ) : (
                 <Text> {""}</Text>
               )}
@@ -437,26 +456,30 @@ const PDFView = () => {
                 ))}
               </View>
               {/* education section */}
-              {stateValue4[0].institution ? (
-                <View>
-                  <Text
-                    style={{
-                      fontSize: "15px",
-                      marginTop: "15px",
-                      color: "#003d74",
-                    }}
-                  >
-                    Education
-                  </Text>
-                  <View
-                    style={{
-                      height: "0.5px",
-                      width: "100%",
-                      backgroundColor: "black",
-                      marginTop: "5px",
-                    }}
-                  />
-                </View>
+              {stateValue4.length > 0 ? (
+                stateValue4[0].institution ? (
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: "15px",
+                        marginTop: "15px",
+                        color: "#003d74",
+                      }}
+                    >
+                      Education
+                    </Text>
+                    <View
+                      style={{
+                        height: "0.5px",
+                        width: "100%",
+                        backgroundColor: "black",
+                        marginTop: "5px",
+                      }}
+                    />
+                  </View>
+                ) : (
+                  <Text> {""}</Text>
+                )
               ) : (
                 <Text> {""}</Text>
               )}
@@ -517,26 +540,30 @@ const PDFView = () => {
                   </View>
                 ))}
               </View>
-              {stateValue7[0].course ? (
-                <View>
-                  <Text
-                    style={{
-                      fontSize: "15px",
-                      marginTop: "15px",
-                      color: "#003d74",
-                    }}
-                  >
-                    Courses
-                  </Text>
-                  <View
-                    style={{
-                      height: "0.5px",
-                      width: "100%",
-                      backgroundColor: "black",
-                      marginTop: "5px",
-                    }}
-                  />
-                </View>
+              {stateValue7.length > 0 ? (
+                stateValue7[0].course ? (
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: "15px",
+                        marginTop: "15px",
+                        color: "#003d74",
+                      }}
+                    >
+                      Courses
+                    </Text>
+                    <View
+                      style={{
+                        height: "0.5px",
+                        width: "100%",
+                        backgroundColor: "black",
+                        marginTop: "5px",
+                      }}
+                    />
+                  </View>
+                ) : (
+                  <Text> {""}</Text>
+                )
               ) : (
                 <Text> {""}</Text>
               )}
@@ -593,26 +620,30 @@ const PDFView = () => {
                 ))}
               </View>
 
-              {stateValue8[0].activity ? (
-                <View>
-                  <Text
-                    style={{
-                      fontSize: "15px",
-                      marginTop: "15px",
-                      color: "#003d74",
-                    }}
-                  >
-                    Extra-Curricular Activites
-                  </Text>
-                  <View
-                    style={{
-                      height: "0.5px",
-                      width: "100%",
-                      backgroundColor: "black",
-                      marginTop: "5px",
-                    }}
-                  />
-                </View>
+              {stateValue8.length > 0 ? (
+                stateValue8[0].activity ? (
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: "15px",
+                        marginTop: "15px",
+                        color: "#003d74",
+                      }}
+                    >
+                      Extra-Curricular Activites
+                    </Text>
+                    <View
+                      style={{
+                        height: "0.5px",
+                        width: "100%",
+                        backgroundColor: "black",
+                        marginTop: "5px",
+                      }}
+                    />
+                  </View>
+                ) : (
+                  <Text> {""}</Text>
+                )
               ) : (
                 <Text> {""}</Text>
               )}
@@ -708,8 +739,8 @@ const PDFView = () => {
           </Page>
         </Document>
       </PDFViewer>
-    </div>
+    </Box>
   );
-};
+});
 
-export default React.memo(PDFView);
+export default PDFView;

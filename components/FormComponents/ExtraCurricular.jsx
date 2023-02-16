@@ -58,7 +58,7 @@ export default function ExtraCurricular({
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
-      <Grid container item md={8}>
+      <Grid container item md={8} >
         <Grid container item md={8}>
           <Typography
             sx={{
@@ -102,7 +102,7 @@ export default function ExtraCurricular({
       <Box sx={{ flexGrow: 1 }}>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
-            <Grid item md={15}>
+            <Grid item xs={14} sm={15} md={15}>
               <Accordion
                 expanded={expanded === key}
                 onChange={handleChange(key)}
@@ -174,7 +174,7 @@ export default function ExtraCurricular({
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={6} sx={{ display: "flex" }}>
+                    <Grid item xs={12} md={6} sx={{ display: "flex" }}>
                       {" "}
                       <TextField
                         variant="filled"
@@ -221,7 +221,7 @@ export default function ExtraCurricular({
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={16} md={6}>
                       <TextField
                         label="City"
                         type="text"
@@ -244,7 +244,7 @@ export default function ExtraCurricular({
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={12}>
+                    <Grid item xs={16} md={12}>
                       <TextField
                         label="Description"
                         variant="filled"

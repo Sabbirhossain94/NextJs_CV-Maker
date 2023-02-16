@@ -135,10 +135,10 @@ export default function Skills() {
         </Typography>
       </Stack>
 
-      <Box>
+      <Box sx={{ marginTop: "15px" }}>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
-            <Grid item md={15}>
+            <Grid item xs={14} sm={15} md={15}>
               <Accordion
                 expanded={expanded === key}
                 onChange={handleChange(key)}
@@ -165,7 +165,7 @@ export default function Skills() {
                     rowSpacing={3}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                   >
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={15} sm={6} md={6}>
                       <TextField
                         id="outlined-basic"
                         label="Skill"
@@ -188,11 +188,11 @@ export default function Skills() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={6} md={6}>
-                      <FormControl sx={{ width: "80%", marginLeft: "50px" }}>
+                    <Grid item xs={15} sm={6} md={6}>
+                      <FormControl sx={{ width: "100%"}}>
                         <InputLabel
                           id="demo-simple-select-helper-label"
-                          sx={{ marginTop: "5px" }}
+                          sx={{}}
                         >
                           Level
                         </InputLabel>
