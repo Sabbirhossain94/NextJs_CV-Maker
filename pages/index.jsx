@@ -5,7 +5,8 @@ import Box from "@mui/material/Box";
 import LoadingAnimation from "../components/StyleComponents/LoadingAnimation";
 import { useState } from "react";
 
-export default function index() {
+export default function Index() {
+  
   const [delay, setDelay] = useState(0);
 
   setTimeout(() => setDelay(1), 1000);
