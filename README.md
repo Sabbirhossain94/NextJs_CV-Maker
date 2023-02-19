@@ -7,11 +7,13 @@ A web application where users can build their resume and download.
 
 This project is currently in development
 ## Screenshots
+
 Page 1
+
 ![App Screenshot](https://i.imgur.com/7Gh0Vgr.png)
 
 
-     Page 2
+Page 2
 
 ![App Screenshot](https://i.imgur.com/A6HB50n.png)
 
