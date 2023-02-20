@@ -14,6 +14,12 @@ This project is currently in development
 
 ![](https://i.imgur.com/9uqfsUo.gif)
 
+## Functionality
+
+- Users can upload photo, their information and custom section.
+- Users can delete their custom section and also required section
+- Users can see the changes live in rendered pdf viewer.
+- Users can download resume as pdf
 
 ## Installation
 
