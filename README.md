@@ -2,11 +2,9 @@
 
 A web application where users can build their resume and download.
 
-
 ## Project Status
 
 This project is currently in development
-## Project Screenshots
 
 ## Overview
 
