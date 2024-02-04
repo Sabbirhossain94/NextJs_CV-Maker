@@ -16,9 +16,8 @@ export default function AddSection({
   setAllSections,
   deleteCustomSection,
 }) {
-  const [activeSectionId, setActiveSectionId] = useState(null);
 
-  const addToDraggableSections = (newSectionId, newSectionName) => {
+  const addSections = (newSectionId, newSectionName) => {
     setAllSections([
       ...allSections,
       { id: newSectionId, name: newSectionName },
@@ -32,7 +31,7 @@ export default function AddSection({
         <SchoolOutlinedIcon
           style={{
             fontSize: "35px",
-            ...{ color: activeSectionId == 5 ? "#bdbdbd" : "#1565c0" },
+            ...{ color: allSections.map((item) => item.id).includes(5) ? "#bdbdbd" : "#1565c0" },
           }}
           color="primary"
         />
@@ -42,7 +41,6 @@ export default function AddSection({
         <Courses
           deleteCustomSection={deleteCustomSection}
           sectionId={5}
-          setActiveSectionId={setActiveSectionId}
         />
       ),
     },
@@ -53,7 +51,7 @@ export default function AddSection({
           color="primary"
           sx={{
             fontSize: "35px",
-            ...{ color: activeSectionId == 6 ? "#bdbdbd" : "#1565c0" },
+            ...{ color: allSections.map((item) => item.id).includes(6) ? "#bdbdbd" : "#1565c0" },
           }}
         />
       ),
@@ -62,7 +60,6 @@ export default function AddSection({
         <ExtraCurricular
           deleteCustomSection={deleteCustomSection}
           sectionId={6}
-          setActiveSectionId={setActiveSectionId}
         />
       ),
     },
@@ -73,7 +70,7 @@ export default function AddSection({
           color="primary"
           sx={{
             fontSize: "35px",
-            ...{ color: activeSectionId == 7 ? "#bdbdbd" : "#1565c0" },
+            ...{ color: allSections.map((item) => item.id).includes(7) ? "#bdbdbd" : "#1565c0" },
           }}
         />
       ),
@@ -82,7 +79,6 @@ export default function AddSection({
         <Hobbies
           deleteCustomSection={deleteCustomSection}
           sectionId={7}
-          setActiveSectionId={setActiveSectionId}
         />
       ),
     },
@@ -93,7 +89,7 @@ export default function AddSection({
           color="primary"
           sx={{
             fontSize: "35px",
-            ...{ color: activeSectionId == 8 ? "#bdbdbd" : "#1565c0" },
+            ...{ color: allSections.map((item) => item.id).includes(8) ? "#bdbdbd" : "#1565c0" },
           }}
         />
       ),
@@ -102,19 +98,11 @@ export default function AddSection({
         <Language
           deleteCustomSection={deleteCustomSection}
           sectionId={8}
-          setActiveSectionId={setActiveSectionId}
         />
       ),
     },
   ];
-  const triggerActiveSection = (id) => {
-    const activeId = addSectionElements.filter((item) => {
-      if (item.id === id) {
-        return item.id;
-      }
-    });
-    setActiveSectionId(activeId[0].id);
-  };
+
 
   return (
     <Box>
@@ -161,15 +149,14 @@ export default function AddSection({
                   cursor: "pointer",
                 },
                 ...{
-                  pointerEvents: item.id === activeSectionId ? "none" : "auto",
+                  pointerEvents: allSections.map((section) => section.id).includes(item.id) ? "none" : "auto",
                 },
                 ...{
-                  color: item.id === activeSectionId ? "#bdbdbd" : "primary",
+                  color: allSections.map((section) => section.id).includes(item.id) ? "#bdbdbd" : "primary",
                 },
               }}
               onClick={() => {
-                addToDraggableSections(item.id, item.component);
-                triggerActiveSection(item.id);
+                addSections(item.id, item.component);
               }}
             >
               {item.name}

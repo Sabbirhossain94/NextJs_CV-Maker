@@ -39,12 +39,12 @@ const PDFView = () => {
     "Nov",
     "Dec",
   ];
-const handlePageChange =()=> {
-  alert()
-}
+  const handlePageChange = () => {
+    alert()
+  }
   return (
     <Box>
-      <PDFViewer style={{ width: "100%", height: "100vh" }}>
+      <PDFViewer style={{ width: "100%", height: "100vh",marginTop: '70px'}}>
         <Document>
           <Page
             size="A4"
@@ -80,9 +80,9 @@ const handlePageChange =()=> {
                   </View>
 
                   {item.address ||
-                  item.phone ||
-                  item.email ||
-                  item.nationality ? (
+                    item.phone ||
+                    item.email ||
+                    item.nationality ? (
                     <View
                       style={{
                         backgroundColor: "#002e58",
@@ -412,19 +412,17 @@ const handlePageChange =()=> {
                     <View style={{ width: "25%" }}>
                       <Text style={{ fontSize: "12px" }}>
                         {item.startdate
-                          ? `${
-                              months[parseInt(item.startdate.slice(5, 7)) - 1]
-                            }` +
-                            " " +
-                            `${item.startdate.slice(0, 4)}`
+                          ? `${months[parseInt(item.startdate.slice(5, 7)) - 1]
+                          }` +
+                          " " +
+                          `${item.startdate.slice(0, 4)}`
                           : ""}
                         {item.enddate
-                          ? ` ${
-                              "- " +
-                              months[parseInt(item.enddate.slice(5, 7)) - 1]
-                            }` +
-                            " " +
-                            `${item.enddate.slice(0, 4)}`
+                          ? ` ${"- " +
+                          months[parseInt(item.enddate.slice(5, 7)) - 1]
+                          }` +
+                          " " +
+                          `${item.enddate.slice(0, 4)}`
                           : ""}
                       </Text>
                     </View>
@@ -503,19 +501,17 @@ const handlePageChange =()=> {
                     <View style={{ width: "25%" }}>
                       <Text style={{ fontSize: "12px" }}>
                         {item.startdate
-                          ? `${
-                              months[parseInt(item.startdate.slice(5, 7)) - 1]
-                            }` +
-                            " " +
-                            `${item.startdate.slice(0, 4)}`
+                          ? `${months[parseInt(item.startdate.slice(5, 7)) - 1]
+                          }` +
+                          " " +
+                          `${item.startdate.slice(0, 4)}`
                           : ""}
                         {item.enddate
-                          ? ` ${
-                              "- " +
-                              months[parseInt(item.enddate.slice(5, 7)) - 1]
-                            }` +
-                            " " +
-                            `${item.enddate.slice(0, 4)}`
+                          ? ` ${"- " +
+                          months[parseInt(item.enddate.slice(5, 7)) - 1]
+                          }` +
+                          " " +
+                          `${item.enddate.slice(0, 4)}`
                           : ""}
                       </Text>
                     </View>
@@ -587,19 +583,17 @@ const handlePageChange =()=> {
                     <View style={{ width: "25%" }}>
                       <Text style={{ fontSize: "12px" }}>
                         {item.startdate
-                          ? `${
-                              months[parseInt(item.startdate.slice(5, 7)) - 1]
-                            }` +
-                            " " +
-                            `${item.startdate.slice(0, 4)}`
+                          ? `${months[parseInt(item.startdate.slice(5, 7)) - 1]
+                          }` +
+                          " " +
+                          `${item.startdate.slice(0, 4)}`
                           : ""}
                         {item.enddate
-                          ? ` ${
-                              "- " +
-                              months[parseInt(item.enddate.slice(5, 7)) - 1]
-                            }` +
-                            " " +
-                            `${item.enddate.slice(0, 4)}`
+                          ? ` ${"- " +
+                          months[parseInt(item.enddate.slice(5, 7)) - 1]
+                          }` +
+                          " " +
+                          `${item.enddate.slice(0, 4)}`
                           : ""}
                       </Text>
                     </View>
@@ -667,19 +661,17 @@ const handlePageChange =()=> {
                     <View style={{ width: "25%" }}>
                       <Text style={{ fontSize: "12px" }}>
                         {item.startdate
-                          ? `${
-                              months[parseInt(item.startdate.slice(5, 7)) - 1]
-                            }` +
-                            " " +
-                            `${item.startdate.slice(0, 4)}`
+                          ? `${months[parseInt(item.startdate.slice(5, 7)) - 1]
+                          }` +
+                          " " +
+                          `${item.startdate.slice(0, 4)}`
                           : ""}
                         {item.enddate
-                          ? ` ${
-                              "- " +
-                              months[parseInt(item.enddate.slice(5, 7)) - 1]
-                            }` +
-                            " " +
-                            `${item.enddate.slice(0, 4)}`
+                          ? ` ${"- " +
+                          months[parseInt(item.enddate.slice(5, 7)) - 1]
+                          }` +
+                          " " +
+                          `${item.enddate.slice(0, 4)}`
                           : ""}
                       </Text>
                     </View>

@@ -19,7 +19,6 @@ import { DataContext } from "../../pages/CVBuilder";
 export default function Language({
   deleteCustomSection,
   sectionId,
-  setActiveSectionId,
 }) {
   const getData = useContext(DataContext);
   const [expanded, setExpanded] = useState(false);
@@ -82,7 +81,6 @@ export default function Language({
             }}
             onClick={() => {
               deleteCustomSection(sectionId);
-              setActiveSectionId(null);
               setStateValue([
                 {
                   language: "",

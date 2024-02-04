@@ -10,7 +10,6 @@ import { DataContext } from "../../pages/CVBuilder";
 export default function Hobbies({
   deleteCustomSection,
   sectionId,
-  setActiveSectionId,
 }) {
   const getData = useContext(DataContext);
   const [stateValue, setStateValue] = getData.value10;
@@ -46,7 +45,6 @@ export default function Hobbies({
             }}
             onClick={() => {
               deleteCustomSection(sectionId);
-              setActiveSectionId(null);
               setStateValue({ hobbies: "" });
             }}
           />

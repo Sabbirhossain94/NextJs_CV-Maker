@@ -10,17 +10,18 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { DataContext } from "../../pages/CVBuilder";
+
 export default function Courses({
   deleteCustomSection,
   sectionId,
-  setActiveSectionId,
 }) {
   const getData = useContext(DataContext);
   const [expanded, setExpanded] = useState(false);
 
-  const handleChange = (panel) => (event, isExpanded) => {
+  const handleChange = (panel) => (_, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
   const [stateValue, setStateValue] = getData.value7;
 
   const deleteAccordionSection = (id) => {
@@ -52,6 +53,7 @@ export default function Courses({
     setStateValue([...clone]);
   };
 
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
       <Grid container item md={6}>
@@ -79,7 +81,6 @@ export default function Courses({
             }}
             onClick={() => {
               deleteCustomSection(sectionId);
-              setActiveSectionId(null);
               setStateValue([
                 {
                   course: "",

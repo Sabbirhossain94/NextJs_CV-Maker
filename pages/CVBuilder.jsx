@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import PersonalDetails from "../components/FormComponents/PersonalDetails";
 import Education from "../components/FormComponents/Education";
@@ -17,6 +18,8 @@ import "@fontsource/roboto/700.css";
 import PDFView from "../components/PDFSection";
 import ImageUpload from "../components/FormComponents/ImageUpload";
 import LoadingAnimation from "../components/StyleComponents/LoadingAnimation";
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer";
 
 export const DataContext = React.createContext();
 
@@ -132,96 +135,102 @@ export default function CVBuilder() {
     setAllSections(result);
   };
 
+
   return delay === 0 ? (
     <LoadingAnimation />
   ) : (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: {
-          xs: "column",
-          sm: "column",
-          md: "column",
-          lg: "column",
-          xl: "row",
-        },
-        height: "100%",
-      }}
-    >
-      <Head>
-        <title>CV Builder</title>
-      </Head>
-      <DataContext.Provider
-        value={{
-          image: [images, setImages],
-          imageUrls: [imageURLs, setImageURLs],
-          value1: [personalDetails, setPersonalDetails],
-          value2: [professionalSummary, setProfessionalSummary],
-          value3: [employmentDetails, setEmploymentDetails],
-          value4: [educationDetails, setEducationDetails],
-          value5: [socialLinksDetails, setSocialLinksDetails],
-          value6: [skillDetails, setSkillDetails],
-          value7: [courseDetails, setCourseDetails],
-          value8: [extraCurricularDetails, setExtraCurricularDetails],
-          value9: [languageDetails, setLanguageDetails],
-          value10: [hobbiesDetails, setHobbiesDetails],
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: {
+            xs: "column",
+            sm: "column",
+            md: "column",
+            lg: "column",
+            xl: "row",
+          },
+          height: "100%",
         }}
       >
-        <Box
-          sx={{
-            width: {
-              xs: "100%",
-              sm: "100%",
-              md: "100%",
-              lg: "100%",
-              xl: "50%",
-            },
-            height: {
-              lg: "50%",
-              xl: "50%",
-            },
-            padding: "5%",
-            backgroundColor: "white",
+        <Head>
+          <title>CV Builder</title>
+        </Head>
+        <DataContext.Provider
+          value={{
+            image: [images, setImages],
+            imageUrls: [imageURLs, setImageURLs],
+            value1: [personalDetails, setPersonalDetails],
+            value2: [professionalSummary, setProfessionalSummary],
+            value3: [employmentDetails, setEmploymentDetails],
+            value4: [educationDetails, setEducationDetails],
+            value5: [socialLinksDetails, setSocialLinksDetails],
+            value6: [skillDetails, setSkillDetails],
+            value7: [courseDetails, setCourseDetails],
+            value8: [extraCurricularDetails, setExtraCurricularDetails],
+            value9: [languageDetails, setLanguageDetails],
+            value10: [hobbiesDetails, setHobbiesDetails],
           }}
         >
-          <Box sx={{}}>
-            <ImageUpload />
-            <PersonalDetails />
-            <ProfessionalSummary />
-            {allSections.map((item) => (
-              <List key={item.id}> {item.name}</List>
-            ))}
-            <AddSection
-              allSections={allSections}
-              setAllSections={setAllSections}
-              deleteCustomSection={deleteCustomSection}
-            />
+          <Box
+            sx={{
+              width: {
+                xs: "100%",
+                sm: "100%",
+                md: "100%",
+                lg: "100%",
+                xl: "50%",
+              },
+              height: {
+                lg: "50%",
+                xl: "50%",
+              },
+              padding: '5%',
+              backgroundColor: "white",
+            }}
+          >
+            <Navbar />
+            <Box >
+              <ImageUpload />
+              <PersonalDetails />
+              <ProfessionalSummary />
+              {allSections.map((item) => (
+                <List key={item.id}> {item.name}</List>
+              ))}
+              <AddSection
+                allSections={allSections}
+                setAllSections={setAllSections}
+                deleteCustomSection={deleteCustomSection}
+              />
+            </Box>
           </Box>
-        </Box>
-        <Box
-          sx={{
-            width: {
-              xs: "100%",
-              sm: "100%",
-              md: "100%",
-              lg: "100%",
-              xl: "50%",
-            },
-            position: {
-              lg: "relative",
-              xl: "fixed",
-            },
-            top: {
-              lg: "50%",
-              xl: 0,
-            },
-            right: 0,
-            height: "50%",
-          }}
-        >
-          <PDFView />
-        </Box>
-      </DataContext.Provider>
-    </Box>
+          <Box
+            sx={{
+              width: {
+                xs: "100%",
+                sm: "100%",
+                md: "100%",
+                lg: "100%",
+                xl: "50%",
+              },
+              position: {
+                lg: "relative",
+                xl: "fixed",
+              },
+              top: {
+                lg: "50%",
+                xl: 0,
+              },
+              right: 0,
+              height: "100%",
+
+            }}
+          >
+            <PDFView />
+          </Box>
+        </DataContext.Provider>
+      </Box>
+      <Footer />
+    </>
   );
 }

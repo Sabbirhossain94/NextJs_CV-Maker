@@ -7,6 +7,8 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Link from "next/link";
+import Footer from "./Footer";
+
 export default function Home() {
   return (
     <Box>
@@ -57,7 +59,6 @@ export default function Home() {
           </Button>
         </Link>
       </Box>
-      {/*  */}
       <Box
         style={{
           background: "#e6ecf7",
@@ -146,23 +147,7 @@ export default function Home() {
           </Box>
         </Box>
       </Box>
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          height: "100px",
-          background: "linear-gradient(to right bottom, #64b5f6, #1565c0)",
-          fontFamily: "Segoe UI",
-        }}
-      >
-        <Typography
-          style={{ textAlign: "center", color: "white", fontWeight: "600" }}
-        >
-          &copy; 2023 CV Builder. All rights reserved
-        </Typography>
-      </Box>
+      <Footer/>
     </Box>
   );
 }

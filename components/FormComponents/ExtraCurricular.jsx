@@ -15,7 +15,6 @@ import { DataContext } from "../../pages/CVBuilder";
 export default function ExtraCurricular({
   deleteCustomSection,
   sectionId,
-  setActiveSectionId,
 }) {
   const getData = useContext(DataContext);
   const [expanded, setExpanded] = useState(false);
@@ -83,7 +82,6 @@ export default function ExtraCurricular({
             }}
             onClick={() => {
               deleteCustomSection(sectionId);
-              setActiveSectionId(null);
               setStateValue([
                 {
                   activity: "",
