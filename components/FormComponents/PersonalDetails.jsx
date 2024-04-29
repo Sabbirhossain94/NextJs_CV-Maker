@@ -16,7 +16,7 @@ export default function PersonalDetails() {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [stateValue, setStateValue] = getData.value1;
+  const [stateValue, setStateValue] = getData.personalInformation;
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
@@ -127,7 +127,7 @@ export default function PersonalDetails() {
                 name="phone"
                 variant="filled"
                 value={item.phone}
-                type="text"
+                type="tel"
                 sx={{
                   width: "100%",
                   background: "#e7eaf4",
@@ -313,82 +313,7 @@ export default function PersonalDetails() {
                       }}
                       onChange={(e) => handleInputChange(e, key)}
                     />
-                  </Grid>
-                  <Grid item xs={7} md={7}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Nationality"
-                      name="nationality"
-                      variant="filled"
-                      type="text"
-                      value={item.nationality}
-                      sx={{
-                        width: "102%",
-                        background: "#e7eaf4",
-                        borderRadius: "5px",
-                        marginLeft: "8px",
-                      }}
-                      InputLabelProps={{
-                        sx: {
-                          color: "#828ba2",
-                        },
-                      }}
-                      InputProps={{
-                        disableUnderline: true,
-                      }}
-                      onChange={(e) => handleInputChange(e, key)}
-                    />
-                  </Grid>
-                  <Grid item xs={7} md={7}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Place Of Birth"
-                      name="placeofbirth"
-                      variant="filled"
-                      type="text"
-                      value={item.placeofbirth}
-                      sx={{
-                        width: "102%",
-                        background: "#e7eaf4",
-                        borderRadius: "5px",
-                      }}
-                      InputLabelProps={{
-                        sx: {
-                          color: "#828ba2",
-                        },
-                      }}
-                      InputProps={{
-                        disableUnderline: true,
-                      }}
-                      onChange={(e) => handleInputChange(e, key)}
-                    />
-                  </Grid>
-                  <Grid item xs={7} md={7}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Date Of Birth"
-                      name="dateofbirth"
-                      variant="filled"
-                      type="text"
-                      value={item.dateofbirth}
-                      sx={{
-                        width: "102%",
-                        background: "#e7eaf4",
-                        borderRadius: "5px",
-                        textDecoration: "none",
-                        marginLeft: "8px",
-                      }}
-                      InputLabelProps={{
-                        sx: {
-                          color: "#828ba2",
-                        },
-                      }}
-                      InputProps={{
-                        disableUnderline: true,
-                      }}
-                      onChange={(e) => handleInputChange(e, key)}
-                    />
-                  </Grid>
+                  </Grid>             
                 </Grid>
               </AccordionDetails>
             </Accordion>

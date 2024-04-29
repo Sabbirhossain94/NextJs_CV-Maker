@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
@@ -11,15 +12,21 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import { DataContext } from "../../pages/CVBuilder";
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function Employment() {
+
   const getData = useContext(DataContext);
   const [expanded, setExpanded] = useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.value3;
+  const [stateValue, setStateValue] = getData.employment;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -28,6 +35,13 @@ export default function Employment() {
       }
     });
     setStateValue(result);
+  };
+
+  const modules = {
+    toolbar: [
+      [{ 'list': 'bullet' }],
+      ['clean']
+    ],
   };
 
   const addAccordionSection = () => {
@@ -51,10 +65,17 @@ export default function Employment() {
     obj[name] = value;
     clone[inputKey] = obj;
     setStateValue([...clone]);
+
+  };
+
+  const handleDescriptionChange = (index, value) => {
+    const updatedEmploymentDetails = [...stateValue];
+    updatedEmploymentDetails[index].description = value;
+    setStateValue(updatedEmploymentDetails);
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box>
       <Typography
         sx={{
           width: "33%",
@@ -67,7 +88,7 @@ export default function Employment() {
         Experience
       </Typography>
 
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item xs={14} sm={15} md={15}>
@@ -76,7 +97,6 @@ export default function Employment() {
                 onChange={handleChange(key)}
                 sx={{
                   backgroundColor: "white",
-                  cursor: "none",
                   boxShadow: "none",
                   border: "1px solid",
                   borderColor: "#e7eaf4",
@@ -218,22 +238,13 @@ export default function Employment() {
                       />
                     </Grid>
                     <Grid item xs={16} md={12}>
-                      <TextField
-                        id={item.id}
-                        label="Description"
-                        
-                        type="text"
-                        value={stateValue.description}
-                        name="description"
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
-                        }}
-                        multiline
-                        rows={8}
-                        sx={{ width: "100%", background: "#e7eaf4" }}
-                        onChange={(e) => handleInputChange(e, key)}
+                      <Typography>Description</Typography>
+                      <ReactQuill
+                        style={{ marginTop: '10px', background: "#e7eaf4" }}
+                        value={item.description}
+                        modules={modules}
+                        formats={['list']}
+                        onChange={(value) => handleDescriptionChange(key, value)}
                       />
                     </Grid>
                   </Grid>
@@ -241,7 +252,7 @@ export default function Employment() {
               </Accordion>
             </Grid>
             <Grid item md="auto">
-              <DeleteOutlineOutlinedIcon
+              {key > 0 && <DeleteOutlineOutlinedIcon
                 sx={{
                   marginTop: "20px",
                   marginLeft: "5px",
@@ -253,7 +264,7 @@ export default function Employment() {
                   },
                 }}
                 onClick={() => deleteAccordionSection(key)}
-              />
+              />}
             </Grid>
           </Grid>
         ))}

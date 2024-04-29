@@ -12,7 +12,7 @@ export default function Hobbies({
   sectionId,
 }) {
   const getData = useContext(DataContext);
-  const [stateValue, setStateValue] = getData.value10;
+  const [stateValue, setStateValue] = getData.hobbies;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

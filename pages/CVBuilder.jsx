@@ -39,9 +39,6 @@ export default function CVBuilder() {
       occupation: "",
       address: "",
       postalcode: "",
-      nationality: "",
-      placeofbirth: "",
-      dateofbirth: "",
     },
   ]);
   const [professionalSummary, setProfessionalSummary] = useState([
@@ -66,11 +63,11 @@ export default function CVBuilder() {
       startdate: "",
       enddate: "",
       institutioncity: "",
-      description: "",
     },
   ]);
   const [socialLinksDetails, setSocialLinksDetails] = useState([
     {
+      icon: "",
       label: "",
       linkurl: "",
     },
@@ -83,7 +80,7 @@ export default function CVBuilder() {
   ]);
   const [courseDetails, setCourseDetails] = useState([
     {
-      course: "",
+      projecttitle: "",
       institution: "",
       startdate: "",
       enddate: "",
@@ -92,10 +89,10 @@ export default function CVBuilder() {
   const [extraCurricularDetails, setExtraCurricularDetails] = useState([
     {
       activity: "",
-      employer: "",
+      institution: "",
       startdate: "",
       enddate: "",
-      city: "",
+      role: "",
       description: "",
     },
   ]);
@@ -128,12 +125,14 @@ export default function CVBuilder() {
 
   const deleteCustomSection = (id) => {
     const result = allSections.filter((item) => {
-      if (item.id != id) {
+      if (item.id !== id) {
         return item.id;
       }
     });
     setAllSections(result);
   };
+
+  console.log(allSections)
 
 
   return delay === 0 ? (
@@ -160,16 +159,16 @@ export default function CVBuilder() {
           value={{
             image: [images, setImages],
             imageUrls: [imageURLs, setImageURLs],
-            value1: [personalDetails, setPersonalDetails],
-            value2: [professionalSummary, setProfessionalSummary],
-            value3: [employmentDetails, setEmploymentDetails],
-            value4: [educationDetails, setEducationDetails],
-            value5: [socialLinksDetails, setSocialLinksDetails],
-            value6: [skillDetails, setSkillDetails],
-            value7: [courseDetails, setCourseDetails],
-            value8: [extraCurricularDetails, setExtraCurricularDetails],
-            value9: [languageDetails, setLanguageDetails],
-            value10: [hobbiesDetails, setHobbiesDetails],
+            personalInformation: [personalDetails, setPersonalDetails],
+            summary: [professionalSummary, setProfessionalSummary],
+            employment: [employmentDetails, setEmploymentDetails],
+            education: [educationDetails, setEducationDetails],
+            socials: [socialLinksDetails, setSocialLinksDetails],
+            skills: [skillDetails, setSkillDetails],
+            course: [courseDetails, setCourseDetails],
+            extraCurricular: [extraCurricularDetails, setExtraCurricularDetails],
+            languages: [languageDetails, setLanguageDetails],
+            hobbies: [hobbiesDetails, setHobbiesDetails],
           }}
         >
           <Box
@@ -206,6 +205,7 @@ export default function CVBuilder() {
           </Box>
           <Box
             sx={{
+              overflowY: "scroll",
               width: {
                 xs: "100%",
                 sm: "100%",

@@ -6,7 +6,8 @@ import GTranslateOutlinedIcon from "@mui/icons-material/GTranslateOutlined";
 import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import NordicWalkingOutlinedIcon from "@mui/icons-material/NordicWalkingOutlined";
-import Courses from "./Courses";
+import AppsIcon from '@mui/icons-material/Apps';
+import Projects from "./Projects";
 import ExtraCurricular from "./ExtraCurricular";
 import Hobbies from "./Hobbies";
 import Language from "./Language";
@@ -17,10 +18,18 @@ export default function AddSection({
   deleteCustomSection,
 }) {
 
-  const addSections = (newSectionId, newSectionName) => {
+  const generateCustomSectionId = () => {
+    const existingIds = allSections.map(section => section.id);
+    const maxId = Math.max(...existingIds);
+    return maxId + 1;
+  };
+
+  const addSections = (newSectionName) => {
+    const newId = generateCustomSectionId();
+    console.log(newId)
     setAllSections([
       ...allSections,
-      { id: newSectionId, name: newSectionName },
+      { id: newId, name: newSectionName },
     ]);
   };
 
@@ -28,7 +37,7 @@ export default function AddSection({
     {
       id: 5,
       icon: (
-        <SchoolOutlinedIcon
+        <AppsIcon
           style={{
             fontSize: "35px",
             ...{ color: allSections.map((item) => item.id).includes(5) ? "#bdbdbd" : "#1565c0" },
@@ -36,9 +45,9 @@ export default function AddSection({
           color="primary"
         />
       ),
-      name: "Courses",
+      name: "Projects",
       component: (
-        <Courses
+        <Projects
           deleteCustomSection={deleteCustomSection}
           sectionId={5}
         />
@@ -55,7 +64,7 @@ export default function AddSection({
           }}
         />
       ),
-      name: "Extra-curricular Activities",
+      name: "Extra-Curricular Activities",
       component: (
         <ExtraCurricular
           deleteCustomSection={deleteCustomSection}
@@ -103,6 +112,7 @@ export default function AddSection({
     },
   ];
 
+  console.log(allSections)
 
   return (
     <Box>
@@ -156,7 +166,7 @@ export default function AddSection({
                 },
               }}
               onClick={() => {
-                addSections(item.id, item.component);
+                addSections(item.component);
               }}
             >
               {item.name}

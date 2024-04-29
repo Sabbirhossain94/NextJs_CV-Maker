@@ -27,7 +27,7 @@ export default function Skills() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.value6;
+  const [stateValue, setStateValue] = getData.skills;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -58,6 +58,7 @@ export default function Skills() {
     clone[inputKey] = obj;
     setStateValue([...clone]);
   };
+
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
     height: 16,
@@ -135,7 +136,7 @@ export default function Skills() {
         </Typography>
       </Stack>
 
-      <Box sx={{ marginTop: "15px" }}>
+      <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item xs={14} sm={15} md={15}>
@@ -189,7 +190,7 @@ export default function Skills() {
                       />
                     </Grid>
                     <Grid item xs={15} sm={6} md={6}>
-                      <FormControl sx={{ width: "100%"}}>
+                      <FormControl sx={{ width: "100%" }}>
                         <InputLabel
                           id="demo-simple-select-helper-label"
                           sx={{}}
@@ -213,28 +214,24 @@ export default function Skills() {
                         >
                           {[
                             {
-                              value: 0,
-                              name: "None",
-                            },
-                            {
                               value: 1,
-                              name: "Novice",
+                              name: "⭐",
                             },
                             {
                               value: 2,
-                              name: "Beginner",
+                              name: "⭐⭐",
                             },
                             {
                               value: 3,
-                              name: "Skillfull",
+                              name: "⭐⭐⭐",
                             },
                             {
                               value: 4,
-                              name: "Experienced",
+                              name: "⭐⭐⭐⭐",
                             },
                             {
                               value: 5,
-                              name: "Expert",
+                              name: "⭐⭐⭐⭐⭐",
                             },
                           ].map((item, key) => (
                             <MenuItem
@@ -253,7 +250,7 @@ export default function Skills() {
               </Accordion>
             </Grid>
             <Grid item md="auto">
-              <DeleteOutlineOutlinedIcon
+              {key > 0 && <DeleteOutlineOutlinedIcon
                 sx={{
                   marginTop: "20px",
                   marginLeft: "5px",
@@ -265,7 +262,7 @@ export default function Skills() {
                   },
                 }}
                 onClick={() => deleteAccordionSection(key)}
-              />
+              />}
             </Grid>
           </Grid>
         ))}

@@ -25,7 +25,7 @@ export default function Language({
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [stateValue, setStateValue] = getData.value9;
+  const [stateValue, setStateValue] = getData.languages;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -35,7 +35,6 @@ export default function Language({
     });
     setStateValue(result);
   };
-  // const [toggleSwitch, setToggleSwitch] = useState(false);
 
   const addAccordionSection = () => {
     setStateValue([

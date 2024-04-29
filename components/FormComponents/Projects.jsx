@@ -10,8 +10,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { DataContext } from "../../pages/CVBuilder";
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
 
-export default function Courses({
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+
+export default function Projects({
   deleteCustomSection,
   sectionId,
 }) {
@@ -22,7 +27,14 @@ export default function Courses({
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.value7;
+  const [stateValue, setStateValue] = getData.course;
+
+  const modules = {
+    toolbar: [
+      [{ 'list': 'bullet' }],
+      ['clean']
+    ],
+  };
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -65,7 +77,7 @@ export default function Courses({
               paddingBottom: "10px",
             }}
           >
-            Courses
+            Projects
           </Typography>
           <DeleteOutlineOutlinedIcon
             sx={{
@@ -126,34 +138,10 @@ export default function Courses({
                     <Grid item xs={6} md={6}>
                       <TextField
                         id="outlined-basic"
-                        label="Course"
+                        label="Project Title"
                         type="text"
                         value={stateValue.course}
-                        name="course"
-                        variant="filled"
-                        sx={{
-                          width: "100%",
-                          background: "#e7eaf4",
-                          borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
-                        }}
-                        InputProps={{
-                          disableUnderline: true,
-                        }}
-                        onChange={(e) => handleInputChange(e, key)}
-                      />
-                    </Grid>
-                    <Grid item xs={6} md={6}>
-                      <TextField
-                        id="outlined-basic"
-                        label="Institution"
-                        type="text"
-                        value={stateValue.institution}
-                        name="institution"
+                        name="projecttitle"
                         variant="filled"
                         sx={{
                           width: "100%",
@@ -214,6 +202,16 @@ export default function Courses({
                           },
                         }}
                         onChange={(e) => handleInputChange(e, key)}
+                      />
+                    </Grid>
+                    <Grid item xs={16} md={12}>
+                      <Typography>Description</Typography>
+                      <ReactQuill
+                        style={{ marginTop: '10px', background: "#e7eaf4" }}
+                        value={item.description}
+                        modules={modules}
+                        formats={['list']}
+                        onChange={(value) => handleDescriptionChange(key, value)}
                       />
                     </Grid>
                   </Grid>

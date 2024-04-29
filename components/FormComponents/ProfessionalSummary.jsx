@@ -7,7 +7,7 @@ import { DataContext } from "../../pages/CVBuilder";
 
 export default function ProfessionalSummary() {
   const getData = useContext(DataContext);
-  const [stateValue, setStateValue] = getData.value2;
+  const [stateValue, setStateValue] = getData.summary;
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
     let clone = [...stateValue];

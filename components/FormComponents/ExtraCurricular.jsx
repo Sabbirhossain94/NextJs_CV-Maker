@@ -11,6 +11,10 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { DataContext } from "../../pages/CVBuilder";
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function ExtraCurricular({
   deleteCustomSection,
@@ -21,8 +25,15 @@ export default function ExtraCurricular({
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [stateValue, setStateValue] = getData.value8;
+  const [stateValue, setStateValue] = getData.extraCurricular;
 
+  const modules = {
+    toolbar: [
+      [{ 'list': 'bullet' }],
+      ['clean']
+    ],
+  };
+  
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
       if (key !== id) {
@@ -53,6 +64,12 @@ export default function ExtraCurricular({
     obj[name] = value;
     clone[inputKey] = obj;
     setStateValue([...clone]);
+  };
+
+  const handleDescriptionChange = (index, value) => {
+    const updatedActivites = [...stateValue];
+    updatedActivites[index].description = value;
+    setStateValue(updatedActivites);
   };
 
   return (
@@ -151,9 +168,9 @@ export default function ExtraCurricular({
                     </Grid>
                     <Grid item xs={6} md={6}>
                       <TextField
-                        label="Employer"
+                        label="Institution or Organization"
                         type="text"
-                        name="employer"
+                        name="institution"
                         value={stateValue.employer}
                         variant="filled"
                         sx={{
@@ -221,9 +238,9 @@ export default function ExtraCurricular({
                     </Grid>
                     <Grid item xs={16} md={6}>
                       <TextField
-                        label="City"
+                        label="Role or Position"
                         type="text"
-                        name="city"
+                        name="role"
                         value={stateValue.city}
                         variant="filled"
                         sx={{
@@ -243,21 +260,13 @@ export default function ExtraCurricular({
                       />
                     </Grid>
                     <Grid item xs={16} md={12}>
-                      <TextField
-                        label="Description"
-                        variant="filled"
-                        type="text"
-                        value={stateValue.description}
-                        name="description"
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
-                        }}
-                        multiline
-                        rows={8}
-                        sx={{ width: "100%", background: "#e7eaf4" }}
-                        onChange={(e) => handleInputChange(e, key)}
+                      <Typography>Responsibilities or Achivements</Typography>
+                      <ReactQuill
+                        style={{ marginTop: '10px', background: "#e7eaf4" }}
+                        value={item.description}
+                        modules={modules}
+                        formats={['list']}
+                        onChange={(value) => handleDescriptionChange(key, value)}
                       />
                     </Grid>
                   </Grid>

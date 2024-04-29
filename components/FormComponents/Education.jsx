@@ -20,7 +20,7 @@ export default function Education() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.value4;
+  const [stateValue, setStateValue] = getData.education;
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -54,7 +54,7 @@ export default function Education() {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box >
       <Typography
         sx={{
           width: "33%",
@@ -67,7 +67,7 @@ export default function Education() {
         Education
       </Typography>
 
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item xs={14} sm={15} md={15}>
@@ -145,10 +145,10 @@ export default function Education() {
                     <Grid item xs={12} md={6} sx={{ display: "flex" }}>
                       <TextField
                         variant="filled"
-                        label="Start Date"
+                        label="Start Year"
                         name="startdate"
                         value={stateValue.startdate}
-                        type="month"
+                        type="year"
                         sx={{
                           background: "#e7eaf4",
                           borderRadius: "5px",
@@ -167,10 +167,10 @@ export default function Education() {
 
                       <TextField
                         variant="filled"
-                        label="End Date"
+                        label="End Year"
                         name="enddate"
                         value={stateValue.enddate}
-                        type="month"
+                        type="year"
                         sx={{
                           marginLeft: "20px",
                           background: "#e7eaf4",
@@ -211,29 +211,13 @@ export default function Education() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={16} md={12}>
-                      <TextField
-                        label="Description"
-                        type="text"
-                        value={stateValue.description}
-                        name="description"
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
-                        }}
-                        multiline
-                        rows={8}
-                        sx={{ width: "100%", background: "#e7eaf4" }}
-                        onChange={(e) => handleInputChange(e, key)}
-                      />
-                    </Grid>
+                   
                   </Grid>
                 </AccordionDetails>
               </Accordion>
             </Grid>
             <Grid item md="auto">
-              <DeleteOutlineOutlinedIcon
+              {key > 0 && <DeleteOutlineOutlinedIcon
                 sx={{
                   marginTop: "20px",
                   marginLeft: "5px",
@@ -245,7 +229,7 @@ export default function Education() {
                   },
                 }}
                 onClick={() => deleteAccordionSection(key)}
-              />
+              />}
             </Grid>
           </Grid>
         ))}
