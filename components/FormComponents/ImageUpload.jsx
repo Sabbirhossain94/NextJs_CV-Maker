@@ -12,22 +12,27 @@ export default function Practice() {
   const getData = useContext(DataContext);
   const [imageData, setImageData] = getData.image;
   const [imageUrlData, setImageUrlData] = getData.imageUrls;
+
   useEffect(() => {
     if (imageData.length < 1) return;
     const newImageUrls = [];
     imageData.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
     setImageUrlData(newImageUrls);
   }, [imageData, setImageUrlData]);
+
   const imageHandler = (e) => {
     setImageData([...e.target.files]);
   };
+
   const deleteImage = () => {
     setImageUrlData([]);
     setImageData([]);
   };
+
   const imageLoader = () => {
     return imageUrlData;
   };
+  
   return (
     <div style={{ marginTop: "30px" }}>
       <Typography

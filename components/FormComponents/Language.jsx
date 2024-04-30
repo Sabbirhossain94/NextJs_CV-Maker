@@ -91,7 +91,7 @@ export default function Language({
         </Grid>
       </Grid>
 
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item xs={14} sm={15} md={15}>
@@ -146,7 +146,7 @@ export default function Language({
                       />
                     </Grid>
                     <Grid item xs={16} md={6}>
-                      <FormControl sx={{ width: "100%"}}>
+                      <FormControl sx={{ width: "100%" }}>
                         <InputLabel id="demo-simple-select-helper-label">
                           Level
                         </InputLabel>
@@ -167,19 +167,23 @@ export default function Language({
                           {[
                             {
                               value: 0,
-                              name: "None",
+                              name: "Native",
                             },
                             {
                               value: 1,
-                              name: "Native speaker",
+                              name: "Beginner",
                             },
                             {
                               value: 2,
-                              name: "Highly proficient",
+                              name: "Intermediate",
                             },
                             {
                               value: 3,
-                              name: "Very good command",
+                              name: "Advanced",
+                            },
+                            {
+                              value: 4,
+                              name: "Fluent",
                             },
                           ].map((item, key) => (
                             <MenuItem
@@ -198,7 +202,7 @@ export default function Language({
               </Accordion>
             </Grid>
             <Grid item md="auto">
-              <DeleteOutlineOutlinedIcon
+              {key > 0 && <DeleteOutlineOutlinedIcon
                 sx={{
                   marginTop: "20px",
                   marginLeft: "5px",
@@ -210,7 +214,7 @@ export default function Language({
                   },
                 }}
                 onClick={() => deleteAccordionSection(key)}
-              />
+              />}
             </Grid>
           </Grid>
         ))}

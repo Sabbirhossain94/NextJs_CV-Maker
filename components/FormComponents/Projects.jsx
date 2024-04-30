@@ -27,13 +27,21 @@ export default function Projects({
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.course;
+  const [stateValue, setStateValue] = getData.project;
 
   const modules = {
     toolbar: [
       [{ 'list': 'bullet' }],
+      [{ 'link': 'link' }],
       ['clean']
     ],
+  };
+
+  const customStyles = {
+    'link': {
+      color: 'blue',
+      textDecoration: 'underline'
+    }
   };
 
   const deleteAccordionSection = (id) => {
@@ -49,10 +57,10 @@ export default function Projects({
     setStateValue([
       ...stateValue,
       {
-        course: "",
-        institution: "",
+        projecttitle: "",
         startdate: "",
         enddate: "",
+        description: "",
       },
     ]);
   };
@@ -65,6 +73,11 @@ export default function Projects({
     setStateValue([...clone]);
   };
 
+  const handleDescriptionChange = (index, value) => {
+    const updatedProjectDetails = [...stateValue];
+    updatedProjectDetails[index].description = value;
+    setStateValue(updatedProjectDetails);
+  };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
@@ -95,10 +108,10 @@ export default function Projects({
               deleteCustomSection(sectionId);
               setStateValue([
                 {
-                  course: "",
-                  institution: "",
+                  projecttitle: "",
                   startdate: "",
                   enddate: "",
+                  description: "",
                 },
               ]);
             }}
@@ -106,7 +119,7 @@ export default function Projects({
         </Grid>
       </Grid>
 
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item xs={14} sm={15} md={15}>
@@ -126,7 +139,7 @@ export default function Projects({
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                    {item.course ? item.course : "(Not Specified)"}
+                    {item.projecttitle ? item.projecttitle : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -210,7 +223,8 @@ export default function Projects({
                         style={{ marginTop: '10px', background: "#e7eaf4" }}
                         value={item.description}
                         modules={modules}
-                        formats={['list']}
+                        formats={['list', 'link']}
+                        styles={customStyles}
                         onChange={(value) => handleDescriptionChange(key, value)}
                       />
                     </Grid>
@@ -219,7 +233,7 @@ export default function Projects({
               </Accordion>
             </Grid>
             <Grid item md="auto">
-              <DeleteOutlineOutlinedIcon
+              {key > 0 && <DeleteOutlineOutlinedIcon
                 sx={{
                   marginTop: "20px",
                   marginLeft: "5px",
@@ -231,7 +245,7 @@ export default function Projects({
                   },
                 }}
                 onClick={() => deleteAccordionSection(key)}
-              />
+              />}
             </Grid>
           </Grid>
         ))}

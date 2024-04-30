@@ -2,7 +2,6 @@ import React from "react";
 import Head from "next/head";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import PersonalDetails from "../components/FormComponents/PersonalDetails";
 import Education from "../components/FormComponents/Education";
@@ -78,14 +77,16 @@ export default function CVBuilder() {
       level: "",
     },
   ]);
-  const [courseDetails, setCourseDetails] = useState([
+
+  const [projectDetails, setProjectDetails] = useState([
     {
       projecttitle: "",
-      institution: "",
       startdate: "",
       enddate: "",
+      description: "",
     },
   ]);
+
   const [extraCurricularDetails, setExtraCurricularDetails] = useState([
     {
       activity: "",
@@ -103,6 +104,14 @@ export default function CVBuilder() {
     },
   ]);
   const [hobbiesDetails, setHobbiesDetails] = useState({ hobbies: "" });
+  const [referenceDetails, setReferenceDetails] = useState([{
+    referrername: "",
+    position: "",
+    organization: "",
+    address: "",
+    phone: "",
+    email: ""
+  }])
 
   const [allSections, setAllSections] = useState([
     {
@@ -123,17 +132,12 @@ export default function CVBuilder() {
     },
   ]);
 
-  const deleteCustomSection = (id) => {
-    const result = allSections.filter((item) => {
-      if (item.id !== id) {
-        return item.id;
-      }
-    });
-    setAllSections(result);
+  const [customSection, setCustomSection] = useState([])
+  const [showExpLevel, setShowExpLevel] = useState(false)
+
+  const deleteCustomSection = (sectionId) => {
+    setCustomSection(prevSections => prevSections.filter(section => section.id !== sectionId))
   };
-
-  console.log(allSections)
-
 
   return delay === 0 ? (
     <LoadingAnimation />
@@ -151,6 +155,7 @@ export default function CVBuilder() {
           },
           height: "100%",
         }}
+
       >
         <Head>
           <title>CV Builder</title>
@@ -165,10 +170,12 @@ export default function CVBuilder() {
             education: [educationDetails, setEducationDetails],
             socials: [socialLinksDetails, setSocialLinksDetails],
             skills: [skillDetails, setSkillDetails],
-            course: [courseDetails, setCourseDetails],
+            project: [projectDetails, setProjectDetails],
             extraCurricular: [extraCurricularDetails, setExtraCurricularDetails],
             languages: [languageDetails, setLanguageDetails],
             hobbies: [hobbiesDetails, setHobbiesDetails],
+            reference: [referenceDetails, setReferenceDetails],
+            skillExpLevel: [showExpLevel, setShowExpLevel]
           }}
         >
           <Box
@@ -196,9 +203,14 @@ export default function CVBuilder() {
               {allSections.map((item) => (
                 <List key={item.id}> {item.name}</List>
               ))}
+              {customSection.map((item, index) => (
+                <List key={index}> {item.name}</List>
+              ))}
               <AddSection
                 allSections={allSections}
                 setAllSections={setAllSections}
+                customSection={customSection}
+                setCustomSection={setCustomSection}
                 deleteCustomSection={deleteCustomSection}
               />
             </Box>

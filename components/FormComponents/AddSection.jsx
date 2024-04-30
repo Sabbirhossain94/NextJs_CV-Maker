@@ -1,35 +1,28 @@
-import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import GTranslateOutlinedIcon from "@mui/icons-material/GTranslateOutlined";
 import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined";
-import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import NordicWalkingOutlinedIcon from "@mui/icons-material/NordicWalkingOutlined";
 import AppsIcon from '@mui/icons-material/Apps';
 import Projects from "./Projects";
 import ExtraCurricular from "./ExtraCurricular";
 import Hobbies from "./Hobbies";
 import Language from "./Language";
+import References from "./References";
+import { Reference } from "../SvgComponents/SVG";
 
 export default function AddSection({
-  allSections,
-  setAllSections,
+  customSection,
+  setCustomSection,
   deleteCustomSection,
 }) {
 
-  const generateCustomSectionId = () => {
-    const existingIds = allSections.map(section => section.id);
-    const maxId = Math.max(...existingIds);
-    return maxId + 1;
-  };
 
-  const addSections = (newSectionName) => {
-    const newId = generateCustomSectionId();
-    console.log(newId)
-    setAllSections([
-      ...allSections,
-      { id: newId, name: newSectionName },
+  const addSections = (sectionId, newSectionName) => {
+    setCustomSection([
+      ...customSection,
+      { id: sectionId, name: newSectionName },
     ]);
   };
 
@@ -40,7 +33,7 @@ export default function AddSection({
         <AppsIcon
           style={{
             fontSize: "35px",
-            ...{ color: allSections.map((item) => item.id).includes(5) ? "#bdbdbd" : "#1565c0" },
+            ...{ color: customSection.map((item) => item.id).includes(5) ? "#bdbdbd" : "#1565c0" },
           }}
           color="primary"
         />
@@ -60,7 +53,7 @@ export default function AddSection({
           color="primary"
           sx={{
             fontSize: "35px",
-            ...{ color: allSections.map((item) => item.id).includes(6) ? "#bdbdbd" : "#1565c0" },
+            ...{ color: customSection.map((item) => item.id).includes(6) ? "#bdbdbd" : "#1565c0" },
           }}
         />
       ),
@@ -79,7 +72,7 @@ export default function AddSection({
           color="primary"
           sx={{
             fontSize: "35px",
-            ...{ color: allSections.map((item) => item.id).includes(7) ? "#bdbdbd" : "#1565c0" },
+            ...{ color: customSection.map((item) => item.id).includes(7) ? "#bdbdbd" : "#1565c0" },
           }}
         />
       ),
@@ -98,7 +91,7 @@ export default function AddSection({
           color="primary"
           sx={{
             fontSize: "35px",
-            ...{ color: allSections.map((item) => item.id).includes(8) ? "#bdbdbd" : "#1565c0" },
+            ...{ color: customSection.map((item) => item.id).includes(8) ? "#bdbdbd" : "#1565c0" },
           }}
         />
       ),
@@ -110,9 +103,20 @@ export default function AddSection({
         />
       ),
     },
+    {
+      id: 9,
+      icon: (
+        <Reference customSection={customSection} />
+      ),
+      name: "References",
+      component: (
+        <References
+          deleteCustomSection={deleteCustomSection}
+          sectionId={9}
+        />
+      ),
+    },
   ];
-
-  console.log(allSections)
 
   return (
     <Box>
@@ -159,14 +163,14 @@ export default function AddSection({
                   cursor: "pointer",
                 },
                 ...{
-                  pointerEvents: allSections.map((section) => section.id).includes(item.id) ? "none" : "auto",
+                  pointerEvents: customSection.map((section) => section.id).includes(item.id) ? "none" : "auto",
                 },
                 ...{
-                  color: allSections.map((section) => section.id).includes(item.id) ? "#bdbdbd" : "primary",
+                  color: customSection.map((section) => section.id).includes(item.id) ? "#bdbdbd" : "primary",
                 },
               }}
               onClick={() => {
-                addSections(item.component);
+                addSections(item.id, item.component);
               }}
             >
               {item.name}

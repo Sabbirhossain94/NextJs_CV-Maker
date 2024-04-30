@@ -33,7 +33,7 @@ export default function ExtraCurricular({
       ['clean']
     ],
   };
-  
+
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
       if (key !== id) {
@@ -48,10 +48,10 @@ export default function ExtraCurricular({
       ...stateValue,
       {
         activity: "",
-        employer: "",
+        institution: "",
         startdate: "",
         enddate: "",
-        city: "",
+        role: "",
         description: "",
       },
     ]);
@@ -102,10 +102,10 @@ export default function ExtraCurricular({
               setStateValue([
                 {
                   activity: "",
-                  employer: "",
+                  institution: "",
                   startdate: "",
                   enddate: "",
-                  city: "",
+                  role: "",
                   description: "",
                 },
               ]);
@@ -114,7 +114,7 @@ export default function ExtraCurricular({
         </Grid>
       </Grid>
 
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
         {stateValue.map((item, key) => (
           <Grid key={key} container columns={16}>
             <Grid item xs={14} sm={15} md={15}>
@@ -274,7 +274,7 @@ export default function ExtraCurricular({
               </Accordion>
             </Grid>
             <Grid item md="auto">
-              <DeleteOutlineOutlinedIcon
+              {key > 0 && <DeleteOutlineOutlinedIcon
                 sx={{
                   marginTop: "20px",
                   marginLeft: "5px",
@@ -286,7 +286,7 @@ export default function ExtraCurricular({
                   },
                 }}
                 onClick={() => deleteAccordionSection(key)}
-              />
+              />}
             </Grid>
           </Grid>
         ))}
