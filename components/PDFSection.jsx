@@ -1,9 +1,9 @@
 import React from "react";
-import Template from "../pages/Template";
+import Template from "./Template/Template";
 
 const PDFView = () => {
   return (
-    <div className="">
+    <div className="hidden custom-end:block">
       <Template />
     </div>
   );

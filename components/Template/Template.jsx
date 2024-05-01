@@ -1,50 +1,38 @@
 import React from 'react'
-import { useContext, useRef } from 'react'
-import { DataContext } from './CVBuilder'
-import { Email, Phone, Location } from '../components/SvgComponents/SVG';
-import { months, parseDescription, parseProjectDetails, parseActivityDetails } from '../components/helpers/helpers';
-import generatePDF, { Resolution, Margin } from 'react-to-pdf';
+import { useState, useContext, useRef } from 'react'
+import { DataContext } from '../../pages/CVBuilder'
+import { Form, Email, Phone, Location } from '../SvgComponents/SVG';
+import { months, parseDescription, parseProjectDetails, parseActivityDetails, colorPicker } from '../helpers/helpers';
 import ReactToPrint from 'react-to-print';
+import Tooltip from '@mui/material/Tooltip';
 
 function Template() {
     const targetRef = useRef();
-    const { imageUrls, personalInformation, summary, employment, education, socials, skills, project, extraCurricular, languages, hobbies, reference, skillExpLevel } = useContext(DataContext);
+    const [colors, setColors] = useState("")
+    const { imageUrls, personalInformation, summary, employment, education, socials, skills, project, extraCurricular, languages, hobbies, reference, skillExpLevel, previewTemplate } = useContext(DataContext);
     const [{ firstname, lastname, email, phone, country, city, occupation, address, postalcode }] = personalInformation[0]
     const [picture] = imageUrls[0];
     const [{ summary: about }] = summary[0];
     const [showExpLevel] = skillExpLevel;
     const { hobbies: interests } = hobbies[0]
 
-    const options = {
-        method: 'open',
-        resolution: Resolution.EXTREME,
-        page: {
-            margin: Margin.SMALL,
-            format: 'letter',
-            orientation: 'portrait',
-        },
-        canvas: {
-            mimeType: 'image/png',
-            qualityRatio: 1
-        },
-        overrides: {
-            pdf: {
-                compress: true
-            },
-            canvas: {
-                useCORS: true
-            }
-        },
-    };
+    const [showTemplate, setShowTemplate] = previewTemplate
 
+    const handleColorChange = (name) => {
+        setColors(name)
+    }
 
     return (
-        <div className="bg-gradient-to-t from-gray-200 to-blue-300">
-
+        <div className="relative bg-gradient-to-t from-gray-200 to-blue-300">
+            <div className='absolute w-full flex justify-center gap-2 h-20 top-12'>
+                {colorPicker.map((color, index) => (
+                    <div onClick={() => handleColorChange(color.name)} key={index} className={`cursor-pointer border transition duration-300 hover:border-2 w-8 h-10 rounded-md ${color.name}`}></div>
+                ))}
+            </div>
             {/* Template start */}
             <div className='mx-auto scale-75 lg:scale-75 xl:scale-75 '>
                 <div ref={targetRef} id="template-wrapper" className="bg-white shadow-lg min-h-screen mx-auto ">
-                    <div className="flex w-full  bg-slate-800 sm:px-2 gap-10">
+                    <div className={`flex w-full ${colors ? colors : 'bg-slate-800'} sm:px-2 gap-10`}>
                         <div className="left-5 top-10 h-40 w-40 overflow-hidden p-3 sm:relative sm:rounded-full sm:p-0">
                             <img src={picture ? picture : `images/dummy.png`} />
                         </div>
@@ -63,7 +51,7 @@ function Template() {
                             <div className="flex flex-col sm:w-1/3">
                                 {/* contact section */}
                                 <div className="order-3 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-top-color text-lg font-bold">Contact</h2>
+                                    <h2 className="font-poppins text-slate-800 text-lg font-bold">Contact</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
 
                                     <div className='flex flex-col'>
@@ -86,7 +74,7 @@ function Template() {
 
                                 {/* skills section */}
                                 <div className="order-2 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-top-color text-lg font-bold">Skills</h2>
+                                    <h2 className="font-poppins text-top-color text-slate-800 text-lg font-bold">Skills</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <>
                                         {showExpLevel ? (skills?.[0] && skills?.[0].map((item, index) => (
@@ -105,7 +93,7 @@ function Template() {
                                 </div>
 
                                 <div className="order-3 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-top-color text-lg font-bold">Social Links</h2>
+                                    <h2 className="font-poppins text-top-color text-slate-800 text-lg font-bold">Social Links</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <div className='pt-1 flex flex-col gap-2'>
                                         {socials?.[0] && socials?.[0].map((social, index) => (
@@ -119,7 +107,7 @@ function Template() {
 
                                 {
                                     languages?.[0].some((entry) => Object.values(entry).some((item) => item !== "")) && <div className="order-3 py-3 sm:order-none">
-                                        <h2 className="font-poppins text-top-color text-lg font-bold">Languages</h2>
+                                        <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Languages</h2>
                                         <div className="border-top-color my-3 w-20 border-2"></div>
                                         <div className='pt-1 flex flex-wrap items-center gap-2'>
                                             {languages?.[0] && languages?.[0].map((item, index) => (
@@ -132,7 +120,7 @@ function Template() {
                                 }
 
                                 {interests && <div className="order-2 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-top-color text-lg font-bold">Interests</h2>
+                                    <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Interests</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <div className='flex flex-wrap gap-2'>
                                         {interests.split(",").map((item, index) => (
@@ -148,13 +136,13 @@ function Template() {
 
                             <div className="order-first flex flex-col sm:order-none sm:w-2/3">
                                 <div className="py-3">
-                                    <h2 className="font-poppins text-top-color text-lg font-bold">About</h2>
+                                    <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">About</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <p className='text-left'>{about}</p>
                                 </div>
 
                                 <div className="py-3">
-                                    <h2 className="font-poppins text-top-color text-lg font-bold">Experience</h2>
+                                    <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Experience</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
 
                                     <div className="flex flex-col">
@@ -176,7 +164,7 @@ function Template() {
                                 </div>
 
                                 <div className="order-1 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-top-color text-lg font-bold">Education</h2>
+                                    <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Education</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
 
                                     <div className="flex flex-col space-y-2">
@@ -193,7 +181,7 @@ function Template() {
 
                                 {
                                     project?.[0].some((entry) => Object.values(entry).some((item) => item !== "")) && <div className="py-3">
-                                        <h2 className="font-poppins text-top-color text-lg font-bold">Projects</h2>
+                                        <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Projects</h2>
                                         <div className="border-top-color my-3 w-20 border-2"></div>
 
                                         <div className="flex flex-col ">
@@ -216,7 +204,7 @@ function Template() {
 
                                 {
                                     extraCurricular?.[0].some((entry) => Object.values(entry).some((item) => item !== "")) && <div className="py-3">
-                                        <h2 className="font-poppins text-top-color text-lg font-bold">Extra Currricular Activites</h2>
+                                        <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Extra Currricular Activites</h2>
                                         <div className="border-top-color my-3 w-20 border-2"></div>
 
                                         <div className="flex flex-col ">
@@ -239,7 +227,7 @@ function Template() {
 
                                 {
                                     reference?.[0].some((entry) => Object.values(entry).some((item) => item !== "")) && <div className="order-1 py-3 sm:order-none">
-                                        <h2 className="font-poppins text-top-color text-lg font-bold">References</h2>
+                                        <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">References</h2>
                                         <div className="border-top-color my-3 w-20 border-2"></div>
 
                                         <div className="flex flex-col space-y-2">
@@ -260,15 +248,20 @@ function Template() {
                 </div>
                 <ReactToPrint
                     trigger={() =>
-                        <div className='mt-10 mx-auto flex justify-end'>
+                        <div className='mt-10 mx-auto flex justify-start custom-end:justify-end'>
                             <button className='bg-slate-800 transition hover:bg-slate-700 text-white p-3 rounded-md py-3 text-sm'>Print and Download</button>
                         </div>}
                     content={() => targetRef.current}
                 />
             </div>
+            <Tooltip title="Form" placement="top">
+                <div
+                    onClick={() => setShowTemplate(!showTemplate)}
+                    className="z-100 p-[15px] rounded-full bg-blue-500 hover:bg-blue-400 cursor-pointer fixed bottom-[25px] right-[25px] custom-end:hidden">
+                    <Form />
+                </div>
+            </Tooltip>
             {/* Template end */}
-
-
         </div >
 
     )

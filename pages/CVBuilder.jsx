@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PersonalDetails from "../components/FormComponents/PersonalDetails";
 import Education from "../components/FormComponents/Education";
 import SocialLinks from "../components/FormComponents/SocialLinks";
@@ -17,8 +17,9 @@ import "@fontsource/roboto/700.css";
 import PDFView from "../components/PDFSection";
 import ImageUpload from "../components/FormComponents/ImageUpload";
 import LoadingAnimation from "../components/StyleComponents/LoadingAnimation";
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer";
+import { Preview } from "../components/SvgComponents/SVG";
+import Template from "../components/Template/Template";
+import Tooltip from '@mui/material/Tooltip';
 
 export const DataContext = React.createContext();
 
@@ -134,10 +135,26 @@ export default function CVBuilder() {
 
   const [customSection, setCustomSection] = useState([])
   const [showExpLevel, setShowExpLevel] = useState(false)
+  const [showTemplate, setShowTemplate] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(null);
 
   const deleteCustomSection = (sectionId) => {
     setCustomSection(prevSections => prevSections.filter(section => section.id !== sectionId))
   };
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return delay === 0 ? (
     <LoadingAnimation />
@@ -175,7 +192,8 @@ export default function CVBuilder() {
             languages: [languageDetails, setLanguageDetails],
             hobbies: [hobbiesDetails, setHobbiesDetails],
             reference: [referenceDetails, setReferenceDetails],
-            skillExpLevel: [showExpLevel, setShowExpLevel]
+            skillExpLevel: [showExpLevel, setShowExpLevel],
+            previewTemplate: [showTemplate, setShowTemplate]
           }}
         >
           <Box
@@ -197,14 +215,17 @@ export default function CVBuilder() {
                 xl: '2%'
               },
               position: {
+                sm: 'relative',
                 lg: 'fixed',
                 xl: 'fixed'
               },
-              overflowY: "scroll",
+              overflowY: {
+                lg: 'scroll'
+              },
               backgroundColor: "white",
             }}
           >
-            <Box sx={{
+            {!showTemplate || windowWidth > 1199 ? <Box sx={{
               display: 'flex',
               flexDirection: 'column',
               paddingTop: {
@@ -229,8 +250,23 @@ export default function CVBuilder() {
                 setCustomSection={setCustomSection}
                 deleteCustomSection={deleteCustomSection}
               />
-            </Box>
+              <Tooltip title="Preview" placement="top">
+                <Box
+                  onClick={() => setShowTemplate(!showTemplate)}
+                  sx={{ zIndex: 200, cursor: "pointer", position: "fixed", bottom: 25, right: 25, background: "linear-gradient(to right bottom, #64b5f6, #1565c0)", borderRadius: "50%", padding: '15px' }}
+                >
+                  <Preview />
+                </Box>
+              </Tooltip>
+            </Box> : null}
+            {showTemplate && windowWidth < 1199 ?
+              <div className={`${showTemplate ? "transition duration-300 translate-x-0" : "transition duration-300 translate-x-96"}  z-100 absolute top-0 right-0 left-0 bottom-0 h-screen custom-end:hidden`}>
+                <Template />
+              </div> : null
+            }
           </Box>
+
+          {/* template section start */}
           <Box
             sx={{
               width: {
@@ -250,11 +286,11 @@ export default function CVBuilder() {
               },
               right: 0,
               height: "100%",
-
             }}
           >
             <PDFView />
           </Box>
+          {/* template section end */}
         </DataContext.Provider>
       </Box>
     </>

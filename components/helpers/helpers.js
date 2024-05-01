@@ -74,3 +74,27 @@ export const parseActivityDetails = (activityDettails) => {
         return <div className="ql-snow"><li key={index} dangerouslySetInnerHTML={{ __html: item.innerHTML }} /></div>
     });
 };
+
+export const colorPicker = [
+    {
+        name: "bg-slate-500",
+    },
+    {
+        name: "bg-yellow-500",
+    },
+    {
+        name: "bg-green-500",
+    },
+    {
+        name: "bg-blue-500",
+    },
+    {
+        name: "bg-teal-500",
+    },
+    {
+        name: "bg-purple-800",
+    },
+    {
+        name: "bg-slate-800",
+    },
+]
