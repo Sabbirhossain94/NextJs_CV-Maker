@@ -46,7 +46,7 @@ export const AntSwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
-export const months = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'july', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+export const months = ['Jan', 'Feb', 'Mar', 'April', 'May', 'June', 'july', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
 export const parseDescription = (description) => {
     const parser = new DOMParser();

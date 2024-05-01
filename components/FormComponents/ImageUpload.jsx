@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditIcon from "@mui/icons-material/Edit";
+import { Box } from "@mui/material";
 
 export default function Practice() {
   const getData = useContext(DataContext);
@@ -32,9 +33,9 @@ export default function Practice() {
   const imageLoader = () => {
     return imageUrlData;
   };
-  
+
   return (
-    <div style={{ marginTop: "30px" }}>
+    <Box style={{ marginTop: "20px" }}>
       <Typography
         sx={{
           width: "33%",
@@ -46,7 +47,7 @@ export default function Practice() {
         Photo
       </Typography>
       {imageUrlData.length > 0 ? (
-        <div style={{ display: "flex" }}>
+        <Box style={{ display: "flex" }}>
           <Image
             loader={imageLoader}
             src="/Images/resume_icon.png"
@@ -64,16 +65,16 @@ export default function Practice() {
               accept="image/png, image/jpg "
               onChange={imageHandler}
             />
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <Box style={{ display: "flex", flexDirection: "column" }}>
               <Button color="primary" component="span">
                 <EditIcon />
               </Button>
               <Button onClick={deleteImage}>
                 <DeleteOutlineOutlinedIcon />
               </Button>
-            </div>
+            </Box>
           </label>
-        </div>
+        </Box>
       ) : (
         <label htmlFor="upload-photo">
           <input
@@ -89,6 +90,6 @@ export default function Practice() {
           </Button>
         </label>
       )}
-    </div>
+    </Box>
   );
 }

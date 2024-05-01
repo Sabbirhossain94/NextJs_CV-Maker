@@ -150,7 +150,7 @@ export default function CVBuilder() {
             xs: "column",
             sm: "column",
             md: "column",
-            lg: "column",
+            lg: "row",
             xl: "row",
           },
           height: "100%",
@@ -184,19 +184,35 @@ export default function CVBuilder() {
                 xs: "100%",
                 sm: "100%",
                 md: "100%",
-                lg: "100%",
-                xl: "50%",
-              },
-              height: {
                 lg: "50%",
                 xl: "50%",
               },
-              padding: '5%',
+              height: {
+                lg: "100%",
+                xl: "100%",
+              },
+              padding: {
+                xs: '5%',
+                lg: '2%',
+                xl: '2%'
+              },
+              position: {
+                lg: 'fixed',
+                xl: 'fixed'
+              },
+              overflowY: "scroll",
               backgroundColor: "white",
             }}
           >
-            <Navbar />
-            <Box >
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              paddingTop: {
+                xs: '50px',
+                sm: '0px'
+              },
+              margin: "auto"
+            }}>
               <ImageUpload />
               <PersonalDetails />
               <ProfessionalSummary />
@@ -217,20 +233,19 @@ export default function CVBuilder() {
           </Box>
           <Box
             sx={{
-              overflowY: "scroll",
               width: {
                 xs: "100%",
                 sm: "100%",
                 md: "100%",
-                lg: "100%",
+                lg: "50%",
                 xl: "50%",
               },
               position: {
-                lg: "relative",
+                lg: "fixed",
                 xl: "fixed",
               },
               top: {
-                lg: "50%",
+                lg: "0%",
                 xl: 0,
               },
               right: 0,
@@ -242,7 +257,6 @@ export default function CVBuilder() {
           </Box>
         </DataContext.Provider>
       </Box>
-      <Footer />
     </>
   );
 }

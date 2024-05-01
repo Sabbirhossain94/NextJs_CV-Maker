@@ -80,12 +80,8 @@ export default function References({
                             marginTop: "7px",
                             marginLeft: "5px",
                             fontSize: "18px",
-                            color: "white",
-
-                            "&:hover": {
-                                color: "#2196f3",
-                                cursor: "pointer",
-                            },
+                            color: "red",
+                            cursor: "pointer",
                         }}
                         onClick={() => {
                             deleteCustomSection(sectionId);
@@ -106,7 +102,7 @@ export default function References({
 
             <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
                 {stateValue.map((item, key) => (
-                    <Grid key={key} container columns={16}>
+                    <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
                         <Grid item xs={14} sm={15} md={15}>
                             <Accordion
                                 expanded={expanded === key}
@@ -123,7 +119,7 @@ export default function References({
                                     aria-controls="panel1bh-content"
                                     id="panel1bh-header"
                                 >
-                                    <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                                    <Typography sx={{ width: "100%", flexShrink: 0 }}>
                                         {item.referrername ? item.referrername : "(Not Specified)"}
                                     </Typography>
                                 </AccordionSummary>
@@ -280,14 +276,13 @@ export default function References({
                         <Grid item md="auto">
                             {key > 0 && <DeleteOutlineOutlinedIcon
                                 sx={{
-                                    marginTop: "20px",
                                     marginLeft: "5px",
-                                    fontSize: "25px",
-                                    color: "white",
-                                    "&:hover": {
-                                        color: "#2196f3",
-                                        cursor: "pointer",
+                                    fontSize: {
+                                        xs: '20px',
+                                        md: '25px'
                                     },
+                                    color: "red",
+                                    cursor: "pointer"
                                 }}
                                 onClick={() => deleteAccordionSection(key)}
                             />}
@@ -295,24 +290,28 @@ export default function References({
                     </Grid>
                 ))}
             </Box>
-            <Typography
-                sx={{
-                    width: "94%",
-                    fontWeight: "700",
-                    marginTop: "10px",
-                    display: "flex",
-                    padding: "5px",
-                    borderRadius: "5px",
-                    "&:hover": {
-                        backgroundColor: "#e3f2fd",
-                        cursor: "pointer",
-                    },
-                }}
-                color="primary"
-                onClick={addAccordionSection}
-            >
-                <AddIcon sx={{ fontSize: "20px" }} /> Add one more course
-            </Typography>
+            <Grid container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid item xs={14} sm={15} md={15}>
+                    <Typography
+                        sx={{
+                            width: "100%",
+                            fontWeight: "700",
+                            marginTop: "10px",
+                            display: "flex",
+                            padding: "5px",
+                            borderRadius: "5px",
+                            "&:hover": {
+                                backgroundColor: "#e3f2fd",
+                                cursor: "pointer",
+                            },
+                        }}
+                        color="primary"
+                        onClick={addAccordionSection}
+                    >
+                        <AddIcon sx={{ fontSize: "20px" }} /> Add one more course
+                    </Typography>
+                </Grid>
+            </Grid>
         </Box >
     );
 }

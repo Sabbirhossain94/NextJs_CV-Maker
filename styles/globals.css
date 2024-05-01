@@ -5,5 +5,10 @@
     }
     
 }
+@media print {
+    #template-wrapper{
+        box-shadow: none !important;
+    }
+}
 @tailwind components;
 @tailwind utilities;

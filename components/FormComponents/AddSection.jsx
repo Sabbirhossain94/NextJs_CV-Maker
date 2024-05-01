@@ -136,17 +136,17 @@ export default function AddSection({
         rowSpacing={1}
         columns={16}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-        sx={{ marginLeft: "5px", padding: "-7px" }}
+        sx={{  }}
       >
         {addSectionElements.map((item) => (
           <Grid
             key={item.id}
             container
             item
-            xs={3}
-            lg={5}
+            xs={10}
+            sm={10}
             md={10}
-            sm={3}
+            lg={6}
             sx={{ width: "30%", padding: "10px" }}
           >
             <Grid>{item.icon}</Grid>

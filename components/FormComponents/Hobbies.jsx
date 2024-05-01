@@ -36,12 +36,8 @@ export default function Hobbies({
               marginTop: "7px",
               marginLeft: "5px",
               fontSize: "18px",
-              color: "white",
-
-              "&:hover": {
-                color: "#2196f3",
-                cursor: "pointer",
-              },
+              color: "red",
+              cursor: 'pointer'
             }}
             onClick={() => {
               deleteCustomSection(sectionId);
@@ -51,8 +47,8 @@ export default function Hobbies({
         </Grid>
       </Grid>
 
-      <Grid container columns={14}>
-        <Grid item xs={12} md={13}>
+      <Grid container columns={16}>
+        <Grid item xs={15} md={15}>
           <TextField
             id="outlined-basic"
             label="What do you like?"

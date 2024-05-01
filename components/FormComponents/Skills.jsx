@@ -99,16 +99,15 @@ export default function Skills() {
         </Typography>
       </Stack>
 
-      <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', marginTop: "15px", flexGrow: 1 }}>
         {stateValue.map((item, key) => (
-          <Grid key={key} container columns={16}>
+          <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
             <Grid item xs={14} sm={15} md={15}>
               <Accordion
                 expanded={expanded === key}
                 onChange={handleChange(key)}
                 sx={{
                   backgroundColor: "white",
-                  marginTop: "10px",
                   boxShadow: "none",
                   border: "1px solid",
                   borderColor: "#e7eaf4",
@@ -119,7 +118,7 @@ export default function Skills() {
                   aria-controls="panel1bh-content"
                   id="panel1bh-header"
                 >
-                  <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  <Typography sx={{ width: "100%", flexShrink: 0 }}>
                     {item.skill ? item.skill : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
@@ -215,14 +214,13 @@ export default function Skills() {
             <Grid item md="auto">
               {key > 0 && <DeleteOutlineOutlinedIcon
                 sx={{
-                  marginTop: "20px",
                   marginLeft: "5px",
-                  fontSize: "25px",
-                  color: "white",
-                  "&:hover": {
-                    color: "#2196f3",
-                    cursor: "pointer",
+                  fontSize: {
+                    xs: '20px',
+                    md: '25px'
                   },
+                  color: "red",
+                  cursor: "pointer"
                 }}
                 onClick={() => deleteAccordionSection(key)}
               />}
@@ -230,25 +228,28 @@ export default function Skills() {
           </Grid>
         ))}
       </Box>
-      {/* add one more skill area */}
-      <Typography
-        sx={{
-          width: "94%",
-          fontWeight: "700",
-          marginTop: "10px",
-          padding: "5px",
-          display: "flex",
-          borderRadius: "5px",
-          "&:hover": {
-            backgroundColor: "#e3f2fd",
-            cursor: "pointer",
-          },
-        }}
-        color="primary"
-        onClick={addAccordionSection}
-      >
-        <AddIcon sx={{ fontSize: "20px" }} /> Add one more skill
-      </Typography>
+      <Grid container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
+        <Grid item xs={14} sm={15} md={15}>
+          <Typography
+            sx={{
+              width: "100%",
+              fontWeight: "700",
+              marginTop: "10px",
+              padding: "5px",
+              display: "flex",
+              borderRadius: "5px",
+              "&:hover": {
+                backgroundColor: "#e3f2fd",
+                cursor: "pointer",
+              },
+            }}
+            color="primary"
+            onClick={addAccordionSection}
+          >
+            <AddIcon sx={{ fontSize: "20px" }} /> Add one more skill
+          </Typography>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

@@ -49,7 +49,6 @@ export default function SocialLinks() {
     const { name, value } = e.target;
     let clone = [...socialSites];
     let obj = clone[inputKey];
-    console.log(obj)
 
     const getIconForLabel = (label) => {
       switch (label) {
@@ -81,6 +80,7 @@ export default function SocialLinks() {
             paddingBottom: "20px",
             fontWeight: "700",
             fontSize: "20px",
+            whiteSpace: 'nowrap'
           }}
         >
           Websites & Social Links
@@ -88,7 +88,7 @@ export default function SocialLinks() {
 
         <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
           {socialSites.map((social, key) => (
-            <Grid key={key} container columns={16}>
+            <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
               <Grid item xs={14} sm={15} md={15}>
                 <Accordion
                   expanded={expanded === key}
@@ -105,7 +105,7 @@ export default function SocialLinks() {
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                   >
-                    <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                    <Typography sx={{ width: "90%", flexShrink: 0 }}>
                       {social.label ? social.label : "(Not Specified)"}
                     </Typography>
                   </AccordionSummary>
@@ -193,14 +193,13 @@ export default function SocialLinks() {
               <Grid item md="auto">
                 {key > 0 && <DeleteOutlineOutlinedIcon
                   sx={{
-                    marginTop: "20px",
                     marginLeft: "5px",
-                    fontSize: "25px",
-                    color: "white",
-                    "&:hover": {
-                      color: "#2196f3",
-                      cursor: "pointer",
+                    fontSize: {
+                      xs: '20px',
+                      md: '25px'
                     },
+                    color: "red",
+                    cursor: "pointer"
                   }}
                   onClick={() => deleteAccordionSection(key)}
                 />}
@@ -209,24 +208,28 @@ export default function SocialLinks() {
             </Grid>
           ))}
         </Box>
-        <Typography
-          sx={{
-            width: "94%",
-            fontWeight: "700",
-            marginTop: "10px",
-            padding: "5px",
-            display: "flex",
-            borderRadius: "5px",
-            "&:hover": {
-              backgroundColor: "#e3f2fd",
-              cursor: "pointer",
-            },
-          }}
-          color="primary"
-          onClick={addAccordionSection}
-        >
-          <AddIcon sx={{ fontSize: "20px" }} /> Add one more link
-        </Typography>
+        <Grid container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
+          <Grid item xs={14} sm={15} md={15}>
+            <Typography
+              sx={{
+                width: "100%",
+                fontWeight: "700",
+                marginTop: "10px",
+                padding: "5px",
+                display: "flex",
+                borderRadius: "5px",
+                "&:hover": {
+                  backgroundColor: "#e3f2fd",
+                  cursor: "pointer",
+                },
+              }}
+              color="primary"
+              onClick={addAccordionSection}
+            >
+              <AddIcon sx={{ fontSize: "20px" }} /> Add one more link
+            </Typography>
+          </Grid>
+        </Grid>
       </Box>
     </div>
   );

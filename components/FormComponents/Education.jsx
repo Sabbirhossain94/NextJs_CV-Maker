@@ -69,7 +69,7 @@ export default function Education() {
 
       <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
         {stateValue.map((item, key) => (
-          <Grid key={key} container columns={16}>
+          <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
             <Grid item xs={14} sm={15} md={15}>
               <Accordion
                 expanded={expanded === key}
@@ -86,7 +86,7 @@ export default function Education() {
                   aria-controls="panel1bh-content"
                   id="panel1bh-header"
                 >
-                  <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  <Typography sx={{ width: "90%", flexShrink: 0 }}>
                     {item.institution ? item.institution : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
@@ -211,7 +211,7 @@ export default function Education() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                   
+
                   </Grid>
                 </AccordionDetails>
               </Accordion>
@@ -219,14 +219,13 @@ export default function Education() {
             <Grid item md="auto">
               {key > 0 && <DeleteOutlineOutlinedIcon
                 sx={{
-                  marginTop: "20px",
                   marginLeft: "5px",
-                  fontSize: "25px",
-                  color: "white",
-                  "&:hover": {
-                    color: "#2196f3",
-                    cursor: "pointer",
+                  fontSize: {
+                    xs: '20px',
+                    md: '25px'
                   },
+                  color: "red",
+                  cursor: "pointer"
                 }}
                 onClick={() => deleteAccordionSection(key)}
               />}
@@ -234,24 +233,28 @@ export default function Education() {
           </Grid>
         ))}
       </Box>
-      <Typography
-        sx={{
-          width: "94%",
-          fontWeight: "700",
-          marginTop: "10px",
-          padding: "5px",
-          display: "flex",
-          borderRadius: "5px",
-          "&:hover": {
-            backgroundColor: "#e3f2fd",
-            cursor: "pointer",
-          },
-        }}
-        color="primary"
-        onClick={addAccordionSection}
-      >
-        <AddIcon sx={{ fontSize: "20px" }} /> Add one more education
-      </Typography>
+      <Grid container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
+        <Grid item xs={14} sm={15} md={15}>
+          <Typography
+            sx={{
+              width: "100%",
+              fontWeight: "700",
+              marginTop: "10px",
+              padding: "5px",
+              display: "flex",
+              borderRadius: "5px",
+              "&:hover": {
+                backgroundColor: "#e3f2fd",
+                cursor: "pointer",
+              },
+            }}
+            color="primary"
+            onClick={addAccordionSection}
+          >
+            <AddIcon sx={{ fontSize: "20px" }} /> Add one more education
+          </Typography>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

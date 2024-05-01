@@ -8,6 +8,7 @@ import { DataContext } from "../../pages/CVBuilder";
 export default function ProfessionalSummary() {
   const getData = useContext(DataContext);
   const [stateValue, setStateValue] = getData.summary;
+
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
     let clone = [...stateValue];
@@ -20,7 +21,7 @@ export default function ProfessionalSummary() {
     <Box>
       <Typography
         sx={{
-          width: "33%",
+          width: "100%",
           marginTop: "50px",
           paddingBottom: "20px",
           fontWeight: "700",
@@ -29,14 +30,14 @@ export default function ProfessionalSummary() {
       >
         About
       </Typography>
-      {stateValue.map((item, key) => (
-        <Grid key={key} container columns={16}>
-          <Grid item xs={14} md={15} variant="contained">
+      {stateValue.map((_, key) => (
+        <Grid key={key} container columns={16} >
+          <Grid item xs={16} md={15} variant="contained">
             <Box
               sx={{
                 height: "219px",
                 overflow: "auto",
-                border: "1px solid",
+                border: "1px solid black",
                 borderColor: "#e7eaf4",
                 borderRadius: "5px",
                 backgroundColor: "#e7eaf4",

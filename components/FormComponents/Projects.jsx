@@ -97,12 +97,8 @@ export default function Projects({
               marginTop: "7px",
               marginLeft: "5px",
               fontSize: "18px",
-              color: "white",
-
-              "&:hover": {
-                color: "#2196f3",
-                cursor: "pointer",
-              },
+              color: "red",
+              cursor: 'pointer'
             }}
             onClick={() => {
               deleteCustomSection(sectionId);
@@ -121,7 +117,7 @@ export default function Projects({
 
       <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
         {stateValue.map((item, key) => (
-          <Grid key={key} container columns={16}>
+          <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
             <Grid item xs={14} sm={15} md={15}>
               <Accordion
                 expanded={expanded === key}
@@ -138,7 +134,7 @@ export default function Projects({
                   aria-controls="panel1bh-content"
                   id="panel1bh-header"
                 >
-                  <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  <Typography sx={{ width: "100%", flexShrink: 0 }}>
                     {item.projecttitle ? item.projecttitle : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
@@ -148,7 +144,7 @@ export default function Projects({
                     rowSpacing={3}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                   >
-                    <Grid item xs={6} md={6}>
+                    <Grid item xs={16} md={6}>
                       <TextField
                         id="outlined-basic"
                         label="Project Title"
@@ -172,7 +168,7 @@ export default function Projects({
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={12} md={6} sx={{ display: "flex" }}>
+                    <Grid item xs={16} sm={16} md={6} sx={{ display: "flex", flexDirection: { xs: 'column', sm: 'row' }, gap: '20px' }}>
                       <TextField
                         variant="filled"
                         label="Start Date"
@@ -182,6 +178,10 @@ export default function Projects({
                         sx={{
                           background: "#e7eaf4",
                           borderRadius: "5px",
+                          width: {
+                            xs: '100%',
+                            sm: '50%'
+                          }
                         }}
                         InputProps={{
                           disableUnderline: true,
@@ -201,9 +201,12 @@ export default function Projects({
                         value={stateValue.enddate}
                         type="month"
                         sx={{
-                          marginLeft: "20px",
                           background: "#e7eaf4",
                           borderRadius: "5px",
+                          width: {
+                            xs: '100%',
+                            sm: '50%'
+                          }
                         }}
                         InputProps={{
                           disableUnderline: true,
@@ -235,14 +238,13 @@ export default function Projects({
             <Grid item md="auto">
               {key > 0 && <DeleteOutlineOutlinedIcon
                 sx={{
-                  marginTop: "20px",
                   marginLeft: "5px",
-                  fontSize: "25px",
-                  color: "white",
-                  "&:hover": {
-                    color: "#2196f3",
-                    cursor: "pointer",
+                  fontSize: {
+                    xs: '20px',
+                    md: '25px'
                   },
+                  color: "red",
+                  cursor: "pointer"
                 }}
                 onClick={() => deleteAccordionSection(key)}
               />}
@@ -250,24 +252,28 @@ export default function Projects({
           </Grid>
         ))}
       </Box>
-      <Typography
-        sx={{
-          width: "94%",
-          fontWeight: "700",
-          marginTop: "10px",
-          display: "flex",
-          padding: "5px",
-          borderRadius: "5px",
-          "&:hover": {
-            backgroundColor: "#e3f2fd",
-            cursor: "pointer",
-          },
-        }}
-        color="primary"
-        onClick={addAccordionSection}
-      >
-        <AddIcon sx={{ fontSize: "20px" }} /> Add one more course
-      </Typography>
+      <Grid container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
+        <Grid item xs={14} sm={15} md={15}>
+          <Typography
+            sx={{
+              width: "100%",
+              fontWeight: "700",
+              marginTop: "10px",
+              display: "flex",
+              padding: "5px",
+              borderRadius: "5px",
+              "&:hover": {
+                backgroundColor: "#e3f2fd",
+                cursor: "pointer",
+              },
+            }}
+            color="primary"
+            onClick={addAccordionSection}
+          >
+            <AddIcon sx={{ fontSize: "20px" }} /> Add one more course
+          </Typography>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
