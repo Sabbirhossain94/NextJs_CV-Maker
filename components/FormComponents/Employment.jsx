@@ -27,6 +27,7 @@ export default function Employment() {
   };
 
   const [stateValue, setStateValue] = getData.employment;
+  const [completedSections, setCompletedSections] = getData.completed
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -65,14 +66,42 @@ export default function Employment() {
     obj[name] = value;
     clone[inputKey] = obj;
     setStateValue([...clone]);
-
+    calculateProfileCompleteness();
   };
 
   const handleDescriptionChange = (index, value) => {
     const updatedEmploymentDetails = [...stateValue];
     updatedEmploymentDetails[index].description = value;
     setStateValue(updatedEmploymentDetails);
+    calculateProfileCompleteness();
+
   };
+
+  const calculateProfileCompleteness = () => {
+    const firstEntry = stateValue[0];
+    if (firstEntry) {
+
+      const allfieldsCompleted = Object.values(firstEntry).every(field => field !== "")
+      
+      if (allfieldsCompleted) {
+        if (!completedSections.sections.includes("Experience")) {
+          setCompletedSections(prevState => ({
+            ...prevState,
+            sections: [...prevState.sections, "Experience"]
+          }));
+        }
+      } else {
+        if (completedSections.sections.includes("Experience")) {
+          setCompletedSections(prevState => ({
+            ...prevState,
+            sections: prevState.sections.filter(section => section !== "Experience")
+          }));
+        }
+      }
+    }
+
+  }
+
 
   return (
     <Box >

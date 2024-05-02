@@ -8,6 +8,7 @@ import { DataContext } from "../../pages/CVBuilder";
 export default function ProfessionalSummary() {
   const getData = useContext(DataContext);
   const [stateValue, setStateValue] = getData.summary;
+  const [completedSections, setCompletedSections] = getData.completed
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
@@ -16,7 +17,30 @@ export default function ProfessionalSummary() {
     obj[name] = value;
     clone[inputKey] = obj;
     setStateValue([...clone]);
+    calculateProfileCompleteness();
+
   };
+
+  const calculateProfileCompleteness = () => {
+    const allfieldsCompleted = stateValue.every(entry => Object.values(entry).every(field => field !== ""))
+
+    if (allfieldsCompleted) {
+      if (!completedSections.sections.includes("summary")) {
+        setCompletedSections(prevState => ({
+          ...prevState,
+          sections: [...prevState.sections, "summary"]
+        }));
+      }
+    } else {
+      if (completedSections.sections.includes("summary")) {
+        setCompletedSections(prevState => ({
+          ...prevState,
+          sections: prevState.sections.filter(section => section !== "summary")
+        }));
+      }
+    }
+  }
+
   return (
     <Box>
       <Typography

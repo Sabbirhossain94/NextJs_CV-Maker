@@ -3,6 +3,7 @@ import Head from "next/head";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import PersonalDetails from "../components/FormComponents/PersonalDetails";
 import Education from "../components/FormComponents/Education";
 import SocialLinks from "../components/FormComponents/SocialLinks";
@@ -14,12 +15,15 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import PDFView from "../components/PDFSection";
+import TemplateView from "../components/Template/TemplateView";
 import ImageUpload from "../components/FormComponents/ImageUpload";
 import LoadingAnimation from "../components/StyleComponents/LoadingAnimation";
 import { Preview } from "../components/SvgComponents/SVG";
 import Template from "../components/Template/Template";
 import Tooltip from '@mui/material/Tooltip';
+import { Home } from "../components/SvgComponents/SVG";
+import LinearProgress from '@mui/material/LinearProgress';
+import { Typography } from "@mui/material";
 
 export const DataContext = React.createContext();
 
@@ -37,7 +41,6 @@ export default function CVBuilder() {
       country: "",
       city: "",
       occupation: "",
-      address: "",
       postalcode: "",
     },
   ]);
@@ -137,11 +140,48 @@ export default function CVBuilder() {
   const [showExpLevel, setShowExpLevel] = useState(false)
   const [showTemplate, setShowTemplate] = useState(false)
   const [windowWidth, setWindowWidth] = useState(null);
+  const [completedSections, setCompletedSections] = useState({
+    sections: []
+  });
+  const [profileCompleteness, setProfileCompleteness] = useState(null)
+  const [progressBarColor, setProgressBarColor] = useState('red');
+  const [isScrolled, setIsScrolled] = useState(false);
+
+
 
   const deleteCustomSection = (sectionId) => {
     setCustomSection(prevSections => prevSections.filter(section => section.id !== sectionId))
   };
 
+  useEffect(() => {
+    const completed = completedSections.sections.length;
+    const totalSections = 7;
+    setProfileCompleteness(Math.round((completed / totalSections * 100).toFixed(2)))
+  }, [completedSections])
+
+  useEffect(() => {
+    if (profileCompleteness < 50) {
+      setProgressBarColor('red')
+    } else if (profileCompleteness > 50 && profileCompleteness < 80) {
+      setProgressBarColor('#f57f17')
+    } else if (profileCompleteness > 80) {
+      setProgressBarColor('green')
+    }
+  }, [profileCompleteness, progressBarColor])
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -170,10 +210,14 @@ export default function CVBuilder() {
             lg: "row",
             xl: "row",
           },
+          position: {
+            lg: 'relative'
+          },
           height: "100%",
         }}
 
       >
+
         <Head>
           <title>CV Builder</title>
         </Head>
@@ -193,7 +237,8 @@ export default function CVBuilder() {
             hobbies: [hobbiesDetails, setHobbiesDetails],
             reference: [referenceDetails, setReferenceDetails],
             skillExpLevel: [showExpLevel, setShowExpLevel],
-            previewTemplate: [showTemplate, setShowTemplate]
+            previewTemplate: [showTemplate, setShowTemplate],
+            completed: [completedSections, setCompletedSections]
           }}
         >
           <Box
@@ -225,47 +270,97 @@ export default function CVBuilder() {
               backgroundColor: "white",
             }}
           >
-            {!showTemplate || windowWidth > 1199 ? <Box sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              paddingTop: {
-                xs: '50px',
-                sm: '0px'
-              },
-              margin: "auto"
-            }}>
-              <ImageUpload />
-              <PersonalDetails />
-              <ProfessionalSummary />
-              {allSections.map((item) => (
-                <List key={item.id}> {item.name}</List>
-              ))}
-              {customSection.map((item, index) => (
-                <List key={index}> {item.name}</List>
-              ))}
-              <AddSection
-                allSections={allSections}
-                setAllSections={setAllSections}
-                customSection={customSection}
-                setCustomSection={setCustomSection}
-                deleteCustomSection={deleteCustomSection}
-              />
-              <Tooltip title="Preview" placement="top">
+
+            {!showTemplate || windowWidth > 1199 ?
+                <div className="animate-slide-from-left">
                 <Box
-                  onClick={() => setShowTemplate(!showTemplate)}
-                  sx={{ zIndex: 200, cursor: "pointer", position: "fixed", bottom: 25, right: 25, background: "linear-gradient(to right bottom, #64b5f6, #1565c0)", borderRadius: "50%", padding: '15px' }}
-                >
-                  <Preview />
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    paddingTop: {
+                      xs: '50px',
+                      sm: '0px'
+                    },
+                    margin: "auto",
+                    animation: 'animate-slide-from-right'
+                  }}>
+                  <Box
+                    sx={{
+                      position: 'fixed',
+                      top: 0,
+                      left: {
+                        xs: 0,
+                        sm: 5,
+                        md: 10,
+                        lg: 15
+                      },
+                      width: {
+                        xs: '100%',
+                        sm: '90%',
+                        lg: '45%'
+                      },
+                      zIndex: 1000,
+                      padding: '25px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                      transition: 'background-color 0.3s ease',
+                      ...(isScrolled && { backgroundColor: 'rgb(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)' })
+                    }}
+                  >
+                    <Typography>Profile Completeness <span style={{ color: progressBarColor }}>{profileCompleteness}</span>&nbsp;%</Typography>
+                    <Box sx={{ marginTop: '15px' }}>
+                      <LinearProgress
+                        sx={{
+                          '& .MuiLinearProgress-bar': {
+                            backgroundColor: progressBarColor
+                          },
+                          '& .MuiLinearProgress-root': {
+                            backgroundColor: 'rgb(213 218 223)',
+                          },
+                        }}
+                        variant="determinate"
+                        value={profileCompleteness} />
+                    </Box>
+                  </Box>
+                  <ImageUpload />
+                  <PersonalDetails />
+                  <ProfessionalSummary />
+                  {allSections.map((item) => (
+                    <List key={item.id}> {item.name}</List>
+                  ))}
+                  {customSection.map((item, index) => (
+                    <List key={index}> {item.name}</List>
+                  ))}
+                  <AddSection
+                    allSections={allSections}
+                    setAllSections={setAllSections}
+                    customSection={customSection}
+                    setCustomSection={setCustomSection}
+                    deleteCustomSection={deleteCustomSection}
+                  />
+                  <Link href="/" style={{ textDecoration: "none" }}>
+                    <Tooltip title="Home" placement="top">
+                      <Box sx={{ zIndex: 200, cursor: "pointer", position: "fixed", bottom: 105, right: 20, background: "linear-gradient(to right bottom, #64b5f6, #1565c0)", borderRadius: "50%", padding: '15px' }}>
+                        <Home />
+                      </Box>
+                    </Tooltip>
+                  </Link>
+                  <Tooltip title="Preview" placement="top">
+                    <Box
+                      onClick={() => setShowTemplate(!showTemplate)}
+                      sx={{ zIndex: 200, cursor: "pointer", position: "fixed", bottom: 25, right: 20, background: "linear-gradient(to right bottom, #64b5f6, #1565c0)", borderRadius: "50%", padding: '15px' }}
+                    >
+                      <Preview />
+                    </Box>
+                  </Tooltip>
                 </Box>
-              </Tooltip>
-            </Box> : null}
+              </div> : null}
+
             {showTemplate && windowWidth < 1199 ?
-              <div className={`${showTemplate ? "transition duration-300 translate-x-0" : "transition duration-300 translate-x-96"}  z-100 absolute top-0 right-0 left-0 bottom-0 h-screen custom-end:hidden`}>
+              <div className={`${showTemplate && windowWidth < 1199 ? 'animate-slide-from-right transition duration-300' : 'animate-slide-to-right transition duration-300'} transition duration-300 z-100 absolute top-0 right-0 left-0 bottom-0 custom-end:hidden `}>
                 <Template />
               </div> : null
             }
           </Box>
-
           {/* template section start */}
           <Box
             sx={{
@@ -288,11 +383,11 @@ export default function CVBuilder() {
               height: "100%",
             }}
           >
-            <PDFView />
+            <TemplateView />
           </Box>
           {/* template section end */}
-        </DataContext.Provider>
-      </Box>
+        </DataContext.Provider >
+      </Box >
     </>
   );
 }

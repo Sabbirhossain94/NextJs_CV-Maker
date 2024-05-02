@@ -1,22 +1,17 @@
 import * as React from "react";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import { DataContext } from "../../pages/CVBuilder";
+import { toggleButtonClasses } from "@mui/material";
 
 export default function PersonalDetails() {
   const getData = useContext(DataContext);
-  const [expanded, setExpanded] = useState(false);
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
   const [stateValue, setStateValue] = getData.personalInformation;
+
+  const [completedSections, setCompletedSections] = getData.completed
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
@@ -25,7 +20,28 @@ export default function PersonalDetails() {
     obj[name] = value;
     clone[inputKey] = obj;
     setStateValue([...clone]);
+    calculateProfileCompleteness();
   };
+
+  const calculateProfileCompleteness = () => {
+    const allfieldsCompleted = stateValue.every(entry => Object.values(entry).every(field => field !== ""))
+
+    if (allfieldsCompleted) {
+      if (!completedSections.sections.includes("personal Details")) {
+        setCompletedSections(prevState => ({
+          ...prevState,
+          sections: [...prevState.sections, "personal Details"]
+        }));
+      }
+    } else {
+      if (completedSections.sections.includes("personal Details")) {
+        setCompletedSections(prevState => ({
+          ...prevState,
+          sections: prevState.sections.filter(section => section !== "personal Details")
+        }));
+      }
+    }
+  }
 
   return (
     <Box >
@@ -104,7 +120,7 @@ export default function PersonalDetails() {
                 name="email"
                 variant="filled"
                 value={item.email}
-                type="text"
+                type="email"
                 sx={{
                   width: "100%",
                   background: "#e7eaf4",
@@ -240,8 +256,8 @@ export default function PersonalDetails() {
                 }}
                 onChange={(e) => handleInputChange(e, key)}
               />
-            </Grid> 
-          </Grid>    
+            </Grid>
+          </Grid>
         </Box>
       ))}
     </Box>

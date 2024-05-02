@@ -8,7 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 function Template() {
     const targetRef = useRef();
-    const [colors, setColors] = useState("")
+    const [colors, setColors] = useState("");
     const { imageUrls, personalInformation, summary, employment, education, socials, skills, project, extraCurricular, languages, hobbies, reference, skillExpLevel, previewTemplate } = useContext(DataContext);
     const [{ firstname, lastname, email, phone, country, city, occupation, address, postalcode }] = personalInformation[0]
     const [picture] = imageUrls[0];
@@ -23,16 +23,12 @@ function Template() {
     }
 
     return (
-        <div className="relative bg-gradient-to-t from-gray-200 to-blue-300">
-            <div className='absolute w-full flex justify-center gap-2 h-20 top-12'>
-                {colorPicker.map((color, index) => (
-                    <div onClick={() => handleColorChange(color.name)} key={index} className={`cursor-pointer border transition duration-300 hover:border-2 w-8 h-10 rounded-md ${color.name}`}></div>
-                ))}
-            </div>
+        <div className="relative bg-gradient-to-t from-gray-200 to-blue-200">
+
             {/* Template start */}
-            <div className='mx-auto scale-75 lg:scale-75 xl:scale-75 '>
+            <div className='mx-auto scale-90 sm:scale-75 md:scale-75 lg:scale-75 xl:scale-75 '>
                 <div ref={targetRef} id="template-wrapper" className="bg-white shadow-lg min-h-screen mx-auto ">
-                    <div className={`flex w-full ${colors ? colors : 'bg-slate-800'} sm:px-2 gap-10`}>
+                    <div className={`flex w-full bg-slate-800 sm:px-2 gap-10`} style={{ background: colors }}>
                         <div className="left-5 top-10 h-40 w-40 overflow-hidden p-3 sm:relative sm:rounded-full sm:p-0">
                             <img src={picture ? picture : `images/dummy.png`} />
                         </div>
@@ -51,7 +47,7 @@ function Template() {
                             <div className="flex flex-col sm:w-1/3">
                                 {/* contact section */}
                                 <div className="order-3 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-slate-800 text-lg font-bold">Contact</h2>
+                                    <h2 className="font-poppins text-lg font-bold" style={{ color: colors }}>Contact</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
 
                                     <div className='flex flex-col'>
@@ -74,7 +70,7 @@ function Template() {
 
                                 {/* skills section */}
                                 <div className="order-2 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-top-color text-slate-800 text-lg font-bold">Skills</h2>
+                                    <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Skills</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <>
                                         {showExpLevel ? (skills?.[0] && skills?.[0].map((item, index) => (
@@ -93,7 +89,7 @@ function Template() {
                                 </div>
 
                                 <div className="order-3 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-top-color text-slate-800 text-lg font-bold">Social Links</h2>
+                                    <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Social Links</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <div className='pt-1 flex flex-col gap-2'>
                                         {socials?.[0] && socials?.[0].map((social, index) => (
@@ -107,7 +103,7 @@ function Template() {
 
                                 {
                                     languages?.[0].some((entry) => Object.values(entry).some((item) => item !== "")) && <div className="order-3 py-3 sm:order-none">
-                                        <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Languages</h2>
+                                        <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Languages</h2>
                                         <div className="border-top-color my-3 w-20 border-2"></div>
                                         <div className='pt-1 flex flex-wrap items-center gap-2'>
                                             {languages?.[0] && languages?.[0].map((item, index) => (
@@ -120,7 +116,7 @@ function Template() {
                                 }
 
                                 {interests && <div className="order-2 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Interests</h2>
+                                    <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Interests</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <div className='flex flex-wrap gap-2'>
                                         {interests.split(",").map((item, index) => (
@@ -136,13 +132,13 @@ function Template() {
 
                             <div className="order-first flex flex-col sm:order-none sm:w-2/3">
                                 <div className="py-3">
-                                    <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">About</h2>
+                                    <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>About</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <p className='text-left'>{about}</p>
                                 </div>
 
                                 <div className="py-3">
-                                    <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Experience</h2>
+                                    <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Experience</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
 
                                     <div className="flex flex-col">
@@ -164,7 +160,7 @@ function Template() {
                                 </div>
 
                                 <div className="order-1 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Education</h2>
+                                    <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Education</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
 
                                     <div className="flex flex-col space-y-2">
@@ -181,7 +177,7 @@ function Template() {
 
                                 {
                                     project?.[0].some((entry) => Object.values(entry).some((item) => item !== "")) && <div className="py-3">
-                                        <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Projects</h2>
+                                        <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Projects</h2>
                                         <div className="border-top-color my-3 w-20 border-2"></div>
 
                                         <div className="flex flex-col ">
@@ -204,7 +200,7 @@ function Template() {
 
                                 {
                                     extraCurricular?.[0].some((entry) => Object.values(entry).some((item) => item !== "")) && <div className="py-3">
-                                        <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">Extra Currricular Activites</h2>
+                                        <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Extra Currricular Activites</h2>
                                         <div className="border-top-color my-3 w-20 border-2"></div>
 
                                         <div className="flex flex-col ">
@@ -227,7 +223,7 @@ function Template() {
 
                                 {
                                     reference?.[0].some((entry) => Object.values(entry).some((item) => item !== "")) && <div className="order-1 py-3 sm:order-none">
-                                        <h2 className="font-poppins text-slate-800 text-top-color text-lg font-bold">References</h2>
+                                        <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>References</h2>
                                         <div className="border-top-color my-3 w-20 border-2"></div>
 
                                         <div className="flex flex-col space-y-2">
@@ -246,18 +242,26 @@ function Template() {
                         </div>
                     </div>
                 </div>
-                <ReactToPrint
-                    trigger={() =>
-                        <div className='mt-10 mx-auto flex justify-start custom-end:justify-end'>
-                            <button className='bg-slate-800 transition hover:bg-slate-700 text-white p-3 rounded-md py-3 text-sm'>Print and Download</button>
-                        </div>}
-                    content={() => targetRef.current}
-                />
+                <div className='border w-full flex gap-2 py-5'>
+                    {colorPicker.map((color, index) => (
+                        <div onClick={() => handleColorChange(color.name)} key={index} className={`cursor-pointer border transition duration-300 hover:border-2 w-8 h-10 rounded-md `} style={{ background: color.name }}></div>
+                    ))}
+                    <div className='w-3/4 flex justify-end custom-end:justify-end'>
+                        <ReactToPrint
+                            trigger={() =>
+                                <button className='bg-slate-800 transition hover:bg-slate-700 text-white p-3 rounded-md py-3 text-sm'>Print and Download</button>
+                            }
+                            content={() => targetRef.current}
+                        />
+                    </div>
+                </div>
+
+
             </div>
             <Tooltip title="Form" placement="top">
                 <div
                     onClick={() => setShowTemplate(!showTemplate)}
-                    className="z-100 p-[15px] rounded-full bg-blue-500 hover:bg-blue-400 cursor-pointer fixed bottom-[25px] right-[25px] custom-end:hidden">
+                    className="z-100 p-[15px] rounded-full bg-blue-500 hover:bg-blue-400 cursor-pointer fixed bottom-[25px] sm:bottom-[25px] right-[25px] custom-end:hidden">
                     <Form />
                 </div>
             </Tooltip>

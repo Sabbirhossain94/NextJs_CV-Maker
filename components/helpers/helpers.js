@@ -77,24 +77,24 @@ export const parseActivityDetails = (activityDettails) => {
 
 export const colorPicker = [
     {
-        name: "bg-slate-500",
+        name: "#64748b",
     },
     {
-        name: "bg-yellow-500",
+        name: "#eab308",
     },
     {
-        name: "bg-green-500",
+        name: "#22c55e",
     },
     {
-        name: "bg-blue-500",
+        name: "#3b82f6",
     },
     {
-        name: "bg-teal-500",
+        name: "#14b8a6",
     },
     {
-        name: "bg-purple-800",
+        name: "#6b21a8",
     },
     {
-        name: "bg-slate-800",
+        name: "#1e293b",
     },
 ]

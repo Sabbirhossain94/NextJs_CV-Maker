@@ -27,6 +27,7 @@ export default function Skills() {
 
   const [stateValue, setStateValue] = getData.skills;
   const [_, setShowExpLevel] = getData.skillExpLevel;
+  const [completedSections, setCompletedSections] = getData.completed
 
   const deleteAccordionSection = (id) => {
     const result = stateValue.filter((item, key) => {
@@ -56,6 +57,7 @@ export default function Skills() {
     obj[name] = value;
     clone[inputKey] = obj;
     setStateValue([...clone]);
+    calculateProfileCompleteness();
   };
 
   useEffect(() => {
@@ -65,6 +67,30 @@ export default function Skills() {
       setShowExpLevel(false)
     }
   }, [toggleSwitch])
+
+  const calculateProfileCompleteness = () => {
+    const firstEntry = stateValue[0];
+
+    if (firstEntry) {
+      const allfieldsCompleted = Object.values(firstEntry).every(field => field !== "")
+
+      if (allfieldsCompleted) {
+        if (!completedSections.sections.includes("Skills")) {
+          setCompletedSections(prevState => ({
+            ...prevState,
+            sections: [...prevState.sections, "Skills"]
+          }));
+        }
+      } else {
+        if (completedSections.sections.includes("Skills")) {
+          setCompletedSections(prevState => ({
+            ...prevState,
+            sections: prevState.sections.filter(section => section !== "Skills")
+          }));
+        }
+      }
+    }
+  }
 
 
   return (
