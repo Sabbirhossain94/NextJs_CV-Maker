@@ -93,7 +93,7 @@ function Template() {
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <div className='pt-1 flex flex-col gap-2'>
                                         {socials?.[0] && socials?.[0].map((social, index) => (
-                                            <a href={social.linkurl} className="flex gap-2 justify-start items-center">
+                                            <a key={index} href={social.linkurl} className="flex gap-2 justify-start items-center">
                                                 {social.icon}
                                                 {social.label}
                                             </a>
@@ -165,7 +165,7 @@ function Template() {
 
                                     <div className="flex flex-col space-y-2">
                                         {education?.[0] && education?.[0].map((edc, index) => (
-                                            <div className="flex flex-col">
+                                            <div key={index} className="flex flex-col">
                                                 {edc.degree && edc.institution && edc.institutioncity ? <p className="text-lg font-medium">
                                                     <span className="text-green-700">{edc.degree}</span>
                                                     , {edc.institution}, {edc.institutioncity}.</p> : null}
@@ -244,7 +244,7 @@ function Template() {
                 </div>
                 <div className='border w-full flex gap-2 py-5'>
                     {colorPicker.map((color, index) => (
-                        <div onClick={() => handleColorChange(color.name)} key={index} className={`cursor-pointer border transition duration-300 hover:border-2 w-8 h-10 rounded-md `} style={{ background: color.name }}></div>
+                        <div key={index} onClick={() => handleColorChange(color.name)} className={`cursor-pointer border transition duration-300 hover:border-2 w-8 h-10 rounded-md `} style={{ background: color.name }}></div>
                     ))}
                     <div className='w-3/4 flex justify-end custom-end:justify-end'>
                         <ReactToPrint
