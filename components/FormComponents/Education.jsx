@@ -16,7 +16,7 @@ export default function Education() {
   const getData = useContext(DataContext);
 
   const [expanded, setExpanded] = useState(false);
-  const handleChange = (panel) => (event, isExpanded) => {
+  const handleChange = (panel) => (_, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 

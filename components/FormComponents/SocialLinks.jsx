@@ -16,10 +16,11 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { DataContext } from "../../pages/CVBuilder";
 import { Facebook, LinkedIn, Github, Website } from "../SvgComponents/SVG";
+
 export default function SocialLinks() {
   const getData = useContext(DataContext);
   const [expanded, setExpanded] = useState(false);
-  const handleChange = (panel) => (event, isExpanded) => {
+  const handleChange = (panel) => (_, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 

@@ -21,7 +21,7 @@ export default function Skills() {
   const getData = useContext(DataContext);
   const [expanded, setExpanded] = useState(false);
 
-  const handleChange = (panel) => (event, isExpanded) => {
+  const handleChange = (panel) => (_, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
@@ -66,7 +66,7 @@ export default function Skills() {
     } else {
       setShowExpLevel(false)
     }
-  }, [toggleSwitch])
+  }, [toggleSwitch,setShowExpLevel])
 
   const calculateProfileCompleteness = () => {
     const firstEntry = stateValue[0];

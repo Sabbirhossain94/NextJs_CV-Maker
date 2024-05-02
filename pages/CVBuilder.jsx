@@ -272,7 +272,9 @@ export default function CVBuilder() {
           >
 
             {!showTemplate || windowWidth > 1199 ?
-                <div className="animate-slide-from-left">
+              <div
+                className="animate-slide-from-left"
+              >
                 <Box
                   sx={{
                     display: 'flex',

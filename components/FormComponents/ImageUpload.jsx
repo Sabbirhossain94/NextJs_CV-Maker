@@ -17,21 +17,8 @@ export default function Practice() {
   const [imageUrlData, setImageUrlData] = getData.imageUrls;
   const [completedSections, setCompletedSections] = getData.completed
 
-  useEffect(() => {
-    if (imageData.length < 1) {
-      calculateProfileCompleteness()
-      return
-    };
-    const newImageUrls = [];
-    imageData.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
-    setImageUrlData(newImageUrls);
-    calculateProfileCompleteness()
-  }, [imageData, setImageUrlData]);
-
   const imageHandler = (e) => {
     setImageData([...e.target.files]);
-
-
   };
 
   const deleteImage = () => {
@@ -42,7 +29,6 @@ export default function Practice() {
   const imageLoader = () => {
     return imageUrlData;
   };
-
 
   const calculateProfileCompleteness = () => {
 
@@ -62,6 +48,18 @@ export default function Practice() {
       }
     }
   }
+
+
+  useEffect(() => {
+    if (imageData.length < 1) {
+      calculateProfileCompleteness()
+      return
+    };
+    const newImageUrls = [];
+    imageData.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
+    setImageUrlData(newImageUrls);
+    calculateProfileCompleteness()
+  }, [imageData, setImageUrlData, calculateProfileCompleteness]);
 
 
   return (

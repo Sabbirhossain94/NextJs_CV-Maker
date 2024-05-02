@@ -62,7 +62,7 @@ export const parseProjectDetails = (projectDetails) => {
     const doc = parser.parseFromString(projectDetails, 'text/html');
     const listItems = doc.querySelectorAll('li');
     return Array.from(listItems).map((item, index) => {
-        return <div className="ql-snow"><li key={index} dangerouslySetInnerHTML={{ __html: item.innerHTML }} /></div>
+        return <div key={index} className="ql-snow"><li key={index} dangerouslySetInnerHTML={{ __html: item.innerHTML }} /></div>
     });
 };
 
@@ -71,7 +71,7 @@ export const parseActivityDetails = (activityDettails) => {
     const doc = parser.parseFromString(activityDettails, 'text/html');
     const listItems = doc.querySelectorAll('li');
     return Array.from(listItems).map((item, index) => {
-        return <div className="ql-snow"><li key={index} dangerouslySetInnerHTML={{ __html: item.innerHTML }} /></div>
+        return <div key={index} className="ql-snow"><li key={index} dangerouslySetInnerHTML={{ __html: item.innerHTML }} /></div>
     });
 };
 
