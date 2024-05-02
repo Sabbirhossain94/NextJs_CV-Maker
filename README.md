@@ -8,9 +8,8 @@ This project is currently in development
 
 ## Overview
 
-![](https://i.imgur.com/vF4BSsW.gif)
+![](https://photos.app.goo.gl/QRdLUxZCD3nLzde68)
 
-![](https://i.imgur.com/9uqfsUo.gif)
 
 ## Functionality
 
