@@ -15,6 +15,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DataContext } from "../../pages/CVBuilder";
+import Stack from "@mui/material/Stack";
+import { AntSwitch } from "../helpers/helpers";
 
 export default function Language({
   deleteCustomSection,
@@ -25,33 +27,34 @@ export default function Language({
   const handleChange = (panel) => (_, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const [stateValue, setStateValue] = getData.languages;
+  const [languageDetails, setLanguageDetails] = getData.languages;
+  const [showLangLevel, setShowLangLevel] = getData.langLevel;
 
   const deleteAccordionSection = (id) => {
-    const result = stateValue.filter((item, key) => {
+    const result = languageDetails.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setStateValue(result);
+    setLanguageDetails(result);
   };
 
   const addAccordionSection = () => {
-    setStateValue([
-      ...stateValue,
+    setLanguageDetails([
+      ...languageDetails,
       {
-        language: "",
+        name: "",
         level: "",
       },
     ]);
   };
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    let clone = [...stateValue];
+    let clone = [...languageDetails];
     let obj = clone[inputKey];
     obj[name] = value;
     clone[inputKey] = obj;
-    setStateValue([...clone]);
+    setLanguageDetails([...clone]);
   };
 
   return (
@@ -77,9 +80,9 @@ export default function Language({
             }}
             onClick={() => {
               deleteCustomSection(sectionId);
-              setStateValue([
+              setLanguageDetails([
                 {
-                  language: "",
+                  name: "",
                   level: "",
                 },
               ]);
@@ -87,9 +90,26 @@ export default function Language({
           />
         </Grid>
       </Grid>
+      <Stack
+        direction="row"
+        spacing={1}
+        alignItems="center"
+        style={{ marginTop: "5px" }}
+      >
+        <AntSwitch
+          defaultChecked={!showLangLevel}
+          inputProps={{ "aria-label": "ant design" }}
+          onChange={() => {
+            setShowLangLevel(!showLangLevel);
+          }}
+        />
+        <Typography sx={{ fontSize: "15px" }}>
+          show language level
+        </Typography>
+      </Stack>
 
       <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
-        {stateValue.map((item, key) => (
+        {languageDetails.map((language, key) => (
           <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
             <Grid item xs={14} sm={15} md={15}>
               <Accordion
@@ -109,7 +129,7 @@ export default function Language({
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "100%", flexShrink: 0 }}>
-                    {item.language ? item.language : "(Not Specified)"}
+                    {language.name ? language.name : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -118,47 +138,31 @@ export default function Language({
                     rowSpacing={3}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                   >
-                    <Grid item xs={16} md={6}>
+                    <Grid item xs={16} sm={6} md={6}>
                       <TextField
-                        id="outlined-basic"
+                        id="languagetitle"
                         label="Language"
                         type="text"
-                        name="language"
-                        value={stateValue.language}
-                        variant="filled"
+                        name="name"
+                        value={language.name}
                         sx={{
                           width: "100%",
-                          background: "#e7eaf4",
                           borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
-                        }}
-                        InputProps={{
-                          disableUnderline: true,
                         }}
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={16} md={6}>
+                    <Grid item xs={16} sm={6} md={6}>
                       <FormControl sx={{ width: "100%" }}>
                         <InputLabel id="demo-simple-select-helper-label">
                           Level
                         </InputLabel>
                         <Select
-                          labelId="demo-simple-select-helper-label"
-                          id="demo-simple-select-helper"
+                          id="languagelevel"
                           label="level"
-                          defaultValue=""
-                          variant="filled"
                           name="level"
-                          value={stateValue.level}
-                          sx={{ background: "#e7eaf4", borderRadius: "5px" }}
-                          InputProps={{
-                            disableUnderline: true,
-                          }}
+                          disabled={showLangLevel ? true : false}
+                          value={language.level}
                           onChange={(e) => handleInputChange(e, key)}
                         >
                           {[
@@ -184,7 +188,7 @@ export default function Language({
                             },
                           ].map((item, key) => (
                             <MenuItem
-                              defaultValue={stateValue.level}
+                              defaultValue={language.level}
                               value={item.name}
                               key={key}
                             >

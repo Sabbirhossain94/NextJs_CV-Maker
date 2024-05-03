@@ -12,12 +12,13 @@ export default function Hobbies({
   sectionId,
 }) {
   const getData = useContext(DataContext);
-  const [stateValue, setStateValue] = getData.hobbies;
+  const [hobbiesDetails, setHobbiesDetails] = getData.hobbies;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setStateValue({ [name]: value });
+    setHobbiesDetails({ [name]: value });
   };
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
       <Grid container item md={6}>
@@ -41,7 +42,7 @@ export default function Hobbies({
             }}
             onClick={() => {
               deleteCustomSection(sectionId);
-              setStateValue({ hobbies: "" });
+              setHobbiesDetails({ hobbies: "" });
             }}
           />
         </Grid>
@@ -50,22 +51,15 @@ export default function Hobbies({
       <Grid container columns={16}>
         <Grid item xs={15} md={15}>
           <TextField
-            id="outlined-basic"
+            id="hobbies"
             label="What do you like?"
             placeholder="e.g. Painting,Skydiving,Gaming"
             type="text"
             name="hobbies"
-            value={stateValue.hobbies}
-            variant="filled"
+            value={hobbiesDetails.hobbies}
             sx={{
               width: "100%",
-              background: "#e7eaf4",
               borderRadius: "5px",
-            }}
-            InputLabelProps={{
-              sx: {
-                color: "#828ba2",
-              },
             }}
             InputProps={{
               disableUnderline: true,

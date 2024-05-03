@@ -15,7 +15,6 @@ import { DataContext } from "../../pages/CVBuilder";
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 
-
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function Employment() {
@@ -26,16 +25,16 @@ export default function Employment() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.employment;
+  const [employmentDetails, setEmploymentDetails] = getData.employment;
   const [completedSections, setCompletedSections] = getData.completed
 
   const deleteAccordionSection = (id) => {
-    const result = stateValue.filter((item, key) => {
+    const result = employmentDetails.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setStateValue(result);
+    setEmploymentDetails(result);
   };
 
   const modules = {
@@ -46,8 +45,8 @@ export default function Employment() {
   };
 
   const addAccordionSection = () => {
-    setStateValue([
-      ...stateValue,
+    setEmploymentDetails([
+      ...employmentDetails,
       {
         jobtitle: "",
         employer: "",
@@ -61,28 +60,28 @@ export default function Employment() {
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    let clone = [...stateValue];
+    let clone = [...employmentDetails];
     let obj = clone[inputKey];
     obj[name] = value;
     clone[inputKey] = obj;
-    setStateValue([...clone]);
+    setEmploymentDetails([...clone]);
     calculateProfileCompleteness();
   };
 
   const handleDescriptionChange = (index, value) => {
-    const updatedEmploymentDetails = [...stateValue];
+    const updatedEmploymentDetails = [...employmentDetails];
     updatedEmploymentDetails[index].description = value;
-    setStateValue(updatedEmploymentDetails);
+    setEmploymentDetails(updatedEmploymentDetails);
     calculateProfileCompleteness();
 
   };
 
   const calculateProfileCompleteness = () => {
-    const firstEntry = stateValue[0];
+    const firstEntry = employmentDetails[0];
     if (firstEntry) {
 
       const allfieldsCompleted = Object.values(firstEntry).every(field => field !== "")
-      
+
       if (allfieldsCompleted) {
         if (!completedSections.sections.includes("Experience")) {
           setCompletedSections(prevState => ({
@@ -119,7 +118,7 @@ export default function Employment() {
       </Typography>
 
       <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
-        {stateValue.map((item, key) => (
+        {employmentDetails.map((employment, key) => (
           <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
             <Grid item xs={14} sm={15} md={15}>
               <Accordion
@@ -138,7 +137,7 @@ export default function Employment() {
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "100%", flexShrink: 0 }}>
-                    {item.jobtitle ? item.jobtitle : "(Not Specified)"}
+                    {employment.jobtitle ? employment.jobtitle : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -147,23 +146,16 @@ export default function Employment() {
                     rowSpacing={3}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                   >
-                    <Grid item xs={16} sm={6} md={6}>
+                    <Grid item xs={16} sm={16} md={6}>
                       <TextField
-                        id={item.id}
+                        id="jobtitle"
                         label="Job title"
                         type="text"
-                        value={stateValue.jobtitle}
+                        value={employment.jobtitle}
                         name="jobtitle"
-                        variant="filled"
                         sx={{
                           width: "100%",
-                          background: "#e7eaf4",
                           borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
                         }}
                         InputProps={{
                           disableUnderline: true,
@@ -171,23 +163,16 @@ export default function Employment() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={16} md={6}>
+                    <Grid item xs={16} sm={16} md={6}>
                       <TextField
-                        id={item.id}
+                        id="employer"
                         label="Employer"
                         type="text"
-                        value={stateValue.employer}
+                        value={employment.employer}
                         name="employer"
-                        variant="filled"
                         sx={{
                           width: "100%",
-                          background: "#e7eaf4",
                           borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
                         }}
                         InputProps={{
                           disableUnderline: true,
@@ -195,71 +180,52 @@ export default function Employment() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={12} md={6} sx={{ display: "flex" }}>
+                    <Grid item xs={12} md={6} sx={{ display: "flex", gap: '20px' }}>
                       <TextField
-                        id={item.id}
-                        variant="filled"
+                        id="jobstartdate"
                         label="Start Date"
                         name="startdate"
-                        value={stateValue.startdate}
+                        value={employment.startdate}
                         type="month"
                         sx={{
-                          background: "#e7eaf4",
                           borderRadius: "5px",
+                          width: '50%'
                         }}
                         InputProps={{
                           disableUnderline: true,
                         }}
-                        InputLabelProps={{
-                          sx: {
-                            fontSize: "12px",
-                            color: "#828ba2",
-                          },
-                        }}
+                        InputLabelProps={{ shrink: true }}
                         onChange={(e) => handleInputChange(e, key)}
                       />
 
                       <TextField
-                        id={item.id}
-                        variant="filled"
+                        id="jobenddate"
                         label="End Date"
                         name="enddate"
-                        value={stateValue.enddate}
+                        value={employment.enddate}
                         type="month"
                         sx={{
-                          marginLeft: "20px",
-                          background: "#e7eaf4",
                           borderRadius: "5px",
+                          width: '50%'
+
                         }}
                         InputProps={{
                           disableUnderline: true,
                         }}
-                        InputLabelProps={{
-                          sx: {
-                            fontSize: "12px",
-                            color: "#828ba2",
-                          },
-                        }}
+                        InputLabelProps={{ shrink: true }}
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
                     <Grid item xs={16} md={6}>
                       <TextField
-                        id={item.id}
+                        id="jobcity"
                         label="City"
                         type="text"
-                        value={stateValue.city}
+                        value={employment.city}
                         name="city"
-                        variant="filled"
                         sx={{
                           width: "100%",
-                          background: "#e7eaf4",
                           borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
                         }}
                         InputProps={{
                           disableUnderline: true,
@@ -270,8 +236,8 @@ export default function Employment() {
                     <Grid item xs={16} md={12}>
                       <Typography>Description</Typography>
                       <ReactQuill
-                        style={{ marginTop: '10px', background: "#e7eaf4" }}
-                        value={item.description}
+                        style={{ marginTop: '10px', background: "#fff" }}
+                        value={employment.description}
                         modules={modules}
                         formats={['list']}
                         onChange={(value) => handleDescriptionChange(key, value)}

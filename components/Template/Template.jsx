@@ -2,35 +2,39 @@ import React from 'react'
 import { useState, useContext, useRef } from 'react'
 import { DataContext } from '../../pages/CVBuilder'
 import { Form, Email, Phone, Location } from '../SvgComponents/SVG';
-import { months, parseDescription, parseProjectDetails, parseActivityDetails, colorPicker } from '../helpers/helpers';
+import { months, parseDescription, parseProjectDetails, parseActivityDetails, colorPicker, dateConverter } from '../helpers/helpers';
 import ReactToPrint from 'react-to-print';
 import Tooltip from '@mui/material/Tooltip';
 
 function Template() {
     const targetRef = useRef();
     const [colors, setColors] = useState("");
-    const { imageUrls, personalInformation, summary, employment, education, socials, skills, project, extraCurricular, languages, hobbies, reference, skillExpLevel, previewTemplate } = useContext(DataContext);
-    const [{ firstname, lastname, email, phone, country, city, occupation, address, postalcode }] = personalInformation[0]
+    const { imageUrls, personalInformation, summary, employment, education, socials, skills, project, extraCurricular, languages, hobbies, reference, skillExpLevel, langLevel, previewTemplate } = useContext(DataContext);
+    const [{ firstname, lastname, email, phone, country, city, occupation, postalcode }] = personalInformation[0]
     const [picture] = imageUrls[0];
     const [{ summary: about }] = summary[0];
     const [showExpLevel] = skillExpLevel;
+    const [showLangLevel] = langLevel;
     const { hobbies: interests } = hobbies[0]
-
     const [showTemplate, setShowTemplate] = previewTemplate
 
     const handleColorChange = (name) => {
         setColors(name)
     }
 
+
+
+
+
     return (
         <div className="relative bg-gradient-to-t from-gray-200 to-blue-200">
 
             {/* Template start */}
-            <div className='mx-auto scale-90 sm:scale-75 md:scale-75 lg:scale-75 xl:scale-75 '>
-                <div ref={targetRef} id="template-wrapper" className="bg-white shadow-lg min-h-screen mx-auto ">
+            <div className='mx-auto scale-75 sm:scale-75 md:scale-75 lg:scale-75 xl:scale-75 '>
+                <div ref={targetRef} id="template-wrapper" className="bg-white shadow-lg h-screen overflow-auto sm:min-h-screen sm:overflow-y-auto mx-auto ">
                     <div className={`flex w-full bg-slate-800 sm:px-2 gap-10`} style={{ background: colors }}>
-                        <div className="left-5 top-10 h-40 w-40 overflow-hidden p-3 sm:relative sm:rounded-full sm:p-0">
-                            <img src={picture ? picture : `images/dummy.png`} />
+                        <div className="left-5 top-10 h-40 w-40 overflow-hidden sm:relative sm:rounded-full sm:p-0">
+                            <img src={picture ? picture : `/images/dummy.png`} />
                         </div>
 
                         <div className="mt-10 w-3/4 text-start sm:text-left flex justify-between items-center">
@@ -44,51 +48,55 @@ function Template() {
 
                     <div className="p-5">
                         <div className="flex sm:mt-10 sm:flex-row gap-10">
-                            <div className="flex flex-col sm:w-1/3">
+                            <div className="flex flex-col py-3 w-1/2 sm:w-1/3">
                                 {/* contact section */}
-                                <div className="order-3 py-3 sm:order-none">
-                                    <h2 className="font-poppins text-lg font-bold" style={{ color: colors }}>Contact</h2>
-                                    <div className="border-top-color my-3 w-20 border-2"></div>
+                                <h2 className="font-poppins text-lg font-bold" style={{ color: colors }}>Contact</h2>
+                                <div className="border-top-color my-3 w-20 border-2"></div>
 
-                                    <div className='flex flex-col'>
-                                        <div className="my-1 flex items-center">
-                                            {email && <a className="w-6 text-gray-700 hover:text-orange-600 whitespace-nowrap"
-                                            >
-                                                <Email />
-                                            </a>}
-                                            <div className="truncate">{email}</div>
-                                        </div>
-                                        <div className="my-1 flex items-center">
-                                            {phone && <a className="w-6 text-gray-700 hover:text-orange-600" aria-label="Visit TrendyMinds YouTube" href="" target="_blank"
-                                            >
-                                                <Phone />
-                                            </a>}
-                                            <div>{phone}</div>
-                                        </div>
+                                <div className='flex flex-col'>
+                                    <div className="my-1 flex w-1/2 items-center ">
+                                        {
+                                            email &&
+                                            <>
+                                                <div class="mr-2">
+                                                    <Email />
+                                                </div>
+                                                <div class="flex-grow" style={{overflowWrap: 'break-word'}}>
+                                                    {email}
+                                                </div>
+                                            </>
+                                        }
+                                    </div>
+                                    <div className="my-1 flex items-center">
+                                        {phone && <a className="w-6 text-gray-700 hover:text-orange-600" aria-label="Visit TrendyMinds YouTube" href="" target="_blank"
+                                        >
+                                            <Phone />
+                                        </a>}
+                                        <div>{phone}</div>
                                     </div>
                                 </div>
 
                                 {/* skills section */}
-                                <div className="order-2 py-3 sm:order-none">
+                                <div className=" py-3 ">
                                     <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Skills</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <>
-                                        {showExpLevel ? (skills?.[0] && skills?.[0].map((item, index) => (
-                                            <div key={index} className="my-1 flex items-center justify-between">
-                                                <div className="">{item.skill}</div>
-                                                <div>{item.level} </div>
-                                            </div>
-                                        ))) : <div className='flex gap-2 flex-wrap'>
+                                        {showExpLevel ? (<div className='flex gap-2 flex-wrap'>
                                             {skills?.[0].some((entry) => Object.values(entry).some((item) => item !== "")) && skills?.[0].map((item, index) => (
                                                 <div key={index} className="bg-slate-800 flex justify-center items-center border flex-wrap rounded-md">
                                                     <p className="px-3 py-1 text-sm text-white">{item.skill}</p>
                                                 </div>
                                             ))}
-                                        </div>}
+                                        </div>) : (skills?.[0] && skills?.[0].map((item, index) => (
+                                            <div key={index} className="my-1 flex items-center justify-between">
+                                                <div className="">{item.skill}</div>
+                                                <div>{item.level} </div>
+                                            </div>
+                                        )))}
                                     </>
                                 </div>
 
-                                <div className="order-3 py-3 sm:order-none">
+                                <div className="py-3">
                                     <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Social Links</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <div className='pt-1 flex flex-col gap-2'>
@@ -105,17 +113,26 @@ function Template() {
                                     languages?.[0].some((entry) => Object.values(entry).some((item) => item !== "")) && <div className="order-3 py-3 sm:order-none">
                                         <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Languages</h2>
                                         <div className="border-top-color my-3 w-20 border-2"></div>
-                                        <div className='pt-1 flex flex-wrap items-center gap-2'>
-                                            {languages?.[0] && languages?.[0].map((item, index) => (
-                                                <div key={index} className='w-full'>
-                                                    <p className='w-full flex justify-between'>{item.language} <span className='text-sm italic text-gray-500'>{item.level}</span></p>
-                                                </div>
-                                            ))}
-                                        </div>
+                                        <>
+                                            {!showLangLevel ? (<div className='pt-1 flex flex-wrap items-center gap-2'>
+                                                {languages?.[0] && languages?.[0].map((language, index) => (
+                                                    <div key={index} className='w-full'>
+                                                        <p className='w-full flex justify-between'>{language.name} <span className='text-sm italic text-gray-500'>{language.level}</span></p>
+                                                    </div>
+                                                ))}
+                                            </div>) : (<div className='pt-1 flex flex-wrap items-center gap-2'>
+                                                {languages?.[0] && languages?.[0].map((language, index) => (
+                                                    <div key={index} className='w-full'>
+                                                        <p className='w-full flex'>{language.name}</p>
+                                                    </div>
+                                                ))}
+                                            </div>)}
+                                        </>
+
                                     </div>
                                 }
 
-                                {interests && <div className="order-2 py-3 sm:order-none">
+                                {interests && <div className="py-3">
                                     <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Interests</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
                                     <div className='flex flex-wrap gap-2'>
@@ -130,11 +147,11 @@ function Template() {
 
                             </div>
 
-                            <div className="order-first flex flex-col sm:order-none sm:w-2/3">
+                            <div className="flex flex-col w-1/2 sm:w-2/3">
                                 <div className="py-3">
                                     <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>About</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
-                                    <p className='text-left'>{about}</p>
+                                    <p className='text-left break-all ...'>{about}</p>
                                 </div>
 
                                 <div className="py-3">
@@ -145,7 +162,7 @@ function Template() {
                                         {employment?.[0] && employment?.[0].map((job, index) => (
                                             <div key={index} className="flex flex-col">
                                                 {job.employer && job.jobtitle ? <p className="text-lg font-bold text-gray-700">{job.employer} | {job.jobtitle}</p> : null}
-                                                {job.startdate && job.enddate ? <p className="text-sm font-semibold text-gray-700">{months[Number(job.startdate.split("-")[1])]} {job.startdate.split("-")[0]} - {months[Number(job.enddate.split("-")[1])]} {job.enddate.split("-")[0]}</p> : null}
+                                                {job.startdate && job.enddate ? <p className="text-sm font-semibold text-gray-700">{dateConverter(job.startdate, job.enddate)}</p> : null}
                                                 {job.description && (
                                                     <>
                                                         <p className="mb-1 mt-2 text-sm font-semibold text-gray-700">{job.description !== "<p><br></p>" && "Key Responsibilities"}</p>
@@ -159,7 +176,7 @@ function Template() {
                                     </div>
                                 </div>
 
-                                <div className="order-1 py-3 sm:order-none">
+                                <div className="py-3">
                                     <h2 className="font-poppins text-top-color text-lg font-bold" style={{ color: colors }}>Education</h2>
                                     <div className="border-top-color my-3 w-20 border-2"></div>
 
@@ -206,8 +223,10 @@ function Template() {
                                         <div className="flex flex-col ">
                                             {extraCurricular?.[0] && extraCurricular?.[0].map((item, index) => (
                                                 <div key={index} className="flex flex-col">
-                                                    {item.role && item.activity && item.institution ? <p className="text-lg font-bold text-gray-700">{item.role} | {item.activity} | {item.institution}</p> : null}
-                                                    {item.startdate && item.enddate ? <p className="text-sm font-bold text-gray-700">{months[Number(item.startdate.split("-")[1])]} {item.startdate.split("-")[0]} - {months[Number(item.enddate.split("-")[1])]} {item.enddate.split("-")[0]}</p> : null}
+                                                    {item.role && item.title && item.institution ? <p className="text-lg font-bold text-gray-700">{item.role} | {item.title} | {item.institution}</p> : null}
+                                                    {item.startdate && item.enddate ? <p className="text-sm font-bold text-gray-700">
+                                                        {dateConverter(item.startdate, item.enddate)}
+                                                    </p> : null}
                                                     {item.description && (
                                                         <div className='py-2'>
                                                             <ul className="list-disc space-y-1 pl-4 text-sm">
@@ -229,9 +248,9 @@ function Template() {
                                         <div className="flex flex-col space-y-2">
                                             {reference?.[0] && reference?.[0].map((ref, index) => (
                                                 <div key={index} className="flex flex-col">
-                                                    <p className="text-lg font-medium">
+                                                    {ref.referrername && ref.position && ref.organization && <p className="text-lg font-medium">
                                                         <span className="text-gray-700">{ref.referrername} - {ref.position} , {ref.organization}</span>
-                                                    </p>
+                                                    </p>}
                                                     {ref.address && ref.email && ref.phone ? <p className="text-sm font-normal text-gray-700">{ref.address} , {ref.email}, {ref.phone}</p> : null}
                                                 </div>
                                             ))}
@@ -242,7 +261,7 @@ function Template() {
                         </div>
                     </div>
                 </div>
-                <div className='border w-full flex gap-2 py-5'>
+                <div className=' w-full flex gap-2 py-5'>
                     {colorPicker.map((color, index) => (
                         <div key={index} onClick={() => handleColorChange(color.name)} className={`cursor-pointer border transition duration-300 hover:border-2 w-8 h-10 rounded-md `} style={{ background: color.name }}></div>
                     ))}
@@ -261,7 +280,7 @@ function Template() {
             <Tooltip title="Form" placement="top">
                 <div
                     onClick={() => setShowTemplate(!showTemplate)}
-                    className="z-100 p-[15px] rounded-full bg-blue-500 hover:bg-blue-400 cursor-pointer fixed bottom-[25px] sm:bottom-[25px] right-[25px] custom-end:hidden">
+                    className="scale-75 sm:scale-100 z-100 p-[15px] rounded-full bg-blue-500 hover:bg-blue-400 cursor-pointer fixed bottom-[10px] sm:bottom-[25px] sm:right-[15px] right-[5px] custom-end:hidden">
                     <Form />
                 </div>
             </Tooltip>

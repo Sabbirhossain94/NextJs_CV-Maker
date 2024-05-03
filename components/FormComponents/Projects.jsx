@@ -27,7 +27,7 @@ export default function Projects({
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.project;
+  const [projectDetails, setProjectDetails] = getData.project;
 
   const modules = {
     toolbar: [
@@ -45,17 +45,17 @@ export default function Projects({
   };
 
   const deleteAccordionSection = (id) => {
-    const result = stateValue.filter((item, key) => {
+    const result = projectDetails.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setStateValue(result);
+    setProjectDetails(result);
   };
 
   const addAccordionSection = () => {
-    setStateValue([
-      ...stateValue,
+    setProjectDetails([
+      ...projectDetails,
       {
         projecttitle: "",
         startdate: "",
@@ -66,17 +66,17 @@ export default function Projects({
   };
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    let clone = [...stateValue];
+    let clone = [...projectDetails];
     let obj = clone[inputKey];
     obj[name] = value;
     clone[inputKey] = obj;
-    setStateValue([...clone]);
+    setProjectDetails([...clone]);
   };
 
   const handleDescriptionChange = (index, value) => {
-    const updatedProjectDetails = [...stateValue];
+    const updatedProjectDetails = [...projectDetails];
     updatedProjectDetails[index].description = value;
-    setStateValue(updatedProjectDetails);
+    setProjectDetails(updatedProjectDetails);
   };
 
   return (
@@ -102,7 +102,7 @@ export default function Projects({
             }}
             onClick={() => {
               deleteCustomSection(sectionId);
-              setStateValue([
+              setProjectDetails([
                 {
                   projecttitle: "",
                   startdate: "",
@@ -116,7 +116,7 @@ export default function Projects({
       </Grid>
 
       <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
-        {stateValue.map((item, key) => (
+        {projectDetails.map((project, key) => (
           <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
             <Grid item xs={14} sm={15} md={15}>
               <Accordion
@@ -135,7 +135,7 @@ export default function Projects({
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "100%", flexShrink: 0 }}>
-                    {item.projecttitle ? item.projecttitle : "(Not Specified)"}
+                    {project.projecttitle ? project.projecttitle : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -146,21 +146,14 @@ export default function Projects({
                   >
                     <Grid item xs={16} md={6}>
                       <TextField
-                        id="outlined-basic"
+                        id="projecttitle"
                         label="Project Title"
                         type="text"
-                        value={stateValue.course}
+                        value={project.projecttitle}
                         name="projecttitle"
-                        variant="filled"
                         sx={{
                           width: "100%",
-                          background: "#e7eaf4",
                           borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
                         }}
                         InputProps={{
                           disableUnderline: true,
@@ -170,61 +163,43 @@ export default function Projects({
                     </Grid>
                     <Grid item xs={16} sm={16} md={6} sx={{ display: "flex", flexDirection: { xs: 'column', sm: 'row' }, gap: '20px' }}>
                       <TextField
-                        variant="filled"
+                        id="projectstartdate"
                         label="Start Date"
                         name="startdate"
-                        value={stateValue.startdate}
+                        value={project.startdate}
                         type="month"
                         sx={{
-                          background: "#e7eaf4",
                           borderRadius: "5px",
                           width: {
                             xs: '100%',
                             sm: '50%'
                           }
                         }}
-                        InputProps={{
-                          disableUnderline: true,
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            fontSize: "12px",
-                            color: "#828ba2",
-                          },
-                        }}
+                        InputLabelProps={{ shrink: true }}
                         onChange={(e) => handleInputChange(e, key)}
                       />
                       <TextField
-                        variant="filled"
+                        id="projectenddate"
                         label="End Date"
                         name="enddate"
-                        value={stateValue.enddate}
+                        value={project.enddate}
                         type="month"
                         sx={{
-                          background: "#e7eaf4",
                           borderRadius: "5px",
                           width: {
                             xs: '100%',
                             sm: '50%'
                           }
                         }}
-                        InputProps={{
-                          disableUnderline: true,
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            fontSize: "12px",
-                            color: "#828ba2",
-                          },
-                        }}
+                        InputLabelProps={{ shrink: true }}
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
                     <Grid item xs={16} md={12}>
                       <Typography>Description</Typography>
                       <ReactQuill
-                        style={{ marginTop: '10px', background: "#e7eaf4" }}
-                        value={item.description}
+                        style={{ marginTop: '10px', background: "#fff" }}
+                        value={project.description}
                         modules={modules}
                         formats={['list', 'link']}
                         styles={customStyles}

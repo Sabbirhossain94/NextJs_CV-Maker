@@ -20,44 +20,43 @@ export default function Education() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.education;
+  const [educationDetails, setEducationDetails] = getData.education;
   const [completedSections, setCompletedSections] = getData.completed
 
   const deleteAccordionSection = (id) => {
-    const result = stateValue.filter((item, key) => {
+    const result = educationDetails.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setStateValue(result);
+    setEducationDetails(result);
   };
 
   const addAccordionSection = () => {
-    setStateValue([
-      ...stateValue,
+    setEducationDetails([
+      ...educationDetails,
       {
         institution: "",
         degree: "",
         startdate: "",
         enddate: "",
         institutioncity: "",
-        description: "",
       },
     ]);
   };
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    let clone = [...stateValue];
+    let clone = [...educationDetails];
     let obj = clone[inputKey];
     obj[name] = value;
     clone[inputKey] = obj;
-    setStateValue([...clone]);
+    setEducationDetails([...clone]);
     calculateProfileCompleteness();
 
   };
 
   const calculateProfileCompleteness = () => {
-    const firstEntry = stateValue[0];
+    const firstEntry = educationDetails[0];
 
     if (firstEntry) {
       const allfieldsCompleted = Object.values(firstEntry).every(field => field !== "")
@@ -95,7 +94,7 @@ export default function Education() {
       </Typography>
 
       <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
-        {stateValue.map((item, key) => (
+        {educationDetails.map((education, key) => (
           <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
             <Grid item xs={14} sm={15} md={15}>
               <Accordion
@@ -114,7 +113,7 @@ export default function Education() {
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "90%", flexShrink: 0 }}>
-                    {item.institution ? item.institution : "(Not Specified)"}
+                    {education.institution ? education.institution : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -125,20 +124,14 @@ export default function Education() {
                   >
                     <Grid item xs={16} md={6}>
                       <TextField
+                        id="educationinstitution"
                         label="Institution"
                         name="institution"
-                        value={stateValue.institution}
+                        value={education.institution}
                         type="text"
-                        variant="filled"
                         sx={{
                           width: "100%",
-                          background: "#e7eaf4",
                           borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
                         }}
                         InputProps={{
                           disableUnderline: true,
@@ -148,20 +141,14 @@ export default function Education() {
                     </Grid>
                     <Grid item xs={16} md={6}>
                       <TextField
+                        id="educationdegree"
                         label="Degree"
                         name="degree"
-                        value={stateValue.degree}
+                        value={education.degree}
                         type="text"
-                        variant="filled"
                         sx={{
                           width: "100%",
-                          background: "#e7eaf4",
                           borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
                         }}
                         InputProps={{
                           disableUnderline: true,
@@ -169,68 +156,49 @@ export default function Education() {
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
-                    <Grid item xs={12} md={6} sx={{ display: "flex" }}>
+                    <Grid item xs={12} md={6} sx={{ display: "flex", gap: '20px' }}>
                       <TextField
-                        variant="filled"
+                        id="educationstartyear"
                         label="Start Year"
                         name="startdate"
-                        value={stateValue.startdate}
+                        value={education.startdate}
                         type="year"
                         sx={{
-                          background: "#e7eaf4",
                           borderRadius: "5px",
+                          width: '50%'
                         }}
                         InputProps={{
                           disableUnderline: true,
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            fontSize: "12px",
-                            color: "#828ba2",
-                          },
                         }}
                         onChange={(e) => handleInputChange(e, key)}
                       />
 
                       <TextField
-                        variant="filled"
+                        id="educationendyear"
                         label="End Year"
                         name="enddate"
-                        value={stateValue.enddate}
+                        value={education.enddate}
                         type="year"
                         sx={{
-                          marginLeft: "20px",
-                          background: "#e7eaf4",
+                          width: '50%',
                           borderRadius: "5px",
                         }}
                         InputProps={{
                           disableUnderline: true,
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            fontSize: "12px",
-                            color: "#828ba2",
-                          },
                         }}
                         onChange={(e) => handleInputChange(e, key)}
                       />
                     </Grid>
                     <Grid item xs={16} md={6}>
                       <TextField
+                        id="educationcity"
                         label="City"
                         name="institutioncity"
                         type="text"
-                        value={stateValue.city}
-                        variant="filled"
+                        value={education.institutioncity}
                         sx={{
                           width: "100%",
-                          background: "#e7eaf4",
                           borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
                         }}
                         InputProps={{
                           disableUnderline: true,

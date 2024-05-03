@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -25,24 +25,22 @@ export default function Skills() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const [stateValue, setStateValue] = getData.skills;
-  const [_, setShowExpLevel] = getData.skillExpLevel;
+  const [skillDetails, setSkillDetails] = getData.skills;
+  const [showExpLevel, setShowExpLevel] = getData.skillExpLevel;
   const [completedSections, setCompletedSections] = getData.completed
 
   const deleteAccordionSection = (id) => {
-    const result = stateValue.filter((item, key) => {
+    const result = skillDetails.filter((item, key) => {
       if (key !== id) {
         return item;
       }
     });
-    setStateValue(result);
+    setSkillDetails(result);
   };
 
-  const [toggleSwitch, setToggleSwitch] = useState(false);
-
   const addAccordionSection = () => {
-    setStateValue([
-      ...stateValue,
+    setSkillDetails([
+      ...skillDetails,
       {
         skill: "",
         level: "",
@@ -52,24 +50,17 @@ export default function Skills() {
 
   const handleInputChange = (e, inputKey) => {
     const { name, value } = e.target;
-    let clone = [...stateValue];
+    let clone = [...skillDetails];
     let obj = clone[inputKey];
     obj[name] = value;
     clone[inputKey] = obj;
-    setStateValue([...clone]);
+    setSkillDetails([...clone]);
     calculateProfileCompleteness();
   };
 
-  useEffect(() => {
-    if (toggleSwitch) {
-      setShowExpLevel(true)
-    } else {
-      setShowExpLevel(false)
-    }
-  }, [toggleSwitch,setShowExpLevel])
 
   const calculateProfileCompleteness = () => {
-    const firstEntry = stateValue[0];
+    const firstEntry = skillDetails[0];
 
     if (firstEntry) {
       const allfieldsCompleted = Object.values(firstEntry).every(field => field !== "")
@@ -114,19 +105,19 @@ export default function Skills() {
         style={{ marginTop: "-10px" }}
       >
         <AntSwitch
-          defaultChecked={!toggleSwitch}
+          defaultChecked={!showExpLevel}
           inputProps={{ "aria-label": "ant design" }}
           onChange={() => {
-            setToggleSwitch(!toggleSwitch);
+            setShowExpLevel(!showExpLevel);
           }}
         />
         <Typography sx={{ fontSize: "15px" }}>
-          Don&apos;t show experience level
+          show experience level
         </Typography>
       </Stack>
 
       <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', marginTop: "15px", flexGrow: 1 }}>
-        {stateValue.map((item, key) => (
+        {skillDetails.map((skills, key) => (
           <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
             <Grid item xs={14} sm={15} md={15}>
               <Accordion
@@ -145,7 +136,7 @@ export default function Skills() {
                   id="panel1bh-header"
                 >
                   <Typography sx={{ width: "100%", flexShrink: 0 }}>
-                    {item.skill ? item.skill : "(Not Specified)"}
+                    {skills.skill ? skills.skill : "(Not Specified)"}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -156,23 +147,14 @@ export default function Skills() {
                   >
                     <Grid item xs={15} sm={6} md={6}>
                       <TextField
-                        id="outlined-basic"
+                        id="skilltitle"
                         label="Skill"
-                        variant="filled"
-                        value={stateValue.skill}
+                        type="text"
+                        value={skills.skill}
                         name="skill"
                         sx={{
                           width: "100%",
-                          background: "#e7eaf4",
                           borderRadius: "5px",
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            color: "#828ba2",
-                          },
-                        }}
-                        InputProps={{
-                          disableUnderline: true,
                         }}
                         onChange={(e) => handleInputChange(e, key)}
                       />
@@ -181,23 +163,15 @@ export default function Skills() {
                       <FormControl sx={{ width: "100%" }}>
                         <InputLabel
                           id="demo-simple-select-helper-label"
-                          sx={{}}
                         >
                           Level
                         </InputLabel>
                         <Select
-                          labelId="demo-simple-select-helper-label"
-                          id="demo-simple-select-helper"
+                          id="skilllevel"
                           label="level"
-                          disabled={toggleSwitch ? false : true}
-                          defaultValue=""
-                          value={stateValue.level}
-                          variant="filled"
+                          disabled={showExpLevel ? true : false}
+                          value={skills.level}
                           name="level"
-                          sx={{ background: "#e7eaf4", borderRadius: "5px" }}
-                          InputProps={{
-                            disableUnderline: true,
-                          }}
                           onChange={(e) => handleInputChange(e, key)}
                         >
                           {[
@@ -223,7 +197,7 @@ export default function Skills() {
                             },
                           ].map((item, key) => (
                             <MenuItem
-                              defaultValue={stateValue.level}
+                              defaultValue={skillDetails.level}
                               value={item.name}
                               key={key}
                             >

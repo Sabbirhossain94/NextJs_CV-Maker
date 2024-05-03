@@ -23,11 +23,14 @@ import Template from "../components/Template/Template";
 import Tooltip from '@mui/material/Tooltip';
 import { Home } from "../components/SvgComponents/SVG";
 import LinearProgress from '@mui/material/LinearProgress';
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+import { useRouter } from 'next/router';
+import Modal from '@mui/material/Modal';
 
 export const DataContext = React.createContext();
 
 export default function CVBuilder() {
+  const router = useRouter();
   const [delay, setDelay] = useState(0);
   setTimeout(() => setDelay(1), 1000);
   const [images, setImages] = useState([]);
@@ -93,7 +96,7 @@ export default function CVBuilder() {
 
   const [extraCurricularDetails, setExtraCurricularDetails] = useState([
     {
-      activity: "",
+      title: "",
       institution: "",
       startdate: "",
       enddate: "",
@@ -103,19 +106,21 @@ export default function CVBuilder() {
   ]);
   const [languageDetails, setLanguageDetails] = useState([
     {
-      language: "",
+      name: "",
       level: "",
     },
   ]);
   const [hobbiesDetails, setHobbiesDetails] = useState({ hobbies: "" });
-  const [referenceDetails, setReferenceDetails] = useState([{
-    referrername: "",
-    position: "",
-    organization: "",
-    address: "",
-    phone: "",
-    email: ""
-  }])
+  const [referenceDetails, setReferenceDetails] = useState([
+    {
+      referrername: "",
+      position: "",
+      organization: "",
+      address: "",
+      phone: "",
+      email: ""
+    }
+  ])
 
   const [allSections, setAllSections] = useState([
     {
@@ -137,7 +142,8 @@ export default function CVBuilder() {
   ]);
 
   const [customSection, setCustomSection] = useState([])
-  const [showExpLevel, setShowExpLevel] = useState(false)
+  const [showExpLevel, setShowExpLevel] = useState(false);
+  const [showLangLevel, setShowLangLevel] = useState(false);
   const [showTemplate, setShowTemplate] = useState(false)
   const [windowWidth, setWindowWidth] = useState(null);
   const [completedSections, setCompletedSections] = useState({
@@ -146,8 +152,7 @@ export default function CVBuilder() {
   const [profileCompleteness, setProfileCompleteness] = useState(null)
   const [progressBarColor, setProgressBarColor] = useState('red');
   const [isScrolled, setIsScrolled] = useState(false);
-
-
+  const [open, setOpen] = useState(false);
 
   const deleteCustomSection = (sectionId) => {
     setCustomSection(prevSections => prevSections.filter(section => section.id !== sectionId))
@@ -196,6 +201,23 @@ export default function CVBuilder() {
     };
   }, []);
 
+  const handleOk = () => {
+    router.push('/');
+  }
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+  };
+
   return delay === 0 ? (
     <LoadingAnimation />
   ) : (
@@ -237,6 +259,7 @@ export default function CVBuilder() {
             hobbies: [hobbiesDetails, setHobbiesDetails],
             reference: [referenceDetails, setReferenceDetails],
             skillExpLevel: [showExpLevel, setShowExpLevel],
+            langLevel: [showLangLevel, setShowLangLevel],
             previewTemplate: [showTemplate, setShowTemplate],
             completed: [completedSections, setCompletedSections]
           }}
@@ -280,11 +303,10 @@ export default function CVBuilder() {
                     display: 'flex',
                     flexDirection: 'column',
                     paddingTop: {
-                      xs: '50px',
+                      xs: '20px',
                       sm: '0px'
                     },
                     margin: "auto",
-                    animation: 'animate-slide-from-right'
                   }}>
                   <Box
                     sx={{
@@ -339,17 +361,72 @@ export default function CVBuilder() {
                     setCustomSection={setCustomSection}
                     deleteCustomSection={deleteCustomSection}
                   />
-                  <Link href="/" style={{ textDecoration: "none" }}>
-                    <Tooltip title="Home" placement="top">
-                      <Box sx={{ zIndex: 200, cursor: "pointer", position: "fixed", bottom: 105, right: 20, background: "linear-gradient(to right bottom, #64b5f6, #1565c0)", borderRadius: "50%", padding: '15px' }}>
-                        <Home />
-                      </Box>
-                    </Tooltip>
-                  </Link>
+                  {/* <Link href="/" style={{ textDecoration: "none" }}> */}
+                    {/* <Tooltip title="Home" placement="top"> */}
+                     
+                        <Button 
+                        sx={{
+                          zIndex: 200,
+                          cursor: "pointer",
+                          position: "fixed",
+                          bottom: {
+                            xs: 85,
+                            sm: 105
+                          },
+                          right: 20,
+                          background: "linear-gradient(to right bottom, #64b5f6, #1565c0)",
+                          borderRadius: "50%",
+                          padding: '15px',
+                          scale: {
+                            xs: "75%",
+                            sm: '100%'
+                          }
+                        }}
+                        onClick={handleOpen}><Home /></Button>
+
+                      {/* modal section */}
+                      <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                      >
+                        <Box sx={style}>
+                          <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Leaving the Page
+                          </Typography>
+                          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            All progress will be lost
+                          </Typography>
+                          <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                            <Button onClick={handleClose} variant="outlined" color="primary" sx={{ mr: 1 }}>
+                              Cancel
+                            </Button>
+                            <Button onClick={handleOk} variant="contained" color="primary">
+                              OK
+                            </Button>
+                          </Box>
+                        </Box>
+                      </Modal>
+                    {/* </Tooltip> */}
+                  {/* </Link> */}
                   <Tooltip title="Preview" placement="top">
                     <Box
                       onClick={() => setShowTemplate(!showTemplate)}
-                      sx={{ zIndex: 200, cursor: "pointer", position: "fixed", bottom: 25, right: 20, background: "linear-gradient(to right bottom, #64b5f6, #1565c0)", borderRadius: "50%", padding: '15px' }}
+                      sx={{
+                        zIndex: 200,
+                        cursor: "pointer",
+                        position: "fixed",
+                        bottom: 25,
+                        right: 20,
+                        background: "linear-gradient(to right bottom, #64b5f6, #1565c0)",
+                        borderRadius: "50%",
+                        padding: '15px',
+                        scale: {
+                          xs: "75%",
+                          sm: '100%'
+                        }
+                      }}
                     >
                       <Preview />
                     </Box>
@@ -358,7 +435,7 @@ export default function CVBuilder() {
               </div> : null}
 
             {showTemplate && windowWidth < 1199 ?
-              <div className={`${showTemplate && windowWidth < 1199 ? 'animate-slide-from-right transition duration-300' : 'animate-slide-to-right transition duration-300'} transition duration-300 z-100 absolute top-0 right-0 left-0 bottom-0 custom-end:hidden `}>
+              <div className={`${showTemplate && windowWidth < 1199 && 'animate-slide-from-right'} z-100 absolute top-0 right-0 left-0 bottom-0 custom-end:hidden `}>
                 <Template />
               </div> : null
             }

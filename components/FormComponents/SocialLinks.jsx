@@ -145,7 +145,7 @@ export default function SocialLinks() {
                       <Grid item xs={15} sm={6} md={6}>
                         <FormControl sx={{ width: "100%" }}>
                           <InputLabel
-                            id="demo-simple-select-helper-label"
+                            id="demo-simple-select-label"
                           >
                             Socials
                           </InputLabel>
@@ -156,13 +156,9 @@ export default function SocialLinks() {
                             name="label"
                             sx={{
                               width: "100%",
-                              background: "#e7eaf4",
                               borderRadius: "5px",
                             }}
                             label="label"
-                            InputProps={{
-                              disableUnderline: true,
-                            }}
                             onChange={(e) => handleInputChange(e, key)}
                           >
                             {[
@@ -193,22 +189,15 @@ export default function SocialLinks() {
                       </Grid>
                       <Grid item xs={15} sm={6} md={6}>
                         <TextField
-                          id="outlined-basic"
+                          id="socialslink"
                           label="Link"
                           placeholder="https://example.com"
                           type="text"
                           name="linkurl"
                           value={social.linkurl}
-                          variant="filled"
                           sx={{
                             width: "100%",
-                            background: "#e7eaf4",
                             borderRadius: "5px",
-                          }}
-                          InputLabelProps={{
-                            sx: {
-                              color: "#828ba2",
-                            },
                           }}
                           onChange={(e) => handleInputChange(e, key)}
                         />

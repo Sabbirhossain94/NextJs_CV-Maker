@@ -13,7 +13,6 @@ import { DataContext } from "../../pages/CVBuilder";
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 
-
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function References({
@@ -27,20 +26,20 @@ export default function References({
         setExpanded(isExpanded ? panel : false);
     };
 
-    const [stateValue, setStateValue] = getData.reference;
+    const [referenceDetails, setReferenceDetails] = getData.reference;
 
     const deleteAccordionSection = (id) => {
-        const result = stateValue.filter((item, key) => {
+        const result = referenceDetails.filter((item, key) => {
             if (key !== id) {
                 return item;
             }
         });
-        setStateValue(result);
+        setReferenceDetails(result);
     };
 
     const addAccordionSection = () => {
-        setStateValue([
-            ...stateValue,
+        setReferenceDetails([
+            ...referenceDetails,
             {
                 referrername: "",
                 position: "",
@@ -48,17 +47,17 @@ export default function References({
                 address: "",
                 phone: "",
                 email: ""
-            },
+            }
         ]);
     };
 
     const handleInputChange = (e, inputKey) => {
         const { name, value } = e.target;
-        let clone = [...stateValue];
+        let clone = [...referenceDetails];
         let obj = clone[inputKey];
         obj[name] = value;
         clone[inputKey] = obj;
-        setStateValue([...clone]);
+        setReferenceDetails([...clone]);
     };
 
 
@@ -85,7 +84,7 @@ export default function References({
                         }}
                         onClick={() => {
                             deleteCustomSection(sectionId);
-                            setStateValue([
+                            setReferenceDetails([
                                 {
                                     referrername: "",
                                     position: "",
@@ -93,7 +92,7 @@ export default function References({
                                     address: "",
                                     phone: "",
                                     email: ""
-                                },
+                                }
                             ]);
                         }}
                     />
@@ -101,7 +100,7 @@ export default function References({
             </Grid>
 
             <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
-                {stateValue.map((item, key) => (
+                {referenceDetails.map((reference, key) => (
                     <Grid key={key} container columns={16} sx={{ display: 'flex', alignItems: 'center' }}>
                         <Grid item xs={14} sm={15} md={15}>
                             <Accordion
@@ -120,7 +119,7 @@ export default function References({
                                     id="panel1bh-header"
                                 >
                                     <Typography sx={{ width: "100%", flexShrink: 0 }}>
-                                        {item.referrername ? item.referrername : "(Not Specified)"}
+                                        {reference.referrername ? reference.referrername : "(Not Specified)"}
                                     </Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
@@ -131,20 +130,14 @@ export default function References({
                                     >
                                         <Grid item xs={16} md={6}>
                                             <TextField
+                                                id="referrername"
                                                 label="Referrer name"
                                                 name="referrername"
-                                                value={stateValue.referrername}
+                                                value={reference.referrername}
                                                 type="text"
-                                                variant="filled"
                                                 sx={{
                                                     width: "100%",
-                                                    background: "#e7eaf4",
                                                     borderRadius: "5px",
-                                                }}
-                                                InputLabelProps={{
-                                                    sx: {
-                                                        color: "#828ba2",
-                                                    },
                                                 }}
                                                 InputProps={{
                                                     disableUnderline: true,
@@ -154,20 +147,14 @@ export default function References({
                                         </Grid>
                                         <Grid item xs={16} md={6}>
                                             <TextField
+                                                id="position"
                                                 label="Position"
                                                 name="position"
-                                                value={stateValue.position}
+                                                value={reference.position}
                                                 type="text"
-                                                variant="filled"
                                                 sx={{
                                                     width: "100%",
-                                                    background: "#e7eaf4",
                                                     borderRadius: "5px",
-                                                }}
-                                                InputLabelProps={{
-                                                    sx: {
-                                                        color: "#828ba2",
-                                                    },
                                                 }}
                                                 InputProps={{
                                                     disableUnderline: true,
@@ -177,20 +164,14 @@ export default function References({
                                         </Grid>
                                         <Grid item xs={16} md={6}>
                                             <TextField
+                                                id="organization"
                                                 label="Organization"
                                                 name="organization"
-                                                value={stateValue.organization}
+                                                value={reference.organization}
                                                 type="text"
-                                                variant="filled"
                                                 sx={{
                                                     width: "100%",
-                                                    background: "#e7eaf4",
                                                     borderRadius: "5px",
-                                                }}
-                                                InputLabelProps={{
-                                                    sx: {
-                                                        color: "#828ba2",
-                                                    },
                                                 }}
                                                 InputProps={{
                                                     disableUnderline: true,
@@ -200,20 +181,14 @@ export default function References({
                                         </Grid>
                                         <Grid item xs={16} md={6}>
                                             <TextField
+                                                id="referreremail"
                                                 label="Email"
                                                 name="email"
                                                 type="text"
-                                                value={stateValue.email}
-                                                variant="filled"
+                                                value={reference.email}
                                                 sx={{
                                                     width: "100%",
-                                                    background: "#e7eaf4",
                                                     borderRadius: "5px",
-                                                }}
-                                                InputLabelProps={{
-                                                    sx: {
-                                                        color: "#828ba2",
-                                                    },
                                                 }}
                                                 InputProps={{
                                                     disableUnderline: true,
@@ -224,20 +199,14 @@ export default function References({
 
                                         <Grid item xs={16} md={6}>
                                             <TextField
+                                                id="referrerphone"
                                                 label="Phone"
                                                 name="phone"
                                                 type="text"
-                                                value={stateValue.phone}
-                                                variant="filled"
+                                                value={reference.phone}
                                                 sx={{
                                                     width: "100%",
-                                                    background: "#e7eaf4",
                                                     borderRadius: "5px",
-                                                }}
-                                                InputLabelProps={{
-                                                    sx: {
-                                                        color: "#828ba2",
-                                                    },
                                                 }}
                                                 InputProps={{
                                                     disableUnderline: true,
@@ -248,20 +217,14 @@ export default function References({
 
                                         <Grid item xs={16} md={6}>
                                             <TextField
+                                                id="referreraddress"
                                                 label="Address"
                                                 name="address"
                                                 type="text"
-                                                value={stateValue.address}
-                                                variant="filled"
+                                                value={reference.address}
                                                 sx={{
                                                     width: "100%",
-                                                    background: "#e7eaf4",
                                                     borderRadius: "5px",
-                                                }}
-                                                InputLabelProps={{
-                                                    sx: {
-                                                        color: "#828ba2",
-                                                    },
                                                 }}
                                                 InputProps={{
                                                     disableUnderline: true,

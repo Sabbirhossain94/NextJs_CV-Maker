@@ -1,6 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { DataContext } from "../../pages/CVBuilder";
 import Typography from "@mui/material/Typography";
@@ -9,13 +8,23 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import EditIcon from "@mui/icons-material/Edit";
 import { Box } from "@mui/material";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import Link from "next/link";
+import Modal from '@mui/material/Modal';
+import { useRouter } from 'next/router';
 
 export default function Practice() {
   const getData = useContext(DataContext);
+  const router = useRouter();
   const [imageData, setImageData] = getData.image;
   const [imageUrlData, setImageUrlData] = getData.imageUrls;
   const [completedSections, setCompletedSections] = getData.completed
+
+  const [open, setOpen] = useState(false);
+
+  const handleOk = () => {
+    router.push('/');
+  }
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const imageHandler = (e) => {
     setImageData([...e.target.files]);
@@ -61,14 +70,49 @@ export default function Practice() {
     calculateProfileCompleteness()
   }, [imageData, setImageUrlData, calculateProfileCompleteness]);
 
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+  };
 
   return (
     <Box style={{ marginTop: "60px" }}>
-      <Link href="/" style={{ textDecoration: "none" }}>
-        <Button color="primary" variant="contained" startIcon={<KeyboardBackspaceIcon />}>
-          Back
-        </Button>
-      </Link>
+      <Button
+        sx={{
+          display: { xs: 'none', lg: 'flex' }
+        }}
+        onClick={handleOpen} color="primary" variant="contained" startIcon={<KeyboardBackspaceIcon />}>
+        Back
+      </Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Leaving the Page
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            All progress will be lost
+          </Typography>
+          <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
+            <Button onClick={handleClose} variant="outlined" color="primary" sx={{ mr: 1 }}>
+              Cancel
+            </Button>
+            <Button onClick={handleOk} variant="contained" color="primary">
+              OK
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
       <Box sx={{ paddingTop: "20px" }}>
         <Typography
           sx={{
