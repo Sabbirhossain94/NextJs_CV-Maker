@@ -2,6 +2,7 @@
 import * as React from "react";
 import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
@@ -14,6 +15,8 @@ import TextField from "@mui/material/TextField";
 import { DataContext } from "../../pages/CVBuilder";
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
+import Modal from '@mui/material/Modal';
+import { modalStyles } from "../helpers/helpers";
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -27,6 +30,17 @@ export default function Employment() {
 
   const [employmentDetails, setEmploymentDetails] = getData.employment;
   const [completedSections, setCompletedSections] = getData.completed
+  const [disabledEditor, setDisabledEditor] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOk = () => {
+    setOpenModal(false)
+    setDisabledEditor(false)
+  }
+  const handleClose = () => {
+    setOpenModal(false)
+    setDisabledEditor(false)
+  }
 
   const deleteAccordionSection = (id) => {
     const result = employmentDetails.filter((item, key) => {
@@ -69,11 +83,18 @@ export default function Employment() {
   };
 
   const handleDescriptionChange = (index, value) => {
-    const updatedEmploymentDetails = [...employmentDetails];
-    updatedEmploymentDetails[index].description = value;
-    setEmploymentDetails(updatedEmploymentDetails);
-    calculateProfileCompleteness();
 
+    if ((value.startsWith("<p>") && value.endsWith("</p>") && value !== "<p><br></p>")) {
+      setOpenModal(true)
+      setDisabledEditor(true)
+    }
+    else {
+      setDisabledEditor(false)
+      const updatedEmploymentDetails = [...employmentDetails];
+      updatedEmploymentDetails[index].description = value;
+      setEmploymentDetails(updatedEmploymentDetails);
+      calculateProfileCompleteness();
+    }
   };
 
   const calculateProfileCompleteness = () => {
@@ -98,9 +119,7 @@ export default function Employment() {
         }
       }
     }
-
   }
-
 
   return (
     <Box >
@@ -116,6 +135,30 @@ export default function Employment() {
       >
         Experience
       </Typography>
+
+      <Modal
+        open={openModal}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={modalStyles}>
+          <Typography id="modal-modal-title" variant="h6" component="h2" style={{ color: '#ffc107' }}>
+            Warning!
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Bullet points only
+          </Typography>
+          <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
+            <Button onClick={handleClose} variant="outlined" color="primary" sx={{ mr: 1 }}>
+              Cancel
+            </Button>
+            <Button onClick={handleOk} variant="contained" color="primary">
+              OK
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
 
       <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
         {employmentDetails.map((employment, key) => (
@@ -240,6 +283,7 @@ export default function Employment() {
                         value={employment.description}
                         modules={modules}
                         formats={['list']}
+                        readOnly={disabledEditor}
                         onChange={(value) => handleDescriptionChange(key, value)}
                       />
                     </Grid>

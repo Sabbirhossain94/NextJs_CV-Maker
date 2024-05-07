@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState, useContext } from "react";
 import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -13,6 +14,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { DataContext } from "../../pages/CVBuilder";
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
+import Modal from '@mui/material/Modal';
+import { modalStyles } from "../helpers/helpers";
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -26,6 +29,17 @@ export default function ExtraCurricular({
     setExpanded(isExpanded ? panel : false);
   };
   const [extraCurricularDetails, setExtraCurricularDetails] = getData.extraCurricular;
+  const [disabledEditor, setDisabledEditor] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOk = () => {
+    setOpenModal(false)
+    setDisabledEditor(false)
+  }
+  const handleClose = () => {
+    setOpenModal(false)
+    setDisabledEditor(false)
+  }
 
   const modules = {
     toolbar: [
@@ -67,11 +81,17 @@ export default function ExtraCurricular({
   };
 
   const handleDescriptionChange = (index, value) => {
-    const updatedActivites = [...extraCurricularDetails];
-    updatedActivites[index].description = value;
-    setExtraCurricularDetails(updatedActivites);
+    if ((value.startsWith("<p>") && value.endsWith("</p>") && value !== "<p><br></p>")) {
+      setOpenModal(true)
+      setDisabledEditor(true)
+    }
+    else {
+      setDisabledEditor(false)
+      const updatedActivites = [...extraCurricularDetails];
+      updatedActivites[index].description = value;
+      setExtraCurricularDetails(updatedActivites);
+    }
   };
-
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", marginTop: "20px" }}>
@@ -110,6 +130,30 @@ export default function ExtraCurricular({
           />
         </Grid>
       </Grid>
+
+      <Modal
+        open={openModal}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={modalStyles}>
+          <Typography id="modal-modal-title" variant="h6" component="h2" style={{ color: '#ffc107' }}>
+            Warning!
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Bullet points only
+          </Typography>
+          <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
+            <Button onClick={handleClose} variant="outlined" color="primary" sx={{ mr: 1 }}>
+              Cancel
+            </Button>
+            <Button onClick={handleOk} variant="contained" color="primary">
+              OK
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
 
       <Box sx={{ display: 'flex', flexDirection: "column", gap: '10px', flexGrow: 1 }}>
         {extraCurricularDetails.map((activity, key) => (
@@ -168,7 +212,7 @@ export default function ExtraCurricular({
                           width: "100%",
                           borderRadius: "5px",
                         }}
-                     
+
                         InputProps={{
                           disableUnderline: true,
                         }}
@@ -228,6 +272,7 @@ export default function ExtraCurricular({
                         value={activity.description}
                         modules={modules}
                         formats={['list']}
+                        readOnly={disabledEditor}
                         onChange={(value) => handleDescriptionChange(key, value)}
                       />
                     </Grid>
