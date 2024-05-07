@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import Image from "next/image";
 import { DataContext } from "../../pages/CVBuilder";
 import Typography from "@mui/material/Typography";
@@ -10,6 +10,7 @@ import { Box } from "@mui/material";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Modal from '@mui/material/Modal';
 import { useRouter } from 'next/router';
+import { modalStyles } from "../helpers/helpers";
 
 export default function Practice() {
   const getData = useContext(DataContext);
@@ -39,7 +40,7 @@ export default function Practice() {
     return imageUrlData;
   };
 
-  const calculateProfileCompleteness = () => {
+  const calculateProfileCompleteness = useCallback(() => {
 
     if (imageData.length > 0) {
       if (!completedSections.sections.includes("Image")) {
@@ -56,7 +57,7 @@ export default function Practice() {
         }));
       }
     }
-  }
+  }, [imageData, completedSections, setCompletedSections])
 
 
   useEffect(() => {
@@ -68,18 +69,8 @@ export default function Practice() {
     imageData.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
     setImageUrlData(newImageUrls);
     calculateProfileCompleteness()
-  }, [imageData, setImageUrlData, calculateProfileCompleteness]);
+  }, [imageData, setImageUrlData, calculateProfileCompleteness,setCompletedSections]);
 
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-  };
 
   return (
     <Box style={{ marginTop: "60px" }}>
@@ -96,7 +87,7 @@ export default function Practice() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={modalStyles}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Leaving the Page
           </Typography>

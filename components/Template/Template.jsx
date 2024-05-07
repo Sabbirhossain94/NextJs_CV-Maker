@@ -5,6 +5,7 @@ import { Form, Email, Phone, Location } from '../SvgComponents/SVG';
 import { months, parseDescription, parseProjectDetails, parseActivityDetails, colorPicker, dateConverter } from '../helpers/helpers';
 import ReactToPrint from 'react-to-print';
 import Tooltip from '@mui/material/Tooltip';
+import Image from 'next/image';
 
 function Template() {
     const targetRef = useRef();
@@ -22,10 +23,6 @@ function Template() {
         setColors(name)
     }
 
-
-
-
-
     return (
         <div className="relative bg-gradient-to-t from-gray-200 to-blue-200">
 
@@ -34,7 +31,12 @@ function Template() {
                 <div ref={targetRef} id="template-wrapper" className="bg-white shadow-lg h-screen overflow-auto sm:min-h-screen sm:overflow-y-auto mx-auto ">
                     <div className={`flex w-full bg-slate-800 sm:px-2 gap-10`} style={{ background: colors }}>
                         <div className="left-5 top-10 h-40 w-40 overflow-hidden sm:relative sm:rounded-full sm:p-0">
-                            <img src={picture ? picture : `/images/dummy.png`} />
+                            <Image
+                                src={picture ? picture : `/images/dummy.png`}
+                                alt="cover"
+                                width={160}
+                                height={160}
+                            />
                         </div>
 
                         <div className="mt-10 w-3/4 text-start sm:text-left flex justify-between items-center">
@@ -61,7 +63,7 @@ function Template() {
                                                 <div class="mr-2">
                                                     <Email />
                                                 </div>
-                                                <div class="flex-grow" style={{overflowWrap: 'break-word'}}>
+                                                <div class="flex-grow" style={{ overflowWrap: 'break-word' }}>
                                                     {email}
                                                 </div>
                                             </>

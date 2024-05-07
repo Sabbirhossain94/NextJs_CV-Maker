@@ -3,7 +3,6 @@ import Head from "next/head";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import PersonalDetails from "../components/FormComponents/PersonalDetails";
 import Education from "../components/FormComponents/Education";
 import SocialLinks from "../components/FormComponents/SocialLinks";
@@ -26,6 +25,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { Button, Typography } from "@mui/material";
 import { useRouter } from 'next/router';
 import Modal from '@mui/material/Modal';
+import { modalStyles } from "../components/helpers/helpers";
 
 export const DataContext = React.createContext();
 
@@ -361,55 +361,50 @@ export default function CVBuilder() {
                     setCustomSection={setCustomSection}
                     deleteCustomSection={deleteCustomSection}
                   />
-                  {/* <Link href="/" style={{ textDecoration: "none" }}> */}
-                    {/* <Tooltip title="Home" placement="top"> */}
-                     
-                        <Button 
-                        sx={{
-                          zIndex: 200,
-                          cursor: "pointer",
-                          position: "fixed",
-                          bottom: {
-                            xs: 85,
-                            sm: 105
-                          },
-                          right: 20,
-                          background: "linear-gradient(to right bottom, #64b5f6, #1565c0)",
-                          borderRadius: "50%",
-                          padding: '15px',
-                          scale: {
-                            xs: "75%",
-                            sm: '100%'
-                          }
-                        }}
-                        onClick={handleOpen}><Home /></Button>
+                  <Button
+                    sx={{
+                      zIndex: 200,
+                      cursor: "pointer",
+                      position: "fixed",
+                      bottom: {
+                        xs: 85,
+                        sm: 105
+                      },
+                      right: 20,
+                      background: "linear-gradient(to right bottom, #64b5f6, #1565c0)",
+                      borderRadius: "50%",
+                      padding: '15px',
+                      scale: {
+                        xs: "75%",
+                        sm: '100%'
+                      }
+                    }}
+                    onClick={handleOpen}><Home /></Button>
 
-                      {/* modal section */}
-                      <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                      >
-                        <Box sx={style}>
-                          <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Leaving the Page
-                          </Typography>
-                          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            All progress will be lost
-                          </Typography>
-                          <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
-                            <Button onClick={handleClose} variant="outlined" color="primary" sx={{ mr: 1 }}>
-                              Cancel
-                            </Button>
-                            <Button onClick={handleOk} variant="contained" color="primary">
-                              OK
-                            </Button>
-                          </Box>
-                        </Box>
-                      </Modal>
-                    {/* </Tooltip> */}
-                  {/* </Link> */}
+                  {/* modal section */}
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={modalStyles}>
+                      <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Leaving the Page
+                      </Typography>
+                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        All progress will be lost
+                      </Typography>
+                      <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button onClick={handleClose} variant="outlined" color="primary" sx={{ mr: 1 }}>
+                          Cancel
+                        </Button>
+                        <Button onClick={handleOk} variant="contained" color="primary">
+                          OK
+                        </Button>
+                      </Box>
+                    </Box>
+                  </Modal>
                   <Tooltip title="Preview" placement="top">
                     <Box
                       onClick={() => setShowTemplate(!showTemplate)}
